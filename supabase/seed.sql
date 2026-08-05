@@ -132,8 +132,11 @@ insert into auth.users (
   ('00000000-0000-0000-0000-000000000000', 'a0000000-0000-0000-0000-000000000008', 'authenticated', 'authenticated', 'hoa.bui@sunkudos.demo', crypt('demo-not-a-real-password', gen_salt('bf')), now(), now(), now(), '{"provider":"google","providers":["google"]}', '{"full_name":"Bùi Thị Hoa","avatar_url":null}', false, '', '', '', '', false, false);
 
 -- ============================================================
--- 6) profiles — không có trigger handle_new_user() ở phase này (thuộc phase-03),
---    nên phải tự tay insert profiles cho từng auth.users demo ở trên.
+-- 6) profiles — từ phase-03, trigger handle_new_user() trên auth.users ĐÃ tạo sẵn
+--    hàng profiles (chỉ có full_name/avatar_url từ raw_user_meta_data) ngay lúc
+--    insert auth.users phía trên. Nên ở đây dùng ON CONFLICT DO UPDATE để bồi
+--    thêm department_id — thứ trigger không biết. Không có ON CONFLICT thì đụng
+--    khoá chính và cả seed rollback.
 --    received_kudos_count/sent_kudos_count/received_hearts_count để mặc định 0,
 --    trigger ở 0005 tự tính khi seed kudos/hearts phía dưới (không ghi cứng).
 -- ============================================================
@@ -145,10 +148,16 @@ insert into profiles (id, full_name, avatar_url, department_id) values
   ('a0000000-0000-0000-0000-000000000005', 'Hoàng Văn Em', 'https://api.dicebear.com/7.x/initials/svg?seed=Em', (select id from departments where code = 'CEVC2-CYSS')),
   ('a0000000-0000-0000-0000-000000000006', 'Đỗ Thị Phương', 'https://api.dicebear.com/7.x/initials/svg?seed=Phuong', (select id from departments where code = 'OPDC-HRD')),
   ('a0000000-0000-0000-0000-000000000007', 'Vũ Văn Giang', 'https://api.dicebear.com/7.x/initials/svg?seed=Giang', (select id from departments where code = 'GEU')),
-  ('a0000000-0000-0000-0000-000000000008', 'Bùi Thị Hoa', 'https://api.dicebear.com/7.x/initials/svg?seed=Hoa', (select id from departments where code = 'PAO'));
+  ('a0000000-0000-0000-0000-000000000008', 'Bùi Thị Hoa', 'https://api.dicebear.com/7.x/initials/svg?seed=Hoa', (select id from departments where code = 'PAO'))
+on conflict (id) do update set
+  full_name     = excluded.full_name,
+  avatar_url    = excluded.avatar_url,
+  department_id = excluded.department_id;
 
 -- ============================================================
 -- 7) user_roles — 1 admin (An), 7 user thường.
+--    Trigger phase-03 đã chèn sẵn role 'user' cho mọi auth.users, nên ON CONFLICT
+--    DO UPDATE ở đây là đường duy nhất nâng An lên admin.
 -- ============================================================
 insert into user_roles (user_id, role) values
   ('a0000000-0000-0000-0000-000000000001', 'admin'),
@@ -158,7 +167,8 @@ insert into user_roles (user_id, role) values
   ('a0000000-0000-0000-0000-000000000005', 'user'),
   ('a0000000-0000-0000-0000-000000000006', 'user'),
   ('a0000000-0000-0000-0000-000000000007', 'user'),
-  ('a0000000-0000-0000-0000-000000000008', 'user');
+  ('a0000000-0000-0000-0000-000000000008', 'user')
+on conflict (user_id) do update set role = excluded.role;
 
 -- ============================================================
 -- 8) kudos — 30 kudos demo, xoay vòng 8 profile (offset +3 nên sender luôn
