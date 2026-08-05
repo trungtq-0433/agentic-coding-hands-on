@@ -2,7 +2,7 @@
 
 Website ghi nhận và lan toả Kudos nội bộ Sun\*, xây trên Next.js 16 (App Router) và Supabase (chạy local qua Docker). Chi tiết yêu cầu và kiến trúc: [`plans/260805-1032-sun-kudos-website/plan.md`](./plans/260805-1032-sun-kudos-website/plan.md).
 
-> Dự án đang ở **phase-01/17** (nền tảng Supabase + Next đã xong; schema, auth, UI các màn còn ở phase sau). Xem tiến độ đầy đủ trong `plan.md`.
+> Dự án đang ở **phase-03/17** (nền tảng Supabase + Next, schema/RLS, và auth Google OAuth đã xong; UI 18 màn còn ở phase sau). Xem tiến độ đầy đủ trong `plan.md`.
 
 ## Yêu cầu môi trường
 
@@ -17,18 +17,29 @@ npm install
 
 # 2. Tạo file env từ template
 cp .env.local.example .env.local
+cp .env.example .env
 
-# 3. Dựng Supabase local (Docker phải chạy trước; lần đầu kéo vài GB image, mất vài phút)
+# 3. Điền credential Google OAuth (bắt buộc — auth chỉ có một nút "Đăng nhập
+#    Google", không có email/password) vào .env, biến
+#    SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID / _SECRET. Xin giá trị thật từ
+#    người giữ OAuth client của dự án (PRE-REQ-01 trong plan.md) — KHÔNG tự
+#    tạo OAuth client riêng, redirect URI đã đăng ký cố định là
+#    http://localhost:54321/auth/v1/callback và dùng chung cho mọi máy local
+#    (port 54321 cố định trong supabase/config.toml).
+#    Lưu ý: đây là file .env (CLI Supabase đọc), KHÁC với .env.local (Next.js
+#    đọc) ở bước trên — xem chú thích trong .env.example.
+
+# 4. Dựng Supabase local (Docker phải chạy trước; lần đầu kéo vài GB image, mất vài phút)
 npm run supabase:start
 
-# 4. Copy URL + key mà lệnh trên IN RA vào .env.local
+# 5. Copy URL + key mà lệnh trên IN RA vào .env.local
 #    Tên biến/key thay đổi theo version CLI — lấy NGUYÊN VĂN từ output,
 #    đừng chép từ tài liệu. Xem chú thích trong .env.local.example.
 
-# 5. Sinh type Supabase (chạy lại sau mỗi lần đổi migration)
+# 6. Sinh type Supabase (chạy lại sau mỗi lần đổi migration)
 npm run supabase:types
 
-# 6. Chạy dev server
+# 7. Chạy dev server
 npm run dev
 ```
 
