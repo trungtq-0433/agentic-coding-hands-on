@@ -84,6 +84,30 @@ Nguồn: 15 finding từ 4 reviewer thù địch, user duyệt từng cái. Bả
   `user-hearts:<user_id>`; payload chỉ mang id. Đã kiểm `realtime.send()` tồn tại và trigger
   phát thật trên bản Supabase CLI hiện tại — gỡ được 2 mục unresolved của plan.
 
+### Credential Google OAuth — chỗ đặt, và cái bẫy .env vs .env.local
+
+Secret cũ từng bị dán vào `plan.md` và lọt vào git; GitHub secret scanning chặn push, đã xoay
+key và scrub lịch sử bằng `git filter-repo --replace-text`. **Không bao giờ dán giá trị
+credential vào file trong `plans/` hay `docs/`.**
+
+Có HAI file env, hai người tiêu thụ khác nhau — đây là chỗ dễ mất buổi chiều:
+
+| File | Ai đọc | Biến |
+|---|---|---|
+| `.env.local` | **Next.js** | `NEXT_PUBLIC_SUPABASE_*`, `NEXT_PUBLIC_*_AT`, `GOOGLE_CLIENT_ID`, `GOOGLE_SECRET` |
+| `.env` | **CLI Supabase** (thay thế `env()` trong `supabase/config.toml`) | `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID`, `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET` |
+
+Đã kiểm chứng bằng thực nghiệm (đặt biến dò vào `.env`, `supabase stop && start`, đọc env của
+container): CLI **có** đọc `.env`, và **không** đọc `.env.local`. Cả hai file đều đã gitignore;
+template tương ứng là `.env.example` và `.env.local.example`.
+
+**phase-03 phải làm:** bật `[auth.external.google]` trong `supabase/config.toml` với
+`client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"` và
+`secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"` — đúng khuôn mẫu mà chính config.toml
+đã dùng cho các provider khác. **Tuyệt đối không ghi giá trị literal vào config.toml**, file đó
+được commit. Redirect URI đã đăng ký sẵn trên Cloud Console:
+`http://localhost:54321/auth/v1/callback` (cổng **Supabase**, không phải cổng Next).
+
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")
 - URL pattern: `https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/{screenId}`

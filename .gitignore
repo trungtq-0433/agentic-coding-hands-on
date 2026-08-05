@@ -41,7 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 # env example thì phải commit (dòng .env* ở trên nuốt mất nó)
-!.env.local.example
+!/.env.local.example
+!/.env.example
 
 # supabase local
 /supabase/.temp
@@ -50,3 +51,6 @@ next-env.d.ts
 # sunlint
 /.takumi
 /.sunlint-eslint.config.js
+
+# File credential tải từ Google Cloud Console — không bao giờ vào git
+client_secret*.json
