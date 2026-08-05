@@ -1,28 +1,25 @@
 {
-  "score": 9.4,
+  "score": 9.3,
   "criticalCount": 0,
   "decision": "SEALED",
   "acceptanceCovered": [
-    "npx supabase db reset exit 0, không warning về bảng thiếu RLS — verify: exit 0; truy vấn pg_class trả 0 bảng có relrowsecurity=false",
-    "select count(*) from badges = 6 và sum(probability_weight) = 100 — verify: 6 và 100",
-    "select count(*) from departments = 50; hashtags = 13 — verify: 50 và 13, khớp output scripts/count-departments.mjs",
-    "select count(*) from pg_tables where tablename = 'kudos_mentions' = 0 — verify: 0, bảng không được dựng đúng như Key Insight #7",
-    "Ghi trực tiếp bị chặn: insert kudos / insert kudos_hashtags / insert hearts / delete hearts đều lỗi quyền với phiên authenticated — verify: cả 4 trả permission denied; ngoài ra TRUNCATE cũng đã bị đóng sau khi vá",
-    "pg_proc: mọi hàm security definer có search_path=public, pg_temp — verify: cả 7 hàm, không sót",
-    "admin_grant_secret_box(): user thường FORBIDDEN; admin tăng đúng số hàng unopened — verify: FORBIDDEN với non-admin, unopened 8→11 khi admin cấp 3 hộp",
-    "my_sent_kudos: phiên A trả đúng kudos A gửi; phiên B không thấy hàng nào của A — verify: 3 phiên, danh sách id khớp tuyệt đối ground truth, không lẫn chéo",
-    "public_kudos_feed: sender_id và sender_full_name đều NULL với kudos ẩn danh — verify: qua psql count(sender_id)=0 và qua PostgREST với anon key trả null",
-    "CHECK kudos_no_self chặn self-kudos; UNIQUE chặn tim trùng — verify: cả hai raise đúng constraint",
-    "Tim ngày đặc biệt +2; xoá tim đó thu hồi đúng 2 — verify: heart_count 1→3→1, đọc cờ từ hàng bị xoá chứ không tính lại theo now()",
-    "database.types.ts có type cho cả 12 bảng và 2 view — verify: kiểm từng tên, đủ 14/14"
+    "Bấm nút Google → về / với session, không phải /todo — verify một phần: redirect đích trong callback là new URL('/', request.url); callback với code hỏng đi về /login?error=oauth. Luồng consent thật CHƯA chạy được (cần browser)",
+    "Đăng nhập lần đầu: profiles và user_roles mỗi bảng thêm đúng MỘT hàng; lần hai không thêm — verify: tạo user qua admin API → +1 profiles, +1 user_roles. Lần hai không thêm vì trigger là AFTER INSERT trên auth.users, đăng nhập lại không tạo hàng auth.users mới",
+    "Guest mở /profile → 302 /login; sau khi login mở lại → thấy trang — verify: HTTP thật trả 307 (Next dùng 307 chứ không 302) về /login. Phần 'sau khi login mở lại → thấy trang' chưa kiểm được vì trang /profile thuộc Track A chưa dựng (404), nhưng guard đã cho qua",
+    "User đã login mở /login → 302 / — verify: dựng cookie sb-127-auth-token từ session thật rồi curl → 307 về /",
+    "User role user mở /admin → 302 /; đổi role thành admin rồi F5 → vào được ngay không cần đăng xuất — verify một phần: proxy chặn guest; chặn theo role nằm ở requireAdmin() trong DAL, query user_roles tươi mỗi lần nên đổi role có hiệu lực ngay (không dựa JWT claim). Trang /admin thật chưa tồn tại (Track A) nên chưa chạy qua đường thật",
+    "Đăng nhập bằng Gmail ngoài @sun-asterisk.com → thành công (đúng spec, không chặn domain) — verify: tạo user email @gmail.com qua admin API thành công, trigger chạy bình thường, không có check hd/domain nào trong code",
+    "grep -rn email lib/auth/dto.ts không khớp — verify: 0 lần xuất hiện",
+    "select proconfig from pg_proc where proname = handle_new_user chứa search_path=public, pg_temp — verify: search_path=public, pg_temp; và 0 hàm definer nào trong schema thiếu",
+    "Đăng nhập thật xong, avatar Google hiển thị được — CHƯA VERIFY: cần browser thật"
   ],
   "regressionChecked": [
-    "database.types.ts sinh lại ảnh hưởng typecheck toàn repo — tsc --noEmit exit 0 sau khi regenerate",
-    "Column-level grant trên profiles làm select('*') gãy — kiểm qua PostgREST thật: select=* trả 42501, cột tường minh trả dữ liệu. Đã ghi ràng buộc vào clarifications.md cho phase-11/16",
-    "revoke all rồi grant select lại — kiểm không vô tình khoá luôn đường đọc hợp lệ: 11 bảng vẫn SELECT được, feed và master data đọc bình thường",
-    "Thứ tự migration 00061 chạy trước 0006 — kiểm 2 trigger broadcast chỉ phụ thuộc bảng ở 0003, không phụ thuộc view/grant; tester và reviewer xác nhận độc lập",
-    "Seed idempotent — db reset 2 lần liên tiếp cho cùng kết quả, counter không nhân đôi",
-    "Phase-01 không hồi quy — npm run build compiled, lint 0, proxy/i18n không bị đụng (ownership glob tách bạch)"
+    "Trigger 0007 trên auth.users va chạm seed.sql — PHÁT HIỆN HỒI QUY: db reset gãy hoàn toàn, DB rỗng. Đã vá bằng ON CONFLICT DO UPDATE; kiểm lại db reset exit 0 và 8 profile đều có department_id (chứng tỏ seed vẫn thắng trigger đúng ý đồ)",
+    "proxy.ts nhận thêm nhánh redirect từ route-guard — kiểm mọi redirect đều qua redirectKeepingSession, không đánh rơi cookie session vừa refresh (lỗi Critical đã xảy ra ở phase-01)",
+    "database.types.ts regen sau migration 0007 — tsc --noEmit exit 0",
+    "config.toml đổi + restart Supabase — kiểm provider google vẫn true và redirect_uri khớp Google Cloud Console sau restart",
+    "Gỡ biến env GOOGLE_CLIENT_ID/GOOGLE_SECRET khỏi .env.local — kiểm không code nào đọc chúng trước khi gỡ; build vẫn xanh sau khi gỡ",
+    "Phase-01/02 không hồi quy: launch gate, i18n, RLS, view ẩn danh không bị đụng (ownership tách bạch); build + lint + tsc đều xanh"
   ],
   "contractStatus": "STABLE",
   "refuted": [],
@@ -31,37 +28,37 @@
   "findings": [
     {
       "severity": "Critical",
-      "category": "security",
-      "location": "supabase/migrations/0006_views_and_rls.sql:64",
-      "summary": "Plan viết `revoke insert, update, delete` — liệt kê từng quyền nên bỏ sót TRUNCATE, thứ không đi qua RLS. Đã khai thác thành công: phiên authenticated truncate sạch bảng hearts (44 dòng), và spec cho phép MỌI tài khoản Google đăng nhập. Áp cho cả master table vì default privilege của Supabase local cấp sẵn REFERENCES/TRIGGER/TRUNCATE. ĐÃ VÁ bằng revoke all + grant select lại, kiểm chứng cả hai chiều.",
-      "disposition": "Accept"
-    },
-    {
-      "severity": "Critical",
-      "category": "security",
-      "location": "supabase/migrations/0006_views_and_rls.sql:93",
-      "summary": "profiles.sent_kudos_count cộng cả kudos ẩn danh và được grant công khai, cho phép suy luận trừ: số_ẩn_danh(X) = sent_kudos_count(X) − count(public_kudos_feed where sender_id = X). Đo trên seed khớp chính xác 100% cả 8 profile. Theo dõi counter theo thời gian còn truy được TỪNG kudo về đúng người gửi, phá sạch mục tiêu bảo mật trung tâm của phase. ĐÃ VÁ bằng column-level grant loại cột đó khỏi danh sách công khai.",
+      "category": "regression",
+      "location": "supabase/seed.sql:140",
+      "summary": "Trigger handle_new_user() của migration 0007 tạo profiles/user_roles ngay khi seed insert auth.users, sau đó seed tự insert lại 2 bảng đó không có ON CONFLICT → đụng khoá chính, toàn bộ seed rollback, db reset để lại DB RỖNG (0 profile/0 kudos/0 department). Comment trong seed ghi rõ giả định cũ 'không có trigger handle_new_user() ở phase này'. ĐÃ VÁ bằng on conflict do update, giữ được việc seed bồi department_id và nâng An lên admin.",
       "disposition": "Accept"
     },
     {
       "severity": "Warning",
-      "category": "convention",
-      "location": "supabase/seed.sql:1",
-      "summary": "289 dòng, vượt giới hạn 200 dòng/file của repo. Là seed data tuyến tính nên tách file làm giảm tính đọc được; ghi vào Còn treo thay vì chẻ nhỏ máy móc.",
-      "disposition": "Defer"
-    },
-    {
-      "severity": "Warning",
-      "category": "plan-consistency",
-      "location": "supabase/migrations/00061_realtime_broadcast_triggers.sql:1",
-      "summary": "Plan đặt tên 0006b_ nhưng CLI Supabase bắt version phải toàn số. Đổi thành 00061_, kéo theo nó chạy TRƯỚC 0006_views_and_rls.sql chứ không phải sau. Vô hại vì 2 trigger chỉ phụ thuộc bảng ở 0003 — tester và reviewer xác nhận độc lập. Plan đã cập nhật cho khớp tên thật.",
+      "category": "integration",
+      "location": "supabase/config.toml:346",
+      "summary": "redirect_uri để trống → GoTrue tự suy ra http://127.0.0.1:54321/auth/v1/callback, nhưng Google Cloud Console đăng ký http://localhost:54321/auth/v1/callback. Google so khớp redirect_uri theo chuỗi tuyệt đối nên lần đăng nhập thật đầu tiên sẽ gãy redirect_uri_mismatch. Kiểm chứng bằng curl /auth/v1/authorize?provider=google. ĐÃ VÁ bằng khai tường minh + restart + verify lại.",
       "disposition": "Accept"
     },
     {
       "severity": "Suggestion",
-      "category": "data-quality",
-      "location": "supabase/seed.sql:1",
-      "summary": "Hai phòng ban OPDC - HRF và OPDC - HRD không có parent_id vì CSV nguồn thiếu dòng gốc OPDC. Không phải lỗi logic UPDATE mà là khuyết ở nguồn, cùng loại với PAO - PAO.",
+      "category": "maintainability",
+      "location": ".env.local.example:1",
+      "summary": "GOOGLE_CLIENT_ID/GOOGLE_SECRET nằm trong .env.local và .env.local.example nhưng KHÔNG code nào đọc — CLI Supabase đọc .env với tên SUPABASE_AUTH_EXTERNAL_GOOGLE_*. Biến chết trông có thẩm quyền khiến người sửa auth sẽ sửa nhầm file. ĐÃ VÁ: gỡ khỏi cả hai, thay bằng dòng trỏ sang .env.example.",
+      "disposition": "Accept"
+    },
+    {
+      "severity": "Suggestion",
+      "category": "robustness",
+      "location": "app/auth/callback/route.ts:21",
+      "summary": "Thiếu try/catch bao ngoài — exception không lường trước (Supabase sập, metadata dị dạng) sẽ thành trang 500 trần ở đúng điểm cuối luồng đăng nhập, user không có đường đi tiếp. ĐÃ VÁ: bọc try/catch, mọi hỏng hóc quy về /login?error=oauth. Kiểm 3 trường hợp code thiếu/rác/rỗng đều 307 đúng chỗ.",
+      "disposition": "Accept"
+    },
+    {
+      "severity": "Warning",
+      "category": "coverage",
+      "location": "plans/260805-1032-sun-kudos-website/phase-03-auth-google-oauth.md:129",
+      "summary": "Luồng đăng nhập Google end-to-end thật chưa chạy được lần nào (cần browser). Mọi thứ bao quanh đã verify nhưng bản thân consent flow + avatar hiển thị vẫn là giả định. Ghi vào Còn treo, cần người mở browser xác nhận trước khi coi phase-03 là đã chứng minh đầy đủ.",
       "disposition": "Defer"
     }
   ]

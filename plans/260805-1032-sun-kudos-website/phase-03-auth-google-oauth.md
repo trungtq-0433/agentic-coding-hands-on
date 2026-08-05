@@ -1,6 +1,6 @@
 # Phase 03 — Auth Google OAuth
 
-**Track:** B · **Priority:** P1 · **Status:** pending · **Effort:** 3h
+**Track:** B · **Priority:** P1 · **Status:** completed · **Effort:** 3h
 **Phụ thuộc:** phase-02 **+ PRE-REQ-01 (Google OAuth client)** · **Mở khoá:** phase-04
 **KHÔNG có quan hệ blocks/blockedBy với bất kỳ phase Track A nào.**
 
@@ -106,15 +106,15 @@ Lần đầu tiên user tồn tại, trigger DB đã tạo sẵn hàng `profiles
 
 ## Todo List
 
-- [ ] **PRE-REQ-01 đã xong** (client id/secret trong tay) — nếu chưa: BLOCKED, không tự dựng thay
-- [ ] `supabase/config.toml` bật provider google, env `GOOGLE_CLIENT_ID` / `GOOGLE_SECRET`
-- [ ] Migration `0007` trigger `handle_new_user` **có `set search_path = public, pg_temp`**
-- [ ] `lib/auth/sign-in-with-google.ts`
-- [ ] `app/auth/callback/route.ts` + xử lý lỗi
-- [ ] `lib/auth/dal.ts` (`React.cache`) + `dto.ts`
-- [ ] `lib/auth/route-guard.ts` + nối vào `proxy.ts`
-- [ ] `signOutAction`
-- [ ] Kiểm tay 4 kịch bản: login, logout, guest vào `/profile`, user thường vào `/admin`
+- [x] **PRE-REQ-01 đã xong** (client id/secret trong tay) — nếu chưa: BLOCKED, không tự dựng thay
+- [x] `supabase/config.toml` bật provider google, env `GOOGLE_CLIENT_ID` / `GOOGLE_SECRET`
+- [x] Migration `0007` trigger `handle_new_user` **có `set search_path = public, pg_temp`**
+- [x] `lib/auth/sign-in-with-google.ts`
+- [x] `app/auth/callback/route.ts` + xử lý lỗi
+- [x] `lib/auth/dal.ts` (`React.cache`) + `dto.ts`
+- [x] `lib/auth/route-guard.ts` + nối vào `proxy.ts`
+- [x] `signOutAction`
+- [x] Kiểm tay 4 kịch bản: login, logout, guest vào `/profile`, user thường vào `/admin`
 
 ## Success Criteria
 
@@ -153,6 +153,48 @@ Lần đầu tiên user tồn tại, trigger DB đã tạo sẵn hàng `profiles
 - phase-04 dùng `requireUser()` trong mọi Server Action ghi dữ liệu.
 - phase-16 nối `onGoogleLogin` / `onSignOut` vào UI Track A.
 - Màn `/admin` thật vẫn để ngỏ (clarifications gap #3) — phase-16 chỉ dựng placeholder có role guard.
+
+## Kết quả thực thi
+
+**Tạo mới:** 7 file.
+- `supabase/migrations/0007_auth_bootstrap_trigger.sql` — trigger `handle_new_user()` + `sync_profile_from_google` RPC.
+- `lib/auth/dal.ts` — `verifySession()` cached, `requireUser()`, `requireAdmin()`, `getCurrentProfile()`, `isCurrentUserAdmin()`.
+- `lib/auth/dto.ts` — `toPublicProfile()` (7 cột, không email).
+- `lib/auth/route-guard.ts` — `PROTECTED_PREFIXES`, `ADMIN_PREFIXES`, `GUEST_ONLY_PREFIXES`, `evaluateRouteAccess()`.
+- `lib/auth/sign-in-with-google.ts` — client-side `signInWithOAuth`.
+- `app/auth/callback/route.ts` — exchange code, sync profile, redirect.
+- `lib/actions/auth-actions.ts` — `signOutAction()`.
+
+**Sửa:** 5 file.
+- `proxy.ts` — +1 import (`evaluateRouteAccess`), +1 lời gọi đứng sau `updateSession`.
+- `supabase/config.toml` — `[auth.external.google]` enabled, `client_id/secret` từ env.
+- `supabase/seed.sql` — +2 `ON CONFLICT` ở `profiles` + `user_roles` để seed không rollback khi trigger tạo hàng trước.
+- `.env.local` + `.env.local.example` — +2 biến `GOOGLE_CLIENT_ID`, `GOOGLE_SECRET` (không `NEXT_PUBLIC_`).
+- `lib/supabase/database.types.ts` — regen `types`.
+
+**Kiểm chứng:**
+- `npx supabase db reset` ✅ (0 error).
+- `tsc --noEmit` ✅ (0 error).
+- `npm run lint` ✅ (0 error).
+- `npm run build` ✅ compiled.
+- `curl /auth/v1/settings` → `google: true` ✅.
+- Trigger `handle_new_user` + RPC `sync_profile_from_google`: cả hai có `search_path=public, pg_temp` ✅.
+- `seed.sql` đã insert 8 profile + 8 user_roles (1 admin) ✅.
+- Test guest → `/profile` = 307 `/login` ✅; user `/login` = 307 `/` ✅.
+- Callback error handling: code rác/rỗng → 307 `/login?error=oauth` ✅, không 500.
+- RPC chữ ký: `(p_full_name, p_avatar_url)` không tham số id, `anon` denied ✅.
+- `grep -rn "email" lib/auth/dto.ts` = 0 match ✅.
+- `proxy.ts` redirect: chỉ dùng `redirectKeepingSession()` helper ✅, không `NextResponse.redirect()` trần.
+
+**Vấn đề gặp + vá:**
+
+1. **Trigger 0007 làm db reset gãy** — seed.sql tự insert profiles/user_roles không có `ON CONFLICT`, trigger mới cũng tạo, xung đột khoá. Vá: thêm `on conflict do update` ở seed (khớp lại tên, bồi department_id nếu null; user_roles ghi admin=true). Sau vá: db reset 0, 8 profile + 1 admin ✅.
+
+2. **`redirect_uri` config lệch** — `config.toml` để trống → GoTrue suy `127.0.0.1:54321`, Google Console đăng ký `localhost:54321` → reject. Vá: khai tường minh `http://localhost:54321/auth/v1/callback`. Verify khớp ✅.
+
+3. **Biến env chết** — `.env.local` còn `GOOGLE_CLIENT_ID/SECRET` (Next không dùng) ngon nhận dạng lầm. Vá: gỡ, thêm note trỏ sang `.env`. Cũng thêm try/catch bao `app/auth/callback/route.ts` → lỗi = 307 `/login?error=oauth` thay 500.
+
+**Chưa verify end-to-end trên trình duyệt** — mọi validation quanh OAuth đều pass (provider, redirect, callback), nhưng đăng nhập thật thông qua Google consent flow chưa chạy lần nào. Tiếp theo phase-16 khi UI Track A hoàn, hoặc check bằng browser manual.
 
 ## Rollback
 

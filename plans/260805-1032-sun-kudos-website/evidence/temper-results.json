@@ -4,99 +4,106 @@
       "command": "npx supabase db reset",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Chạy sạch 7 migration + seed.sql từ đầu. 0 bảng thiếu RLS (kiểm pg_class.relrowsecurity).",
-      "ts": "2026-08-05T21:29:01+07:00"
-    },
-    {
-      "command": "npm run supabase:types",
-      "exitCode": 0,
-      "status": "pass",
-      "summary": "Sinh lại database.types.ts: đủ 12 bảng + 2 view (kiểm từng tên một).",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Xanh SAU KHI vá seed.sql. Trước vá: LỖI duplicate key profiles_pkey, toàn bộ seed rollback, DB rỗng (0 profile/0 kudos/0 department). Sau vá: 8 profile đều có department_id, 1 admin, 30 kudos, 50 phòng ban.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
       "command": "npx tsc --noEmit",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Typecheck sạch sau khi type sinh lại.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Typecheck sạch.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
       "command": "npm run lint",
       "exitCode": 0,
       "status": "pass",
-      "summary": "ESLint sạch toàn repo.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "ESLint sạch.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
       "command": "npm run build",
       "exitCode": 0,
       "status": "pass",
       "summary": "next build compile thành công.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "node scripts/count-departments.mjs",
+      "command": "curl http://127.0.0.1:54321/auth/v1/settings",
       "exitCode": 0,
       "status": "pass",
-      "summary": "50 mục, 0 trùng lặp. PAO - PAO ở vị trí 50 được đánh dấu trùng tên cha — seed giữ nguyên kèm FIXME thay vì tự gộp.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "external.google = true — provider bật thật ở stack local, không phải chỉ khai trong config.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: kiểm search_path mọi hàm security definer",
+      "command": "curl /auth/v1/authorize?provider=google (đọc redirect_uri)",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Cả 7 hàm (is_admin, admin_grant_secret_box, 4 trigger fn, hashtag limit) đều có search_path=public, pg_temp. Không sót hàm nào.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "TRƯỚC vá: GoTrue gửi http://127.0.0.1:54321/... trong khi Google Cloud Console đăng ký http://localhost:54321/... → redirect_uri_mismatch chắc chắn ở lần đăng nhập thật đầu tiên. SAU vá (khai tường minh trong config.toml + restart): khớp chính xác.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: role_table_grants cho anon/authenticated",
+      "command": "psql: pg_proc search_path mọi hàm security definer",
       "exitCode": 0,
       "status": "pass",
-      "summary": "kudos không còn quyền nào. 11 bảng còn lại chỉ SELECT, không REFERENCES/TRIGGER/TRUNCATE. secret_box_grants+user_roles chỉ authenticated.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "handle_new_user và sync_profile_from_google đều có search_path=public, pg_temp. Đếm hàm definer thiếu search_path trong schema public: 0.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: khai thác TRUNCATE bằng phiên authenticated",
+      "command": "admin API tạo user + psql đếm hàng",
       "exitCode": 0,
       "status": "pass",
-      "summary": "TRƯỚC khi vá: truncate hearts THÀNH CÔNG (44 dòng) — lỗ hổng thật, plan bỏ sót vì liệt kê từng quyền. SAU khi đổi sang revoke all: permission denied. Đã kiểm cả hai chiều.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Trigger bootstrap: +1 profiles, +1 user_roles (role mặc định user), metadata Google (full_name/avatar_url) được chép. department_id NULL — đúng giới hạn đã biết.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: rò ẩn danh qua profiles.sent_kudos_count",
+      "command": "admin API tạo user email @gmail.com ngoài domain",
       "exitCode": 0,
       "status": "pass",
-      "summary": "TRƯỚC khi vá: sent_kudos_count − count(feed where sender_id=X) khớp CHÍNH XÁC số kudo ẩn danh thật của cả 8 profile. SAU column-level grant: permission denied cho cột đó, cột công khai vẫn đọc được.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Tạo thành công 200, trigger chạy bình thường. Không có check hd/domain nào trong code — đúng spec Login item 2.2.1.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: my_sent_kudos qua 3 phiên giả lập",
+      "command": "psql: RPC sync_profile_from_google cách ly người gọi",
       "exitCode": 0,
       "status": "pass",
-      "summary": "So danh sách id với ground truth từ phiên owner: A=[1,9,17,25], B=[2,10,18,26], C=[3,11,19,27] — khớp tuyệt đối, không lẫn chéo. Phiên anon bị permission denied.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Chữ ký chỉ (p_full_name, p_avatar_url) — không nhận id nên không nhắm được hàng người khác. Phiên A gọi: A đổi, B nguyên. Phiên anon: permission denied for function.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: trigger Broadcast phát thật",
+      "command": "curl route guard bằng session cookie thật",
       "exitCode": 0,
       "status": "pass",
-      "summary": "INSERT kudos → realtime.messages tăng 118→119. Payload {\"kudos_id\":31,\"event\":\"insert\"} — chỉ id, không sender_id/body. realtime.send() CÓ tồn tại: gỡ 2 unresolved của plan.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Guest: /profile→307 /login, /admin→307 /login. User đã login (cookie sb-127-auth-token dựng từ password grant): /login→307 /. /profile,/admin trả 404 vì trang thuộc Track A chưa dựng — guard đã cho qua, đúng.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "curl PostgREST bằng publishable key (đường thật của client)",
+      "command": "curl /auth/callback với code thiếu/rác/rỗng",
       "exitCode": 0,
       "status": "pass",
-      "summary": "GET /profiles?select=* → 42501 denied. select cột an toàn → OK. select=sent_kudos_count → denied. GET /kudos → denied. GET /public_kudos_feed?is_anonymous=eq.true → sender_id và sender_full_name đều null.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "Cả 3 trường hợp đều 307 về /login?error=oauth, không có 500 nào lọt ra. try/catch bao ngoài đã thêm sau góp ý reviewer.",
+      "ts": "2026-08-05T23:52:43+07:00"
     },
     {
-      "command": "psql: CHECK/UNIQUE/trigger counter/tim bonus (qua tester agent)",
+      "command": "grep -c email lib/auth/dto.ts",
       "exitCode": 0,
       "status": "pass",
-      "summary": "self-kudos bị CHECK chặn; tim trùng lỗi UNIQUE; position ngoài 0..4 bị chặn; counter giảm đúng khi xoá; tim ngày đặc biệt +2 và thu hồi đúng 2 (đọc cờ từ hàng bị xoá, không tính lại theo now()); seed idempotent qua 2 lần reset; đủ 7 index.",
-      "ts": "2026-08-05T21:29:01+07:00"
+      "summary": "0 — DTO không rò email hay auth identifier (TC_WEB_PROFILE_SEC_004).",
+      "ts": "2026-08-05T23:52:43+07:00"
+    },
+    {
+      "command": "grep NextResponse.redirect proxy.ts",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Chỉ xuất hiện trong helper redirectKeepingSession và trong comment giải thích. Không có redirect trần nào đánh rơi cookie session.",
+      "ts": "2026-08-05T23:52:43+07:00"
+    },
+    {
+      "command": "Đăng nhập Google THẬT qua trình duyệt",
+      "exitCode": 0,
+      "status": "skipped",
+      "summary": "CHƯA CHẠY ĐƯỢC — cần người mở browser thật, ngoài khả năng phiên này. Mọi thứ bao quanh đã verify (provider bật, redirect_uri khớp, trigger chạy, callback xử lý lỗi đúng) nhưng luồng end-to-end vẫn là giả định. Kéo theo: avatar Google hiển thị (bằng chứng images.remotePatterns) cũng chưa kiểm.",
+      "ts": "2026-08-05T23:52:43+07:00"
     }
   ]
 }

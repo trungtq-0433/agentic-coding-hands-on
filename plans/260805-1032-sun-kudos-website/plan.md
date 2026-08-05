@@ -33,7 +33,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 | — | **PRE-REQ-01 — Google OAuth client** (việc của người, không phải agent) | — | **chưa giao** | — | ngày 0 |
 | 01 | [Nền tảng Supabase + Next](./phase-01-nen-tang-supabase-va-next.md) | B | completed | 3h | — |
 | 02 | [Schema, migrations, RLS](./phase-02-schema-migrations-rls.md) | B | completed | 6h | 01 |
-| 03 | [Auth Google OAuth](./phase-03-auth-google-oauth.md) | B | pending | 3h | 02 + **PRE-REQ-01** |
+| 03 | [Auth Google OAuth](./phase-03-auth-google-oauth.md) | B | completed | 3h | 02 + **PRE-REQ-01** |
 | 04 | [Data access + business logic](./phase-04-data-access-va-business-logic.md) | B | pending | 6h | 03 |
 | 05 | [Realtime — Broadcast](./phase-05-realtime.md) | B | pending | 3h | 04 |
 | 06 | [UI shared components (9 màn)](./phase-06-ui-shared-components.md) | A | pending | 4h | — |
@@ -51,15 +51,18 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 2/17 phase hoàn thành · 9h/63h effort done.
+**Tiến độ:** 3/17 phase hoàn thành · 12h/63h effort done.
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
-**PRE-REQ-01 — Google OAuth client.** Tạo trên Cloud Console, redirect URI `http://localhost:54321/auth/v1/callback` (cổng **Supabase**). Client ID + secret đặt vào `.env.local` dưới hai biến `GOOGLE_CLIENT_ID` và `GOOGLE_SECRET` — xem `.env.local.example`. Người làm: có quyền admin Google Workspace Sun\* — **ĐÃ GIAO**. Chặn phase-03 → 04 → 05 → 16; Track A không ảnh hưởng. Agent không có và không nên có quyền này. Nếu trễ, phase-04 vẫn code/test được bằng phiên giả lập (`set request.jwt.claims`); chỉ đăng nhập thật phải chờ.
+**PRE-REQ-01 — Google OAuth client.** Tạo trên Cloud Console, redirect URI `http://localhost:54321/auth/v1/callback` (cổng **Supabase**). Client ID + secret đặt vào **`.env`** dưới hai biến `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID` và `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET` — xem `.env.example`. (KHÔNG phải `.env.local`; xem ghi chú dưới.) Người làm: có quyền admin Google Workspace Sun\* — **ĐÃ GIAO và HOÀN THÀNH**. Chặn phase-03 → 04 → 05 → 16 khi chưa xong; Track A không ảnh hưởng. Agent không có và không nên có quyền này. Với credential đã có, phase-03 + 04/05/16 không còn chặn.
 
 > **Không bao giờ dán giá trị credential vào file trong `plans/` hay `docs/`.** Bản kế hoạch này
 > từng chứa client ID + secret thật ở đúng dòng trên; GitHub secret scanning chặn push và secret
-> đó phải xoay lại. Nơi duy nhất của giá trị thật là `.env.local` (đã gitignore).
+> đó phải xoay lại. Nơi duy nhất của giá trị thật là **`.env`** — file mà CLI Supabase đọc để
+> thay thế `env()` trong `supabase/config.toml`, dưới tên `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID`
+> và `_SECRET`. **KHÔNG phải `.env.local`** (file đó của Next.js; CLI Supabase không đọc nó — đã
+> kiểm chứng bằng thực nghiệm). Cả hai đều gitignore; template ở `.env.example`.
 
 ## Bản đồ route + ranh giới sở hữu file (chốt ở đây, mọi phase theo)
 
@@ -89,8 +92,8 @@ Hero tier · rule cấp Secret Box · notification bell · màn Admin thật · 
 > **Ghi chú độ dài:** phần thân plan (tới hết mục "Còn treo") giữ đúng dưới 80 dòng theo ràng buộc. Section Red Team Review bên dưới đẩy tổng file lên ~148 dòng — vượt có chủ ý và được cho phép, vì bảng disposition là hồ sơ kiểm toán phải đi cùng plan, không phải nội dung điều hướng.
 
 ### Session — 2026-08-05
-**Findings:** 17 (15 accepted, 2 rejected) + 4 capped-applied + **2 phase-02 Critical phát hiện trong review**
-**Severity breakdown:** 9 Critical, 8 High
+**Findings:** 20 (18 accepted, 2 rejected) + 4 capped-applied + **3 phase-03 Critical phát hiện sau thực thi**
+**Severity breakdown:** 11 Critical, 8 High, 1 Warning
 
 | # | Finding | Severity | Disposition | Applied To |
 |---|---|---|---|---|
@@ -111,6 +114,9 @@ Hero tier · rule cấp Secret Box · notification bell · màn Admin thật · 
 | 15 | `kudos_mentions` ghi mà không ai đọc | High | Accept | phase-02 (KI#7, bỏ bảng), phase-04 (bỏ `p_mention_ids`), phase-10 (bỏ `mentionIds`) |
 | **16** | **TRUNCATE privilege không revoke — phiên authenticated truncate sạch 4 bảng** | **Critical** | **Accept** | **phase-02 (bước 7, khối revoke toàn bộ, C1 vá: `revoke all` → `grant select`)** |
 | **17** | **Counter `sent_kudos_count` rò ẩn danh — suy luận chính xác 100% số kudo ẩn → truy sender** | **Critical** | **Accept** | **phase-02 (bước 7, column-level grant loại `sent_kudos_count`, C2 vá: hệ quả `select('*')` lỗi)** |
+| **18** | **Trigger 0007 làm `seed.sql` rollback khi `profiles`/`user_roles` xung đột khoá** | **Critical** | **Accept** | **phase-03 (bước 3, SC + vá: thêm `ON CONFLICT ... DO UPDATE` ở seed, khớp lại `full_name`, bồi `department_id`)** |
+| **19** | **`redirect_uri` config để trống → GoTrue dùng `127.0.0.1`, Google Console đăng ký `localhost` → mismatch** | **Critical** | **Accept** | **phase-03 (PRE-REQ-01, SC, risk + vá: khai tường minh `http://localhost:54321/auth/v1/callback`)** |
+| **20** | **Biến env `.env.local` chứa `GOOGLE_CLIENT_ID/SECRET` mà Next.js không dùng → mix-up với `.env`** | **Warning** | **Accept** | **phase-03 (bước 2 bổ sung, `.env.local.example` + `clarifications.md`)** |
 | capped-1 | ModalShell dùng chung — 3 phase song song tự dựng modal chrome riêng | — | Accept (capped) | phase-06 (contract + SC), phase-10/13/15 |
 | capped-2 | Google OAuth client là pre-requisite ngoài phase | — | Accept (capped) | phase-03 (khối PRE-REQ-01, risk), `plan.md` (bảng Pre-requisites) |
 | capped-3 | Số đếm sai: phòng ban và test case | — | Accept (capped) | phase-02 (**50** phòng ban + `PAO - PAO`, script đếm), phase-17 (**292** TC + bảng 8 file rỗng) |

@@ -59,6 +59,7 @@ Nguồn: 15 finding từ 4 reviewer thù địch, user duyệt từng cái. Bả
 - **`app/prelaunch/` 404**: Đúng design, thuộc phase-14. Kiểm tra route khác phải ở gate ở quá khứ.
 
 ## Còn treo (không chặn MVP)
+- **Đăng nhập Google end-to-end chưa verify trên browser** — mọi kiểm soát quanh OAuth (provider bật, redirect_uri khớp, trigger bootstrap, callback error-handling) đều test qua API + psql + curl được. Nhưng luồng thật qua Google consent ở trình duyệt chưa chạy lần nào. Tiếp theo phase-16 khi UI hoàn hoặc manual browser test. **Avatar Google** cũng chưa verify hiển thị — phụ thuộc điều kiện đó.
 - Hero tier: cần designer cấp tên tier + ngưỡng + icon.
 - Rule cấp phát Secret Box: cần PO chốt. **Đường tạm:** RPC `admin_grant_secret_box()` + runbook cấp tay (phase-02) — đủ để sự kiện không chết giữa chừng khi hết hộp. (#7)
 - Nội dung/trigger cụ thể của notification bell (gap #14) — định nghĩa lúc implement, ưu tiên "nhận kudos mới".
@@ -66,7 +67,22 @@ Nguồn: 15 finding từ 4 reviewer thù địch, user duyệt từng cái. Bả
 - **`department_id` của mọi user đăng nhập thật sẽ là NULL.** Google không trả phòng ban, trigger chỉ chép name/avatar, và **không có màn sửa profile trong 18 màn**. Đường tạm: filter gom NULL vào nhóm hiển thị **"Chưa phân loại"** thay vì trả rỗng im lặng. Cần PO chốt cách gán phòng ban thật (import HR? màn chọn lúc đăng nhập lần đầu? — cả hai đều cần design mới). (#6)
 - **`PAO - PAO` trong danh sách phòng ban nguồn** — mục thứ 50, một phòng ban con trùng tên cha (`PAO` là mục 33). Gần như chắc chắn lỗi nhập liệu bên soạn spec. Vẫn seed đủ 50 kèm `FIXME`, chờ người soạn spec xác nhận gộp hay sửa tên. (capped finding)
 - **8/18 file test case rỗng hoàn toàn 0 byte** (mọi dropdown + cả 2 FAB) — nhóm component dùng chung của phase-06 không có TC gốc để bám, test phải suy từ spec. Nếu QA bổ sung TC sau, rà lại phase-17. (capped finding)
-- **PRE-REQ-01 — Google OAuth client** chưa giao cho ai. Cần quyền admin Google Workspace của tổ chức; chặn phase-03 → 04 → 05 → 16. Xem `plan.md` mục Pre-requisites. (capped finding)
+
+## Session 2026-08-05 (Sau thực thi phase-03)
+
+Các ràng buộc kiến trúc phát sinh từ implementation, phục vụ phase-04/16 và track A:
+
+- **Hai file env, tuyệt đối không nhầm:**
+  - `.env` — dùng bởi **CLI Supabase** (`supabase/config.toml` đọc qua `env()`). Chứa `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID`, `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET`. **Giá trị thật ở đây.**
+  - `.env.local` — dùng bởi **Next.js**. Chứa `NEXT_PUBLIC_SUPABASE_*`, `NEXT_PUBLIC_*_AT` — **KHÔNG** chứa credential Google. **Để trống template, copy từ `.env` lúc setup.**
+
+- **`redirect_uri` trong `config.toml` phải khai tường minh** `http://localhost:54321/auth/v1/callback` — để trống là GoTrue suy `127.0.0.1` khác với `localhost` đã đăng ký trên Google Console → OAuth mismatch reject.
+
+- **Mọi redirect mới trong `proxy.ts`** phải dùng helper `redirectKeepingSession()` chứ không `NextResponse.redirect()` trần — lỗi Critical đã xảy ở phase-01, đừng lặp lại.
+
+- **`seed.sql` phải giữ `ON CONFLICT`** trên `profiles` + `user_roles` miễn là trigger `handle_new_user` còn tồn tại — seed tự INSERT profile/roles, trigger cũng tạo, không conflict = npx db reset lỗi rollback, DB rỗng.
+
+- **Phase sau (04/11/16 khi gọi `requireUser()`/`requireAdmin()`):** gọi trong **page.tsx / Server Action**, KHÔNG gọi trong layout — Next 16 Partial Rendering sẽ bỏ lọt kiểm soát từ layout, chỉ page được re-render. Quy ước: Guard logic ở tầng application (page/action), không middleware/layout.
 
 ## Ràng buộc phát sinh từ phase-02 (đọc trước khi code Track A / phase-11 / phase-16)
 
@@ -94,7 +110,7 @@ Có HAI file env, hai người tiêu thụ khác nhau — đây là chỗ dễ m
 
 | File | Ai đọc | Biến |
 |---|---|---|
-| `.env.local` | **Next.js** | `NEXT_PUBLIC_SUPABASE_*`, `NEXT_PUBLIC_*_AT`, `GOOGLE_CLIENT_ID`, `GOOGLE_SECRET` |
+| `.env.local` | **Next.js** | `NEXT_PUBLIC_SUPABASE_*`, `NEXT_PUBLIC_*_AT` — **KHÔNG** chứa credential Google |
 | `.env` | **CLI Supabase** (thay thế `env()` trong `supabase/config.toml`) | `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID`, `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET` |
 
 Đã kiểm chứng bằng thực nghiệm (đặt biến dò vào `.env`, `supabase stop && start`, đọc env của
