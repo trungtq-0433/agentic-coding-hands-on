@@ -1,0 +1,20 @@
+{
+  "app.name": "Sun* Annual Awards 2025",
+  "nav.home": "Home",
+  "nav.kudos": "Sun* Kudos",
+  "nav.awards": "Awards",
+  "nav.rules": "Rules",
+  "nav.profile": "Profile",
+  "action.login": "Log in",
+  "action.logout": "Log out",
+  "action.close": "Close",
+  "action.cancel": "Cancel",
+  "action.confirm": "Confirm",
+  "action.retry": "Retry",
+  "state.loading": "Loading…",
+  "state.empty": "No data yet",
+  "error.generic": "Something went wrong. Please try again.",
+  "error.network": "Cannot reach the server.",
+  "language.label": "Language",
+  "footer.copyright": "Copyright Sun* © 2025"
+}

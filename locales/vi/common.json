@@ -1,0 +1,20 @@
+{
+  "app.name": "Sun* Annual Awards 2025",
+  "nav.home": "Trang chủ",
+  "nav.kudos": "Sun* Kudos",
+  "nav.awards": "Hệ thống giải",
+  "nav.rules": "Thể lệ",
+  "nav.profile": "Trang cá nhân",
+  "action.login": "Đăng nhập",
+  "action.logout": "Đăng xuất",
+  "action.close": "Đóng",
+  "action.cancel": "Huỷ",
+  "action.confirm": "Xác nhận",
+  "action.retry": "Thử lại",
+  "state.loading": "Đang tải…",
+  "state.empty": "Chưa có dữ liệu",
+  "error.generic": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+  "error.network": "Không kết nối được máy chủ.",
+  "language.label": "Ngôn ngữ",
+  "footer.copyright": "Bản quyền thuộc về Sun* © 2025"
+}

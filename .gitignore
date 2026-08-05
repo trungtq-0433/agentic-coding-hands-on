@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# env example thì phải commit (dòng .env* ở trên nuốt mất nó)
+!.env.local.example
+
+# supabase local
+/supabase/.temp
+/supabase/.branches
+
+# sunlint
+/.takumi
+/.sunlint-eslint.config.js
