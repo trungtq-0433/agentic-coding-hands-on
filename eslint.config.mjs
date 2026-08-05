@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Không phải code ứng dụng — lint chúng chỉ tạo nhiễu:
+    ".claude/**", // hook/script/venv của bộ kit Takumi, không do dự án này sở hữu
+    "plans/**", // tài liệu kế hoạch + evidence
+    "supabase/**", // file sinh bởi Supabase CLI
+    "lib/supabase/database.types.ts", // sinh bởi `npm run supabase:types`
   ]),
 ]);
 
