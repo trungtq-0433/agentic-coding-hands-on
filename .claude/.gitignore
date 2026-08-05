@@ -6,3 +6,8 @@ settings.json.*.bak
 
 # Cấu hình cá nhân từng máy — settings.json mới là bản dùng chung
 settings.local.json
+
+# Virtualenv của skill — tái tạo được, phụ thuộc phiên bản Python từng máy.
+# Từng bị commit (11.416 file, 579 MB, kéo repo lên 209 MB) và đã gỡ khỏi
+# lịch sử bằng git filter-repo ngày 2026-08-05.
+skills/.venv/
