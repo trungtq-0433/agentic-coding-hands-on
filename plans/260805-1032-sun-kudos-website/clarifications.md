@@ -68,6 +68,22 @@ Nguồn: 15 finding từ 4 reviewer thù địch, user duyệt từng cái. Bả
 - **8/18 file test case rỗng hoàn toàn 0 byte** (mọi dropdown + cả 2 FAB) — nhóm component dùng chung của phase-06 không có TC gốc để bám, test phải suy từ spec. Nếu QA bổ sung TC sau, rà lại phase-17. (capped finding)
 - **PRE-REQ-01 — Google OAuth client** chưa giao cho ai. Cần quyền admin Google Workspace của tổ chức; chặn phase-03 → 04 → 05 → 16. Xem `plan.md` mục Pre-requisites. (capped finding)
 
+## Ràng buộc phát sinh từ phase-02 (đọc trước khi code Track A / phase-11 / phase-16)
+
+- **`select('*')` trên bảng `profiles` sẽ LỖI 42501.** `sent_kudos_count` bị loại khỏi grant
+  bằng column-level grant vì nó cộng cả kudos ẩn danh — để công khai là suy ra được
+  `số_ẩn_danh(X) = sent_kudos_count(X) − count(feed where sender_id = X)`, đo trên seed khớp
+  100%. Mọi query `profiles` phải **liệt kê cột tường minh**:
+  `id, full_name, avatar_url, department_id, received_kudos_count, received_hearts_count, created_at`.
+  Chính chủ muốn biết số đã gửi thì đếm từ `my_sent_kudos`. (Red Team phase-02, Critical #1)
+- **Không query thẳng bảng `kudos`** — đã revoke toàn bộ quyền với anon/authenticated.
+  Đọc feed qua view `public_kudos_feed`, đọc sent-list qua `my_sent_kudos`.
+- **Không ghi thẳng `kudos` / `kudos_hashtags` / `kudos_images` / `hearts`** — chỉ SELECT.
+  Mọi ghi đi qua RPC của phase-04.
+- **Realtime dùng Broadcast, KHÔNG dùng Postgres Changes.** Topic `kudos-board` và
+  `user-hearts:<user_id>`; payload chỉ mang id. Đã kiểm `realtime.send()` tồn tại và trigger
+  phát thật trên bản Supabase CLI hiện tại — gỡ được 2 mục unresolved của plan.
+
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")
 - URL pattern: `https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/{screenId}`

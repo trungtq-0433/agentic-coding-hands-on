@@ -1,6 +1,6 @@
 # Phase 02 — Schema, migrations, RLS, seed
 
-**Track:** B · **Priority:** P1 · **Status:** pending · **Effort:** 6h
+**Track:** B · **Priority:** P1 · **Status:** completed · **Effort:** 6h
 **Phụ thuộc:** phase-01 · **Mở khoá:** phase-03
 **KHÔNG có quan hệ blocks/blockedBy với bất kỳ phase Track A nào.**
 
@@ -155,19 +155,41 @@ Phase-03 sở hữu `0007_*.sql`, phase-04 sở hữu `0008_*` và `0009_*` — 
 
 ## Todo List
 
-- [ ] 7 file migration `0001`–`0006` + `0006b`
-- [ ] Mọi bảng `enable row level security`, không sót
-- [ ] `is_admin()` có `set search_path = public, pg_temp`
-- [ ] CHECK `kudos_no_self` + UNIQUE `hearts(kudos_id,user_id)`
-- [ ] 3 trigger counter + 7 index + 2 trigger Broadcast (payload chỉ id)
-- [ ] View `public_kudos_feed` (che ẩn danh) + `my_sent_kudos` (definer, self-only)
-- [ ] Khối `revoke` đủ 4 bảng: `kudos` (all), `kudos_hashtags`/`kudos_images`/`hearts` (ghi)
-- [ ] RPC `admin_grant_secret_box()` + runbook hết hộp
-- [ ] `scripts/count-departments.mjs` + seed đủ **50** phòng ban (có `PAO - PAO` kèm FIXME)
-- [ ] `seed.sql` đủ 13 hashtag / 6 badge đúng trọng số / demo data
-- [ ] `npx supabase db reset` xanh
-- [ ] `npm run supabase:types` sinh lại type
-- [ ] Kiểm RLS bằng 2 phiên giả lập + kiểm ghi trực tiếp bị chặn
+- [x] 7 file migration `0001`–`0006` + `00061` (đổi từ `0006b` — CLI từ chối ký tự không phải số)
+- [x] Mọi bảng `enable row level security`, không sót (12 bảng)
+- [x] `is_admin()` có `set search_path = public, pg_temp`
+- [x] CHECK `kudos_no_self` + UNIQUE `hearts(kudos_id,user_id)`
+- [x] 3 trigger counter + 7 index + 2 trigger Broadcast (payload chỉ id)
+- [x] View `public_kudos_feed` (che ẩn danh) + `my_sent_kudos` (definer, self-only)
+- [x] Khối `revoke` đủ 4 bảng: `kudos` (all), `kudos_hashtags`/`kudos_images`/`hearts` (ghi) — 2 lỗ hổng Critical giật ra trong review
+- [x] RPC `admin_grant_secret_box()` + runbook hết hộp
+- [x] `scripts/count-departments.mjs` + seed đủ **50** phòng ban (có `PAO - PAO` kèm FIXME)
+- [x] `seed.sql` đủ 13 hashtag / 6 badge đúng trọng số / demo data
+- [x] `npx supabase db reset` xanh (exit 0)
+- [x] `npm run supabase:types` sinh lại type (database.types.ts 12 bảng + 2 view)
+- [x] Kiểm RLS bằng 2 phiên giả lập + kiểm ghi trực tiếp bị chặn
+
+## Kết quả thực thi
+
+**Artifact tạo:** 7 migration (`0001_core_master_tables`, `0002_profiles_and_roles`, `0003_kudos_tables`, `0004_secret_box_tables`, `0005_triggers_and_indexes`, `00061_realtime_broadcast_triggers`, `0006_views_and_rls`), `supabase/seed.sql` (289 dòng, vượt 200), `scripts/count-departments.mjs`. Sinh lại `lib/supabase/database.types.ts` (12 bảng + 2 view).
+
+**Cổng xanh:** `npx supabase db reset` exit 0 · `npm run supabase:types` OK · `tsc --noEmit` 0 error · `npm run lint` 0 error · `npm run build` compiled.
+
+**Verify thủ công qua psql + PostgREST:**
+- 0 bảng thiếu RLS; `search_path=public, pg_temp` đúng trên cả 7 hàm `security definer`
+- 2 view `security_invoker=false`; `public_kudos_feed` trả `sender_id: null` khi `is_anonymous` (test via REST với anon key)
+- `kudos` không còn quyền nào cho anon/authenticated; 3 bảng nghiệp vụ kia SELECT-only
+- `my_sent_kudos` (definer view): 3 phiên user giả, danh sách id khớp **CHÍNH XÁC** ground truth, không lẫn chéo
+- Broadcast **phát thật**: `realtime.messages` tăng khi INSERT kudos; payload chỉ `{kudos_id, event}`
+- 50 phòng ban (0 trùng lặp) / 13 hashtag / 6 badge tổng 100 trọng số
+
+**2 lỗ hổng Critical phát hiện + vá:**
+1. **C1 — TRUNCATE privilege không bị revoke.** Phát hiện: orchestrator kiểm `revoke insert, update, delete` — bỏ sót `TRUNCATE`. Kiểm chứng: phiên `authenticated` truncate sạch bảng `hearts` (44 dòng). TRUNCATE không qua RLS, và spec cho phép ANY user Google login. Áp cho `kudos`, `kudos_hashtags`, `kudos_images` + mọi master table (Supabase local cấp sẵn REFERENCES/TRIGGER/TRUNCATE mặc định). **Vá:** đổi sang `revoke all` rồi `grant select` lại.
+2. **C2 — Counter rò ẩn danh qua `profiles.sent_kudos_count`.** Phát hiện: reviewer. Counter đó cộng cả kudos ẩn danh + công khai. Suy luận: `số_ẩn(X) = sent_kudos_count(X) − count(public_kudos_feed where sender_id = X)`. Kiểm seed: khớp **CHÍNH XÁC 100%** (8 profile đo được). **Nguy hiểm hơn:** theo dõi counter time-series + đối chiếu khi kudo ẩn xuất hiện trên feed → truy được TỪNG kudo về đúng sender — phá sạch mục tiêu bảo mật trung tâm. **Vá:** column-level grant trên `profiles`, loại `sent_kudos_count` khỏi danh sách công khai. Hệ quả: `select('*')` trên `profiles` giờ lỗi 42501 → mọi query phải liệt kê cột. Ghi vào `clarifications.md` ràng buộc phát sinh.
+
+**Deviation từ plan:** Tên file `0006b_realtime_broadcast_triggers.sql` bị CLI từ chối (version phải toàn số) → đổi `00061_...`. Hệ quả: trigger chạy TRƯỚC `0006_views_and_rls` (`1 < _` ASCII) chứ không sau. Vô hại: 2 trigger phụ thuộc bảng ở `0003`, độc lập với `0006`. Xác nhận bởi tester + reviewer.
+
+**Warning chưa xử:** `seed.sql` 289 dòng, vượt 200. Ghi vào "Còn treo".
 
 ## Success Criteria
 

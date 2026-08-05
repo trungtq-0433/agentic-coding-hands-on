@@ -32,7 +32,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 |---|---|---|---|---|---|
 | — | **PRE-REQ-01 — Google OAuth client** (việc của người, không phải agent) | — | **chưa giao** | — | ngày 0 |
 | 01 | [Nền tảng Supabase + Next](./phase-01-nen-tang-supabase-va-next.md) | B | completed | 3h | — |
-| 02 | [Schema, migrations, RLS](./phase-02-schema-migrations-rls.md) | B | pending | 6h | 01 |
+| 02 | [Schema, migrations, RLS](./phase-02-schema-migrations-rls.md) | B | completed | 6h | 01 |
 | 03 | [Auth Google OAuth](./phase-03-auth-google-oauth.md) | B | pending | 3h | 02 + **PRE-REQ-01** |
 | 04 | [Data access + business logic](./phase-04-data-access-va-business-logic.md) | B | pending | 6h | 03 |
 | 05 | [Realtime — Broadcast](./phase-05-realtime.md) | B | pending | 3h | 04 |
@@ -51,7 +51,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 1/17 phase hoàn thành · 3h/63h effort done.
+**Tiến độ:** 2/17 phase hoàn thành · 9h/63h effort done.
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
@@ -85,8 +85,8 @@ Hero tier · rule cấp Secret Box · notification bell · màn Admin thật · 
 > **Ghi chú độ dài:** phần thân plan (tới hết mục "Còn treo") giữ đúng dưới 80 dòng theo ràng buộc. Section Red Team Review bên dưới đẩy tổng file lên ~148 dòng — vượt có chủ ý và được cho phép, vì bảng disposition là hồ sơ kiểm toán phải đi cùng plan, không phải nội dung điều hướng.
 
 ### Session — 2026-08-05
-**Findings:** 15 (12 accepted, 3 rejected) + 4 capped-applied
-**Severity breakdown:** 7 Critical, 8 High
+**Findings:** 17 (15 accepted, 2 rejected) + 4 capped-applied + **2 phase-02 Critical phát hiện trong review**
+**Severity breakdown:** 9 Critical, 8 High
 
 | # | Finding | Severity | Disposition | Applied To |
 |---|---|---|---|---|
@@ -105,6 +105,8 @@ Hero tier · rule cấp Secret Box · notification bell · màn Admin thật · 
 | 13 | Thiếu `images.remotePatterns` → `next/image` throw với avatar Google thật | High | Accept | phase-01 (KI#6b, bước 3b, SC, risk), phase-03 (SC) |
 | 14 | Effort phase-17 5h phi thực tế | High | Accept | phase-17 (14h + phân bổ theo tầng), `plan.md` (tổng 63h) |
 | 15 | `kudos_mentions` ghi mà không ai đọc | High | Accept | phase-02 (KI#7, bỏ bảng), phase-04 (bỏ `p_mention_ids`), phase-10 (bỏ `mentionIds`) |
+| **16** | **TRUNCATE privilege không revoke — phiên authenticated truncate sạch 4 bảng** | **Critical** | **Accept** | **phase-02 (bước 7, khối revoke toàn bộ, C1 vá: `revoke all` → `grant select`)** |
+| **17** | **Counter `sent_kudos_count` rò ẩn danh — suy luận chính xác 100% số kudo ẩn → truy sender** | **Critical** | **Accept** | **phase-02 (bước 7, column-level grant loại `sent_kudos_count`, C2 vá: hệ quả `select('*')` lỗi)** |
 | capped-1 | ModalShell dùng chung — 3 phase song song tự dựng modal chrome riêng | — | Accept (capped) | phase-06 (contract + SC), phase-10/13/15 |
 | capped-2 | Google OAuth client là pre-requisite ngoài phase | — | Accept (capped) | phase-03 (khối PRE-REQ-01, risk), `plan.md` (bảng Pre-requisites) |
 | capped-3 | Số đếm sai: phòng ban và test case | — | Accept (capped) | phase-02 (**50** phòng ban + `PAO - PAO`, script đếm), phase-17 (**292** TC + bảng 8 file rỗng) |

@@ -1,0 +1,2 @@
+- [Sun Kudos docs layout](project_sun_kudos_docs_layout.md) — SDD off, docs/ has only runbook-su-kien.md, maxLoc 800
+- [Docs vs plans boundary rule](feedback_docs_vs_plans_boundary.md) — event-ops → docs/; next-phase-dev constraint → clarifications.md stays
