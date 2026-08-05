@@ -1,0 +1,276 @@
+[
+        {
+            "item_type": "Default display",
+            "description": "Testing display properties of RichTextBox/Markdown in both add and edit forms",
+            "test_view_points": [
+                {
+                    "viewpoint": "[Add new form]\nCheck default display of RichTextBox/Markdown item",
+                    "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n+ Type of Richtextbox\n..."]
+                },
+                {
+                    "viewpoint": "[Edit form]\nCheck default display of RichTextBox/Markdown item",
+                    "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+                }
+            ]
+        },
+        {
+            "item_type": "Controls in RichTextbox",
+            "description": "Testing basic control functionality of RichTextBox including cursor, tab order and resizing",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check display of cusor in RichTextbox",
+                    "expected_result": ["Appear the cursor when focus into RichTextbox as normal"]
+                },
+                {
+                    "viewpoint": "Click \"Tab\" key on keyboard to Check tab order of item",
+                    "expected_result": ["Tab order is correct as designed"]
+                },
+                {
+                    "viewpoint": "Check ability to resize of richtextbox",
+                    "expected_result": ["+ Richtextbox can not resize\n[Base on spec]\n(If richtextbox can resize following spec, Check operation of richtextbox when resized form)"]
+                }
+            ]
+        },
+        {
+            "item_type": "Edit in Richtextbox",
+            "description": "Testing editing operations in RichTextBox",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check actions in RichTextbox:\n+ Cut\n+ Copy\n+ Paste\n+ Paste Special\n+ Undo\n+ Redo\n+ Find\n+ Find and Replace\n+ Select All",
+                    "expected_result": ["All actions are performed correctly as normal"]
+                }
+            ]
+        },
+        {
+            "item_type": "Format in Richtextbox",
+            "description": "Testing text formatting capabilities and paragraph alignment options",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check format functions for text:\n+ Font\n+ Size\n+ Text color\n+ Background color\n+ Bold\n+ Italics\n+ Underline\n+ Strikethrough\n+ Superscript\n+ Subscript\n+ Style of text\n+ Format heading",
+                    "expected_result": ["Text displays corresponding chosen format correctly"]
+                },
+                {
+                    "viewpoint": "Check align of paragraph:\n+ Left\n+ Right\n+ Center\n+ Justify",
+                    "expected_result": ["Paragraph is aligned correctly as selected option"]
+                },
+                {
+                    "viewpoint": "Check Indent of paragraph when:\n+ Descrease Indent\n+ Increase Indent",
+                    "expected_result": ["Paragraph is Descrease/Increase Indent correctly"]
+                },
+                {
+                    "viewpoint": "Check breakline Paragraph",
+                    "expected_result": ["Parapraph is broken to 2 lines"]
+                },
+                {
+                    "viewpoint": "Check break page",
+                    "expected_result": ["Data is broken to 2 pages"]
+                },
+                {
+                    "viewpoint": "Check Margin of paragraph:\n+ From left\n+ From right",
+                    "expected_result": ["Paragraph is margined from left/right correctly"]
+                },
+                {
+                    "viewpoint": "Check quote a paragraph",
+                    "expected_result": ["Paragraph displays in quote format"]
+                },
+                {
+                    "viewpoint": "Check action Copy Formatting",
+                    "expected_result": ["All formatting is copied and saved to cache"]
+                },
+                {
+                    "viewpoint": "Check action Remove format",
+                    "expected_result": ["All formatting is removed successfully"]
+                }
+            ]
+        },
+        {
+            "item_type": "Insert/Edit items",
+            "description": "Testing insertion and editing of various elements in RichTextBox",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check action Add/Remove:\n+ Bullet\n+ Numbering",
+                    "expected_result": ["Bullet/Numbering is inserted or removed correctly"]
+                },
+                {
+                    "viewpoint": "Check action insert:\n+ Checkbox\n+ Radio button\n+ Textbox\n+ Text Area\n+ Pulldown\n+ Button\n+ Image button\n+ Insert/Edit/Remove Link\n+ Flag\n+ Image\n+ Flash\n+ Separator Line\n+ Emotion\n+ Symbols\n+ Embed media",
+                    "expected_result": ["Selected item is inserted successfully\nAll of operation of items after inserted are normal."]
+                },
+                {
+                    "viewpoint": "Check action insert Hidden field",
+                    "expected_result": ["Hidden field is inserted successfully and not displays in preview/view mode"]
+                }
+            ]
+        },
+        {
+            "item_type": "View in Richtextbox",
+            "description": "Testing different view modes and screen behaviors of RichTextBox",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check Preview mode",
+                    "expected_result": ["All formatting data is displays correctly in preview mode"]
+                },
+                {
+                    "viewpoint": "Check HTML code mode",
+                    "expected_result": ["All forrmattin data displays in HTML mode correctly"]
+                },
+                {
+                    "viewpoint": "Check 2 modes displays at the same time",
+                    "expected_result": ["Editting mode and Preview mode displays correctly at the same time"]
+                },
+                {
+                    "viewpoint": "Check Minimize/Maximize screen",
+                    "expected_result": ["Minimize/Maximize screen successfully, all data and formatting has no change"]
+                }
+            ]
+        },
+        {
+            "item_type": "Insert and Edit table",
+            "description": "Testing table functionality including insertion, editing and formatting",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check insert table successfully",
+                    "expected_result": ["Table is inseated successfully corresponding number of row, column"]
+                },
+                {
+                    "viewpoint": "Check edit table successfully",
+                    "expected_result": ["Table is editable, add/remove row/column/data successfully"]
+                },
+                {
+                    "viewpoint": "Check formatting in table",
+                    "expected_result": ["Data/Text on table can be formated normally like normal text/paragraph"]
+                }
+            ]
+        },
+        {
+            "item_type": "Other functions",
+            "description": "Testing additional features like printing, templates, and language settings",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check create new page",
+                    "expected_result": ["New blank page is created"]
+                },
+                {
+                    "viewpoint": "Check action print",
+                    "expected_result": ["Preview print page displays correctly formartting data"]
+                },
+                {
+                    "viewpoint": "Check all sample template displays and can be used",
+                    "expected_result": ["Sample template format displays correctly and enable to use"]
+                },
+                {
+                    "viewpoint": "Check setting language",
+                    "expected_result": ["Language can be set to text successfully"]
+                },
+                {
+                    "viewpoint": "Check Spelling function",
+                    "expected_result": ["Checkspelling work correctly"]
+                },
+                {
+                    "viewpoint": "Check Help",
+                    "expected_result": ["Navigating to Help popup/screen\n[Base on spec]"]
+                }
+            ]
+        },
+        {
+            "item_type": "Some other scenarios",
+            "description": "Testing various formatting and display scenarios",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check format for middle/bottom paragraph",
+                    "expected_result": ["+ All content can be applied format\n+ Format middle/bottom text is applied successfully"]
+                },
+                {
+                    "viewpoint": "Check scroll bar",
+                    "expected_result": ["+ Scroll bar displays\n+ Scroll smoothy, content is not jerky"]
+                },
+                {
+                    "viewpoint": "Check insert successfully",
+                    "expected_result": ["Insert successfully, no error"]
+                },
+                {
+                    "viewpoint": "Check when mix multi-format in a text/paragraph",
+                    "expected_result": ["All formatting is applied"]
+                },
+                {
+                    "viewpoint": "Input and format => Preview => Save => Check displays on RichTextBox/Markdown again",
+                    "expected_result": ["RichTextBox/Markdown can be displays all formatting "]
+                },
+                {
+                    "viewpoint": "Paste all encode data to DB",
+                    "expected_result": ["RichTextBox/Markdown can be displays all formatting "]
+                },
+                {
+                    "viewpoint": "Generate encode format from another generation encode tool and paste to RichTextBox/\nMarkdown",
+                    "expected_result": ["RichTextBox/Markdown can be displays all formatting \n[Base on spec]"]
+                }
+            ]
+        },
+        {
+            "item_type": "Null/Space",
+            "description": "Testing empty and space-only inputs",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check when not input value/multi spaces",
+                    "expected_result": ["Success or failure base on spec"]
+                },
+                {
+                    "viewpoint": "Check when input only spaces",
+                    "expected_result": []
+                }
+            ]
+        },
+        {
+            "item_type": "Inputting all type of data",
+            "description": "Testing various data type inputs with formatting",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check input multi data with multi formatting:\n- text\n- number\n- Special characters\n- Enter character\n- table/image/media",
+                    "expected_result": ["Process successfully with inputed value"]
+                }
+            ]
+        },
+        {
+            "item_type": "Multi lines",
+            "description": "Testing multi-line input scenarios",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check when input multi lines when:\n+ Not display vertical scroll\n+ Display vertical scroll",
+                    "expected_result": ["Process successfully with inputed value\nVertical scroll operates normally"]
+                }
+            ]
+        },
+        {
+            "item_type": "Min length",
+            "description": "Testing minimum length constraints",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check when input Max/Mix value",
+                    "expected_result": ["Process successfully with inputed value"]
+                }
+            ]
+        },
+        {
+            "item_type": "Max length",
+            "description": "Testing maximum length constraints",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check when input max valid value:\n+ Without Enter character\n+ Has Enter character\n(includes all valid character types)",
+                    "expected_result": ["Process successfully with inputed value"]
+                }
+            ]
+        },
+        {
+            "item_type": "Abnormal cases",
+            "description": "Testing error handling for invalid inputs",
+            "test_view_points": [
+                {
+                    "viewpoint": "Check when input < Min lenght value",
+                    "expected_result": ["Display exact error message with correct format and position\n"]
+                },
+                {
+                    "viewpoint": "Check when input > Max length value",
+                    "expected_result": ["Display exact error message with correct format and position\n"]
+                }
+            ]
+        }
+    ]

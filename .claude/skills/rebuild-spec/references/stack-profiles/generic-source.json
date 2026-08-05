@@ -1,0 +1,33 @@
+{
+  "id": "generic-source",
+  "graphable": true,
+  "display_name": "Generic source (no recognized stack)",
+  "detected_language_heading": "Generic source",
+  "detection": {
+    "globs": []
+  },
+  "source_encoding": { "primary": "utf-8", "fallback": "utf-8" },
+  "resource_decode": null,
+  "artifact_map": {
+    "system-overview": { "action": "produce", "class": "universal" },
+    "architecture": { "action": "produce", "class": "universal" },
+    "data-model": { "action": "produce", "class": "universal" },
+    "entities": { "action": "produce", "class": "universal" },
+    "user-stories": { "action": "produce", "class": "universal" },
+    "feature-list": { "action": "produce", "class": "universal" },
+    "business-rules": { "action": "produce", "class": "universal" },
+    "permissions": { "action": "produce", "class": "universal" },
+    "permissions-matrix": { "action": "produce", "class": "universal" },
+    "behavior-logic": { "action": "produce", "class": "universal" },
+    "route-list": { "action": "skip", "class": "web" },
+    "screen-list": { "action": "skip", "class": "web" },
+    "screen-flow": { "action": "skip", "class": "web" },
+    "api-map": { "action": "skip", "class": "web" },
+    "crud-matrix": { "action": "skip", "class": "stack-specific" },
+    "db-objects": { "action": "skip", "class": "stack-specific" }
+  },
+  "screen_source": "none",
+  "extractors": [],
+  "probe": { "bootable": false },
+  "module_layout": "feature-grouped"
+}

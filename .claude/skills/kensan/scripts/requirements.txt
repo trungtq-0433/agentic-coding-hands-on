@@ -1,0 +1,7 @@
+# Kensan skill dependencies (Python 3.9+)
+# Installed into the skills venv by .claude/skills/install.sh.
+# Stdlib-only modules (watchlist parsing, dedup ledger) work without these;
+# these power the structured-feed collectors only.
+
+feedparser>=6.0      # RSS / Atom / arXiv / YouTube channel feeds
+requests>=2.31       # HTTP for GitHub, Hacker News, arXiv, goodailist, HF, Bluesky APIs

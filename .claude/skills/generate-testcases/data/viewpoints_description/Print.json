@@ -1,0 +1,90 @@
+[
+    {
+        "item_type": "Design of Print form",
+        "description": "Testing the UI elements and layout of the Print form interface",
+        "test_view_points": [
+            {
+                "viewpoint": "Check UI of Print form/ button\n- Title\n- Layout of items\n- Text\n...",
+                "expected_result": ["Print form/ button is the same with design"]
+            }
+        ]
+    },
+    {
+        "item_type": "Function",
+        "description": "Testing print functionality including preview, configuration options, multi-user scenarios, and various printing conditions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check working of button Print",
+                "expected_result": ["Btn is active when hover mouse. Display Print screen"]
+            },
+            {
+                "viewpoint": "Check click many times and quickly",
+                "expected_result": ["Display Only One Print screen"]
+            },
+            {
+                "viewpoint": "Check pressing Ctrl+P",
+                "expected_result": ["Display Print screen"]
+            },
+            {
+                "viewpoint": "Check layout of Print Screen",
+                "expected_result": ["Display screen like design:\n- Print preview\n- Configuration to print"]
+            },
+            {
+                "viewpoint": "Check template on Print preview default",
+                "expected_result": ["Display format exactly as design/ result screen/ set condition"]
+            },
+            {
+                "viewpoint": "Check template on Print preview when hide some columns",
+                "expected_result": ["Display format exactly as setting/ result screen/ set condition"]
+            },
+            {
+                "viewpoint": "Check data on Print preview default",
+                "expected_result": ["Display exact data the same result screen"]
+            },
+            {
+                "viewpoint": "Check data on Print preview when hide some columns",
+                "expected_result": ["Display exact data the same set conditions"]
+            },
+            {
+                "viewpoint": "Print with config: Portrait/Landscape orientation",
+                "expected_result": ["Print preview is changed exactly by selected orientation. Print out exactly"]
+            },
+            {
+                "viewpoint": "Print with range that user set",
+                "expected_result": ["Print Preview display exactly selected range. Print out successfull and exactly"]
+            },
+            {
+                "viewpoint": "Print odd/ even pages",
+                "expected_result": ["Print out successfully and exactly, the same with setup"]
+            },
+            {
+                "viewpoint": "Check function when disconnect or connect Print",
+                "expected_result": ["Connect/ disconnect Print is not aflect Print function"]
+            },
+            {
+                "viewpoint": "Print larges file",
+                "expected_result": ["Print out successfully and exactly"]
+            },
+            {
+                "viewpoint": "Check hard record after printting",
+                "expected_result": ["Data, template, text, font are exactly as Print preview (not realtime)"]
+            },
+            {
+                "viewpoint": "Check Print on many browsers",
+                "expected_result": ["Print successfully on browsers"]
+            },
+            {
+                "viewpoint": "Multi users print at the same time (the same Print/ other Print)",
+                "expected_result": ["Print out successfully. Display exact name format"]
+            },
+            {
+                "viewpoint": "Valid Activities while print (change tab, open another function, close browser...)",
+                "expected_result": ["Print out successfully"]
+            },
+            {
+                "viewpoint": "Cancel Print (no click Print on Print Preview or close Print Preview)",
+                "expected_result": ["Don't print"]
+            }
+        ]
+    }
+]

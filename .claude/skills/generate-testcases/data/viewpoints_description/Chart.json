@@ -1,0 +1,268 @@
+[
+    {
+        "item_type": "Default display",
+        "description": "Testing chart display behavior with and without data",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display when DB has not data",
+                "expected_result": ["Do not display chart <base on spec>\n"]
+            },
+            {
+                "viewpoint": "Check default display when DB has data",
+                "expected_result": ["2. Display correctly as designed:\n+ Position\n+ Chart type\n+ Label of item\n+ Color\n+ Title name\n+ Axis X name\n+ Axis Y name\n+ Data Label \n+ Legend \n+ Value of each node value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Title",
+        "description": "Testing chart title display and interactions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check displayed title of chart",
+                "expected_result": ["Display correctly as designed:\n+ Color\n+ Text"]
+            },
+            {
+                "viewpoint": "Check operation when:\n+ Hover on chart title\n+ Click on chart title\n+ Multi-click on chart title",
+                "expected_result": ["Display and operation correctly as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Edit name",
+        "description": "Testing name editing functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Refer to testcases of \"input box _String\"",
+                "expected_result": [""]
+            }
+        ]
+    },
+    {
+        "item_type": "Legend (notice text)",
+        "description": "Testing legend interactions and display behavior",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when hover on legend",
+                "expected_result": ["Highligh items that is hovered on correctly"]
+            },
+            {
+                "viewpoint": "Check when click on legend",
+                "expected_result": ["2. Display correctly as designed:\n+ Hide corresponding item that clicked on\n+ Position\n+ Chart type\n+ Label of item\n+ Color\n+ Title name\n+ Axis X name\n+ Axis Y name\n+ Data Label\n+ Legend \n+ Value of each node value"]
+            },
+            {
+                "viewpoint": "Check when Multi - click on legend",
+                "expected_result": ["2. Display correctly as designed:\n+ Hide and unhide correctly item that coresponding click\n+ Position\n+ Chart type\n+ Label of item\n+ Color\n+ Title name\n+ Axis X name\n+ Axis Y name\n+ Data Label\n+ Legend \n+ Value of each node value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Load chart",
+        "description": "Testing chart loading indicators and final display",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display progress bar/waiting cursor while load chart",
+                "expected_result": ["2. Display progress bar/waiting cursor correctly <base on spec>\n+ Position\n+ Color\n+ Percentage of load"]
+            },
+            {
+                "viewpoint": "Check default display progress bar/waiting cursor after load chart completely",
+                "expected_result": ["Not display progress bar/ waiting cursor and Display correctly as designed:\n+ Position\n+ Chart type\n+ Label of item\n+ Color\n+ Title name\n+ Axis X name\n+ Axis Y name\n+ Data Label \n+ Legend\n+ Value of each node value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change data realtime",
+        "description": "Testing real-time data updates in chart",
+        "test_view_points": [
+            {
+                "viewpoint": "Check realtime update when increasing data for 1 item on DB",
+                "expected_result": ["Display correctly chart with correctly data changed real-time:\n+ Increase data value corresponding changed data"]
+            },
+            {
+                "viewpoint": "Check realtime update when Descreasing data for 1 item on DB",
+                "expected_result": ["Display correctly chart with correctly data changed real-time:\n+ Descrease data value corresponding changed data\n"]
+            },
+            {
+                "viewpoint": "Check realtime update when Change data for 1 item = 0/ NULL on DB",
+                "expected_result": ["Display correctly chart with correctly data changed real-time:\n+ Display value = 0 for changed data\n"]
+            },
+            {
+                "viewpoint": "Check realtime update when Change data for 1 item has multiple format (date, number, character,..)",
+                "expected_result": ["Display correctly chart with correctly data changed real-time:\n+ Display value = 0 for different format of each node value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change data not realtime",
+        "description": "Testing non-real-time data updates in chart",
+        "test_view_points": [
+            {
+                "viewpoint": "Check not realtime update when increasing data for 1 item on DB",
+                "expected_result": ["Just update displaying after reload chart page"]
+            },
+            {
+                "viewpoint": "Check  not realtime update when Descreasing data for 1 item on DB",
+                "expected_result": ["Just update displaying after reload chart page"]
+            },
+            {
+                "viewpoint": "Check not realtime update when Change data for 1 item = 0/ NULL on DB",
+                "expected_result": ["Just update displaying after reload chart page"]
+            },
+            {
+                "viewpoint": "Check not realtime update when Change data for 1 item has multiple format (date, number, character,..)",
+                "expected_result": ["Just update displaying after reload chart page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change item Real-time",
+        "description": "Testing real-time item additions and deletions in chart",
+        "test_view_points": [
+            {
+                "viewpoint": "Check realtime update when Delete one item on DB",
+                "expected_result": ["Display correctly chart with correctly items changed real-time:\n+ Hide correctly deleted item"]
+            },
+            {
+                "viewpoint": "Check realtime update when add more item on DB",
+                "expected_result": ["Display correctly chart with correctly items changed real-time:\n+ Display correctly added item"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change item non Real-time",
+        "description": "Testing non-real-time item additions and deletions in chart",
+        "test_view_points": [
+            {
+                "viewpoint": "Check not realtime update when Delete one item on DB",
+                "expected_result": ["Just update displaying after reload chart page"]
+            },
+            {
+                "viewpoint": "Check not realtime update when add more item on DB",
+                "expected_result": ["Just update displaying after reload chart page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Scroll\n<Max high: N, max long: M >",
+        "description": "Testing scroll behavior based on chart dimensions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display scroll for small chart: smaller than or equal to N and M",
+                "expected_result": ["Not display scroll"]
+            },
+            {
+                "viewpoint": "Check display scroll for high chart : bigger than N",
+                "expected_result": ["Display vertical scroll"]
+            },
+            {
+                "viewpoint": "Check display scroll for high chart : longer than long M",
+                "expected_result": ["Display horizontal scroll"]
+            }
+        ]
+    },
+    {
+        "item_type": "Zooms",
+        "description": "Testing zoom functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check Zoom in/Zoom out chart",
+                "expected_result": ["Zoom in/out chart correctly:\n+ Not broke UI"]
+            }
+        ]
+    },
+    {
+        "item_type": "Tooltips",
+        "description": "Testing tooltip display on chart elements",
+        "test_view_points": [
+            {
+                "viewpoint": "Check tooltips when Hover on each node value",
+                "expected_result": ["Display tooltips correctly as desiged:\n+ Text on tooltips \n+ Value on tooltips is same as node value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Performance",
+        "description": "Testing chart performance with varying data sizes",
+        "test_view_points": [
+            {
+                "viewpoint": "Check performance of chart when DB has Smallest data",
+                "expected_result": ["Display correctly as designed"]
+            },
+            {
+                "viewpoint": "Check performance of chart when DB has Bigest data",
+                "expected_result": ["Display correctly as designed"]
+            }
+        ]
+    },
+    {
+        "item_type": "Select chart type",
+        "description": "Testing different chart type displays and interactions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when Hover mouse on the data in chart with each chart type:\n+ Line\n+ Area\n+ Column\n+ Bar\n+ Pie\n+ Scatter\n+ Map\n+ Others",
+                "expected_result": ["+ Chart is displayed correctly as the type\n+ Data of chart is displayed correctly \n+ It shows the detail of data correctly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check the display of chart",
+        "description": "Testing chart display with different data values",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the display of chart when has normal value",
+                "expected_result": ["+ Chart is displayed correctly as the type\n+ Data of chart is displayed correctly \n+ It shows the detail of data correctly"]
+            },
+            {
+                "viewpoint": "Check the display and operation of chart when Data has a big distance between max value and min value",
+                "expected_result": [""]
+            }
+        ]
+    },
+    {
+        "item_type": "Change period  From - To",
+        "description": "Testing chart display with different date ranges",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a day: From = To = Today",
+                "expected_result": ["+ Chart is displayed correctly as the type\n+ Data of chart is displayed correctly \n+ It shows the detail of data correctly"]
+            },
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a day: From = To # Today",
+                "expected_result": [""]
+            },
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a day: From = To = The oldest date in database",
+                "expected_result": [""]
+            },
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a week",
+                "expected_result": [""]
+            },
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a month",
+                "expected_result": [""]
+            },
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a year",
+                "expected_result": [""]
+            },
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in special period: From last month to this month, from last year to this year\n\nEx: 15/6/2018 ~15/7/2018\n01/01/2017~01/01/2018",
+                "expected_result": [""]
+            }
+        ]
+    },
+    {
+        "item_type": "Check some special chart and data",
+        "description": "Testing chart behavior with special data conditions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check some special chart and data when:\n+ There are no data in special period\n\nEx: Share price\n1. Check the share price in the period 2018/01/01 ~ 2018/01/02\n(New year holiday and there are no Stock Exchange )\n2. Check the share price at the time the Stock Exchange has out of working time\nEx: At mid night\n      Before 8:30 o'clock (the working time will start from 8:30 o'clock)\n",
+                "expected_result": ["+ Chart is displayed correctly\n+ Data of chart is displayed correctly"]
+            },
+            {
+                "viewpoint": "There are no data in special period when:\n+ There are no data in that day\n\nEx: Share price\n      There is problem with the Stock market and there is no Stock Exchange be run in that day",
+                "expected_result": [""]
+            }
+        ]
+    }
+]

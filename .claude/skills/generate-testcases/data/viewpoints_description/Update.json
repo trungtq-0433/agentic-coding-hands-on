@@ -1,0 +1,343 @@
+[
+    {
+        "item_type": "Precondition",
+        "description": "Initial setup for update testing",
+        "test_view_points": [
+            {
+                "viewpoint": "At Main screen\n- Click button to open Update function",
+                "expected_result": "Open Edit screen"
+            }
+        ]
+    },
+    {
+        "item_type": "Basic Checks",
+        "description": "Initial UI and data verification",
+        "test_view_points": [
+            {
+                "category": "UI Check",
+                "viewpoint": "Verify layout and format, position all items",
+                "expected_result": "Like design"
+            },
+            {
+                "category": "Data Check",
+                "viewpoint": "Verify data on Update screen",
+                "expected_result": "Data at each field exactly (from DB)"
+            }
+        ]
+    },
+    {
+        "item_type": "Validation",
+        "description": "Field validation testing",
+        "test_view_points": [
+            {
+                "category": "Mandatory Fields",
+                "viewpoint": "Don't input / select at mandatory item",
+                "expected_result": [
+                    "- Show message at each item",
+                    "- Keep at current screen"
+                ]
+            },
+            {
+                "category": "Length Validation",
+                "viewpoints": [
+                    {
+                        "type": "Minimum Length",
+                        "viewpoint": "Verify min of each items\n- Input number of character less than Min Length",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    },
+                    {
+                        "type": "Maximum Length",
+                        "viewpoint": "Verify min of each items\n- Input number of character more than Max Length",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "Character Type Validation",
+                "viewpoints": [
+                    {
+                        "type": "Alphabet items",
+                        "viewpoint": "Verify characters isn't allowed [Depend on spec]\nExample:\n- Symbol\n- Number\n- Fullsize characters....\n(Refer sheet: Input box, Combo, Selectbox, Text area)",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    },
+                    {
+                        "type": "Number items",
+                        "viewpoint": "Verify characters isn't allowed [Depend on spec]\nExample:\n- Symbol\n- Character\n- Any character isn't Number....\n(Refer sheet: Input box, Combo)",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    },
+                    {
+                        "type": "Format Validation",
+                        "viewpoint": "Verify case: Format incorrect\n(Example Phone Number format correct: 0XYYYYYYYY\nWith: X=3/5/8/9 then Y include 8 number\nWith: X=1 then Y include 9 number)",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "Input Controls Validation",
+                "viewpoints": [
+                    {
+                        "type": "Radio items",
+                        "viewpoint": "Verify characters isn't allowed [Depend on spec]\nExample\n- Symbol different: - / .\n(Refer sheet: Radio button)",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    },
+                    {
+                        "type": "Dropdown items",
+                        "viewpoint": "Verify characters not allowed [Depend on spec]\nExample\n- Symbol different: - / .\n(Refer sheet: Combo)",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "Special Validations",
+                "viewpoints": [
+                    {
+                        "type": "Special items",
+                        "viewpoint": "Example, items only allowed Japanese [Depend on spec]\nVerify characters isn't allowed\nExample\n- Symbol\n- Number\n- Alphabet character or different with Japanese",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed"
+                        ]
+                    },
+                    {
+                        "type": "Duplicate Check",
+                        "viewpoint": "New information, it's duplicate with other record in DB",
+                        "expected_result": [
+                            "- Show message at item",
+                            "- Keep at current screen",
+                            "- Keep value was inputed",
+                            "- Data in DB isn't change"
+                        ]
+                    },
+                    {
+                        "type": "Valid Characters",
+                        "viewpoint": "Verify case: Character allow [Depent on Spec of each items]",
+                        "expected_result": ["Don't show message at item"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Back Button Handling",
+        "description": "Testing back button functionality",
+        "test_view_points": [
+            {
+                "action": "Click BACK",
+                "viewpoint": "- Edit or not Edit infor of any items\n- Click into 'BACK' button at Browser / Screen",
+                "expected_result": "Show popup confirm Back Yes/No"
+            },
+            {
+                "action": "Click No on confirmation",
+                "viewpoint": "Continue case above\n- Click No",
+                "expected_result": [
+                    "- Cancel 'Back' action",
+                    "- Keep value was input at all items"
+                ]
+            },
+            {
+                "action": "Click Yes on confirmation",
+                "viewpoint": "Continue case click button 'BACK'\n- Click Yes",
+                "expected_result": [
+                    "- Back to previous screen",
+                    "- Data of item is not changed"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Submit Operations",
+        "description": "Testing submit functionality",
+        "test_view_points": [
+            {
+                "category": "Submit without changes",
+                "viewpoint": "- Don't edit value of any items\n- Click into 'Submit' button",
+                "expected_result": [
+                    "- Update succesfull",
+                    "- Back to Previous screen",
+                    "- Data in DB isn't change",
+                    "[Depend on spec]"
+                ]
+            },
+            {
+                "category": "Partial update",
+                "viewpoint": "- Edit value of some items\n- Click into 'Submit' button",
+                "expected_result": [
+                    "- Update succesfull",
+                    "- Back to Previous screen"
+                ]
+            },
+            {
+                "category": "Complete update",
+                "viewpoint": "- Edit value of all items\n- Click into 'Submit' button",
+                "expected_result": [
+                    "- Update succesfull",
+                    "- Back to Previous screen"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Database Verification",
+        "description": "Testing database updates",
+        "test_view_points": [
+            {
+                "category": "Normal fields",
+                "viewpoint": "After update successfull\nCheck Update data in DB\n- Normal field",
+                "expected_result": [
+                    "Update exactly at:",
+                    "- Table",
+                    "- Row",
+                    "- Field",
+                    "(Note: Update Date, Update Time)"
+                ]
+            },
+            {
+                "category": "Special fields",
+                "viewpoint": "After update successfull\nCheck Update data in DB\n- Special field",
+                "expected_result": [
+                    "Update exactly:",
+                    "Example:",
+                    "- Gender: save is: 0/1/2",
+                    "- Building Type save is: 1/2/3/4"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Security Validation",
+        "description": "Testing security aspects",
+        "test_view_points": [
+            {
+                "category": "Client-side manipulation",
+                "viewpoint": "In case: F12 or Inspect to edit value at items",
+                "expected_result": "- Normal processing (Validation or Update successfull)"
+            },
+            {
+                "category": "Readonly field manipulation",
+                "viewpoint": "F12 or Inspect to edit value of item readonly\n1. Value incorrect\n2. Value correct\n- Click Submit button",
+                "expected_result": [
+                    "1. Show message at item",
+                    "2. Update successful with value of item before edit"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Multiple Operations",
+        "description": "Testing multiple submission scenarios",
+        "test_view_points": [
+            {
+                "category": "Multiple clicks",
+                "viewpoint": "At Update form\n- Click into button submit many times",
+                "expected_result": [
+                    "- Only submit the first times (button disable affter click)",
+                    "- Data in DB was changed exaclty (1 times)"
+                ]
+            },
+            {
+                "category": "Sequential updates",
+                "viewpoint": "- Perform edit successfully 1 times\n- Continue perform edit many times",
+                "expected_result": [
+                    "With each times:",
+                    "- Update successfull",
+                    "- Data in DB was changed exaclty"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Post-Update Verification",
+        "description": "Testing post-update states",
+        "test_view_points": [
+            {
+                "category": "Record status",
+                "viewpoint": "After update success\n- Check Status of Record",
+                "expected_result": [
+                    "[Depent on spec of system]",
+                    "- Enable",
+                    "- Disable"
+                ]
+            },
+            {
+                "category": "Related forms",
+                "viewpoint": "After update success\n- Check related forms",
+                "expected_result": "Display exactly new information\nor Special information of spec"
+            }
+        ]
+    },
+    {
+        "item_type": "Error Handling",
+        "description": "Testing system error scenarios",
+        "test_view_points": [
+            {
+                "category": "Session timeout",
+                "viewpoint": "Session time out",
+                "expected_result": [
+                    "- Show message",
+                    "- Keep current screen (or 404 page)"
+                ]
+            },
+            {
+                "category": "Database connection",
+                "viewpoint": "Can't connect with Database",
+                "expected_result": [
+                    "- Show message",
+                    "- Stop the process (Don't update)",
+                    "- Keep current screen (or 404 page)"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Cancel Operations",
+        "description": "Testing cancel functionality",
+        "test_view_points": [
+            {
+                "category": "Normal cancel",
+                "viewpoint": "- Edit value of items correct\n- Click 'Cancel' button on form update",
+                "expected_result": [
+                    "- Show message confirm (Yes/No)",
+                    "- Clear data inputed in form or Close form Update",
+                    "- No change data in DB"
+                ]
+            },
+            {
+                "category": "Cancel during submit",
+                "viewpoint": "- Edit value of items correct\n- Click Submit button\n- After click 'CANCEL' button",
+                "expected_result": [
+                    "- Button 'Cancel' and 'Submit' was disable",
+                    "- Can't click button 'Cancel'"
+                ]
+            }
+        ]
+    }
+]

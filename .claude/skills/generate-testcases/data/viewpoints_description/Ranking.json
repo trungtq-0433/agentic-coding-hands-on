@@ -1,0 +1,156 @@
+[
+    {
+        "item_type": "Setting Ranking",
+        "description": "Testing the functionality to add, edit, and delete ranking indices for items, including individual and bulk operations at various positions in the ranking list.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify be able to add index for 1 items that matching with ranking condition",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to add index for 1 items that do not matching with ranking condition \n\n[base on required]",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to add top index for item on ranking list",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to add bottom index for item on ranking list",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to add index for items at this item's index",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to add index for >= 2 items on ranking list",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to add index for all items on ranking list",
+                "expected_result": ["- Setting index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit index for 1 items that matching with ranking condition",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit index for 1 items that do not matching with ranking condition \n\n[base on required]",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit top index for item on ranking list",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit bottom index for item on ranking list",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit index for items at this item's index",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit index for >= 2 items on ranking list",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to edit index for all items on ranking list",
+                "expected_result": ["- Edit index for item successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to delete 1 item on ranking list",
+                "expected_result": ["- Delete item on ranking list successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to delete 1 item at the top of ranking list",
+                "expected_result": ["- Delete item on ranking list successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to delete 1 item at the bottom of ranking list",
+                "expected_result": ["- Delete item on ranking list successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to delete >=2 items on ranking list",
+                "expected_result": ["- Delete item on ranking list successfully"]
+            },
+            {
+                "viewpoint": "Verify be able to delete all items on ranking list",
+                "expected_result": ["- Delete item on ranking list successfully"]
+            }
+        ]
+    },
+    {
+        "item_type": "Default display",
+        "description": "Testing the default display behavior of ranking list in various scenarios including empty list, single item, multiple items, and maximum items.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify default display on Ranking list when do not has item on list",
+                "expected_result": ["Has no item on list"]
+            },
+            {
+                "viewpoint": "Verify default display on Ranking list when has 1 item on list",
+                "expected_result": ["Display list items on oder by Ranking Condition"]
+            },
+            {
+                "viewpoint": "Verify default display on Ranking list when have >=2 items on list",
+                "expected_result": ["Display list items on oder by Ranking Condition"]
+            },
+            {
+                "viewpoint": "Verify default display on Ranking list when have max items on list",
+                "expected_result": ["Display list items on oder by Ranking Condition"]
+            }
+        ]
+    },
+    {
+        "item_type": "List Rank",
+        "description": "Testing the dynamic behavior of ranking list including priority display, real-time updates, and post-deletion behavior.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list ranking display when setting index of 1 items that matiching with ranking condition",
+                "expected_result": ["- Item is setting is priority display with setting index on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display when setting items that do not matching with ranking condition \n\n[base on required]",
+                "expected_result": ["- Item is setting is priority display with setting index on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display when setting top index on list",
+                "expected_result": ["- Item is setting is priority display with setting index on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display when setting bottom index on list",
+                "expected_result": ["- Item is setting is priority display with setting index on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display when setting item at this item's index",
+                "expected_result": ["- Item is setting is priority display with setting index on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display when setting index of all items on list",
+                "expected_result": ["- Item is setting is priority display with setting index on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display when has >= 2 items matching ranking condition at the same index",
+                "expected_result": ["- Item has lastest create_date is priority display at this index\n[base on required]\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display after delete 1 items on ranking list\n\nEx:\n- Item at top index\n- Item at bottom index\n- Item at mindel index",
+                "expected_result": ["- Item is deleted do not display on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display after delete >=2 items on ranking list",
+                "expected_result": ["- Item is deleted do not display on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display after delete all items on ranking list",
+                "expected_result": ["- Item is deleted do not display on Ranking list\n- List ranking is displayed correctly\n(List ranking is update real time or update after refresh page)"]
+            },
+            {
+                "viewpoint": "Verify list ranking display after refresh page",
+                "expected_result": ["All item is displayed order by setting"]
+            }
+        ]
+    }
+]

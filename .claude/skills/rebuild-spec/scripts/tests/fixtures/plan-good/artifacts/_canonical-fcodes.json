@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-05-16T00:00:00Z",
+  "plan": "plan-good",
+  "features": [
+    {
+      "fcode": "F001",
+      "name": "Authentication",
+      "slug": "F001_Auth",
+      "priority": "P0",
+      "type": "ui",
+      "related": {
+        "screens": ["SCR001_LoginForm"],
+        "user_stories": ["US001_Login"],
+        "routes": ["POST /login"],
+        "models": ["User"],
+        "bl": [],
+        "perms": ["PERM001_AuthRequired"]
+      }
+    },
+    {
+      "fcode": "F002",
+      "name": "Search",
+      "slug": "F002_Search",
+      "priority": "P1",
+      "type": "ui",
+      "related": {
+        "screens": ["SCR002_SearchPage"],
+        "user_stories": ["US002_Search"],
+        "routes": ["GET /search"],
+        "models": ["Item"],
+        "bl": [],
+        "perms": []
+      }
+    }
+  ]
+}

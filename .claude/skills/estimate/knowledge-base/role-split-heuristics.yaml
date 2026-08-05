@@ -1,0 +1,178 @@
+# Role splits for dev effort only (BE/FE/QA/Design).
+# BrSE and Infra are calculated separately — see management_overhead and infrastructure task type.
+crud:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.401
+    fe: 0.349
+    qa_manual: 0.25
+authentication:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.543
+    fe: 0.218
+    qa_manual: 0.239
+authorization:
+  typical_roles:
+  - be
+  - qa_manual
+  split:
+    be: 0.7
+    qa_manual: 0.3
+file_operations:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.359
+    fe: 0.395
+    qa_manual: 0.246
+notifications:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.331
+    fe: 0.318
+    qa_manual: 0.351
+search:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.385
+    fe: 0.385
+    qa_manual: 0.23
+payments:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.5
+    fe: 0.222
+    qa_manual: 0.278
+reports:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.35
+    fe: 0.35
+    qa_manual: 0.3
+ui:
+  typical_roles:
+  - fe
+  - design
+  - qa_manual
+  split:
+    fe: 0.487
+    design: 0.283
+    qa_manual: 0.23
+infrastructure:
+  typical_roles:
+  - infra
+  split:
+    infra: 1.0
+  sub_categories:
+    - architecture_design
+    - cost_estimation
+    - account_setup
+    - networking
+    - dns_ssl
+    - compute_setup
+    - static_hosting
+    - database_infra
+    - cache_search_infra
+    - ci_cd_per_service
+    - monitoring_alerting
+    - waf_security
+    - infra_documentation
+  environment_multiplier_key: environment_multipliers
+testing:
+  typical_roles:
+  - qa_manual
+  - qa_auto
+  split:
+    qa_manual: 0.6
+    qa_auto: 0.4
+documentation:
+  typical_roles:
+  - be
+  - brse
+  split:
+    be: 0.6
+    brse: 0.4
+api:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.541
+    fe: 0.28
+    qa_manual: 0.179
+data_management:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.303
+    fe: 0.52
+    qa_manual: 0.177
+database:
+  typical_roles:
+  - be
+  - qa_manual
+  split:
+    be: 0.772
+    qa_manual: 0.228
+user_management:
+  typical_roles:
+  - be
+  - fe
+  - qa_manual
+  split:
+    be: 0.481
+    fe: 0.343
+    qa_manual: 0.176
+management:
+  typical_roles:
+  - pm
+  - brse
+  split:
+    pm: 0.506
+    brse: 0.494
+# BrSE and PM are separate overhead, not part of per-task dev splits.
+# Infra effort uses the infrastructure task type (infra: 1.0).
+management_overhead:
+  pm:
+    pct_of_total: 0.10
+    description: Project management overhead (~10% of total dev MD)
+  brse:
+    tiers:
+      middle_solo:
+        ratio: "1:4"
+        pct_of_dev: 0.25
+        description: BrSE middle, no comtor (~25% of dev MD, 1 BrSE per 4 devs)
+      middle_with_comtor:
+        ratio: "1:7"
+        pct_of_dev: 0.14
+        description: BrSE middle + 1 comtor (~14% of dev MD, 1 BrSE per 7 devs)
+      lead_with_comtor:
+        ratio: "1:10"
+        pct_of_dev: 0.09
+        description: BrSE lead/PSM + 1 comtor (~9% of dev MD, 1 BrSE per 10-12 devs)
+    default_tier: middle_with_comtor
+    description: BrSE overhead varies by seniority and comtor support

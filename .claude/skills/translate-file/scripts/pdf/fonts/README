@@ -1,0 +1,15 @@
+Noto Sans fonts bundled for PDF in-place text re-insertion.
+
+Source: Google Noto Fonts (https://fonts.google.com/noto)
+License: SIL Open Font License 1.1 (OFL)
+See: https://openfontlicense.org/
+
+Files:
+- NotoSans-Regular.ttf
+- NotoSans-Bold.ttf
+- NotoSans-Italic.ttf
+- NotoSans-BoldItalic.ttf
+- NotoSansJP-Regular.ttf  (CJK fallback — Japanese/Chinese/Korean glyphs)
+
+Note: PyMuPDF (pymupdf) is AGPL-3.0 licensed.
+This font bundle has no additional license restrictions.

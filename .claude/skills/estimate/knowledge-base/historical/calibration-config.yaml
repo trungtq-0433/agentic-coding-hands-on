@@ -1,0 +1,14 @@
+weights:
+  actual: 3.0     # Type A: estimate vs actual — rare but high signal
+  accepted: 1.0   # Type B: client-accepted estimates — abundant
+  recency_decay: 0.9  # per year
+
+thresholds:
+  min_samples: 2
+  significance_pct: 10
+
+algorithm: "weighted_median"
+
+blending:
+  method: "bayesian_prior"
+  prior_strength: 5  # equivalent to N pseudo-samples from KB default

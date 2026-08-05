@@ -1,0 +1,176 @@
+[
+    {
+        "item_type": "Default display",
+        "description": "Testing initial display of checkboxes in both add and edit forms",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default slected value\n+ List of values\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default slected value: DB's value\n+ List of values\n..."]
+            }
+        ]
+    },
+    {
+        "item_type": "Select value",
+        "description": "Testing single and multiple checkbox selection functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when select a value:\n+ Select the first value \n+ Select any value\n+ Select the last value",
+                "expected_result": ["+ The selected value is Check ON. Other values are unselected \n+ Process with selected value successfully."]
+            },
+            {
+                "viewpoint": "Check operation when select multi values",
+                "expected_result": ["+ The selected values are Check ON. Other values are unselected \n+ Process with selected values successfully."]
+            }
+        ]
+    },
+    {
+        "item_type": "Behaviour of Active Check box",
+        "description": "Testing interactions and database synchronization for active checkboxes",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when hover on each part of Check box value",
+                "expected_result": ["Mouse becomes hand icon and can select [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when hover on each part of Check box value",
+                "expected_result": ["Mouse becomes hand icon and can select [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when selecting value is edited from DB",
+                "expected_result": ["Display correct error message"]
+            },
+            {
+                "viewpoint": "Check operation when selecting value is deleted from DB",
+                "expected_result": ["Display correct error message\n"]
+            },
+            {
+                "viewpoint": "Click on a selected Check box",
+                "expected_result": ["That Check box is unselected. Other values kept old status"]
+            }
+        ]
+    },
+    {
+        "item_type": "Behaviour of Inactive Check box",
+        "description": "Testing interactions with disabled checkboxes",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when hover on each part of each disabled radio button",
+                "expected_result": ["Mouse not becomes hand icon [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when hover on each part of each disabled radio button",
+                "expected_result": ["Mouse not becomes hand icon [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when select an disabled Check box button",
+                "expected_result": ["Can not select that Check box"]
+            }
+        ]
+    },
+    {
+        "item_type": "Tab order on keyboard",
+        "description": "Testing keyboard navigation through checkboxes",
+        "test_view_points": [
+            {
+                "viewpoint": "Check tab order on keyboard",
+                "expected_result": ["Go to Left to Right, from Up to Down as normal and don't go to disable value "]
+            }
+        ]
+    },
+    {
+        "item_type": "Edit radio button value by Inspect",
+        "description": "Testing client-side manipulation prevention of checkbox values",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when changed value of Check box on client web (inspect element)\nEx: Not select any value/ Select all options/ Change value of options/ Change text of options)",
+                "expected_result": ["Can not update wrong value to DB"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change config on backend",
+        "description": "Testing backend configuration changes and their effects on frontend checkbox behavior",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation of frontend after change config on backend",
+                "expected_result": ["+ Change default value list and selected value correctly corresponding to backend setting\n+ Operation of Checkbox is correct after change config."]
+            },
+            {
+                "viewpoint": "Check operation if change config on backend while selecting value on frontend page",
+                "expected_result": ["+ Can change config on backend successfully. \n+ Display notification to frontend [base on each spec]\n+ Operation of Checkbox is correct after reload page"]
+            },
+            {
+                "viewpoint": "Check operation if change config on backend while selecting value on frontend page",
+                "expected_result": ["+ Can change config on backend successfully. \n+ Display corect error message when submit on frontend"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check all option of Check box",
+        "description": "Testing 'Check all' functionality and its interaction with related checkboxes",
+        "test_view_points": [
+            {
+                "viewpoint": "Not select any item, then click on \"Check all\" option",
+                "expected_result": ["+ \"Check all\" option is changed from UNCheck to CheckED\n+ All related items are Check"]
+            },
+            {
+                "viewpoint": "Select some items by manual, then click on \"Check all\" option",
+                "expected_result": ["+ \"Check all\" option is changed from UNCheck to CheckED\n+ All related items are Check"]
+            },
+            {
+                "viewpoint": "Select all items which related with \"Check all\" option",
+                "expected_result": ["+ \"Check all\" option is changed from UNCheck to CheckED"]
+            },
+            {
+                "viewpoint": "Select all items which related with \"Check all\" option, then click on \"Check all\" option",
+                "expected_result": ["+ \"Check all\" option is changed from CheckED to UNCheck\n+ All related items are UNCheck\n"]
+            },
+            {
+                "viewpoint": "Select all items, then deselect some items of them. ",
+                "expected_result": ["+ \"Check all\" option is changed from CheckED to UNCheck\n+ Deselected items are UNCheck, other items are CheckED.\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "TriState CheckBox",
+        "description": "Testing three-state checkbox functionality with parent-child relationships",
+        "test_view_points": [
+            {
+                "viewpoint": "Select all items, then deselect some items of them.  (remain at least 1 item)",
+                "expected_result": ["+ As soon as deselect the first item, TriState CheckBox option is changed from CheckED to INDETERMINATE\n+ Deselected items are UNCheck, other items are CheckED.\n"]
+            },
+            {
+                "viewpoint": "Select all items which related with TriState CheckBox option, then click on TriState CheckBox option",
+                "expected_result": ["+ TriState CheckBox option is changed from CheckED to UNCheck\n+ All related items are UNCheck\n"]
+            },
+            {
+                "viewpoint": "Select all items which related with TriState CheckBox option, then deselect all of them",
+                "expected_result": ["+ TriState CheckBox option is changed from CheckED to UNCheck\n+ All related items are UNCheck\n"]
+            },
+            {
+                "viewpoint": "Select all of items which related with TriState CheckBox option",
+                "expected_result": ["+ As soon as select the last related item, TriState CheckBox option is changed from INDETERMINATE to CheckED"]
+            },
+            {
+                "viewpoint": "Select some items by manual, then click on TriState CheckBox option",
+                "expected_result": ["+ TriState CheckBox option is changed from INDETERMINATE to CheckED\n+ All related items are Check"]
+            },
+            {
+                "viewpoint": "Select some items, then deselect all items of them. ",
+                "expected_result": ["+ As soon as deselect the last item, TriState CheckBox option is changed from INDETERMINATE to UNCheck\n"]
+            },
+            {
+                "viewpoint": "Not select any item, then click on TriState CheckBox option",
+                "expected_result": ["+ TriState CheckBox option is changed from UNCheck to CheckED\n+ All related items are Check"]
+            },
+            {
+                "viewpoint": "Select at least 1 item which related with TriState CheckBox option",
+                "expected_result": ["+ As soon as select at least 1 related item, TriState CheckBox option is changed from UNCheck to INDETERMINATE"]
+            }
+        ]
+    }
+]

@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-estimate.dev/schemas/estimate-output-schema.json",
+  "title": "Role-Based Project Estimate",
+  "description": "Schema for role-based project estimation output with options, tasks, and effort breakdown by role",
+  "type": "object",
+  "required": ["template_tier", "project_name", "generated_date", "parameters", "options", "assumptions"],
+  "properties": {
+    "template_tier": {
+      "type": "string",
+      "enum": ["bidding", "quick"],
+      "description": "Estimation template tier: bidding (detailed) or quick (simplified)"
+    },
+    "project_name": {
+      "type": "string",
+      "description": "Name of the project being estimated"
+    },
+    "generated_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "Date estimate was generated (YYYY-MM-DD)"
+    },
+    "estimator": {
+      "type": "string",
+      "description": "Name or ID of person/AI who created estimate"
+    },
+    "confidence": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"]
+        },
+        "range_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "source_document": {
+      "type": "string",
+      "description": "Path or URL to source requirements document"
+    },
+    "parameters": {
+      "type": "object",
+      "required": ["active_roles", "role_names"],
+      "properties": {
+        "active_roles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Ordered list of role slugs used in this estimate"
+        },
+        "role_names": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Mapping of role slug to display name"
+        },
+        "project_multipliers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "key", "value"],
+            "properties": {
+              "name": { "type": "string" },
+              "key": { "type": "string" },
+              "value": { "type": "number" },
+              "rationale": { "type": "string" }
+            }
+          }
+        },
+        "per_task_factors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "value"],
+            "properties": {
+              "name": { "type": "string" },
+              "value": { "type": "number" },
+              "scope": { "type": "string" }
+            }
+          }
+        },
+        "cost_per_md": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Default cost per man-day"
+        },
+        "cost_per_md_by_role": {
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "description": "Per-role cost overrides"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency code (e.g., JPY, USD)"
+        }
+      }
+    },
+    "options": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "subtitle": { "type": "string" },
+          "budget_target": { "type": "number" },
+          "ai_reduction_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+          "scope_reductions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["item", "impact_md"],
+              "properties": {
+                "item": { "type": "string" },
+                "impact_md": { "type": "number" }
+              }
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "tasks"],
+              "properties": {
+                "name": { "type": "string" },
+                "tasks": { "$ref": "#/$defs/taskArray" }
+              }
+            }
+          },
+          "tasks": { "$ref": "#/$defs/taskArray" }
+        }
+      }
+    },
+    "future_phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "tasks"],
+        "properties": {
+          "name": { "type": "string" },
+          "tasks": { "$ref": "#/$defs/taskArray" }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "category", "mitigation"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "category": { "type": "string" },
+          "probability": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "impact": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "score": { "type": "integer" },
+          "mitigation": { "type": "string" }
+        }
+      }
+    },
+    "tbd_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "status"],
+        "properties": {
+          "item": { "type": "string" },
+          "status": { "type": "string" },
+          "risk_impact": { "type": "string" },
+          "recommendation": { "type": "string" }
+        }
+      }
+    },
+    "comparison": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["area", "my_md", "original_md"],
+        "properties": {
+          "area": { "type": "string" },
+          "my_md": { "type": "integer" },
+          "original_md": { "type": "integer" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "validation_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["check", "result", "status"],
+        "properties": {
+          "check": { "type": "string" },
+          "result": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["pass", "warning", "fail"]
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Assumptions made during estimation"
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "taskArray": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "effort", "total_md", "story_points"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "effort": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "base": { "type": "number", "minimum": 0 },
+                "complexity": { "type": "number", "minimum": 0 },
+                "experience": { "type": "number", "minimum": 0 },
+                "buffer_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+                "md": { "type": "integer", "minimum": 0 }
+              },
+              "required": ["md"]
+            },
+            "minProperties": 1
+          },
+          "total_md": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Sum of all effort[role].md"
+          },
+          "story_points": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Fibonacci story points"
+          },
+          "original_md": { "type": "integer" },
+          "is_dev_task": { "type": "boolean" },
+          "notes": { "type": "string" },
+          "split_recommended": { "type": "boolean" },
+          "option_a_md": { "type": "integer" },
+          "reduction_reason": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,472 @@
+[
+    {
+        "item_type": "Multi search input box",
+        "description": "Testing multi-keyword search functionality including various input scenarios, character types, and search result handling",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display of input box item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "Search with each special values:\n+ Null (blank value)\n+ Multi spaces only",
+                "expected_result": ["Display all search results."]
+            },
+            {
+                "viewpoint": "Search with value:\n+ \"0\"",
+                "expected_result": ["Search LIKE %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Search with 1 keyword in cases:\n+ Keyword = DB's value\n+ Keyword includes DB's value\n+ DB's value includes keyword",
+                "expected_result": ["Search LIKE %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Search with multi keywords in cases:\n+ At least 1 keyword = DB's value\n+ At least 1 keyword includes DB's value\n+ DB's value includes at least 1 keyword",
+                "expected_result": ["Search LIKE each %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Search with:\n+ Valid characters\n+ Lower case/Upper case\n+ English characters\n+ Half/full-width Japanese\n+ Unicode, Chinese...",
+                "expected_result": ["Search LIKE %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Search with:\n+ Special characters: ~!@#$%^&*()_+{}:\"|<>?,./;'[]`",
+                "expected_result": ["Search LIKE %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Search in 2 cases:\n+ Input Japanese string from keyboard => Enter to finish input\n+ Copy paste Japanese string \n",
+                "expected_result": ["2 case have the same search handling."]
+            },
+            {
+                "viewpoint": "Search when has redundant spaces at:\n+ At the begin/end of keystring",
+                "expected_result": ["Search LIKE %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Search when has redundant spaces at:\n+ Between keystring",
+                "expected_result": ["Search LIKE %keyword% correctly \n+ Highlight results base on spec."]
+            },
+            {
+                "viewpoint": "Check when input invalid character [Base on each spec]",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check message content when has search result ",
+                "expected_result": ["Display exact message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check message content when has no search result ",
+                "expected_result": ["Display exact message with correct format and position"]
+            }
+        ]
+    },
+    {
+        "item_type": "Email",
+        "description": "Testing email input validation including syntax, length limits, special characters, and database-related validations across different forms",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input valid Email:\n+ Normal email value with valid characters: Number, Alphabet, valid symbols...\n+ Has redudant spaces at the beginning/at the end of Email value",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input [max length -1] / [max length] local part value",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input [max length -1] / [max length] domain value",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input each invalid syntax of email:\n+ Lack \"@\" in Email\n+ Redundant \"@\" in Email\n+ Has \"..\" in Email\n+ Has \".\" at the end of Email\n+ Has \".\" at the end of local part\n+ Has \"@\" at the end of Email\n+ Has \"-\" after \"@\"\n+ Local part is NULL\n+ Domain part is NULL",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input each invalid value email:\n+ Input SQL injection\n+ Input HTML (Scripts)\n+ Include invalid character \n+ Include unicode character\n+ Include half-width characters\n+ Include full-width characters\n",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Local > Max value (64 characters)\n+ Domain part > Max value (255 characters)\n",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "[Login function/Edit]\nCheck when input invalid Email:\n+ Email doesn't exist in Database",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "[SignUp function] \nCheck when input invalid Email:\n+ Email exist in Database",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Number_Integer",
+        "description": "Testing integer input validation including boundary values, formats, and invalid character handling",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input valid character:\n+ Only numerics\n+ Has \"+\" / \"-\" symbol",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Min / Min +1\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input redundant spaces (before/after)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input invalid format:\n+ Has \"+\"/ \"-\" symbol at invalid position (<> the 1st position)",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input each invalid characters:\n+ Alphabet characters\n+ Full-width number character\n+ Half-width Japanese character\n+ Has \".\" symbol\n+ Has \",\" symbol\n+ Includes space in value\n+ Input SQL injection \n+ Input HTML (Scripts)",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position"]
+            }
+        ]
+    },
+    {
+        "item_type": "Number_Float",
+        "description": "Testing floating-point number input validation including decimal places, formats, and boundary values",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input each valid character:\n+ Only numerics\n+ Has \"+\" / \"-\" symbol\n+ Has \".\" symbol\n+ Has \",\" symbol",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Min / Min +1\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input redundant spaces (before/after)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input each invalid format:\n+ Has \"+\"/ \"-\" symbol at invalid position (<> the 1st position)\n+ Has \".\" symbol at wrong position(<> block 3 digit)\n+ Has \",\" symbol at wrong position",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input each invalid characters:\n+ Alphabet characters\n+ Full-width number character\n+ Half-width Japanese character\n+ Includes other symbols (?><:~!)\n+ Includes space in value\n+ Input SQL injection \n+ Input HTML (Scripts)",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position"]
+            }
+        ]
+    },
+    {
+        "item_type": "Currency (Money)",
+        "description": "Testing currency input validation including various currency symbols, number formats, and decimal places",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input each valid character:\n+ Only numerics\n+ Has \"+\" / \"-\" symbol\n+ Has \".\" symbol\n+ Has \",\" symbol\n+ Has currency symbol ($, ￥, £, €...)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Min / Min +1\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input redundant spaces (before/after)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input each invalid format:\n+ Has \"+\"/ \"-\" symbol at invalid position (<> the 1st position)\n+ Has currency symbol ($, ￥, £, €...) (<> the 1st position)\n+ Has \".\" symbol at wrong position(<> block 3 digit)\n+ Has \",\" symbol at wrong position",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input each invalid characters:\n+ Alphabet characters\n+ Full-width number character\n+ Half-width Japanese character\n+ Includes other symbols (?><:~!)\n+ Includes space in value\n+ Input SQL injection \n+ Input HTML (Scripts)",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position"]
+            }
+        ]
+    },
+    {
+        "item_type": "Phone number",
+        "description": "Testing phone number input validation including format rules, special characters, and length restrictions",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value\n+ Correct Format base on spec"]
+            },
+            {
+                "viewpoint": "Check when input each valid character:\n+ Only numerics\n+ Has () symbol \n+ Has \"-\" symbol \n+ Has \"+\" symbol",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input redundant spaces (before/after)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Min / Min +1\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input each invalid characters:\n+ Includes invalid character : []:,;\"<>\\?\n+ Japanese number\n+ Alphabet character\n+ SQL injection \n+ HTML (Scripts)\n+ Spaces between phone\nnumber ",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input each invalid format:\n+ Has \"()\" symbol  (<> the valid position) \n+ Has \"+\" / \"-\" symbol  (<> the 1st position) ",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "String",
+        "description": "Testing string input validation including various character types, lengths, and special characters handling",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input each valid characters:\n+ Alphabet and Numberic character\n+ Half-width Japanese character\n+ Full-width Japanese character\n+ Special characters: ~!@#$%^&*()_+{{}}:\"|<>?,./;;'\\[]-=`\n+ Unicode character\n+ Includes space in value\n+ Input SQL injection \n+ Input HTML (Scripts)\n+ Have redundant spaces (before/after/between)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when copy paste:\n+ Full-width Japanese character",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Min / Min +1\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Password",
+        "description": "Testing password input validation including character requirements, masking functionality, and security features",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input each valid characters:\n+ Alphabet character only\n+ Numeric character only\n+ Both Alphabet and Numeric characters\n+ Half-width Japanese character\n+ Uppercase characters\n+ LowerCase characters\n+ Valid character base on spec (Ex: ._@)",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Min / Min +1\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input redundant spaces:\n+ Space (before/after)\n+ Includes space in value",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input each invalid characters:\n+ Full-width Japanese character\n+ Invalid special characters: ~!#$%^&*()+({}:\"|<>?,./;;'\\[]-=`\n+ Unicode character\n+ Input SQL injection \n+ Input HTML (Scripts)",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check display of show password icon",
+                "expected_result": ["Display correct icon as designed"]
+            },
+            {
+                "viewpoint": "Check operation of show password icon when click",
+                "expected_result": ["Can switch displaying of password value from Mask to Unmask state"]
+            },
+            {
+                "viewpoint": "Check mask symbol of password",
+                "expected_result": ["Mask symbol is correct base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Confirm Password",
+        "description": "Testing password confirmation functionality including matching validation and error handling",
+        "test_view_points": [
+            {
+                "viewpoint": "Check all cases of \"Password\" as above",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check operation when Confirm password = Password",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check operation when Confirm password <> Password",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Postcode/Zipcode",
+        "description": "Testing postcode validation including mapping with location data and auto-fill functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when input a correct Postcode and map with country/town information",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when Postcode is auto-inputted",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input non-exist Postcode",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input a correct Postcode/ zipcode and not map with country/town information",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input a correct Postcode/ zipcpde and not map with country/town information",
+                "expected_result": ["Display exact error message with correct format and position"]
+            }
+        ]
+    },
+    {
+        "item_type": "Date time",
+        "description": "Testing datetime input validation including format checking, boundary values, and various component validations",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of input item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check when Input each valid value:\n+ Valid date format\n+ The special value (base on spec) \n+ The past time\n+ The future time\n+ Min date\n+ Max date",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when Input invalid year value (YYYY):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese year",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid month value (MM):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese month\n+ < 1\n+ > 12",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid day value (DD):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese day\n+ < 1\n+ > Max days of month",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid hour value (hh):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ < 0\n+ > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid minute value (mm):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ < 0\n+ > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid second value (ii):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ < 0\n+ > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input wrong format to date time input box:\n+ \"00000000\"\n+ YYYY//MM//DD\n+ YYYY / MM / DD\n+ YYYY-MM-DD\n+ YY/MM/DD",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    }
+]

@@ -1,0 +1,228 @@
+[
+    {
+        "item_type": "Check default value",
+        "description": "Testing default display and value list functionality of combo box components",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check value list of item",
+                "expected_result": ["Display correct values with right order in list."]
+            }
+        ]
+    },
+    {
+        "item_type": "Suggestion input box",
+        "description": "Testing autocomplete functionality with various input patterns and character types",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ Inputted data = list's value",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ Inputted data includes list's value",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ List's value includes inputted data",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ At least 1 word of inputted data = list's value",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ At least 1 word of inputted data includes list's value",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ List's value includes at least 1 word of inputted data",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ All of inputted data = list's value",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ All of inputted data includes list's value",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ List's value includes all of inputted data",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input valid characters into combo box:\n+ English characters.\n+ Has Lower cases characters\n+ Has Uper cases characters\n+ Has special characters\n+ Has half-width Japanese characters\n+ Has full-width Japanese characters",
+                "expected_result": ["While typing, auto search and list all of coresponding values correctly. \nUser can select one of value from this list."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ Has redundant spaces at the begin/end of inputted data",
+                "expected_result": ["TRIM redundant spaces and list all coresponding values."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ Has redundant spaces between inputted data",
+                "expected_result": ["List all coresponding values."]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ Inputted value <> value in list",
+                "expected_result": ["Add new value into list value of combo box"]
+            },
+            {
+                "viewpoint": "Check when input boundary value:\n+ Max / Max -1",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check operation when input invalid characters",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input > max value",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input into combo box:\n+ Inputted value <> value in list",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input Input SQL injection",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input Input HTML (Scripts)",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Event in Combo box",
+        "description": "Testing scroll functionality and keyboard interactions in combo box component",
+        "test_view_points": [
+            {
+                "viewpoint": "Check scroll on list value when has N-1 values",
+                "expected_result": ["Do not display vertical scroll bar"]
+            },
+            {
+                "viewpoint": "Check scroll on list value when has N values",
+                "expected_result": ["Do not display vertical scroll bar"]
+            },
+            {
+                "viewpoint": "Check scroll on list value when has N+1 values",
+                "expected_result": ["Display vertical scroll bar and it operates normally (scroll up/down/quickly)"]
+            },
+            {
+                "viewpoint": "Check operation when press Up/Down key on keyboard",
+                "expected_result": ["Highlight Next/Previous value"]
+            },
+            {
+                "viewpoint": "Check operation when press Enter key on keyboard",
+                "expected_result": ["Close list value and set selected value (highlighted value)"]
+            },
+            {
+                "viewpoint": "Check operation while typing on Combo box",
+                "expected_result": ["Unable to input text"]
+            }
+        ]
+    },
+    {
+        "item_type": "Select value from list",
+        "description": "Testing single and multiple value selection functionality, including deletion and re-selection of values",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when Select the first value in list",
+                "expected_result": ["Process successfully with selected value"]
+            },
+            {
+                "viewpoint": "Check operation when Select the midle value in list",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check operation when Select the last value in list",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check operation when Select multi values in list",
+                "expected_result": ["+ All of selected values are displayed correctly, each value has [X] button to delete.\n+ Operation with selected values is correct as normal."]
+            },
+            {
+                "viewpoint": "Check operation when delete 1 selected value from selected list",
+                "expected_result": ["+ Can delete selected value\n+ Perform function successfully with remain selected values."]
+            },
+            {
+                "viewpoint": "Check operation when delete any values from selected list",
+                "expected_result": ["+ Can delete selected value\n+ Perform function successfully with remain selected values."]
+            },
+            {
+                "viewpoint": "Check operation when delete some continuos values from selected list",
+                "expected_result": ["+ Can delete selected value\n+ Perform function successfully with remain selected values."]
+            },
+            {
+                "viewpoint": "Check operation when delete all selected values from selected list",
+                "expected_result": ["+ Can delete all selected value\n+ Perform function same as not select any value"]
+            },
+            {
+                "viewpoint": "Check operation when Re-select a value after delete it",
+                "expected_result": ["+ Can delete selected values\n+ Can re-select deleted values\n+ Perform function successfully with remain selected values."]
+            },
+            {
+                "viewpoint": "Check operation when Select another value after delete",
+                "expected_result": ["+ Can delete selected value\n+ Can select more another values\n+ Perform function successfully with remain selected values."]
+            }
+        ]
+    },
+    {
+        "item_type": "Update value list",
+        "description": "Testing list update functionality including adding, updating, and deleting items, and handling page reload scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display after add new an item to list and reload page",
+                "expected_result": ["+ List of item is updated correctly \n+ Operation of item is still normal"]
+            },
+            {
+                "viewpoint": "Check display after update display text of an item in list and reload",
+                "expected_result": ["+ List of item is updated correctly \n+ Operation of item is still normal"]
+            },
+            {
+                "viewpoint": "Check operation when not reload page after update selected value in DB\n(On Client: Select value => Change selected value in DB => Click button on client)",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check display after delete an item of list and reload",
+                "expected_result": ["+ List of item is updated correctly \n+ Operation of item is still normal"]
+            },
+            {
+                "viewpoint": "Check operation when not reload page after delete selected value in DB\n(On Client: Select value => Change selected value in DB => Click button on client)",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check operation when change display text to another text (not exist value) by inspect page",
+                "expected_result": ["+ Operation of item is unaffected by edited value"]
+            },
+            {
+                "viewpoint": "Check operation when change display text to exist text by inspect page",
+                "expected_result": ["+ Operation of item is unaffected by edited value"]
+            },
+            {
+                "viewpoint": "Check operation when change value to another value (not exist value) by inspect page",
+                "expected_result": ["+ Operation of item is unaffected by edited value"]
+            },
+            {
+                "viewpoint": "Check operation when change value to existed value by inspect page",
+                "expected_result": ["+ Operation of item is unaffected by edited value"]
+            },
+            {
+                "viewpoint": "Check operation when add new item by inspect page",
+                "expected_result": ["+ Operation of item is unaffected by edited value"]
+            }
+        ]
+    }
+]

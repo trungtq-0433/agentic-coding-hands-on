@@ -1,0 +1,202 @@
+[
+    {
+        "item_type": "Before Running Batch",
+        "description": "Testing environment setup and test data preparation for batch processing, ensuring correct configuration and test data isolation.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify evironment for Testing",
+                "expected_result": ["Folder/server run batch is correcttly"]
+            },
+            {
+                "viewpoint": "",
+                "expected_result": ["All email sends and received are email test (not contain customer/end user email)"]
+            },
+            {
+                "viewpoint": "",
+                "expected_result": ["There is no API is called to Production evironment in batch\n- Change to API test or mockup"]
+            },
+            {
+                "viewpoint": "",
+                "expected_result": ["Database to get or insert information is correctly"]
+            },
+            {
+                "viewpoint": "Prepare the test data",
+                "expected_result": ["Upload input data to server (S3) ready for batch if need"]
+            },
+            {
+                "viewpoint": "",
+                "expected_result": ["Create data of all case of testing\n\nNote: There is no data contained any information of customer and end-user"]
+            }
+        ]
+    },
+    {
+        "item_type": "Run batch",
+        "description": "Testing batch execution including command validation, input processing, API integration, output generation, and error handling.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify batch is run normally when:\n- inputting correct command with valid parameters (if have)",
+                "expected_result": ["Batch is run normally"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch can not run when:\n- using incorrect command line",
+                "expected_result": ["- Error message displays correctly\n- Batch is not run"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch can not run when:\n- missing any required parameters",
+                "expected_result": ["- Error message displays correctly\n- Batch is not run"]
+            },
+            {
+                "viewpoint": "Verify batch is run normally when inputting:\n- valid required parameters (if have)\n- missing any optional parameters ",
+                "expected_result": ["Batch is run normally with default setting value of missing parameters [base on spec]"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch can not run in cases:\n- inputting invalid parameters\n- invalid parmeters' name\n- redundant parameter",
+                "expected_result": ["- Error message displays correctly\n- Batch is not run"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch can not run when:\n- missing value of each parameters",
+                "expected_result": ["- Error message displays correctly\n- Batch is not run\n[base on spec: some spec permits batch to process with default values of parameters]"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch can not run when:\n- inputting invalid value for each parameters \n(Validation base on spec, check the same with input box's case)",
+                "expected_result": ["- Error message displays correctly\n- Batch is not run"]
+            },
+            {
+                "viewpoint": "Verify batch get correct input files/data corresponding inputted parameters \n- valid path input files\n- valid files input (format/capacity/content)",
+                "expected_result": ["- Get correct input files/data to process"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch is stopped when having any error on input files/data\n- not have permision to access files or database:\n- files is not existing\n- invalid files type/name/format\n- invalid file's content (Check validation of each column content)\n- Capacity < Min \n- Capacity > Max\n- The number of rowin file  > Max row\n- Invalid image file size (width - height for image only)",
+                "expected_result": ["- Error message displays correctly\n- Batch is stopped\n- Nothing change"]
+            },
+            {
+                "viewpoint": "Verify batch call API correctly when running:\n- correct API\n- corect format or rule (Eg: Maximum for every calling API is 200 responses)\n- get fully API responses",
+                "expected_result": ["- Call correct API \n- Get correct responsed\n\n(To test each phase, QA can request Developer write log or comment other phase on source code)"]
+            },
+            {
+                "viewpoint": "Verify error message displays and batch is stopped when having any error on calling API\n[base on spec]\n- API is not existing\n- not have permistion to access API",
+                "expected_result": ["- Error message displays correctly\n- Batch is stopped\n- Nothing change"]
+            },
+            {
+                "viewpoint": "Verify result is correctly when batch runs completely\n(use small data test for Check all logic cases firstly)\n- generate output files successfully\n- update/process data correctly on DB",
+                "expected_result": ["- Generate output files successfully\n + total files\n- Update/process data correctly on DB\n[base on spec]"]
+            },
+            {
+                "viewpoint": "Verify data on output files is correctly after running batch successfully\n- correct output folder\n- correct format name/data\n- correct content",
+                "expected_result": ["Data on output files is correctly base on spec"]
+            },
+            {
+                "viewpoint": "Verify data on DB is processed correctly after running batch successfully",
+                "expected_result": ["Data on DB is processed correctly base on spec"]
+            },
+            {
+                "viewpoint": "Verify all data is rolled back when happening error on processing of batch\n- timeout\n- disconnect the internet\n- server down\n.....",
+                "expected_result": ["All data is rolled back, nothing change"]
+            },
+            {
+                "viewpoint": "Verify all data is kept at current time when user stops batch suddenly",
+                "expected_result": ["All data is kept at current time"]
+            },
+            {
+                "viewpoint": "Verify all other specification of batch is implemented correctly\n\nEg:\n- Delete input files after running batch\n- Backup data output before\n...",
+                "expected_result": ["All logic is processed correctly base on spec"]
+            },
+            {
+                "viewpoint": "Verify all information is not related is no changed after running batch successfully",
+                "expected_result": ["All information is not related is no changed"]
+            },
+            {
+                "viewpoint": "Verify batch is inserted to a queue when many user run batch at the same time\n[base on spec] ",
+                "expected_result": ["Batch is run accorrding queue, many user can not run batch at the same time\n[base on spec] "]
+            }
+        ]
+    },
+    {
+        "item_type": "Log files",
+        "description": "Testing log file generation, format, content and database logging functionality.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify log files is generated when running batch the first time",
+                "expected_result": ["Log files is generated correctly"]
+            },
+            {
+                "viewpoint": "Verify log files is generated by day\n[base on spec]",
+                "expected_result": ["Log files is generated by day"]
+            },
+            {
+                "viewpoint": "Verify log files's name is generated correctly",
+                "expected_result": ["Log files's name is generated correctly"]
+            },
+            {
+                "viewpoint": "Verify log is inserted into DB when result is PASSED or FAILED\n[base on spec]",
+                "expected_result": ["Log is inserted into DB correctly"]
+            },
+            {
+                "viewpoint": "Verify all events are writen on log files/ or displays on run batch screen\n[base on spec]\n- Start\n- parameter\n- Block start-Processing- end any events/process\n- Error\n- End process",
+                "expected_result": ["All events are writen on log files/ or displays on run batch screen correctly"]
+            },
+            {
+                "viewpoint": "Verify time on log is outputed correctly\n- time of any events/process\n- timezone\n\nNote: Check time when end/start of year (time usually has error)",
+                "expected_result": ["Time on log file is correctly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Email",
+        "description": "Testing email notification system for batch processing results and errors.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify success email is sent to configed email when batch runs successfully",
+                "expected_result": ["Configed email received successful email\n- Sender\n- Tite\n- Content\n- Result run batch"]
+            },
+            {
+                "viewpoint": "Verify error email is sent to configed email when batch happens any errors",
+                "expected_result": ["Configed email received error email\n- Sender\n- Tite\n- Content\n- Result run batch"]
+            },
+            {
+                "viewpoint": "Verify no email is send when batch is stopped suddenly by user",
+                "expected_result": ["Configed email is not received any email"]
+            }
+        ]
+    },
+    {
+        "item_type": "Run batch with big size files",
+        "description": "Testing batch performance with large data sets.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify batch perfomance when running with input files have big size and many data is processed",
+                "expected_result": ["- All data is processed correctly\n- Time process is aprroved by Customer about performance"]
+            }
+        ]
+    },
+    {
+        "item_type": "Other case",
+        "description": "Testing additional batch functionalities including scheduling, error handling, and configuration management.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify batch is run automatically by setting time in config file:\nEx:\n- run 00:00 daily\n- run 14h00 on every Monday ",
+                "expected_result": ["Batch is run automatically on time\n\n(QA can require developer set a specific time to test)"]
+            },
+            {
+                "viewpoint": "Verify batch is re-run when failed with setting time",
+                "expected_result": ["Batch is re-run automatically with time setting"]
+            },
+            {
+                "viewpoint": "Verify batch is processed with latest data on DB/server when having any changes in progress run \n\nEg:\n- batch download data when user is uploading new data on web form/ other upload batch",
+                "expected_result": ["Batch is processed correctly with latest data on DB/server "]
+            },
+            {
+                "viewpoint": "Verify batch continues processing next item when having error with current item, no stop batch\n\nEg:\n- batch call API for 10 items to generate 10 output file. When response is 404 for the first item, expected calling to the next item to process, no stop batch",
+                "expected_result": ["Batch continues processing next item when having error with current item, no stop batch"]
+            },
+            {
+                "viewpoint": "Verify batch is run with corresponding config value when changing data on env/config file",
+                "expected_result": ["Batch is run with corresponding config value on env/config file"]
+            },
+            {
+                "viewpoint": "Some programing language, user input incomplete command line but system still understand and run batch normally\n\nEg: \n- Command run batch on php laravel: php artisan review:output\n- User input: php artisan review:out => batch run normally",
+                "expected_result": ["Batch run normally when inputting incomplete command"]
+            }
+        ]
+    }
+]

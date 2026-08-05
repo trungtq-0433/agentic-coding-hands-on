@@ -1,0 +1,11 @@
+{
+  "doc_shas": {
+    "behavior-logic.md": "aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111aaaa1111",
+    "data-model.md": "bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222bbbb2222",
+    "route-list.md": "cccc3333cccc3333cccc3333cccc3333cccc3333cccc3333cccc3333cccc3333"
+  },
+  "fcode_index_sha": "dddd4444dddd4444dddd4444dddd4444dddd4444dddd4444dddd4444dddd4444",
+  "last_rebuild_sha": "abc123def456abc123def456abc123def456abc123",
+  "mode": "full",
+  "rebuilt_at": "2026-05-19T08:00:00Z"
+}

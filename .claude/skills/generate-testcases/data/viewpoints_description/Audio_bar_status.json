@@ -1,0 +1,368 @@
+[
+    {
+        "item_type": "Screen Player",
+        "description": "Testing audio player display and behavior in different screen states including normal, full screen, and minimized views.",
+        "sub_items": [
+            {
+                "item_type": "Title of Audio",
+                "description": "Testing audio title display functionality with various character types, lengths, and interaction behaviors including redirection to related pages.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify Title of Audio display matching with design\n\nTest with: EN characters, JP characters, number characters, special characters....",
+                        "expected_result": ["Title of audio is displayed with format matching design"]
+                    },
+                    {
+                        "viewpoint": "Verify Title of Audio display when having min/max length\n\nTest with: EN characters, JP characters, number characters, special characters....",
+                        "expected_result": ["Title of audio is displayed with format matching design"]
+                    },
+                    {
+                        "viewpoint": "Verify that redirect to corresponding page when clicking on title of Audio\n\nTest with: \n- Audio details\n- Author of audio details\n...",
+                        "expected_result": ["Redirect to corresponding page"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Image of Audio",
+                "description": "Testing audio image display functionality in different player states, including support for various image formats and dimensions.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify Image of Audio display when audio is stopping \n\nTest with: \n- Image with Vertical format\n- Image with Horizontal format\n- Image with <= max size \n- Image with valid format type",
+                        "expected_result": ["Image of audio is displayed matching with design"]
+                    },
+                    {
+                        "viewpoint": "Verify Image of Audio display when audio is playing\n\nTest with: \n- Image with Vertical format\n- Image with Horizontal format\n- Image with <= max size \n- Image with valid format type",
+                        "expected_result": ["- Image of audio is displayed matching with design\n- Image has Rotate Animation when playing audio\n[base on required]"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Subtitle of Audio",
+                "description": "Testing subtitle functionality including display formatting, synchronization with audio, and interaction with progress controls.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify the display of Subtitle when Audio is stopping\n\nTest with: Subtitle is EN characters or JP characters or number characters or special characters....",
+                        "expected_result": ["- Subtitle is pass or not passed display with format matching with design \nEx:\n+ Blue color for Subtitle is passed and gray for Subtitle is not passed\n+ Format of Subtitle as Blod or Italic\n+ Font size\n+ Position of sub...\n\n- Subtitle is not played when audio is stopping"]
+                    },
+                    {
+                        "viewpoint": "Verify the display of Subtitle is passed when Audio is playing\n\nTest with: Subtitle is EN characters or JP characters or number characters or special characters....",
+                        "expected_result": ["- Subtitle is displayed with format matching with design \nEx:\n+ Blue color for Subtitle is passed and gray for Subtitle is not passed\n+ Format of Subtitle as Blod or Italic\n+ Font size\n+ Position of sub...\n\n- Subtitle is played corresponding with Audio"]
+                    },
+                    {
+                        "viewpoint": "Verify Subtitle displays correctly when drag and drop progress bar",
+                        "expected_result": ["- Display Subtitle corresponding of Audio\n- Subtitle is displayed with format matching with design \nEx:\n+ Blue color for Subtitle is passed and gray for Subtitle is not passed\n+ Format of Subtitle as Blod or Italic\n+ Font size\n+ Position of sub..."]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Control Audio",
+        "description": "Testing audio control functionality including play/stop, progress bar, time counter, and navigation buttons.",
+        "sub_items": [
+            {
+                "item_type": "Play/Stop icon",
+                "description": "Testing play/stop functionality in various states including normal clicks, multiple clicks, and network interruptions.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify state of Audio when clicking on Play/Stop icon while Audio is playing",
+                        "expected_result": ["Audio will be stopped"]
+                    },
+                    {
+                        "viewpoint": "Verify state of Audio when clicking on Play/Stop icon while Audio is stopping",
+                        "expected_result": ["Audio will be played"]
+                    },
+                    {
+                        "viewpoint": "Verify state of Audio when changing progress of Audio\n\nTest with:\n- Audio is playing\n- Audio is stopping",
+                        "expected_result": ["State of Audio is not changed when changing progress of Audio"]
+                    },
+                    {
+                        "viewpoint": "Verify state of Audio when double clicking on Play/Stop icon\n\nTest with:\n- Double clicking\n- Clicking many time\n- Audio is stopping \n- Audio is playing",
+                        "expected_result": ["State of Audio is display correctly with lastest action on Play/Stop icon"]
+                    },
+                    {
+                        "viewpoint": "Verify state of play Audio when disconnect Internet",
+                        "expected_result": ["State of Audio is changed from playing to stop correctly"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Progress bar",
+                "description": "Testing progress bar display and interaction in different audio states including display formatting and user interactions.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify the display default of Progress bar\n\nTest with: \n- Progress bar has gray color for default",
+                        "expected_result": ["Progress bar is displayed matching with design"]
+                    },
+                    {
+                        "viewpoint": "Verify Progress bar display when audio is stopping\n\nTest with:\n- Audio playing at the start\n- Audio playing at the middle\n- Audio playing at the end",
+                        "expected_result": ["- Progress bar is passed and not passed display matching with design\n(Color, position, format....)\nEx:\n+ Blue color for Progress bar is passed and gray for Progress bar is not passed\n+ Format of Progress bar as width, height...\n+ Position..."]
+                    },
+                    {
+                        "viewpoint": "Verify Progress bar display when audio is playing\n\nTest with:\n- Audio playing at the start\n- Audio playing at the middel\n- Audio playing at the end",
+                        "expected_result": ["- Progress bar is passed and not passed display matching with design\nEx:\n+ Blue color for Progress bar is passed and gray for Progress bar is not passed\n+ Format of Progress bar as width, height...\n+ Position..."]
+                    },
+                    {
+                        "viewpoint": "Verify that Progress bar auto play when audio is playing",
+                        "expected_result": ["Progress bar is played corresponding with Audio"]
+                    },
+                    {
+                        "viewpoint": "Verify users can drag progress bar to any positions when Audio is stopping\n\nTest with:\n- Scroll Progress bar at the start \n- Scroll Progress bar at the middel\n- Scroll Progress bar at the random indTest with\n- Scroll Progress bar at the end",
+                        "expected_result": ["- Progress bar is passed and not passed display corresponding with index is scrolled\nEx:\n+ Blue color for Progress bar is passed and gray for Progress bar is not passed\n+ Format of Progress bar as width, height...\n+ Position...\n\n- Audio is still stopping"]
+                    },
+                    {
+                        "viewpoint": "Verify users can drag progress bar to any positions when Audio is playing\n\nTest with:\n- Scroll Progress bar at the start \n- Scroll Progress bar at the middel\n- Scroll Progress bar at the random indTest with\n- Scroll Progress bar at the end",
+                        "expected_result": ["- Progress bar is passed and not passed display corresponding with index is scrolled\nEx:\n+ Blue color for Progress bar is passed and gray for Progress bar is not passed\n+ Format of Progress bar as width, height...\n+ Position...\n\n- Audio is playing at index which is scrolled"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Time Counter",
+                "description": "Testing time counter display functionality including default state, playing/stopping states, and interaction with progress bar.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify the display default of Time counter\n\nTest with: Remain time and Total time...\n00:00 / 06:45",
+                        "expected_result": ["- Remain time and total time is displayed default matching with design\n\n[base on required]"]
+                    },
+                    {
+                        "viewpoint": "Verify Remain Time and Total time display when adio is stopping\n\nTest with:\n- Audio playing at the start\n- Audio playing at the middel\n- Audio playing at the end",
+                        "expected_result": ["- Remain time is displayed corresponding with Audio's remain time\nEx:\n+ At the start: 00:00 / 06:45\n+ At the middel: 03:23 / 06:45\n+ At the end: 06:45 / 06:45\n\n- Remain time is not counted when Audio is stopping"]
+                    },
+                    {
+                        "viewpoint": "Verify Remain Time and Total time display when adio is playing\n\nTest with:\n- Audio playing at the start\n- Audio playing at the middel\n- Audio playing at the end",
+                        "expected_result": ["- Remain time is displayed corresponding with Audio's remain time\nEx:\n+ At the start: 00:00 / 06:45\n+ At the middel: 03:23 / 06:45\n+ At the end: 06:45 / 06:45\n\n- Remain time is auto count remaining time when Audio is playing"]
+                    },
+                    {
+                        "viewpoint": "Verify Remain time and Total time display when scolling on Progress bar\n\nTest with: \n- Scroll Progress bar at the start \n- Scroll Progress bar at the middel\n- Scroll Progress bar at the random indTest with\n- Scroll Progress bar at the end",
+                        "expected_result": ["- Remain time and Total are displayed correctly when scolling on Progress bar\nEx:\n+ At the start: 00:00 / 06:45\n+ At the middel: 03:23 / 06:45\n+ At the end: 06:45 / 06:45"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Next Audio icon",
+                "description": "Testing next audio navigation functionality in different player states and playlist positions.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify can move to nTest witht Audio when clicking on NTest witht icon while Audio is stopping\n\nTest with: \n- Current Audio at the first on Audio list\n- Current Audio at the midle on Audio list\n- Current Audio at the end - 1 on Audio list",
+                        "expected_result": ["- Move to next Audio corresponding\n- Audio is playing (or stopping)\n[base on required]"]
+                    },
+                    {
+                        "viewpoint": "Verify can move to nTest witht Audio when clicking on NTest witht icon while Audio is playing\n\nTest with:\n- Current Audio at the first on Audio list\n- Current Audio at the midle on Audio list\n- Current Audio at the end - 1 on Audio list",
+                        "expected_result": ["- Move to next Audio corresponding\n- Audio is playing (or stopping)\n[base on required]"]
+                    },
+                    {
+                        "viewpoint": "Verify can not move to nTest witht Audio when do not have nTest witht Audio\n\nTest with:\n- List audio has 1 item\n- Current Audio at the end on Audio list",
+                        "expected_result": ["- Next icon is disable\n[base on required]"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Previous Audio icon",
+                "description": "Testing previous audio navigation functionality in different player states and playlist positions.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify can move to Previous Audio when clicking on Previous icon while Audio is stopping\n\nTest with: \n- Current Audio at the end on Audio list\n- Current Audio at the middle on Audio list\n- Current Audio at the first + 1 on Audio list",
+                        "expected_result": ["- Move to Previous Audio corresponding\n- Audio is playing (or stopping)\n[base on required]"]
+                    },
+                    {
+                        "viewpoint": "Verify can move to Previous Audio when clicking on Previous icon while Audio is playing\n\nTest with:\n- Current Audio at the end on Audio list\n- Current Audio at the midle on Audio list\n- Current Audio at the first + 1 on Audio list",
+                        "expected_result": ["- Move to Previous Audio corresponding\n- Audio is playing (or stopping)\n[base on required]"]
+                    },
+                    {
+                        "viewpoint": "Verify can not move to Previous Audio when do not have Previous Audio\n\nTest with:\n- List audio has 1 item\n- Current Audio at the first on Audio list",
+                        "expected_result": ["- Previous icon is disable\n[base on required]"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Adjust Volumn",
+                "description": "Testing volume adjustment functionality in both playing and stopping states, including direct adjustment and scroll bar interaction.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify can adjust volume when audio is playing\n\nTest with:\n- Adjust volume up\n- Adjust volume down\n- Adjust max volume\n- Adjust min volume\n- Adjust mute volume",
+                        "expected_result": ["- Adjust volume successfully\n- Audio is stil playing with volume is adjusted"]
+                    },
+                    {
+                        "viewpoint": "Verify can adjust volume when audio is stopping\n\nTest with:\n- Adjust volume up\n- Adjust volume down\n- Adjust max volume\n- Adjust min volume",
+                        "expected_result": ["- Adjust volume successfully\n- Audio is stil stopping"]
+                    },
+                    {
+                        "viewpoint": "Verify can scroll on volume bar when audio is stopping\n\nTest with:\n- Scroll up\n- Scroll down\n- Scroll max volume\n- Scroll min volume",
+                        "expected_result": ["- Adjust volume successfully\n- Audio is stil stopping"]
+                    },
+                    {
+                        "viewpoint": "Verify can scroll on volume bar when audio is playing\n\nTest with:\n- Scroll up\n- Scroll down\n- Scroll max volume\n- Scroll min volume",
+                        "expected_result": ["- Adjust volume successfully\n- Audio is stil playing with volume is adjusted"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Adjust speech",
+                "description": "Testing speech rate adjustment functionality in both playing and stopping states.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify can adjust speech of audio when audio is playing\n\nTest with: \nTest with: \n- Speech decrease audio as 0.9, 0.5....\n- Speech increase audio as 1.1, 1.5, 2.0....\n- Speech standard as 1.0",
+                        "expected_result": ["- Adjust speech successfully\n- Audio is stil playing with speech is adjusted"]
+                    },
+                    {
+                        "viewpoint": "Verify can adjust speech of audio when audio is stopping\n\nTest with: \n- Speech decrease audio as 0.9, 0.5....\n- Speech increase audio as 1.1, 1.5, 2.0....\n- Speech standard as 1.0",
+                        "expected_result": ["- Adjust speech successfully\n- Audio is stil stopping"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Shuffle/loop option",
+        "description": "Testing shuffle and loop functionality in both playing and stopping states, including behavior with single and multiple audio files in the playlist.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify can turn on Shuffe/Loop option when audio is playing\n\nTest with:\n- List has 1 audio\n- List has >=2 audio",
+                "expected_result": ["- Can turn on shuffe/loop option successfully\n- Display stage of Shuffe/Loop is ON"]
+            },
+            {
+                "viewpoint": "Verify can turn on Shuffe/Loop option when audio is stopping\n\nTest with:\n- List has 1 audio\n- List has >=2 audio",
+                "expected_result": ["- Can turn on shuffe/loop option successfully\n- Display stage of Shuffe/Loop is ON"]
+            },
+            {
+                "viewpoint": "Verify that Audio auto replaying when turning on Shuffe option and has 1 audio on list",
+                "expected_result": ["Audio auto replaying when playing at the end"]
+            },
+            {
+                "viewpoint": "Verify that Audio auto play nTest witht to random audio on list when turning on Shuffe option\n\nTest with:\n- Play audio at the fist audio of list\n- Play audio at the end audio of list\n- Play audio at the midle audio of list",
+                "expected_result": ["Audio auto play next to random audio when playing at the end"]
+            },
+            {
+                "viewpoint": "Verify that Audio auto play nTest witht audio on list when turning on Loop option\n\nTest with:\n- Play audio at the fist audio of list\n- Play audio at the end audio of list\n- Play audio at the midle audio of list",
+                "expected_result": ["Audio auto play next audio when playing at the end\n\nEx: \n- Audio auto play the second audio\n- Audio auto play the first audio\n- Audio auto play the next audio"]
+            },
+            {
+                "viewpoint": "Verify can turn off Shuffe/Loop option when audio is playing\n\nTest with:\n- List has 1 audio\n- List has >=2 audio",
+                "expected_result": ["- Can turn off shuffe/loop option successfully\n- Display stage of Shuffe/Loop is OFF"]
+            },
+            {
+                "viewpoint": "Verify can turn off Shuffe/Loop option when audio is stopping\n\nTest with:\n- List has 1 audio\n- List has >=2 audio",
+                "expected_result": ["- Can turn off shuffe/loop option successfully\n- Display stage of Shuffe/Loop is OFF"]
+            }
+        ]
+    },
+    {
+        "item_type": "Auto next Audio",
+        "description": "Testing automatic next audio functionality including default state, enabling/disabling in different player states, and behavior with single/multiple audio files.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify default stage of Auto nTest witht Audio\n[base on required]",
+                "expected_result": ["Default stage of Auto next Audio is OFF"]
+            },
+            {
+                "viewpoint": "Verify can turn on Auto nTest witht Audio when audio is playing\n\nTest with:\n- List has 1 audio\n- List has >=2 audio",
+                "expected_result": ["Can turn on auto next audio successfully"]
+            },
+            {
+                "viewpoint": "Verify can turn on Auto nTest witht Audio when audio is stopping\n\nTest with:\n- List has 1 audio\n- List has >=2 audio",
+                "expected_result": ["Can turn on auto next audio successfully"]
+            },
+            {
+                "viewpoint": "Verify that Audio auto replaying when turning on Auto nTest witht audio and has 1 audio on list",
+                "expected_result": ["Audio auto replaying when playing at the end"]
+            },
+            {
+                "viewpoint": "Verify that Audio auto play nTest witht to audio on list when turning on Shuffe option\n\nTest with:\n- Play audio at the fist audio of list\n- Play audio at the midle audio of list",
+                "expected_result": ["Audio auto play next to audio when playing at the end"]
+            },
+            {
+                "viewpoint": "Verify that Audio auto stop when play audio at the end of list",
+                "expected_result": ["Audio auto stop when playing at the end"]
+            }
+        ]
+    },
+    {
+        "item_type": "Quality of Audio",
+        "description": "Testing audio quality settings including default values, user account-based quality options, and quality change functionality in different player states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify default value quality of audio",
+                "expected_result": ["Display default value quality of audio matching with spec\n\nEx: 128kpbs"]
+            },
+            {
+                "viewpoint": "Verify display of value on quality list for account login\n\nTest with:\n- Account is normal user\n- Account is VIP user",
+                "expected_result": ["- Display value corresponding with account login \n\nEx: \n- 128kpbs and 320kpbs for normal user\n- 128kpbs, 320kpbs and lossless for VIP user"]
+            },
+            {
+                "viewpoint": "Verify that can change quality of audio when Audio is playing",
+                "expected_result": ["- Change quality of audio successfully\n- Play audio with selected quality "]
+            },
+            {
+                "viewpoint": "Verify that can change quality of audio when Audio is stopping",
+                "expected_result": ["- Change quality of audio successfully\n- Play audio with selected quality "]
+            }
+        ]
+    },
+    {
+        "item_type": "Add to playlist",
+        "description": "Testing playlist functionality including adding to existing/new playlists, authentication requirements, and playlist limitations.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify that can add Audio to Test withisted Playlist",
+                "expected_result": ["- Add to playlist successfully\n- List existed Playlist display correctly"]
+            },
+            {
+                "viewpoint": "Verify that can add Audio to New Playlist",
+                "expected_result": ["Add to playlist successfully"]
+            },
+            {
+                "viewpoint": "Verify that can add Audio that is playing to Playlist",
+                "expected_result": ["Add to playlist successfully"]
+            },
+            {
+                "viewpoint": "Verify that can add Audio that is stopping to Playlist",
+                "expected_result": ["Add to playlist successfully"]
+            },
+            {
+                "viewpoint": "Verify that can play audio on playlist",
+                "expected_result": ["Audio play correctly"]
+            },
+            {
+                "viewpoint": "Verify that can not add Audio when do not login yet",
+                "expected_result": ["- Add to playlist unsuccessfully\n- Redirect to Login page when clicking add to playlist"]
+            },
+            {
+                "viewpoint": "Verify that can not add Audio when Playlist has max items",
+                "expected_result": ["- Add to playlist unsuccessfully"]
+            }
+        ]
+    },
+    {
+        "item_type": "Download Audio",
+        "description": "Testing audio download functionality including different quality options, authentication requirements, and user permission levels.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify that can download Audio that is playing\n\nTest with:\n- Audio has small size as 128kpbs\n- Audio has nomal size as 380kpbs\n- Audio has big size as lossless",
+                "expected_result": ["Download audio successfully"]
+            },
+            {
+                "viewpoint": "Verify that can download Audio that is stopping",
+                "expected_result": ["Download audio successfully"]
+            },
+            {
+                "viewpoint": "Verify default  name of audio when downloading file",
+                "expected_result": ["Display correctly default name of audio\n[base on required]\n\nEx: \n- Title of audio"]
+            },
+            {
+                "viewpoint": "Verify quality of audio after download\n\nTest with:\n- Do not change default quality of audio\n- Change quality of audio",
+                "expected_result": ["Quality of audio which is downloaded matching with quality is selected"]
+            },
+            {
+                "viewpoint": "Verify that can play audio is downloaded",
+                "expected_result": ["Play audio successfully"]
+            },
+            {
+                "viewpoint": "Verify that can not download Audio when do not login yet",
+                "expected_result": ["- Download Audio unsuccessfully\n- Redirect to Login page when clicking on Download Audio"]
+            },
+            {
+                "viewpoint": "Verify display status of download icon for account login\n\nTest with:\n- Account is normal user\n- Account is VIP user",
+                "expected_result": ["- Display status corresponding with account login \n\nEx: \n- Normal User cannot download audio for VIP user and Download icon will be disable\n- VIP user can download all audio on system and Download icon alway enable"]
+            }
+        ]
+    }
+]

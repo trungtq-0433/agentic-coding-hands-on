@@ -1,0 +1,54 @@
+[
+    {
+        "item_type": "Check display/undisplay of menu",
+        "description": "Testing menu visibility based on user roles, login status, and page context",
+        "test_view_points": [
+            {
+                "viewpoint": "Available menu",
+                "expected_result": null
+            },
+            {
+                "viewpoint": "Check NOT Available menu\n+ Based on Role and Permisson [base on requirement]\n+ Based on Login/Not Login session [base on requirement]\n+ Based on spec",
+                "expected_result": ["+ Main menu is NOT available for specific Role and Permission\n+ Main menu is NOT available if user has already login/Not login\n+ Main menu is NOT available on some screens\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check operation on menu",
+        "description": "Testing menu functionality including visual elements, ordering, styling, tooltips, and navigation",
+        "test_view_points": [
+            {
+                "viewpoint": "Check name, icon ... in menu\n+ Main menu\n+ Single - level menu\n+ Multi - level menu",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item"]
+            },
+            {
+                "viewpoint": "Check order of menu \n+ Main menu\n+ Single - level menu\n+ Multi - level menu",
+                "expected_result": ["Menu list displays with correct order\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Check border of main menu/single - level menu/multi-level menu when\n\n+ Item name = Min characters\n+ Item name = Max characters",
+                "expected_result": ["Border of each menu item fits with its text\n"]
+            },
+            {
+                "viewpoint": "Check menu style when hovering mouse over the menu \n\n+ Main menu\n+ Single - level menu\n+ Multi - level menu",
+                "expected_result": ["Display correctly as designed\n+ Position\n+ Format"]
+            },
+            {
+                "viewpoint": "Check tooltip displays when hovering mouse over the menu\n\n+ Tooltip = [Required item]\n+ Tooltip = NULL [Not required tooltip] \n+ Tooltip = Max length -1\n+ Tooltip = Max length\n+ Tooltip = Min length\n+ Tooltip = Min length + 1",
+                "expected_result": ["Display correctly as designed\n+ Position\n+ Content\n+ Format"]
+            },
+            {
+                "viewpoint": "Check arrow icon in Multil - level menu\n+ DOWN arrow icon\n+ UP arrow icon\n",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Format"]
+            },
+            {
+                "viewpoint": "Check open an item in menu\n+ Main menu\n+ Single - level menu\n+ Multi - level menu",
+                "expected_result": ["+ Appropriate page displays when open optional item in menu\n+ In global menu, the opening menu is displayed correctly as designed: format, highlight..."]
+            },
+            {
+                "viewpoint": "Additional menu items: Search menu, Translate menu",
+                "expected_result": ["+ Confirm Search menu display correctly as designed\n+ User can use Search bar in Global navigation"]
+            }
+        ]
+    }
+]

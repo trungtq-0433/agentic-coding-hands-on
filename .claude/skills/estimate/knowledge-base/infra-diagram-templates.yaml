@@ -1,0 +1,242 @@
+metadata:
+  library: "mingrammer/diagrams"
+  library_version: ">=0.23"
+  graphviz_required: true
+  mermaid_cli: "@mermaid-js/mermaid-cli"
+  mermaid_render: "npx --yes @mermaid-js/mermaid-cli -i {input} -o {output} -b transparent --scale 2"
+
+patterns:
+  web_app_classic:
+    description: "Frontend CDN + Backend API + Database + Cache"
+    components:
+      - { id: users, type: user, label: "Users" }
+      - { id: cdn, type: cdn, label: "CDN" }
+      - { id: waf, type: waf, label: "WAF" }
+      - { id: lb, type: load_balancer, label: "Load Balancer" }
+      - { id: app, type: compute, label: "App Server" }
+      - { id: worker, type: compute, label: "Worker" }
+      - { id: db, type: database, label: "Database" }
+      - { id: cache, type: cache, label: "Cache" }
+      - { id: search, type: search, label: "Search" }
+      - { id: storage, type: storage, label: "Object Storage" }
+      - { id: monitoring, type: monitoring, label: "Monitoring" }
+    connections:
+      - [users, cdn]
+      - [cdn, waf]
+      - [waf, lb]
+      - [lb, app]
+      - [app, db]
+      - [app, cache]
+      - [app, search]
+      - [app, storage]
+      - [app, worker]
+      - [worker, db]
+      - [monitoring, app]
+      - [monitoring, db]
+
+  web_app_serverless:
+    description: "Static frontend + API Gateway + Functions + Managed DB"
+    components:
+      - { id: users, type: user, label: "Users" }
+      - { id: cdn, type: cdn, label: "CDN + Static" }
+      - { id: apigw, type: api_gateway, label: "API Gateway" }
+      - { id: fn, type: functions, label: "Functions" }
+      - { id: db, type: managed_db, label: "Managed DB" }
+      - { id: storage, type: storage, label: "Storage" }
+      - { id: auth, type: auth, label: "Auth Service" }
+    connections:
+      - [users, cdn]
+      - [users, apigw]
+      - [apigw, fn]
+      - [fn, db]
+      - [fn, storage]
+      - [apigw, auth]
+
+  microservices:
+    description: "API Gateway + Multiple services + Message queue"
+    components:
+      - { id: users, type: user, label: "Users" }
+      - { id: lb, type: load_balancer, label: "API Gateway / LB" }
+      - { id: svc_a, type: compute, label: "Service A" }
+      - { id: svc_b, type: compute, label: "Service B" }
+      - { id: svc_c, type: compute, label: "Service C" }
+      - { id: queue, type: queue, label: "Message Queue" }
+      - { id: db_a, type: database, label: "DB A" }
+      - { id: db_b, type: database, label: "DB B" }
+      - { id: cache, type: cache, label: "Shared Cache" }
+    connections:
+      - [users, lb]
+      - [lb, svc_a]
+      - [lb, svc_b]
+      - [lb, svc_c]
+      - [svc_a, db_a]
+      - [svc_b, db_b]
+      - [svc_a, queue]
+      - [queue, svc_c]
+      - [svc_a, cache]
+      - [svc_b, cache]
+
+  static_site_api:
+    description: "Static site hosted on CDN + External API"
+    components:
+      - { id: users, type: user, label: "Users" }
+      - { id: cdn, type: cdn, label: "CDN" }
+      - { id: storage, type: storage, label: "Static Hosting" }
+      - { id: api, type: external, label: "External API" }
+    connections:
+      - [users, cdn]
+      - [cdn, storage]
+      - [users, api]
+
+  data_pipeline:
+    description: "Ingestion + Processing + Storage + Analytics"
+    components:
+      - { id: source, type: external, label: "Data Source" }
+      - { id: ingest, type: queue, label: "Ingestion Queue" }
+      - { id: processor, type: compute, label: "Processor" }
+      - { id: db, type: database, label: "Data Store" }
+      - { id: storage, type: storage, label: "Data Lake" }
+      - { id: analytics, type: analytics, label: "Analytics" }
+    connections:
+      - [source, ingest]
+      - [ingest, processor]
+      - [processor, db]
+      - [processor, storage]
+      - [db, analytics]
+      - [storage, analytics]
+
+  managed_serverless:
+    description: "Managed BaaS (Supabase/Firebase) + Edge Workers (Cloudflare/Vercel)"
+    components:
+      - { id: users, type: user, label: "Users" }
+      - { id: dns, type: dns, label: "DNS + DDoS" }
+      - { id: edge, type: edge_compute, label: "Edge Workers" }
+      - { id: api, type: auto_api, label: "Auto API" }
+      - { id: functions, type: edge_functions, label: "Edge Functions" }
+      - { id: db, type: managed_db, label: "Database" }
+      - { id: storage, type: managed_storage, label: "Storage" }
+      - { id: auth, type: managed_auth, label: "Auth" }
+      - { id: realtime, type: realtime, label: "Realtime" }
+      - { id: ci_cd, type: ci_cd, label: "CI/CD" }
+      - { id: monitoring, type: monitoring, label: "Monitoring" }
+    connections:
+      - [users, dns]
+      - [dns, edge]
+      - [edge, api, "REST"]
+      - [edge, functions, "Business Logic"]
+      - [edge, auth, "Auth"]
+      - [edge, realtime, "Live Updates"]
+      - [api, db]
+      - [functions, db]
+      - [functions, storage]
+      - [ci_cd, edge, "Deploy"]
+      - [edge, monitoring, "Errors"]
+
+# Mermaid shape/style mapping for diagram generation
+mermaid_mapping:
+  user: { shape: "([{label}])", style: "fill:#e0e7ff,stroke:#4f46e5" }
+  dns: { shape: "[/{label}\\]", style: "fill:#fef3c7,stroke:#d97706" }
+  cdn: { shape: "[{label}]", style: "fill:#fef3c7,stroke:#d97706" }
+  waf: { shape: "[/{label}\\]", style: "fill:#fef3c7,stroke:#d97706" }
+  load_balancer: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  compute: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  functions: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  edge_compute: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  edge_functions: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  auto_api: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  api_gateway: { shape: "[{label}]", style: "fill:#dbeafe,stroke:#2563eb" }
+  database: { shape: "[({label})]", style: "fill:#dcfce7,stroke:#16a34a" }
+  managed_db: { shape: "[({label})]", style: "fill:#dcfce7,stroke:#16a34a" }
+  cache: { shape: "[{label}]", style: "fill:#dcfce7,stroke:#16a34a" }
+  search: { shape: "[{label}]", style: "fill:#dcfce7,stroke:#16a34a" }
+  storage: { shape: "[{label}]", style: "fill:#fce7f3,stroke:#db2777" }
+  managed_storage: { shape: "[{label}]", style: "fill:#fce7f3,stroke:#db2777" }
+  queue: { shape: "[[{label}]]", style: "fill:#fef9c3,stroke:#ca8a04" }
+  monitoring: { shape: "[{label}]", style: "fill:#f3e8ff,stroke:#9333ea" }
+  auth: { shape: "[/{label}\\]", style: "fill:#fef3c7,stroke:#d97706" }
+  managed_auth: { shape: "[/{label}\\]", style: "fill:#fef3c7,stroke:#d97706" }
+  realtime: { shape: "[{label}]", style: "fill:#e0f2fe,stroke:#0284c7" }
+  analytics: { shape: "[{label}]", style: "fill:#f3e8ff,stroke:#9333ea" }
+  external: { shape: "({label})", style: "fill:#f1f5f9,stroke:#64748b" }
+  ci_cd: { shape: "[{label}]", style: "fill:#f3e8ff,stroke:#9333ea" }
+
+# Mermaid subgraph grouping
+mermaid_groups:
+  aws:
+    cloud_label: "AWS Cloud"
+    subgroups: &standard_subgroups
+      Networking: [cdn, waf, load_balancer, api_gateway, dns]
+      Compute: [compute, functions, edge_compute, edge_functions, auto_api]
+      Data: [database, managed_db, cache, search]
+  gcp:
+    cloud_label: "GCP"
+    subgroups: *standard_subgroups
+  azure:
+    cloud_label: "Azure"
+    subgroups: *standard_subgroups
+  managed:
+    cloud_label: "Managed Cloud"
+    subgroups:
+      Edge: [dns, edge_compute]
+      API Layer: [auto_api, edge_functions]
+      Data Layer: [database, managed_db, managed_storage, storage]
+
+# Maps abstract component types to mingrammer/diagrams class paths
+node_mapping:
+  aws:
+    user: diagrams.onprem.client.Users
+    cdn: diagrams.aws.network.CloudFront
+    waf: diagrams.aws.network.WAF
+    load_balancer: diagrams.aws.network.ALB
+    compute: diagrams.aws.compute.ECS
+    functions: diagrams.aws.compute.Lambda
+    api_gateway: diagrams.aws.network.APIGateway
+    database: diagrams.aws.database.Aurora
+    managed_db: diagrams.aws.database.RDS
+    cache: diagrams.aws.database.ElastiCache
+    search: diagrams.aws.analytics.ElasticsearchService
+    storage: diagrams.aws.storage.S3
+    queue: diagrams.aws.integration.SQS
+    monitoring: diagrams.aws.management.Cloudwatch
+    auth: diagrams.aws.security.Cognito
+    analytics: diagrams.aws.analytics.Athena
+    external: diagrams.onprem.network.Internet
+    ci_cd: diagrams.aws.devtools.Codepipeline
+
+  gcp:
+    user: diagrams.onprem.client.Users
+    cdn: diagrams.gcp.network.CDN
+    waf: diagrams.gcp.network.Armor
+    load_balancer: diagrams.gcp.network.LoadBalancing
+    compute: diagrams.gcp.compute.Run
+    functions: diagrams.gcp.compute.Functions
+    api_gateway: diagrams.gcp.network.LoadBalancing
+    database: diagrams.gcp.database.SQL
+    managed_db: diagrams.gcp.database.SQL
+    cache: diagrams.gcp.database.Memorystore
+    search: diagrams.elastic.elasticsearch.Elasticsearch
+    storage: diagrams.gcp.storage.GCS
+    queue: diagrams.gcp.analytics.PubSub
+    monitoring: diagrams.gcp.devtools.Monitoring
+    auth: diagrams.firebase.develop.Authentication
+    analytics: diagrams.gcp.analytics.BigQuery
+    external: diagrams.onprem.network.Internet
+
+  azure:
+    user: diagrams.onprem.client.Users
+    cdn: diagrams.azure.network.CDNProfiles
+    waf: diagrams.azure.network.ApplicationGateway
+    load_balancer: diagrams.azure.network.LoadBalancers
+    compute: diagrams.azure.compute.ContainerInstances
+    functions: diagrams.azure.compute.FunctionApps
+    api_gateway: diagrams.azure.network.ApplicationGateway
+    database: diagrams.azure.database.DatabaseForPostgresqlServers
+    managed_db: diagrams.azure.database.DatabaseForPostgresqlServers
+    cache: diagrams.azure.database.CacheForRedis
+    search: diagrams.azure.database.CosmosDb
+    storage: diagrams.azure.storage.BlobStorage
+    queue: diagrams.azure.integration.ServiceBus
+    monitoring: diagrams.azure.devtools.ApplicationInsights
+    auth: diagrams.azure.identity.ActiveDirectory
+    analytics: diagrams.azure.analytics.SynapseAnalytics
+    external: diagrams.onprem.network.Internet

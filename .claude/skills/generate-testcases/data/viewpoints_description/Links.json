@@ -1,0 +1,60 @@
+[
+    {
+        "item_type": "Links - GUI",
+        "description": "Testing visual appearance and behavior of links including hover states and positioning",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm GUI of link",
+                "expected_result": ["Display like text links, the same as required on spec\n(color, bold, italic, font size, can hover, mouse icon ...)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Links - Normal Operation",
+        "description": "Testing link functionality including URL redirections, download operations, and cross-browser compatibility",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm the link after click on the links",
+                "expected_result": ["Redirect to corresponding URL"]
+            },
+            {
+                "viewpoint": "Confirm the redirection time to the link\n(for internal links)",
+                "expected_result": ["Redirect immediately with the time loading about < 1000ms(10s)\n(Or the same as required on spec)"]
+            },
+            {
+                "viewpoint": "Confirm the redirection time to the link\n(for external links)",
+                "expected_result": ["Redirect to corresponding URL"]
+            },
+            {
+                "viewpoint": "Confirm the link after click on the links",
+                "expected_result": ["Redirect to corresponding URL"]
+            },
+            {
+                "viewpoint": "Confirm the link after click on the links",
+                "expected_result": ["Popup confirmed download is displayed", "Can download file successfully"]
+            },
+            {
+                "viewpoint": "Confirm the new tab or new windows have opened when click to the link\n(On Chrome, Firefox, IE, Safari)",
+                "expected_result": ["The new tab will be opened\n(Or the same as required on spec)"]
+            },
+            {
+                "viewpoint": "Confirm the broken links\n(Use Chrome extention with \"Check My Links\")",
+                "expected_result": ["Do not have any broken links"]
+            }
+        ]
+    },
+    {
+        "item_type": "Links - Multiple Click/ Access",
+        "description": "Testing link behavior under concurrent access and multiple click scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm the operation of the link when multiple click to the link at the same time",
+                "expected_result": ["The multiple new tab will be opened"]
+            },
+            {
+                "viewpoint": "Confirm the operation of the link when multiple people access at the same time\n(Use tool \"LoadImpact (Free)\")",
+                "expected_result": ["The links do not broken & Redirect immediately"]
+            }
+        ]
+    }
+]

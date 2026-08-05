@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-estimate.dev/schemas/project-metadata-schema.json",
+  "title": "Project",
+  "description": "Schema for complete project including requirements, architecture, and estimate",
+  "type": "object",
+  "required": ["id", "name", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^PRJ-[0-9]{4,}$",
+      "description": "Unique project identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "description": "Project name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Project description"
+    },
+    "client": {
+      "type": "string",
+      "description": "Client or stakeholder name"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "in-review", "approved", "archived"],
+      "default": "draft"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "default": "1.0",
+      "description": "Estimate version"
+    },
+    "source_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["filename", "type"],
+        "properties": {
+          "filename": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["pdf", "excel", "google-doc", "google-sheet", "markdown", "image"]
+          },
+          "url": { "type": "string", "format": "uri" },
+          "parsed_at": { "type": "string", "format": "date-time" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "items": { "$ref": "requirement-item-schema.json" }
+    },
+    "architecture": {
+      "$ref": "architecture-design-schema.json"
+    },
+    "estimate": {
+      "$ref": "estimate-output-schema.json"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

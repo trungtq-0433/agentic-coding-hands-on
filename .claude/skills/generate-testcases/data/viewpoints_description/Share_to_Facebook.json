@@ -1,0 +1,68 @@
+[
+    {
+        "item_type": "Check authentication when sharing",
+        "description": "Testing authentication flow when sharing content to social media platforms for both logged-in and non-logged-in users.",
+        "test_view_points": [
+            {
+                "viewpoint": "User logged in Facebook / Twitter / Gmail already",
+                "expected_result": ["Open share screen as spec"]
+            },
+            {
+                "viewpoint": "User not log in Facebook / Twitter / Gmail already",
+                "expected_result": ["+ Open Facebook / Twitter / Gmail login screen\n+ After logging in, open share screen as spec\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check content of post",
+        "description": "Testing various aspects of shared content including thumbnails, titles, and descriptions with different character types and lengths.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check thumbnail when sharing below content\n+ Sharing content has no thumbnail (Text only)\n+ Sharing content has thumbnail (image, video...) ",
+                "expected_result": ["Content of post displays correctly"]
+            },
+            {
+                "viewpoint": "Check title of post when sharing title with different length\n+ < Max length\n+ = Max length\n+ > Max length\n",
+                "expected_result": ["+ Display full max length of title correctly on both Share screen and Destination screen (Facebook/Google+/Twitter)\n+ For the text exceed max length, it will show \"...\" or \"see more\" string on both Share screen and Destination screen (Facebook/Google+/Twitter)"]
+            },
+            {
+                "viewpoint": "Check title of post when sharing NULL title",
+                "expected_result": ["Not display title on both Share screen and Destination screen (Facebook/Google+/Twitter)\""]
+            },
+            {
+                "viewpoint": "Check title of post when sharing below type of character\n+ Datetime\n+ Alphanumeric and English characters \n+ Japanese character (Full-width/ Halfwidth)\n+ Special character\n+ Emoji\n+ Icons",
+                "expected_result": ["Display full value of title correctly, not broken font and layout"]
+            },
+            {
+                "viewpoint": "Check description of post when sharing description with different length\n+ < Max length\n+ = Max length\n+ > Max length\n",
+                "expected_result": ["+ Display full max length of description correctly on both Share screen and Destination screen (Facebook/Google+/Twitter)\n+ For the text exceed max length, it will show \"...\" or \"see more\" string on both Share screen and Destination screen (Facebook/Google+/Twitter)"]
+            },
+            {
+                "viewpoint": "Check description of post when sharing NULL description ",
+                "expected_result": ["Not display description on both Share screen and Destination screen (Facebook/Google+/Twitter)\""]
+            },
+            {
+                "viewpoint": "Check description of post when sharing below type of character\n+ Datetime\n+ Alphanumeric and English characters: Has space between characters\n+ Alphanumeric and English characters: Has no space between characters\n+ Japanese character (Full-width/ Halfwidth)\n+ Special character\n+ Emoji\n+ Icons\n+ Image: jpg, jpeg, tiff, gif\n+ Video\n+ URL\n+ Content in one paragraph\n+ Content in multi lines/multi paragraph",
+                "expected_result": ["Display full value of description correctly, not broken font and layout"]
+            },
+            {
+                "viewpoint": "Check description of post when edit source code \n+ Check content of shared post after Edit source content\n+ Check content of shared post after Delete source content ",
+                "expected_result": ["Display correctly base on spec\nEx: Update shared content corresponding source content."]
+            }
+        ]
+    },
+    {
+        "item_type": "Check post after sharing",
+        "description": "Testing post visibility settings and share count functionality after successful sharing.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check who can view shared post when\n+ When set Only me\n+ When set Specified friends\n+ When set All",
+                "expected_result": ["+ Post is shared with correct person\n+ Other persons can not view post"]
+            },
+            {
+                "viewpoint": "Check count number of share\n+ When share a post successfully\n+ When share a post unsuccessfully\n+ When cancel a sharing",
+                "expected_result": ["Display correct count number of share\n+ If share successfully, count number = Previous share count number +1\n+ If share unsuccessfully, count number = Previous share count number (not changed)"]
+            }
+        ]
+    }
+]

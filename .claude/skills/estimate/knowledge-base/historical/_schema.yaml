@@ -1,0 +1,32 @@
+version: "1.0"
+
+# Task type aliases for mapping free-text task names to KB categories.
+# Used during import to anonymize/generalize task names.
+# Patterns are case-insensitive; * is a glob wildcard.
+task_type_aliases:
+  crud: ["CRUD", "data management", "manage *", "* management", "* list", "list *"]
+  authentication: ["auth", "login", "sign in", "sign up", "SSO", "OAuth", "register"]
+  authorization: ["permission", "role", "access control", "RBAC", "ABAC"]
+  file_operations: ["upload", "download", "file", "attachment", "media", "image"]
+  notifications: ["notification", "email", "SMS", "push", "alert"]
+  search: ["search", "filter", "find", "query", "lookup"]
+  payments: ["payment", "billing", "checkout", "Stripe", "subscription", "invoice"]
+  reports: ["report", "dashboard", "analytics", "chart", "statistics", "export"]
+  api: ["API", "endpoint", "REST", "GraphQL", "webhook"]
+  ui: ["UI", "page", "screen", "form", "modal", "component", "layout"]
+  infrastructure: ["CI/CD", "deploy", "Docker", "server", "monitoring", "DevOps"]
+  testing: ["test", "QA", "automation", "e2e", "unit test"]
+  documentation: ["doc", "documentation", "manual", "guide", "spec"]
+
+# Data sanitization rules enforced during import.
+# Historical entries must NOT contain client-identifiable information.
+sanitization:
+  project_name: "Replace with generic slug: project-NNN or domain-YYYYMM"
+  task_names: "Generalize to KB category names, strip client-specific terms"
+  stripped_fields:
+    - "estimator"
+    - "source_document"
+    - "client_name"
+    - "assumptions"
+    - "recommendations"
+    - "unresolved_questions"

@@ -1,0 +1,106 @@
+[
+    {
+        "item_type": "Permission - GUI",
+        "description": "Testing GUI display for different account types (ADMIN and NORMAL)",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm GUI for ADMIN account",
+                "expected_result": ["Display as each the specification\n(header color, logo,  ... )"]
+            },
+            {
+                "viewpoint": "Confirm GUI for NORMAL account",
+                "expected_result": ["Display as each the specification\n(header color, logo,  ... )"]
+            }
+        ]
+    },
+    {
+        "item_type": "Permission - Login",
+        "description": "Testing login functionality and access controls for different account types",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm login with INCORRECTED account",
+                "expected_result": ["Can't not access to ADMIN page"]
+            },
+            {
+                "viewpoint": "Confirm login with NORMAL account",
+                "expected_result": ["Can't not access to ADMIN page"]
+            },
+            {
+                "viewpoint": "Confirm login with ADMIN account",
+                "expected_result": ["Can access to ADMIN page"]
+            },
+            {
+                "viewpoint": "Confirm login with INCORRECTED account",
+                "expected_result": ["Can't not access to any page"]
+            },
+            {
+                "viewpoint": "Confirm login with ADMIN account",
+                "expected_result": ["Can't not access to any page"]
+            },
+            {
+                "viewpoint": "Confirm login with NORMAL account of other system",
+                "expected_result": ["Can't not access to any page"]
+            },
+            {
+                "viewpoint": "Confirm login with NORMAL account of corrected system",
+                "expected_result": ["Can access to corresponding page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Permission - Content",
+        "description": "Testing content display and functionality for different admin levels",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm content",
+                "expected_result": ["Display as each the specification and fully function"]
+            },
+            {
+                "viewpoint": "Confirm content",
+                "expected_result": ["Display as each the specification and fully function"]
+            }
+        ]
+    },
+    {
+        "item_type": "Permission - Administrators",
+        "description": "Testing administrative permissions and scope of actions for different admin levels",
+        "test_view_points": [
+            {
+                "viewpoint": "Confirm scope - add new/ change",
+                "expected_result": ["Can change/ update/ delete of all system"]
+            },
+            {
+                "viewpoint": "Confirm scope - update",
+                "expected_result": ["Can change/ update/ delete of all system"]
+            },
+            {
+                "viewpoint": "Confirm scope - delete",
+                "expected_result": ["Can change/ update/ delete of all system"]
+            },
+            {
+                "viewpoint": "Confirm scope - add new/ change",
+                "expected_result": ["Can change/ update/ delete of this system only\n(other system will be not effected)"]
+            },
+            {
+                "viewpoint": "Confirm scope - update",
+                "expected_result": ["Can change/ update/ delete of this system only\n(other system will be not effected)"]
+            },
+            {
+                "viewpoint": "Confirm scope - delete",
+                "expected_result": ["Can change/ update/ delete of this system only\n(other system will be not effected)"]
+            },
+            {
+                "viewpoint": "Confirm scope - add new/ change",
+                "expected_result": ["Do not conflict happen"]
+            },
+            {
+                "viewpoint": "Confirm scope - update",
+                "expected_result": ["Do not conflict happen"]
+            },
+            {
+                "viewpoint": "Confirm scope - delete",
+                "expected_result": ["Do not conflict happen"]
+            }
+        ]
+    }
+]

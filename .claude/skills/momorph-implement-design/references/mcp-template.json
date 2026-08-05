@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "momorph": {
+      "headers": {
+        "x-github-token": "<GITHUB_TOKEN>"
+      },
+      "type": "http",
+      "url": "https://mcp.momorph.ai/mcp"
+    }
+  }
+}

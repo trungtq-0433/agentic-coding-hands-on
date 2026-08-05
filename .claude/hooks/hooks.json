@@ -1,0 +1,116 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \".claude/hooks/session-start.sh\"",
+            "async": false
+          },
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/session-state.cjs\"",
+            "async": false
+          },
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/telemetry.cjs\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/graph-reindex-sync.cjs\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/telemetry.cjs\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/telemetry.cjs\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/session-state.cjs\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/skill-extension-loader.cjs\"",
+            "async": false
+          }
+        ]
+      },
+      {
+        "matcher": "Workflow",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/workflow-opt-in-guard.cjs\"",
+            "async": false
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/evidence-gate-guard.cjs\"",
+            "async": false
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/iron-laws-guard.cjs\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/telemetry.cjs\"",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}

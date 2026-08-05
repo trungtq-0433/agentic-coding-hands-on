@@ -1,0 +1,156 @@
+# Technology Stack Multipliers
+# Adjusts effort based on technology familiarity and complexity
+
+# Team Familiarity Levels
+familiarity:
+  expert: 0.8          # Deep expertise, can optimize
+  familiar: 1.0        # Standard proficiency
+  moderate: 1.2        # Some experience
+  learning: 1.5        # Learning curve involved
+  new: 1.8             # Completely new technology
+
+# Frontend Frameworks
+frontend:
+  # React Ecosystem
+  react:
+    base: 1.0
+    with_typescript: 1.1
+    with_next: 1.1
+    with_redux: 1.15
+    with_react_query: 1.05
+
+  # Vue Ecosystem
+  vue:
+    base: 1.0
+    with_typescript: 1.1
+    with_nuxt: 1.1
+    with_pinia: 1.05
+
+  # Angular
+  angular:
+    base: 1.1            # Steeper learning curve
+    enterprise: 1.2      # Full enterprise setup
+
+  # Svelte
+  svelte:
+    base: 0.95           # Simpler mental model
+    with_sveltekit: 1.05
+
+  # Mobile
+  react_native: 1.2
+  flutter: 1.1
+  native_ios: 1.3
+  native_android: 1.3
+
+# Backend Frameworks
+backend:
+  # Python
+  django:
+    base: 1.0
+    with_drf: 1.05
+    with_celery: 1.1
+
+  fastapi:
+    base: 0.95           # Async by default
+    with_sqlalchemy: 1.0
+
+  # JavaScript/TypeScript
+  express:
+    base: 1.0
+    with_typescript: 1.1
+
+  nestjs:
+    base: 1.1            # More structure
+    with_microservices: 1.3
+
+  # Go
+  go:
+    base: 1.0
+    with_gin: 1.0
+    with_grpc: 1.15
+
+  # Java
+  spring_boot:
+    base: 1.15
+    with_jpa: 1.2
+    enterprise: 1.3
+
+  # Ruby
+  rails:
+    base: 0.9            # Convention over configuration
+    api_only: 0.85
+
+# Databases
+databases:
+  # Relational
+  postgresql:
+    base: 1.0
+    with_extensions: 1.1
+    with_replication: 1.2
+
+  mysql:
+    base: 1.0
+
+  # NoSQL
+  mongodb:
+    base: 1.0
+    with_aggregation: 1.15
+    with_sharding: 1.3
+
+  redis:
+    base: 0.9            # Simple key-value
+    as_primary: 1.2      # When used as primary store
+
+  elasticsearch:
+    base: 1.3            # Complex setup
+
+  # Graph
+  neo4j:
+    base: 1.4            # Specialized knowledge
+
+# Infrastructure
+infrastructure:
+  # Cloud Providers
+  aws:
+    basic: 1.0
+    advanced: 1.2
+    serverless: 1.1
+
+  gcp:
+    basic: 1.0
+    advanced: 1.2
+
+  azure:
+    basic: 1.05
+    advanced: 1.25
+
+  # Containers
+  docker:
+    base: 1.0
+    with_compose: 1.05
+
+  kubernetes:
+    basic: 1.2
+    advanced: 1.4
+    with_helm: 1.3
+
+  # Serverless
+  lambda: 1.1
+  cloudflare_workers: 1.0
+
+# Third-Party Services
+services:
+  stripe: 1.0            # Well-documented
+  twilio: 1.0
+  sendgrid: 0.9
+  auth0: 1.1
+  firebase: 0.95
+  supabase: 0.9
+
+# Calculation method
+calculation:
+  # Combine relevant multipliers
+  # Example: React + TypeScript + Next.js + PostgreSQL
+  # 1.0 * 1.1 * 1.1 * 1.0 = 1.21x base effort
+  method: multiplicative
+  max_stack_multiplier: 2.0  # Cap combined tech multiplier

@@ -1,0 +1,368 @@
+[
+    {
+        "item_type": "Check UI",
+        "description": "Testing UI elements including position, labels, colors and units",
+        "test_view_points": [
+            {
+                "viewpoint": "Check UI:\n+ Position\n+ Label of item \n+ Color\n+ unit (item/ 件, person/人,time/回...)",
+                "expected_result": ["2. Display correctly as designed"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of number items on page",
+        "description": "Testing number display formatting for different value ranges and thresholds",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of item when item has value: 0",
+                "expected_result": ["Display correctly: \"-\" + unit (base on spec: 人, 個...)"]
+            },
+            {
+                "viewpoint": "Check display of item when item has value: 999",
+                "expected_result": ["Display correctly: 999 + unit (base on spec: 人, 個...)"]
+            },
+            {
+                "viewpoint": "Check display of item when item has value: 1000",
+                "expected_result": ["Display correctly as spec. Ex: 1000人"]
+            },
+            {
+                "viewpoint": "Check display of item when item has value from 10,000 to 99,999,999",
+                "expected_result": ["Display correctly as spec. Ex: 999,9万人"]
+            },
+            {
+                "viewpoint": "Check display of item when item has value from 1,000,000,000 to 9,999,999,999 ",
+                "expected_result": ["Display correctly as spec. Ex: 1,000億人"]
+            },
+            {
+                "viewpoint": "Check display of item when item has value # Min/Max value",
+                "expected_result": ["Display correctly as spec."]
+            },
+            {
+                "viewpoint": "Check display of item when item has value = Min/Max value",
+                "expected_result": ["Display correctly as spec."]
+            },
+            {
+                "viewpoint": "Check display of item when item has value # threshold value\n\n(Note: Threshold value is the value which defined to control displaying of item. This value is base on each spec)",
+                "expected_result": ["Display correctly as spec. (Ex: Display current value)"]
+            },
+            {
+                "viewpoint": "Check display of item when item has value = threshold value",
+                "expected_result": ["Display threshold value correctly as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of user list on page",
+        "description": "Testing user list display with different number of users",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of list when has 0 user",
+                "expected_result": ["Not display user list (or display the text base on space)"]
+            },
+            {
+                "viewpoint": "Check display of list when has 1 user only",
+                "expected_result": ["Display user list correctly as spec"]
+            },
+            {
+                "viewpoint": "Check display of list when has less than N users\n\n(Note: N is the value which defined to cotrol displaying of user list)",
+                "expected_result": ["Display user list correctly as spec"]
+            },
+            {
+                "viewpoint": "Check display of list when has N users",
+                "expected_result": ["Display user list correctly as spec"]
+            },
+            {
+                "viewpoint": "Check display of list when has more than N users",
+                "expected_result": ["Display user list with correct format as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check statistic by the time value",
+        "description": "Testing statistics display for different time periods",
+        "test_view_points": [
+            {
+                "viewpoint": "Check statistic by the minute",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check statistic by the  hour",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check statistic by the day",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check statistic by the  week",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check statistic by the month",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check statistic by the year",
+                "expected_result": ["Display value correctly base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check statistic by  specified time period.",
+        "description": "Testing statistics display for various time periods and date ranges",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the display of chart when change period From - To date value:\n+ Data in a day: From = To = Today",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check the display of item change period From - To date value:\n+ Data in a day: From = To # Today",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check the display of item when change period From - To date value:\n+ Data in a day: From = To = The oldest date in database",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check the display of item when change period From - To date value:\n+ Data in a week",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check the display of item when change period From - To date value:\n+ Data in a month",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check the display of item when change period From - To date value:\n+ Data in a year",
+                "expected_result": ["Display value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check the display of item when change period From - To date value:\n+ Data in special period: From last month to this month, from last year to this year\n\nEx: 15/6/2018 ~15/7/2018\n01/01/2017~01/01/2018",
+                "expected_result": ["Display value correctly base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display incase block time is 1 minute (update every minutes)\n\n(Note: After each block time unit, displaying of statitics value is updated) ",
+        "description": "Testing minute-by-minute statistics updates",
+        "test_view_points": [
+            {
+                "viewpoint": "Display when time is 0:00~0:01",
+                "expected_result": ["Display updated value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Display when time is 0:59~1:00",
+                "expected_result": ["Display updated value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Display when time is 23:59~24:00 ",
+                "expected_result": ["Display updated value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Display when time is 23:59 31/12/2019~24:00 01/01/2020",
+                "expected_result": ["Display updated value correctly base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display incase block time is 1 time / day, at the specific time (HH:MM)",
+        "description": "Testing daily updates at specific times",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display before HH: MM ",
+                "expected_result": ["Display current value "]
+            },
+            {
+                "viewpoint": "Check display at HH: MM ",
+                "expected_result": ["Display updated value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Check display after HH: MM ",
+                "expected_result": ["Display updated value correctly base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display incase block time is X hours (every X hours)\n ( Base on spec. Example: X = 4h)",
+        "description": "Testing updates at X-hour intervals",
+        "test_view_points": [
+            {
+                "viewpoint": "Display when time duration from 0:00 to 03:59 hours",
+                "expected_result": ["Display current value "]
+            },
+            {
+                "viewpoint": "Display when time duration from 0:00 to 4:00 hours",
+                "expected_result": ["Display updated value correctly base on spec"]
+            },
+            {
+                "viewpoint": "Display when time duration from 0:00 to 4:01 hours",
+                "expected_result": ["Display updated value correctly base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check realtime update\n(Base on each spec)",
+        "description": "Testing real-time data updates",
+        "test_view_points": [
+            {
+                "viewpoint": "Check realtime update when increasing data for 1 item on DB",
+                "expected_result": ["Increase data value corresponding changed data"]
+            },
+            {
+                "viewpoint": "Check realtime update when Descreasing data for 1 item on DB",
+                "expected_result": ["Descrease data value corresponding changed data\n"]
+            },
+            {
+                "viewpoint": "Check realtime update when Change data for 1 item = 0/ NULL on DB",
+                "expected_result": ["Display value = 0 for changed data\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change data not realtime\n(Base on each spec)\n\n",
+        "description": "Testing non-real-time data updates",
+        "test_view_points": [
+            {
+                "viewpoint": "Check not realtime update when increasing data for 1 item on DB",
+                "expected_result": ["Just update displaying after reload  page"]
+            },
+            {
+                "viewpoint": "Check  not realtime update when Descreasing data for 1 item on DB",
+                "expected_result": ["Just update displaying after reload page"]
+            },
+            {
+                "viewpoint": "Check not realtime update when Change data for 1 item = 0/ NULL on DB",
+                "expected_result": ["Just update displaying after reload chart page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change item Real-time\n(Base on each spec)\n",
+        "description": "Testing real-time item addition/deletion",
+        "test_view_points": [
+            {
+                "viewpoint": "Check realtime update when Delete one item on DB",
+                "expected_result": ["Deleted item is disappeared correctly "]
+            },
+            {
+                "viewpoint": "Check realtime update when add more item on DB",
+                "expected_result": ["Added item is appeared correctly "]
+            }
+        ]
+    },
+    {
+        "item_type": "Change item not Real-time\n(Base on each spec)\n",
+        "description": "Testing non-real-time item addition/deletion",
+        "test_view_points": [
+            {
+                "viewpoint": "Check not realtime update when Delete one item on DB",
+                "expected_result": ["Just update displaying after reload  page"]
+            },
+            {
+                "viewpoint": "Check not realtime update when add more item on DB",
+                "expected_result": ["Just update displaying after reload page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display",
+        "description": "Testing display properties of text area in both add and edit forms",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of Text area item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of Text area item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Controls in Text area",
+        "description": "Testing text area control functionality including cursor, tab order and resizing",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of Cursor in text area",
+                "expected_result": ["Appear the cursor when focus into text area as normal"]
+            },
+            {
+                "viewpoint": "Click \"Tab\" key on keyboard to Check tab order of item",
+                "expected_result": ["Tab order is correct as designed"]
+            },
+            {
+                "viewpoint": "Check operation of text area when resized form",
+                "expected_result": ["+ Text area has the resized icon (at the bottom right of form) \n+ User can resize text area form by drag on the resized icon and drop it.\n+ Operation of text area is not effect after resized form "]
+            }
+        ]
+    },
+    {
+        "item_type": "Normal cases",
+        "description": "Testing text area with various valid input scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input valid character:\n+ Only spaces\n+ Number\n+ English characters\n+ Has Lower cases characters\n+ Has Uper cases characters\n+ Has half-width Japanese characters",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input special valid character:\n+ /n\n+ /br\n+ /r [in case use old version of MAC laptop]\n+ Other symbol",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check when input special valid character:\n+ Copy & Paste full-width Japanese characters\n+ Input full-width Japanese characters",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check when has redundant spaces:\n+ At the begin/end of string\n+ Between string\n+ Between lines",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check when input special valid character:\n+ HTML characters\n+ SQL injection\n+ Programming languages",
+                "expected_result": []
+            },
+            {
+                "viewpoint": "Check when input multi lines when:\n+ Not display vertical scroll\n+ Display vertical scroll",
+                "expected_result": ["Process successfully with inputed value\nVertical scroll operates normally"]
+            },
+            {
+                "viewpoint": "Check when input Max/Mix value",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input max valid value:\n+ Without Enter character\n+ Has Enter character\n(includes all valid character types)",
+                "expected_result": ["Process successfully with inputed value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Abnormal cases",
+        "description": "Testing text area with invalid input scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when input < Min lenght value",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when input > Max length value",
+                "expected_result": []
+            }
+        ]
+    },
+    {
+        "item_type": "Check character Counting Remaining",
+        "description": "Testing character count functionality with different input types",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the number of remain character if not input data yet",
+                "expected_result": ["+ The limited number of field displays correctly"]
+            },
+            {
+                "viewpoint": "Check the number of remain character if input data into text area: \n+ Half-width Japanese characters\n+ Full-width Japanese characters\n+ English characters\n+ Special symbol\n+ Enter symbol\n+ Max length",
+                "expected_result": ["+ The remaining characters = Max length  - number of input characters"]
+            }
+        ]
+    }
+]

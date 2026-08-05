@@ -1,0 +1,104 @@
+[
+    {
+        "item_type": "Check open a dialog/popup",
+        "description": "Testing various ways to trigger and open dialog/popup including mouse clicks and keyboard navigation.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check open dialog box \n+ Click into button/link which opens dialog box\n+ Double click into button/link which opens dialog box\n+ Click TAB to move to button/link which opens dialog box",
+                "expected_result": ["+ Dialog/Popup is displayed without error\n+ Contents under Popup/Dialog are clickable/inclickable [base on each spec]\n+ Background under Popup/Dialog is changed into white cover  [base on each spec]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check layout/content/action of dialog/popup",
+        "description": "Testing visual elements, content display, and interactive features of dialog/popup including button behaviors and keyboard interactions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check layout\n+ Position of dialog/popup\n+ Title: position, text content, style\n+ Description: position, text content, style\n+ Close/ OK/ Cancel button: position, text content, style, 2D 3D style\n+ Icon\n+ Background color\n",
+                "expected_result": ["All items display corrrectly as designed"]
+            },
+            {
+                "viewpoint": "Check action with ACTIVE button in Dialog/Popup\n+ Click button Close / OK / Cancel / button [X]\n+ Double click button Close / OK / Cancel / button [X]\n+ Click Tab to move to button Close / OK / Cancel / button [X] and click Enter\n+ Click [ESC] to close popup",
+                "expected_result": ["+ Dialog/Popup is closed and nothing change when click/double click Close\n+ Dialog/Popup is closed and nothing change when click/double click Cancel\n+ If data is valid, Dialog/Popup is closed and do action in dialog when click/double click OK \n+ If data is invalid, show error message when click/double click OK\n"]
+            },
+            {
+                "viewpoint": "Check action with INACTIVE button in Dialog/Popup\n+ Click button \n+ Double click button \n+ Click Tab to move to button and click Enter",
+                "expected_result": ["Nothing happens, cannot click on inactive buttons"]
+            },
+            {
+                "viewpoint": "Check action with link/other buttons in Dialog/Popup\n+ Click link\n+ Double click link\n+ Click tab to move to link/other buttons in Dialog/Popup and click Enter",
+                "expected_result": ["+ Open the page of that link/button in the same tab / in new tab [base on each spec]"]
+            },
+            {
+                "viewpoint": "Check order focus on Dialog/Popup when press Tab key ",
+                "expected_result": ["Focus on dialog/popup only, move focus with correct order as spec: from left to right, top to bottom, skip all other items on backgound screen..."]
+            },
+            {
+                "viewpoint": "Click on any area on Dialog/Popup (not buttons, links)",
+                "expected_result": ["Dialog/Poup keeps unchanged"]
+            },
+            {
+                "viewpoint": "Select text in Dialog/Popup, Ctrl C Ctrl V",
+                "expected_result": ["Dialog/Poup keeps unchanged\nCan copy paste text in dialog/popup properly"]
+            },
+            {
+                "viewpoint": "Select text in Dialog/Popup, right click and click Copy button",
+                "expected_result": ["Dialog/Poup keeps unchanged\nCan copy paste text in dialog/popup properly"]
+            },
+            {
+                "viewpoint": "Place cursor on Dialog/Popup and Ctrl A",
+                "expected_result": ["Dialog/Poup keeps unchanged\nText is selected properly"]
+            },
+            {
+                "viewpoint": "Drag to move dialog/popup to another position",
+                "expected_result": ["Can move dialog/popup to another position properly"]
+            },
+            {
+                "viewpoint": "Click on 4 corners of dialog/popup to widen that dialog/popup",
+                "expected_result": ["Can widen dialog/popup properly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of dialog/popup when do another action in screen",
+        "description": "Testing dialog/popup behavior during various user interactions and system events.",
+        "test_view_points": [
+            {
+                "viewpoint": "Click outside Dialog/popup",
+                "expected_result": ["Dialog/Popup is closed/not closed  [Base on your spec]"]
+            },
+            {
+                "viewpoint": "Check clicking on any items on the screen when the popup is opening",
+                "expected_result": ["There is no interaction"]
+            },
+            {
+                "viewpoint": "Check display of dialog/popup when displaying duration < <dismiss-on-timeout value>",
+                "expected_result": ["Dialog/Popup keeps displaying properly"]
+            },
+            {
+                "viewpoint": "Check display of dialog/popup when displaying duration = <dismiss-on-timeout value>",
+                "expected_result": ["Dialog/Popup displays and auto-closed when = <dismiss-on-timeout value>\n(confirm that timeout value is enough for customer reading full content of dialog/popup)"]
+            },
+            {
+                "viewpoint": "Check display of dialog/popup when displaying duration > <dismiss-on-timeout value>",
+                "expected_result": ["Dialog/Popup auto closed "]
+            },
+            {
+                "viewpoint": "Scroll up/down/left/right on screen while displaying dialog/popup (Check if background screen is too long or too wide)",
+                "expected_result": ["Dialog/Popup keeps displaying properly"]
+            },
+            {
+                "viewpoint": "Re-load screen while displaying dialog/popup",
+                "expected_result": ["Dialog/Popup is closed and nothing change"]
+            },
+            {
+                "viewpoint": "Check display of popup/dialog screen when zoom in/zoom out screen",
+                "expected_result": ["Zoom in/out without error or broken layout"]
+            },
+            {
+                "viewpoint": "Check display of popup/dialog screen when rotate left/right screen ",
+                "expected_result": ["Rotate popup/dialog without error or broken layout"]
+            }
+        ]
+    }
+]

@@ -1,0 +1,414 @@
+[
+    {
+        "item_type": "Check UI",
+        "description": "Testing the UI elements and layout of the audio recorder interface",
+        "test_view_points": [
+            {
+                "viewpoint": "Check UI\n+ Title of audio (font size, position)\n+ Recording date and time\n+ Recording area\n- Timer(counter)\n- Voice waveform panel\n- Timeline panel\n-Status: recording/ pause / now playing\n- Button:  [Start Recording],[Done/Complete] , [pause], [Resume]\n+Edit Menu \n(items in menu include: Add URL, Image, Article  )",
+                "expected_result": ["UI must be same the design"]
+            }
+        ]
+    },
+    {
+        "item_type": "Title of Audio",
+        "description": "Testing audio title display and input functionality with various character types and lengths",
+        "test_view_points": [
+            {
+                "viewpoint": "Check displaying Title of audio:\n+Check Title of Audio display when title contain JP (half size, full size) character, alphanumeric character\n+Check when Title  too long\n+Number of Title characters  <X charactes \n+Number of Title character =X characters\n+Check defaut tittle ",
+                "expected_result": ["+Display  title of audio correctly\n+Display titlte of audio correctly with X characters + [...]\n+Display correctly in 1 line, Title of audio is display center \n+Display correctly coresponding to each device\n+Display defaut tittle correctly [base on required]"]
+            },
+            {
+                "viewpoint": "Check when tap on Title of audio",
+                "expected_result": ["Do nothing or editable base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Recording area when start Recording",
+        "description": "Testing recording functionality including microphone settings, timer, waveform display, and timeline",
+        "test_view_points": [
+            {
+                "viewpoint": "Setting Microphone: OFF\nTap on button[Start Recording]",
+                "expected_result": ["Display error dialog"]
+            },
+            {
+                "viewpoint": "Setting Microphone: ON\nTap on Button:  [Start Recording]\n",
+                "expected_result": ["Record instantly"]
+            },
+            {
+                "viewpoint": "Check Tap on [Start Recording] button in case record to max recording time",
+                "expected_result": ["Do nothing\nCan't record\n[Start Recording] button isn't change to [Pause] button"]
+            },
+            {
+                "viewpoint": "Check when tap on [Start Recording]Button",
+                "expected_result": ["[Start Recording] button is change to [Pause] button"]
+            },
+            {
+                "viewpoint": "Check swiping and moving on waveform  (drap and drop to specified positon on waveform) while  recording",
+                "expected_result": ["unable to swipe and move on waveform"]
+            },
+            {
+                "viewpoint": "Check Countdown to record",
+                "expected_result": ["3 second countdown starts by default before recording starts."]
+            },
+            {
+                "viewpoint": "Check Timer",
+                "expected_result": ["Timmer starts counting immediately and\ncount up from 00:00.00"]
+            },
+            {
+                "viewpoint": "Check Timer at Max recording time",
+                "expected_result": ["Timer stops counting and display : XX:XX.XX ( (minutes, seconds, and fractions of seconds))\nX is max recording time"]
+            },
+            {
+                "viewpoint": "+Check displaying Voice waveform\n+ Check line width\n+Check Between lines\n+Check line length (from quietness to loudness)",
+                "expected_result": ["+Voice Waveform is displayed as spec"]
+            },
+            {
+                "viewpoint": "Check displaying time ruler\n",
+                "expected_result": ["+The time ruler is displayed along the bottom of the timeline.\n+Displays the time ruler in minutes:seconds\n+Displays the time ruler numbered sequentially from the beginning of recording\n"]
+            },
+            {
+                "viewpoint": "Check scrolling of time ruler",
+                "expected_result": ["Time ruler scroll from right to left"]
+            },
+            {
+                "viewpoint": "Check time display in the time ruler",
+                "expected_result": ["Display time corresponds to timer"]
+            },
+            {
+                "viewpoint": "Check status",
+                "expected_result": ["Status is recording"]
+            }
+        ]
+    },
+    {
+        "item_type": "Recording area when pause recording",
+        "description": "Testing pause functionality including timer behavior, waveform display, and navigation controls during pause state",
+        "test_view_points": [
+            {
+                "viewpoint": "Tap on  [Pause] Button when recording",
+                "expected_result": ["Pause recording instantly"]
+            },
+            {
+                "viewpoint": "Check  when tap on  Button [Pause]",
+                "expected_result": ["[Pause] button is change to [Resume] button"]
+            },
+            {
+                "viewpoint": "Check [pause] button when record to max recording time",
+                "expected_result": ["[Pause] button is change to [Start Recording]\n button"]
+            },
+            {
+                "viewpoint": "Check swiping and moving on waveform  (drap and drop to specified positon on waveform) when pause recording",
+                "expected_result": [" when pause recording, able to swipe and move on waveform"]
+            },
+            {
+                "viewpoint": "Check timer when swiping and moving on waveform\n-From left to right\n-From righ to left\n- Move to the first position of the wave\n-Move to the end of the wave\n-Move to the middle of the wave",
+                "expected_result": ["Display timer correctly \n-Timer count down\n-Timer count up\n-Timer reset to 00:00.00\n- Timer display total recorded time\n- Timer display  half of the recorded time"]
+            },
+            {
+                "viewpoint": "Check timer when tap on [pause] buton",
+                "expected_result": ["Timer stops counting \nDisplay total recording time correctly\nFormat time : XX:XX.XX (minutes, seconds, and fractions of seconds)"]
+            },
+            {
+                "viewpoint": "Check displaying Voice waveform",
+                "expected_result": ["Waveform is stopped\nStanding wave"]
+            },
+            {
+                "viewpoint": "Check scrolling of time ruler",
+                "expected_result": ["Time ruler stop scrolling"]
+            },
+            {
+                "viewpoint": "Check time display in the time ruler",
+                "expected_result": ["Display time corresponds to timer"]
+            },
+            {
+                "viewpoint": "Check status",
+                "expected_result": ["Status is pause"]
+            },
+            {
+                "viewpoint": "Tap on [back 15s]  icon",
+                "expected_result": ["2. Process successfully:\n+timer is displayed corectly\n+waveform is displayed corectly\n+time display on time ruler corectly"]
+            },
+            {
+                "viewpoint": "Tap on [next 15s]  icon ",
+                "expected_result": ["2. Process successfully:\n+timer is displayed corectly\n+waveform is displayed corectly\n+time display on time ruler corectly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check adding image/url/article to each recording",
+        "description": "Testing the functionality to add and edit additional content to recordings",
+        "test_view_points": [
+            {
+                "viewpoint": "Check adding image/url/article to each recording.",
+                "expected_result": ["Can add image//url/article to each recording."]
+            },
+            {
+                "viewpoint": "Check editing image/url/article after added image",
+                "expected_result": ["Can edit image//url/article"]
+            },
+            {
+                "viewpoint": "Check recording after add image/url/article to each recording.",
+                "expected_result": ["Recording is work normally"]
+            }
+        ]
+    },
+    {
+        "item_type": "[Preview play] button",
+        "description": "Testing preview playback functionality including controls, display, and audio speed",
+        "test_view_points": [
+            {
+                "viewpoint": "After pause recording,Tap on [preview play] button",
+                "expected_result": ["Preview play instantly\nCan hear the sound playing."]
+            },
+            {
+                "viewpoint": "Check button [Preview play] when tap on button [Preview play]",
+                "expected_result": ["Button [Preview play] changes to button [pause preview play]"]
+            },
+            {
+                "viewpoint": "Check timer when tap on  [preview play] icon",
+                "expected_result": ["Timer reset to 00:00.00 and count up"]
+            },
+            {
+                "viewpoint": "Check Voice waveform when tap on  [preview play] icon",
+                "expected_result": ["Voice waveform is displayed the same as recording operation"]
+            },
+            {
+                "viewpoint": "Check preview play from specified position as swiped waveform  (drap and drop to specified positon on waveform)",
+                "expected_result": ["Can play from specified position as swiped waveform  (drap and drop to specified positon on waveform)"]
+            },
+            {
+                "viewpoint": "Check scrolling of time ruler",
+                "expected_result": ["Time ruler  scroll to beginning of ruler, then Time ruler scroll from right to left"]
+            },
+            {
+                "viewpoint": "Check time display in the time ruler",
+                "expected_result": ["Display time corresponds to timer"]
+            },
+            {
+                "viewpoint": "Check status when tap on  [preview play] icon",
+                "expected_result": ["Status is now playing"]
+            },
+            {
+                "viewpoint": "Check default speed",
+                "expected_result": ["Display default speed is 1x"]
+            },
+            {
+                "viewpoint": "Check adjust speed",
+                "expected_result": ["Adjustable speeds from 1x to 1.2x\nAdjustable speeds from 1x to 1.5x\nAdjustable speeds1.5x to 2x\nAdjustable speeds  2x to 1x"]
+            },
+            {
+                "viewpoint": "Check keep the set speed when click Play - Pause -Play",
+                "expected_result": ["Keep the set speed"]
+            },
+            {
+                "viewpoint": "Check when tap on  [pause preview play] icon",
+                "expected_result": ["Pause preview play instantly\nCan't hear the sound playing."]
+            },
+            {
+                "viewpoint": "Check button [Pause Preview play] when tap on button [ Pause Preview play]",
+                "expected_result": ["Button [ Pause Preview play] changes to button [preview play]"]
+            },
+            {
+                "viewpoint": "Check button [Pause Preview play] when preview play finish",
+                "expected_result": ["Button [ Pause Preview play] changes to button [preview play]"]
+            },
+            {
+                "viewpoint": "Check continuous tap on [pause preview play]-[play preview]-[Pause preview play] Buttons ",
+                "expected_result": ["Pause preview play\nApp works normally"]
+            }
+        ]
+    },
+    {
+        "item_type": "Recording area when resume recording",
+        "description": "Testing resume recording functionality including timer, waveform, and timeline behavior",
+        "test_view_points": [
+            {
+                "viewpoint": "After Pause recording, then tap on Button:  [Resume Recording]\n",
+                "expected_result": ["Resume recording"]
+            },
+            {
+                "viewpoint": "Check button [Resume]",
+                "expected_result": ["Tap on Button:  [Resume] is change to [Pause] button\n"]
+            },
+            {
+                "viewpoint": "Check timer when tap on button resume\n",
+                "expected_result": ["timer resume counting( count up) from time you pause recording\nformat : XX:XX.XX"]
+            },
+            {
+                "viewpoint": "Check timer when swiping and moving on waveform, then tap on button resume",
+                "expected_result": ["timer resume counting (count up) from a certain time\nformat : XX:XX.XX"]
+            },
+            {
+                "viewpoint": "Check displaying Voice waveform",
+                "expected_result": ["Voice Waveform continue to run from right to left\n"]
+            },
+            {
+                "viewpoint": "Check resume recording  from specified position as swiped waveform  (drap and drop to specified positon on waveform)",
+                "expected_result": ["Can resume recording from specified position as swiped waveform\nThe recorded sound from the resume position to the end of the waveform will be cut"]
+            },
+            {
+                "viewpoint": "Check scrolling of time ruler",
+                "expected_result": ["Time ruler continue scroll from right to left"]
+            },
+            {
+                "viewpoint": "Check time display in the time ruler",
+                "expected_result": ["Display time corresponds to timer"]
+            },
+            {
+                "viewpoint": "Check status",
+                "expected_result": ["Status is recording"]
+            }
+        ]
+    },
+    {
+        "item_type": "[Done] Button",
+        "description": "Testing recording completion functionality with different duration conditions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check dispalying [Done] button ",
+                "expected_result": ["[Done] button is displayed and enabled"]
+            },
+            {
+                "viewpoint": "Tap on [Done] button ",
+                "expected_result": ["Display error message as spec"]
+            },
+            {
+                "viewpoint": "Tap on [Done] button to complete recording\n+ Check Redirect page   \n+ Check location to save recording file\n+ Check the file format",
+                "expected_result": ["+ Go to [List recorded file] screen successfully\n+Recording File is saved at specified position on device\n+ File format is correct (m4a, mp3... as spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "[List recorded file] screen",
+        "description": "Testing recorded file management including display, playback, deletion, and editing",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display items on screen\n-Title recorded file\n- Recording date and time\n-Total recording time",
+                "expected_result": ["items is displayed correctly"]
+            },
+            {
+                "viewpoint": "Check playing recorded file",
+                "expected_result": ["Refer Checklist AudioBar"]
+            },
+            {
+                "viewpoint": "Check deleting recorded file",
+                "expected_result": ["Can delete recorded file\nRecorded file is deleted after deleting operation"]
+            },
+            {
+                "viewpoint": "Check Editing operation        ",
+                "expected_result": ["Confirm the same recording operation"]
+            }
+        ]
+    },
+    {
+        "item_type": "Other",
+        "description": "Testing recording and preview functionality under various system conditions and interruptions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check while recording switch foregroud-backgroud then Background-Foreground ",
+                "expected_result": ["Keep screen before switch Background-Foreground "]
+            },
+            {
+                "viewpoint": "Check while recording, the phone runs out of battery",
+                "expected_result": ["The recording file will be saved on the device."]
+            },
+            {
+                "viewpoint": "Check while recording ,alert low battery\n",
+                "expected_result": ["continuous recording\n"]
+            },
+            {
+                "viewpoint": "Check while recording, press volume up/ down key",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check while recording, press power key",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check while recording, screen lock",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check while recording sreen sleep",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check while recording ,plug in charger",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check recording when Open another recording application available on the device ",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check recording while opening mp3,mp4 file on device",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check recording while playing a recorded audio file",
+                "expected_result": ["Recording is work normally, stop playing audio"]
+            },
+            {
+                "viewpoint": "Check while recording, there is  incoming messages, and incoming mail, pair bluetooth",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check while recording, there is an incoming call or alarm clock",
+                "expected_result": ["Stop recording\nAuto resume preview play after interrupted by incoming call or alarm clock!"]
+            },
+            {
+                "viewpoint": "Check recording when the device's internal memory and external memory are nearly full",
+                "expected_result": ["recording is work normally"]
+            },
+            {
+                "viewpoint": "Check recording when the device's internal memory and external memory are full",
+                "expected_result": ["Can't record"]
+            },
+            {
+                "viewpoint": "Check recording with Bluetooth headset, external mic",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check the recording when the phone's mic is broken",
+                "expected_result": ["Recording is work normally"]
+            },
+            {
+                "viewpoint": "Check while preview play, press power key",
+                "expected_result": ["Continuous preview play"]
+            },
+            {
+                "viewpoint": "Check while preview play, switch FG-BG",
+                "expected_result": ["Continuous preview play"]
+            },
+            {
+                "viewpoint": "Check while preview play, press volume up/down key",
+                "expected_result": ["Preview play is work normally"]
+            },
+            {
+                "viewpoint": "Check preview play, while playing an mp4,mp3 file on device ",
+                "expected_result": ["Preview play is work normally"]
+            },
+            {
+                "viewpoint": "Check while preview play, there are an incoming messages, and incoming mail",
+                "expected_result": ["Preview play is work normally"]
+            },
+            {
+                "viewpoint": "Check while preview play, there are an incoming call or alarm clock",
+                "expected_result": ["Stop preview play\nAuto resume preview play after interrupted by incoming call or alarm clock!"]
+            },
+            {
+                "viewpoint": "Check while preview play, plug in charger",
+                "expected_result": ["Preview play is work normally"]
+            },
+            {
+                "viewpoint": "Check while preview play, remove charger",
+                "expected_result": ["Preview play is work normally"]
+            },
+            {
+                "viewpoint": "Check preview play when connect headset to device\n",
+                "expected_result": ["Preview play is work normally"]
+            }
+        ]
+    }
+]

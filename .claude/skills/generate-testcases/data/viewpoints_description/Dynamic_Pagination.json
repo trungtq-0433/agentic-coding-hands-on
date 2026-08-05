@@ -1,0 +1,70 @@
+[
+    {
+        "item_type": "Default number of records per page",
+        "description": "Testing the default configuration of records displayed per page",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the number of records per page",
+                "expected_result": ["Display correctly as config value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Operation",
+        "description": "Testing scroll functionality and loading behavior in different page positions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check scroll up function when displaying position is:\n+ Middle of page \n+ Bottom of page \n+ The last page\n+ Any page",
+                "expected_result": ["Can view all page with correctly records\nLoading icon is displayed while load a new page"]
+            },
+            {
+                "viewpoint": "Check scroll down function when displaying position is:\n+ Middle of page \n+ Bottom of page \n+ The last page\n+ Any page",
+                "expected_result": ["Can view all page with correctly records\nLoading icon is displayed while load a new page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Max time to load page",
+        "description": "Testing page load performance",
+        "test_view_points": [
+            {
+                "viewpoint": "Check time to load page",
+                "expected_result": ["Load page in expected time"]
+            }
+        ]
+    },
+    {
+        "item_type": "Refresh page",
+        "description": "Testing pagination behavior with page refresh",
+        "test_view_points": [
+            {
+                "viewpoint": "Check pagination display when press [F5] of keyboard",
+                "expected_result": ["All the records of the first is display \n"]
+            },
+            {
+                "viewpoint": "Check pagination display when press [Enter] of keyboard",
+                "expected_result": ["All the records of the first is display \n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Number of item > the max number of item per page",
+        "description": "Testing pagination with multiple pages of records",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when have multi pages",
+                "expected_result": ["Display correct  page number:\n+ Display all the records properly\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "More than 10.000 records",
+        "description": "Testing pagination performance with large datasets",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when have more than 10.000 records",
+                "expected_result": ["Display correct  page number:\n+ Display all the records properly\n"]
+            }
+        ]
+    }
+]

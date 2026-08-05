@@ -1,0 +1,120 @@
+[
+    {
+        "item_type": "Check default",
+        "description": "Testing default download button state",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display of download button",
+                "expected_result": ["Display correctly as designed"]
+            }
+        ]
+    },
+    {
+        "item_type": "File name download",
+        "description": "Testing file name handling during download",
+        "test_view_points": [
+            {
+                "viewpoint": "Check downloaded file name in fixed case",
+                "expected_result": ["Download file successfully and file name is correct as spec."]
+            },
+            {
+                "viewpoint": "Check downloaded file name in editable case:\n+ Has English character (Upper and Lower char)\n+ Has special symbol: \".\", \"-\", \"_\", \"#\"\n+ Max length - 1 (254 characters)\n+ Max length (255 characters)",
+                "expected_result": ["Download file successfully and file name is correct as edited."]
+            }
+        ]
+    },
+    {
+        "item_type": "File type",
+        "description": "Testing downloaded file type verification",
+        "test_view_points": [
+            {
+                "viewpoint": "Check downloaded file type",
+                "expected_result": ["File type is correct as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "File format",
+        "description": "Testing file format verification",
+        "test_view_points": [
+            {
+                "viewpoint": "Check downloaded file format",
+                "expected_result": ["File format is correct as spec:\n+ Unicode UTF-8\n+ Shift JIS \n+ JPEG/PNG/GIF.... (image file only)"]
+            }
+        ]
+    },
+    {
+        "item_type": "File content",
+        "description": "Testing downloaded file content verification",
+        "test_view_points": [
+            {
+                "viewpoint": "Check downloaded file content:\n+ Number of Columns\n+ Header \n+ Number of rows\n+ Record\n+ Quality of image (image file only)",
+                "expected_result": ["File content is correct as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Downloaded folder",
+        "description": "Testing download location verification",
+        "test_view_points": [
+            {
+                "viewpoint": "Check downloaded folder",
+                "expected_result": ["Download file is stored in correct folder as config."]
+            }
+        ]
+    },
+    {
+        "item_type": "Operation of Download button",
+        "description": "Testing download button functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation of Download button when has:\n+ 0 file download",
+                "expected_result": ["When have 0 file to download, cancel processing"]
+            },
+            {
+                "viewpoint": "Check operation of Download button when has:\n+ 1 file download\n+ n file download",
+                "expected_result": ["+ Download file successfully.\n+ Data is correct as spec."]
+            },
+            {
+                "viewpoint": "Check operation of Download button when has:\n+ Click multiple times on Download\n+ Download file has existed \n+ Download file same file name, file content is difference\n+ Download file mutil times\n+ Many users download the same file",
+                "expected_result": ["Download file successfully.\n+ Download with a new name: A1.csv (base on spec)\n+ Not display any error"]
+            },
+            {
+                "viewpoint": "Check operation of Download button when has:\n+ Disconnect network during Upload",
+                "expected_result": ["Display correct error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check file content for each type of data",
+        "description": "Testing content handling for different data types",
+        "test_view_points": [
+            {
+                "viewpoint": "Check content of Downloaded file when value of each column is:\n+ Null",
+                "expected_result": ["+ Download file successfully.\n+ Display data correct as spec"]
+            },
+            {
+                "viewpoint": "Check content of Downloaded file when value of each column is:\n+ Max value",
+                "expected_result": ["+ Download file successfully.\n+ Display data correct as spec"]
+            },
+            {
+                "viewpoint": "Check content of Downloaded file when value of each column is has special character:\n+ HTML tags\n+ Comma\n+ hyphen\n+ Tab character\n+ space\n+ Apostrophes ('')\n+ Quote (\"\")",
+                "expected_result": ["+ Download file successfully.\n+ Display data correct, not broken format"]
+            }
+        ]
+    },
+    {
+        "item_type": "Storage capacity",
+        "description": "Testing download behavior with storage constraints",
+        "test_view_points": [
+            {
+                "viewpoint": "Check case download file when full drive",
+                "expected_result": ["Display correct error message"]
+            },
+            {
+                "viewpoint": "Download file approximately\ncapacity of drive size",
+                "expected_result": ["Display correct error message"]
+            }
+        ]
+    }
+]

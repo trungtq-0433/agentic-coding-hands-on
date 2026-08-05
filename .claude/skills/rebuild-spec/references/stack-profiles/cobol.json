@@ -1,0 +1,34 @@
+{
+  "id": "cobol",
+  "graphable": false,
+  "display_name": "COBOL",
+  "detected_language_heading": "COBOL",
+  "detection": {
+    "globs": ["*.cbl", "*.cob", "*.cpy", "*.bms"]
+  },
+  "source_encoding": { "primary": "utf-8", "fallback": "latin-1" },
+  "resource_decode": null,
+  "artifact_map": {
+    "system-overview": { "action": "produce", "class": "universal" },
+    "architecture": { "action": "produce", "class": "universal" },
+    "data-model": { "action": "produce", "class": "universal" },
+    "entities": { "action": "produce", "class": "universal" },
+    "user-stories": { "action": "produce", "class": "universal" },
+    "feature-list": { "action": "produce", "class": "universal" },
+    "business-rules": { "action": "produce", "class": "universal" },
+    "permissions": { "action": "produce", "class": "universal" },
+    "permissions-matrix": { "action": "produce", "class": "universal" },
+    "behavior-logic": { "action": "produce", "class": "universal" },
+    "route-list": { "action": "skip", "class": "web" },
+    "screen-list": { "action": "produce", "class": "web" },
+    "screen-flow": { "action": "produce", "class": "web" },
+    "api-map": { "action": "skip", "class": "web" },
+    "crud-matrix": { "action": "produce", "class": "stack-specific" },
+    "db-objects": { "action": "produce", "class": "stack-specific" }
+  },
+  "screen_source": "cobol-screen",
+  "extractors": ["extract_cobol_screen", "extract_cobol_data"],
+  "probe": { "bootable": false },
+  "module_layout": "one-spec-per-unit",
+  "re_contract": true
+}

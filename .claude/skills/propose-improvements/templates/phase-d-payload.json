@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "item_markdown": "## <title>\n\n- **Value:** <high|medium|low>\n- **Need:** <one sentence with path:line evidence>\n- **Benefits:** <one or more concrete outcomes>\n- **Proposed solution:** <implementable description tied to detected stack>\n- **Engineering effort hint:** <no|very-low|low|medium|high>\n"
+}

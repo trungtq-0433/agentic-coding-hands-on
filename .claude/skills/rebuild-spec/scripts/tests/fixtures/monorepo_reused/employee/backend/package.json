@@ -1,0 +1,1 @@
+{"name": "employee-backend", "dependencies": {"@nestjs/core": "^9.0.0", "@nestjs/common": "^9.0.0"}}

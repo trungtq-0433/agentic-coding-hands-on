@@ -1,0 +1,212 @@
+[
+    {
+        "item_type": "Upload image",
+        "description": "Testing image upload functionality in different forms",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank with correct place holder\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of upload image item when:\n+ User set image field is Blank",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank with correct place holder\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of upload image item when:\n+ User set image field is not Blank (default image or selected image)",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value:  correct image as Data's value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Image location",
+        "description": "Testing image upload from various sources and locations",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when location of image is:\n+ Long path (max lenght)\n+ Upload from PC\n+ Drag&Drop between folders on PC\n+ Upload from shared folder\n+ Upload from External device (USB, Memory card...)\n+ Upload from storage link (Facebook, Instagram..)",
+                "expected_result": ["Always display correctly:\n+ Image name\n+ Image thumnail\n+ Image size\n+ Image effect\nand upload successfully."]
+            }
+        ]
+    },
+    {
+        "item_type": "Image name (can't change name after upload image)",
+        "description": "Testing image name handling during selection and after upload",
+        "test_view_points": [
+            {
+                "viewpoint": "Check name of image after Selected image when it has:\n+ Max lenght\n+ Special symbol: \".\", \"-\", \"_\", \"#\", \"&\", \"$\"...\n+ Number & Alphabet characters (Upper/Lower case)\n+ Japanese characters  (Half/Full-width)\n+ Unicode characters\n+ Spaces\n+ SQL injection\n+ HTML code",
+                "expected_result": ["+ Display correctly as original image name with correct format\n+ Can upload successfully"]
+            },
+            {
+                "viewpoint": "Check name of image after Uploaded image when it has:\n+ Max lenght\n+ Special symbol: \".\", \"-\", \"_\", \"#\", \"&\", \"$\"...\n+ Number & Alphabet characters (Upper/Lower case)\n+ Japanese characters  (Half/Full-width)\n+ Unicode characters\n+ Spaces\n+ SQL injection\n+ HTML code",
+                "expected_result": ["+ Display correctly as original image name with correct format\n+ Can upload successfully"]
+            }
+        ]
+    },
+    {
+        "item_type": "Image name (can change name after upload image)",
+        "description": "Testing image name editing functionality after upload",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when change image name to new name which valid:\n+ Max lenght -1 / Max lenght (64 characters)\n+ Special symbol: \".\", \"-\", \"_\", \"#\", \"&\", \"$\"...\n+ Number & Alphabet characters (Upper/Lower case)\n+ Japanese characters  (Half/Full-width)\n+ Unicode characters\n+ Spaces\n+ SQL injection\n+ HTML code\n",
+                "expected_result": ["+ Display correctly as edited image name with correct format\n+ Can upload successfully"]
+            },
+            {
+                "viewpoint": "Check display and operation when change image name to new name which invalid:\n+ Max lenght +1\n+ Invalid symbol\n",
+                "expected_result": ["+ Display error message\n+ Can not upload with invalid file name"]
+            }
+        ]
+    },
+    {
+        "item_type": "Capacity image",
+        "description": "Testing image upload with different file sizes",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when upload an image which has capacity:\n+ Max value\n+ Min value\n+ From Min to max value",
+                "expected_result": ["+ Display correctly as edited image name with correct format\n+ Can upload successfully"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has capacity:\n+ Max value + 1\n+ Min value -1",
+                "expected_result": ["+ Display error message\n+ Can not upload with invalid file capacity"]
+            }
+        ]
+    },
+    {
+        "item_type": "Size",
+        "description": "Testing image dimension restrictions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when upload an image which has Height:\n+ Max value\n+ Min value\n+ From Min to max value",
+                "expected_result": ["Can upload successfully"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has Height:\n+ Max value + 1\n+ Min value -1",
+                "expected_result": ["+ Display error message\n+ Can not upload with invalid file capacity"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has width:\n+ Max value\n+ Min value\n+ From Min to max value",
+                "expected_result": ["Can upload successfully"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has width:\n+ Max value + 1\n+ Min value -1",
+                "expected_result": ["+ Display error message\n+ Can not upload with invalid file capacity"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has:\n+ Min width, Max Height",
+                "expected_result": ["+ Can upload successfully\n+ Scale image without error (Base on spec)"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has:\n+ Max width, Min Height",
+                "expected_result": ["+ Can upload successfully\n+ Scale image without error (Base on spec)"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has:\n+ Min width, Min Height",
+                "expected_result": ["+ Can upload successfully\n+ Scale image without error (Base on spec)"]
+            },
+            {
+                "viewpoint": "Check display and operation when upload an image which has:\n+ Max width, Max Height",
+                "expected_result": ["+ Can upload successfully\n+ Scale image without error (Base on spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Resize image",
+        "description": "Testing image editing before upload",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when Edit image before Upload (Crop/Resize...) (base on spec)",
+                "expected_result": ["+ Can upload edited email successfully (Base on spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Type image",
+        "description": "Testing file type restrictions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when upload an image which has type is:\n+ .jpg\n+ .jpeg\n+ .png\n+ .tiff\n+.giff\n+ .bmp\n+ .ICO\n+ .ASF\n+ .SVG\n(Check with each supported types)",
+                "expected_result": ["Can upload successfully with supported file types"]
+            },
+            {
+                "viewpoint": "Check operation when upload an image which has type is:\n+ .MP3\n+ .MP4, \n+ .MOV,\n+ M4V,\n+ .MPEG, \n... and other values: valid",
+                "expected_result": ["Display correct error message with correct format"]
+            },
+            {
+                "viewpoint": "Check operation when upload an image which has type is:\n+ .csv,\n+ .xls,\n+ .txt,\n+ .xlsx,\n+ .tsv\n... and Other values: valid",
+                "expected_result": ["Display correct error message with correct format"]
+            },
+            {
+                "viewpoint": "Change type from abnormal to normal \nex: change from .csv to .jpg and  Upload image is changed type  ",
+                "expected_result": ["Display correct error message with correct format"]
+            },
+            {
+                "viewpoint": "Change type from normal to abnormal \nex: change from .jpg to .csv and  Upload image is changed type  ",
+                "expected_result": ["Display correct error message with correct format"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change image",
+        "description": "Testing image selection and replacement",
+        "test_view_points": [
+            {
+                "viewpoint": "Select image A, and then change to select image B and upload",
+                "expected_result": ["Can upload successfully with the last selected file."]
+            }
+        ]
+    },
+    {
+        "item_type": "Upload the same file",
+        "description": "Testing duplicate file handling",
+        "test_view_points": [
+            {
+                "viewpoint": "Upload in cases:\n+ Same name and same image \n+ Same name but not same image\n+ Same image not same name",
+                "expected_result": ["Can upload successfully or display warning message (Base on spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Upload multi time (N times)",
+        "description": "Testing multiple upload attempts",
+        "test_view_points": [
+            {
+                "viewpoint": "Check upload an image multi times",
+                "expected_result": ["Can upload successfully with the last selected file."]
+            }
+        ]
+    },
+    {
+        "item_type": "Single choice",
+        "description": "Testing single file selection interactions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when:\n+ Hover on uploaded file.",
+                "expected_result": ["Nothing happen (as spec)"]
+            },
+            {
+                "viewpoint": "Check display and operation when:\n+ Click/Multi click on uploaded file.",
+                "expected_result": ["Image folder is displayed (as spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Multi-choice\n(Base on spec)",
+        "description": "Testing multiple file selection interactions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of uploaded image list",
+                "expected_result": ["Display correctly as designed"]
+            },
+            {
+                "viewpoint": "Check display and operation when:\n+ Hover on uploaded file",
+                "expected_result": ["Image is zoom in and has no error <Base on your spec>"]
+            },
+            {
+                "viewpoint": "Check display and operation of Delete icon of each image.",
+                "expected_result": ["+ Display correctly as designed\n+ Can delete selected file"]
+            },
+            {
+                "viewpoint": "Check display and operation when:\n+ Click/Multi click on uploaded file.",
+                "expected_result": ["Image is zoom in and has no error <Base on your spec>"]
+            }
+        ]
+    }
+]

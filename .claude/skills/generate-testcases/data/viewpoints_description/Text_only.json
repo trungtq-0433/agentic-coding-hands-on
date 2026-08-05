@@ -1,0 +1,56 @@
+[
+    {
+        "item_type": "Fixed text",
+        "description": "Testing display and behavior of fixed text/labels that are hardcoded in the application.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check fixed text/label displays corresponding with design, spec\n\nEx: Title of page, Label of item, ...",
+                "expected_result": ["Display correctly as design/spec\n+ Position\n+ Format\n+ Value"]
+            },
+            {
+                "viewpoint": "Check fixed text/label unable to edit on screen",
+                "expected_result": ["Can not edit text by action on screen"]
+            }
+        ]
+    },
+    {
+        "item_type": "Text which is set in Config file\n",
+        "description": "Testing display and behavior of text that is configured through configuration files.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check text/label display corresponding with config file\n\nEx: address, copyright, ...",
+                "expected_result": ["Display correctly as design/spec\n+ Position\n+ Format\n+ Value"]
+            },
+            {
+                "viewpoint": "Check fixed text/label unable to edit on screen",
+                "expected_result": ["Can not edit text by action on screen"]
+            }
+        ]
+    },
+    {
+        "item_type": "Text which gets from database\n",
+        "description": "Testing display and behavior of database-driven text, including various character types, formats, and scrolling behavior.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when text display fully on screen",
+                "expected_result": ["Display correctly as value on database\n+ Position\n+ Format\n+ Value"]
+            },
+            {
+                "viewpoint": "Check when text display in preview mode, not fully",
+                "expected_result": ["Display correctly as value on database and truncate <n character>\n+ Position\n+ Format\n+ Value is truncated <n characters>"]
+            },
+            {
+                "viewpoint": "Check display of text with below data\n+ [Not required item] NULL\n+ Only spaces\n+ Number\n+ Date time\n+ English characters contain space\n+ English characters not contain space\n+ Has Lower cases characters\n+ Has Upper cases characters\n+ Emotion \n+ Symbol\n+ Has half-width Japanese characters\n+ Has full-width Japanese characters\n+ Has tags (in SEO)\n+ Hashtag\n+ HTML tags Ex: break line, hyper link, ...\n+ Break line characters Ex: /n, /r, /r/n\n+ Format tags\n+ Programming languages",
+                "expected_result": ["Display correctly as value on database\n+ Position\n+ Format\n+ Value\n+ When text contains HTML tags, not display HTML tags, only displays text with correct format/style\n+ When text contains Break line characters, not display break line characters, only displays text with correct format/style\n+ When text contains format tags, not display format tags, only displays text with correct format/style"]
+            },
+            {
+                "viewpoint": "Check display of text when has lines\n\n+ Has N-1 lines\n[N: the line number that the vertical scroll appears - Base on each spec]\n+ Has N lines\n+ Has N+1 lines",
+                "expected_result": ["+ Not display vertical bar when have < = N-1 \n    Scroll up/down function is not effect.\n\n+ Only display vertical bar when have >=  N line\n+ Scroll up/down function is effect.\n\n+ Display correctly value on database\n+ Layout is not broken"]
+            },
+            {
+                "viewpoint": "Check fixed text/label is unable to edit on screen",
+                "expected_result": ["Can not edit text by action on screen"]
+            }
+        ]
+    }
+]

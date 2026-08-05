@@ -1,0 +1,266 @@
+[
+    {
+        "item_type": "Check upload video",
+        "description": "Testing video upload functionality including file sources, formats, naming conventions, size limitations and error handling",
+        "test_view_points": [
+            {
+                "viewpoint": "Drag drop video / Click Upload button to upload video from below \n+ PC\n+ Shared device: Mobile ...\n+ USB, Facebook, Instagram..",
+                "expected_result": ["+ Can upload video successfully\n+ Update into DB correctly\n+ Video displays in published WEB/APP correctly as setting\n+ Video displays in published WEB/APP correctly when EDIT uploaded video"]
+            },
+            {
+                "viewpoint": "Upload video with below extension\n+ mp4, avi ....",
+                "expected_result": ["+ Can upload video successfully\n+ Update into DB correctly\n+ Video displays in published WEB/APP correctly as setting\n+ Video displays in published WEB/APP correctly when EDIT uploaded Video\n+ Video displays in published WEB/APP correctly when add new Video with new extension\n"]
+            },
+            {
+                "viewpoint": "Upload Video with incorrect data\n+ Incorrect size: + 0 KB, > Max size, < Min size\n+ Incorrect extension: jpg, png, txt, xls...\n+ XLS file that has been changed extention from video file\n+ Video file that has been changed extention from xls file",
+                "expected_result": ["+ Show error message properly\n+ Cannot upload image\n+ Not update into DB"]
+            },
+            {
+                "viewpoint": "Upload 2 videos with the same name",
+                "expected_result": ["+ Show error message properly [Base on spec]\n+ Or auto change name of file into File 1, File 2 [Base on spec]"]
+            },
+            {
+                "viewpoint": "Upload multi videos at the same time",
+                "expected_result": ["Can upload with the max number of files as spec"]
+            },
+            {
+                "viewpoint": "Click Cancel when uploading Video",
+                "expected_result": ["+ Uploading process is stopped properly\n+ There is no broken file displaying in upload destination"]
+            },
+            {
+                "viewpoint": "After uploading file, delete the origin file",
+                "expected_result": ["Uploaded file not be deleted"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check content of video after uploading",
+        "description": "Testing video playback functionality including source verification, thumbnail display, and default playback behavior",
+        "test_view_points": [
+            {
+                "viewpoint": "Check source of video",
+                "expected_result": ["Video is embeded with correct source in Spec\nEx:  Youtube, vimeo, "]
+            },
+            {
+                "viewpoint": "Check thumbnail of video",
+                "expected_result": ["1. Thumbnail is correct as spec\n2. The size of thumbnail is correct\n3. When hover on video, thumbnail display is correct as spec"]
+            },
+            {
+                "viewpoint": "Check default timeline",
+                "expected_result": ["Show elapsed timing HH:MM:SS / HH:MM:SS correctly"]
+            },
+            {
+                "viewpoint": "Check default running\n+ When open a website containing video\n+ When open a website containing video and scroll to the area of video\n+ When open a website containing video list",
+                "expected_result": ["1. Specified video is auto-run / Pause [Base on spec]\n2. Other videos are pause"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check logic running a video (embed in website\nEx: StarMovie, BOX...) in PC/Mobile",
+        "description": "Testing comprehensive video playback functionality including controls, toolbar behavior, progress tracking, and multi-screen compatibility",
+        "test_view_points": [
+            {
+                "viewpoint": "Check running video from\n+ Run video from the start\n+ Run video from the middle",
+                "expected_result": ["+ Video is displayed correctly\n+ In browser, Volumn icon is displayed correctly as video is running"]
+            },
+            {
+                "viewpoint": "+ Check NEXT / PREVIOUS / PAUSE button\n+ Check Run - Pause - Run - Pause - Run continuously\n+ Check Drag timing bar to go to next/previous screen",
+                "expected_result": ["Can go to next/previous screen in all circumstances"]
+            },
+            {
+                "viewpoint": "Check tool bar when\n+ When video is playing\n+ When tool bar doesn not display, hover on video to show tool bar, then hover out video",
+                "expected_result": ["+ When video is playing, tool bar is hidden after some seconds\n+ When hover on => hover out video, tool bar displays then auto hide after some seconds"]
+            },
+            {
+                "viewpoint": "Check progress bar\n+ Loaded progress: Color\n+ Unloaded progress: Color",
+                "expected_result": ["Show color of loaded progress/unloaded progress properly as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check when video run to the end, it will rerun when set loop function",
+        "description": "Testing video loop functionality and automatic loading of new videos",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Set Loop function\n+ Run a video to the end",
+                "expected_result": ["Video will run again from start"]
+            },
+            {
+                "viewpoint": "Check automatically loading new video when opening video is going to the end\n+ Video is opening with small screen. When video is nearly going to the end, change the view screen to normal screen\n+ Video is opening with small screen. When video is nearly going to the end, change the view screen to full screen\n+ Video is opening with normal screen. When video is nearly going to the end, change the view screen to small screen\n+ Video is opening with normal screen. When video is nearly going to the end, change the view screen to full screen\n+ Video is opening with full screen. When video is nearly going to the end, change the view screen to small screen\n+ Video is opening with full screen. When video is nearly going to the end, change the view screen to normal screen",
+                "expected_result": ["1. Can go to next video successfully\n2. Loading icon is displayed properly and icon suitable with the type of screen\n3. Setting panel is displayed properly and suitable with type of screen"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check status of video when video is stopped unexpectedly",
+        "description": "Testing video behavior during system interruptions and recovery",
+        "test_view_points": [
+            {
+                "viewpoint": "When video is running, do below action \n+ Lock PC \n+ Log off PC \n+ Restart PC / Shutdown PC\nLogin PC again",
+                "expected_result": ["+ After lock PC, when login, Video continues running\n+ After log off/ restart/ shutdown, Video browser is closed correctly. Can open video again properly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check open a new video while a video is being openned",
+        "description": "Testing video switching behavior across different view modes",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Video is opening with small screen (default mode). Run video and change the view screen to normal screen. Go to video list and click to open another video\n+ Video is opening with small screen (default mode). Run video and change the view screen to full screen. Go to video list and click to open another video\n+ Video is opening with medium screen (theatre mode). Run video and change the view screen to small screen. Go to video list and click to open another video\n+ Video is opening with medium screen (theatre mode). Run video and change the view screen to full screen. Go to video list and click to open another video",
+                "expected_result": ["1. Can go to new video successfully\n2. Loading icon is displayed properly and icon suitable with the type of screen\n3. Setting panel is displayed properly and suitable with type of screen"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check auto-scroll to top when open video at the middle/bottom of the list",
+        "description": "Testing auto-scroll behavior when opening videos from different list positions",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Run video for some minutes\n+ Go to video list and open a video that is listing at the middle of screen / at the end of screen",
+                "expected_result": ["It will auto scroll to top and show video at the top of screen\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check volumn of video",
+        "description": "Testing volume control functionality including different levels, persistence across video changes, system events, and playback controls",
+        "test_view_points": [
+            {
+                "viewpoint": "Set volumn with normal level",
+                "expected_result": ["Can hear the voice with normal level"]
+            },
+            {
+                "viewpoint": "Set volumn with mute",
+                "expected_result": ["Cannot hear the voice"]
+            },
+            {
+                "viewpoint": "Set volumn with max level",
+                "expected_result": ["Can hear the voice with max level"]
+            },
+            {
+                "viewpoint": "Change volumn continuously",
+                "expected_result": ["The voice hearing is changed continuously"]
+            },
+            {
+                "viewpoint": "Set volumn with normal level/mute/max level\nRun video to the end to auto-load to new video",
+                "expected_result": ["Volumn setting is unchanged when open to new video"]
+            },
+            {
+                "viewpoint": "Set volumn with normal level/mute/max level\nNot pause the opening video\nLock the PC/Screen lock mobile\nThen login PC again",
+                "expected_result": ["Volumn of video is unchanged after lock and login again"]
+            },
+            {
+                "viewpoint": "Check volumn when click Play - Pause - Previous - Next - Drag to new slides in timing bar",
+                "expected_result": ["Volumn  of video is unchanged when click Play - Pause - Previous - Next - Drag to new slides"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check subtitle of video",
+        "description": "Testing subtitle toggle functionality and its persistence across different video playback scenarios and system events",
+        "test_view_points": [
+            {
+                "viewpoint": "Set subtitle display = ON",
+                "expected_result": ["Subtitle is displayed properly"]
+            },
+            {
+                "viewpoint": "Set subtitle display = OFF",
+                "expected_result": ["Subtitle is not displayed"]
+            },
+            {
+                "viewpoint": "Set subtitle ON/OFF\nRun video to the end to auto-load to new video",
+                "expected_result": ["Subtitle setting is unchanged when open to new video"]
+            },
+            {
+                "viewpoint": "Set subtitle ON/OFF\nNot pause the opening video\nLock the PC/Screen lock mobile\nThen login PC again",
+                "expected_result": ["Subtitle of video is unchanged after lock and login again"]
+            },
+            {
+                "viewpoint": "Check subtitle when click Play - Pause - Previous - Next - Drag to new slides in timing bar",
+                "expected_result": ["Subtitle of video is unchanged when click Play - Pause - Previous - Next - Drag to new slides"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change Speed of video",
+        "description": "Testing video playback speed controls and persistence across different playback scenarios and system events",
+        "test_view_points": [
+            {
+                "viewpoint": "Set Speed = Normal/Slow/Fast",
+                "expected_result": ["Video is displayed correctly at that speed"]
+            },
+            {
+                "viewpoint": "Set Speed = Normal/Slow/Fast\nRun video to the end to auto-load to new video",
+                "expected_result": ["Speed setting is unchanged when open to new video"]
+            },
+            {
+                "viewpoint": "Set Speed = Normal/Slow/Fast\nNot pause the opening video\nOpen another video",
+                "expected_result": ["Speed setting is unchanged when open to new video"]
+            },
+            {
+                "viewpoint": "Set Speed = Normal/Slow/Fast\nNot pause the opening video\nLock the PC/Screen lock mobile\nThen login PC again",
+                "expected_result": ["Speed of video is unchanged after lock and login again"]
+            },
+            {
+                "viewpoint": "Check speed when click Play - Pause - Previous - Next - Drag to new slides in timing bar",
+                "expected_result": ["Speed of video is unchanged when click Play - Pause - Previous - Next - Drag to new slides"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check quality of video",
+        "description": "Testing video quality settings including manual selection, auto-quality based on internet speed, and persistence across different scenarios and system events",
+        "test_view_points": [
+            {
+                "viewpoint": "Set quality with optional quality",
+                "expected_result": ["Video is displayed correctly at that quality"]
+            },
+            {
+                "viewpoint": "Set quality with optional quality\nRun video to the end to auto-load to new video",
+                "expected_result": ["Quality list of new video is displayed properly (each video has different Quality option)\nNew video is set with correct Quality as spec"]
+            },
+            {
+                "viewpoint": "Set Quality with optional quality\nNot pause the opening video\nLock the PC/Screen lock mobile\nThen login PC again",
+                "expected_result": ["Quality of video is unchanged after lock and login again"]
+            },
+            {
+                "viewpoint": "Check quality when click Play - Pause - Previous - Next - Drag to new slides in timing bar",
+                "expected_result": ["Quality of video is unchanged when click Play - Pause - Previous - Next - Drag to new slides"]
+            },
+            {
+                "viewpoint": "Check quality of video when select \"Auto\" in Quality with below internet Speed\n\n1. Internet speed in PC = 1Mbps\n2. Internet speed in PC = 2Mbps\n...",
+                "expected_result": ["Confirm that video is played with suitable quality as spec \n\nEX:\n1. Internet speed in PC = 1Mbps ==> Video will be run with quality = 720p. In quality it will show as \"Auto 720p\" ( Base on requirement)\n2. Internet speed in PC = 2Mbps ==> Video will be run with quality = 1080p. In quality it will show as \"Auto 1080p\" ( Base on requirement)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Some special case when Run video",
+        "description": "Testing video playback behavior under various interruptions and special conditions including advertisements, system events, connectivity issues, and file operations",
+        "test_view_points": [
+            {
+                "viewpoint": "When opening video, an advertising is displayed",
+                "expected_result": ["Can view advertising\nCan skip that advertising\nCan continue with the video"]
+            },
+            {
+                "viewpoint": "When opening video, there is a call/a message/a notification/an automatic virus can run...",
+                "expected_result": ["Error is not displayed\nCan get call/message/notification/virus scan correctly\nCan continue view video properly"]
+            },
+            {
+                "viewpoint": "When opening video, internet is disconnect\nThen connect internet again",
+                "expected_result": ["After connect internet again, can continue view video properly"]
+            },
+            {
+                "viewpoint": "When opening video, that video is deleted from mobile/pc",
+                "expected_result": ["1. If spec is to accept delete video when video is opening\nCan delete video\nCan continue to view video\n\n2. If spec is not accept to delete video when video is opening\nShow warning message and cannot delete video\nCan continue to view video"]
+            },
+            {
+                "viewpoint": "When opening video, move that video to another location in mobile/pc",
+                "expected_result": ["1. If spec is to accept cut video when video is opening\nCan cut video\nCan continue to view video\n\n2. If spec is not accept to cut video when video is opening\nShow warning message and cannot delete video\nCan continue to view video"]
+            },
+            {
+                "viewpoint": "Open video in mobile\nThen copy that video from SDcard to PC",
+                "expected_result": ["Error is not displayed when copying"]
+            }
+        ]
+    }
+]

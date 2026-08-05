@@ -1,0 +1,11 @@
+*****************************************************************
+* Real fixed-column CICS BMS map deck: label col 1, macro name
+* col ~10, operand col ~17 (a genuine whitespace separator between
+* macro name and operand -- the actual assembler free-format
+* convention, not the zero-gap artifact some hand-built test
+* helpers produce). Mirrors the grammar proven by test_cobol_bms.py.
+*****************************************************************
+ORDRSET  DFHMSD  TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,STORAGE=AUTO
+ORDRMAP  DFHMDI  SIZE=(24,80),LINE=1,COLUMN=1
+ORDNAME  DFHMDF  POS=(2,10),LENGTH=10,ATTRB=(NORM),INITIAL='ITEM NAME:'
+ORDVAL   DFHMDF  POS=(2,22),LENGTH=20,ATTRB=(UNPROT,IC)

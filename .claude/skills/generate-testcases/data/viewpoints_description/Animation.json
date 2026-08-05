@@ -1,0 +1,102 @@
+[
+    {
+        "item_type": "Check displaying",
+        "description": "Testing basic animation display properties including size and effects to ensure compliance with specifications.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check displaying of animation:\n+ Size\n+ Effection",
+                "expected_result": ["GUI same as spec\nAnnimation running as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check on many browsers",
+        "description": "Testing animation compatibility across different browsers and versions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check displaying of animation on specificed browsers with versions:\n+ IE\n+ Chrome\n+ Firefox\n+ Safari...",
+                "expected_result": ["Animation still display correctly as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check on many screen size",
+        "description": "Testing animation responsiveness across different screen sizes and resolutions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check displaying of animation on specificed screen size\n+ 14 inches\n+ 23 inches\n+ Resized screen",
+                "expected_result": ["Animation still display correctly as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check when has event from user",
+        "description": "Testing animation behavior in response to various user interactions including hover, clicks, and navigation events.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check displaying of animation when hover mouse on each item of target item:\n+ Button\n+ Menu\n+ Image\n+ Advertisment\n+ Background\n+ Link\n+ Special area (base on spec)",
+                "expected_result": ["Display animation correctly based on spec (highlight or change the cursor icon)"]
+            },
+            {
+                "viewpoint": "Check animation when click / double click / mutlti click on:\n+ Button\n+ Menu\n+ Image\n+ Advertisment\n+ Background\n+ Link\n+ Special area (base on spec)",
+                "expected_result": ["Operate correctly as spec"]
+            },
+            {
+                "viewpoint": "Check animation when click / double click / mutlti click out of:\n+ Button\n+ Menu\n+ Image\n+ Advertisment\n+ Background\n+ Link\n+ Special area (base on spec)",
+                "expected_result": ["Operate correctly as spec"]
+            },
+            {
+                "viewpoint": "Zoom in/ zoom out Animation page",
+                "expected_result": ["Animation still display correctly as spec"]
+            },
+            {
+                "viewpoint": "Press F5 or Click Back/Next to Animation page from browser",
+                "expected_result": ["Animation rerun from the beginning"]
+            },
+            {
+                "viewpoint": "Switch to another Tab then return to Tab which has animation",
+                "expected_result": ["Animation still good working"]
+            },
+            {
+                "viewpoint": "Copy/paste URL to another Tab to open and run",
+                "expected_result": ["Animation still good working"]
+            }
+        ]
+    },
+    {
+        "item_type": "Edit animation property",
+        "description": "Testing animation behavior after modifying CSS properties and image content.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when edit value of CSS:\n+ Animation-duration\n+ Property animation-delay\n+ Another property which user can customize",
+                "expected_result": ["Animation displayes and operates correctly base on edited value in CSS file"]
+            },
+            {
+                "viewpoint": "Change image of animation",
+                "expected_result": ["All function on website still working correctly\nNew image animation is good working"]
+            }
+        ]
+    },
+    {
+        "item_type": "Complex animation on page",
+        "description": "Testing complex animation scenarios including multiple panels, simultaneous animations, and page positioning.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check below case when Animation has some panels:\n+ Check Order of panel\n+ Animation between each panel\n+ Animation when click on icon/number of page/ or directly on panel",
+                "expected_result": ["+ Order panel base on spec\n+ Automatically switches to the next panel this cycle is repeated from the first panel to the last panel and then back to the first panel.\n+ The corresponding panel is displayed when click on icon/number of page/ or directly on panel+"]
+            },
+            {
+                "viewpoint": "Check operation when page has many animation items:\n+ Move mouse between animation items while they are running",
+                "expected_result": ["All of animation are working correctly as spec"]
+            },
+            {
+                "viewpoint": "Check animation when page has some animation on the Top page and on the down page:\n+ Move up/down page",
+                "expected_result": ["Animation on the Top/down still working correctly"]
+            },
+            {
+                "viewpoint": "Check when page has some animation run simultaneously",
+                "expected_result": ["All animation is run correctly at one time"]
+            }
+        ]
+    }
+]

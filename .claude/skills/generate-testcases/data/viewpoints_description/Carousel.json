@@ -1,0 +1,148 @@
+[
+    {
+        "item_type": "Check setting title of carousel",
+        "description": "Testing carousel title functionality including default display, valid/invalid input handling, and bad word filtering according to configuration",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display of title\n+ Position\n+ Label of item\n+ Default value: place holder...",
+                "expected_result": ["Display correctly as designed"]
+            },
+            {
+                "viewpoint": "Check SET NEW / EDIT/ DELETE title with valid data\n+ Alphabetical and number characters\n+ English characters\n+ Half-width Japanese characters\n+ Full-width Japanese characters\n+ Another supported languages\n+ Spaces characters\n+ Supported special character, symbols: @#$%^🌷🐕🐱\n+ Max length\n+ Max length - 1\n+ Min length\n+ Min length + 1",
+                "expected_result": ["+ Data is set successfully\n+ Update into DB correctly\n+ Redundant spaces are auto-trimmed\n+ Carousel displays in published WEB/APP correctly as setting"]
+            },
+            {
+                "viewpoint": "Check setting title with invalid data\n+ NULL\n+ Min length - 1\n+ Max length + 1\n+ Unsupported languages\n+ Unsupported special character, symbols\n",
+                "expected_result": ["+ Display correct error message\n+ Not update into DB"]
+            },
+            {
+                "viewpoint": "Check setting title with Bad words \n+ Input bad word which has been defined in config file before but  has been removed from Config file already",
+                "expected_result": ["+ Data is set successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting"]
+            },
+            {
+                "viewpoint": "Check setting title with Bad words \n+ Input bad word which has been already defined in config file \n+ Input bad word which has been updated  in config file \n+ Input bad word which has been new-added  in config file ",
+                "expected_result": ["Check if Bad words are removed from title (Base on spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check setting description of carousel",
+        "description": "Testing carousel description functionality including default display, valid/invalid input handling, and bad word filtering according to configuration",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display of description\n+ Position\n+ Label of item\n+ Default value: placeholder...",
+                "expected_result": ["Display correctly as designed"]
+            },
+            {
+                "viewpoint": "Check SET NEW / EDIT/ DELETE description with valid data\n+ Alphabetical and number characters\n+ English characters\n+ Half-width Japanese characters\n+ Full-width Japanese characters\n+ Another supported languages\n+ Spaces characters\n+ Supported special character, symbols: @#$%^🌷🐕🐱\n+ Max length\n+ Max length - 1\n+ Min length\n+ Min length + 1",
+                "expected_result": ["+ Data is set successfully\n+ Update into DB correctly\n+ Redundant spaces are auto-trimmed\n+ Carousel displays in published WEB/APP correctly as setting"]
+            },
+            {
+                "viewpoint": "Check setting description with invalid data\n+ NULL\n+ Min length - 1\n+ Max length + 1\n+ Unsupported languages\n+ Unsupported special character, symbols\n",
+                "expected_result": ["+ Display correct error message\n+ Not update into DB"]
+            },
+            {
+                "viewpoint": "Check setting description with Bad words \n+ Input bad word which has been defined in config file before but  has been removed from Config file already",
+                "expected_result": ["+ Data is set successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting"]
+            },
+            {
+                "viewpoint": "Check setting description with Bad words \n+ Input bad word which has been already defined in config file \n+ Input bad word which has been updated  in config file \n+ Input bad word which has been new-added  in config file ",
+                "expected_result": ["Check if Bad words are removed from description (Base on spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check upload image",
+        "description": "Testing image upload functionality including file sources, formats, dimensions, naming conventions, size limitations and validation of incorrect inputs",
+        "test_view_points": [
+            {
+                "viewpoint": "Drag drop image / Click Upload button to upload image from\n+ PC\n+ Shared device: Mobile ...\n+ USB, Facebook, Instagram..",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with below extension\n+ .jpg, .jpeg, png, tiff, gif, ico, asf, svg",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when add new images with new extension\n+ Carousel displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with below types\n+ all images are horizontal images \n+ all images are vertical images\n+ both horizontal images and vertical images",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when add new images with different type\n+ Carousel displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with all kinds of name\n+ Max value -1\n+ Max value\n+ Has special symbol: \".\", \"-\", \"_\", \"#\"\n+ Has English character (Upper and Lower char)\n+ Includes SQL injection \n+ Includes HTML (Scripts)\n+ Includes half-width characters\n+ Includes full-width characters",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when add new images with different name\n+ Carousel displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with below size \n+ Max value\n+ Max value -1 \n+ Min value\n+ Min value +1\n+ Min ~ Max value",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when add new images with different size\n+ Carousel displays in published WEB/APP correctly when EDIT/ DELETE uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with below height/width\n+ Max value\n+ Max value -1 \n+ Min value\n+ Min value +1\n+ Min ~ Max value",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when add new images with different height/width\n+ Carousel displays in published WEB/APP correctly when EDIT/ DELETE uploaded image"]
+            },
+            {
+                "viewpoint": "Upload number of images as below\n+ Carousel has 1 image\n+ Carousel has > 2 images\n+ Carousel has max images",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Carousel displays in published WEB/APP correctly as setting\n+ Carousel displays in published WEB/APP correctly when EDIT/ DELETE uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with incorrect data\n+ Incorrect size: + 0 KB, > Max size, < Min size\n+ Incorrect height: > Max height, < Min height\n+ Incorrect width: > Max width, < Min width\n+ Incorrect extension: mp4, mov, txt, xls...\n+ XLS file that has been changed extention from jpg file\n+ JPG file that has been changed extention from xls file\n+ Upload more than max quantity (ex: a carousel is permitted to set 5 images. => When testing, upload 6 images)",
+                "expected_result": ["+ Show error message properly\n+ Cannot upload image\n+ Not update into DB"]
+            }
+        ]
+    },
+    {
+        "item_type": "Set position for each image in carousel",
+        "description": "Testing image positioning functionality in carousel including index settings for different quantities of images and handling inactive/draft images",
+        "test_view_points": [
+            {
+                "viewpoint": "Setting index when\n+ Carousel has 1 image\n+ Carousel has > 2 images\n+ Carousel has max images\n",
+                "expected_result": ["In published WEB/APP, position of image display correctly as index"]
+            },
+            {
+                "viewpoint": "Setting index > max quantity\n(ex: a carousel has 5 images. => When testing, set 6 index)",
+                "expected_result": ["+ Display error message\n+ Not update DB "]
+            },
+            {
+                "viewpoint": "Setting index for images that have been set as inactive/draft",
+                "expected_result": ["In published WEB/APP, inactive/draft image is not displayed"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check carousel in published WEB/APP",
+        "description": "Testing carousel navigation, auto-movement functionality and link access permissions based on user status",
+        "test_view_points": [
+            {
+                "viewpoint": "Next/Previous button\n+ Click on Next button when current slide is first slide / middle slide / last slide\n\n+ Click on Previous button when current slide is first slide / middle slide / last slide\n\n+ Click continuously on Next button when current slide is first slide / middle slide / last slide\n\n+ Click continuously on Previous button when current slide is first slide / middle slide / last slide",
+                "expected_result": ["Go to correct slide [base on requirement]"]
+            },
+            {
+                "viewpoint": "○○○○○○　button under carousel\n+ Click on first ○／middle ○／last ○\n+ Double click on first ○／middle ○／last ○",
+                "expected_result": ["Go to correct slide [base on requirement]"]
+            },
+            {
+                "viewpoint": "○○○○○○　button under carousel\n+ Click on current ○",
+                "expected_result": ["Carousel keep unchanged"]
+            },
+            {
+                "viewpoint": "Auto-move slide\n+ Do not have any action on page\n+ After click Next/Previous button\n+ After double click Next/Previous button\n+ After click ○ button",
+                "expected_result": ["Go to correct slide [base on requirement]"]
+            },
+            {
+                "viewpoint": "Click/ Double click on link setting in title / image in carousel\n\nCondition: \n+ Link is permitted to access with customer user\n+ User status: log-out",
+                "expected_result": ["Can open link successfully with the same tab / not the same tab [base on requirement]"]
+            },
+            {
+                "viewpoint": "Click/ Double click on link setting in title / image in carousel\n\nCondition: \n+ Link is permitted to access with customer user\n+ User status: log-in",
+                "expected_result": ["Can open link successfully with the same tab / not the same tab [base on requirement]"]
+            },
+            {
+                "viewpoint": "Click/ Double click on link setting in title / image in carousel\n\nCondition: \n+ Link is not permitted to access with customer user\n+ User status: log-out",
+                "expected_result": ["Can not open link\nOpen proper page (Ex: login page. After login, will open that link)"]
+            },
+            {
+                "viewpoint": "Click/ Double click on link setting in title / image in carousel\n\nCondition: \n+ Link is not permitted to access with customer user\n+ User status: log-in",
+                "expected_result": ["Can open link successfully with the same tab / not the same tab [base on requirement]"]
+            }
+        ]
+    }
+]

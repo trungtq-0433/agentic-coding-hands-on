@@ -1,0 +1,641 @@
+[
+    {
+        "item_type": "Search with ID/Code",
+        "description": "Testing search functionality for ID/Code fields including default values, blank fields, exact/partial matches, special characters, and handling of deleted records while validating field length restrictions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All ID/code is returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search results when search with existed ID/Code",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when search with ID/Code is not existed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when search with exited ID/Code partial match",
+                "expected_result": ["List result matching with Search condition [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when search with exited ID/Code exactly match",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with ID/code is deleted",
+                "expected_result": [
+                    "List result matching with Search condition",
+                    "ID/Code which delete do not display in list search results"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search when searching with special characters",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with maxlength characters on fields",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with > maxlength characters on fields",
+                "expected_result": ["Do not allow input > maxlength characters [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify field is auto trim space character when searching with many space character in the begin and the end of Search condition",
+                "expected_result": [
+                    "Space character in the begin and the end of search condition is auto trim",
+                    "List result matching with Search condition"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with Text",
+        "description": "Testing text search functionality including handling of different character types, blank fields, partial/exact matches, deleted records, and field length validation.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with existed text",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with existed text partial match",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when search with not exited Text exactly match",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with text of result is deleted",
+                "expected_result": [
+                    "List result matching with Search condition",
+                    "Text which delete do not display in list search results"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search when searching with special characters",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with maxlength characters on fields",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with > maxlength characters on fields",
+                "expected_result": ["Do not allow input > maxlength characters [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify field is auto trim space character when searching with many space character in the begin and the end of Search condition",
+                "expected_result": [
+                    "Space character in the begin and the end of search condition is auto trim",
+                    "List result matching with Search condition"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with fullname field",
+        "description": "Testing full name search functionality including first name and last name searches separately and combined, with support for multiple character sets (EN, JP), partial matches, and validation of field constraints.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All name is returned on list search results"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with exited lastname only",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with exited last name partial match",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with exited first name only",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with exited first name partial match",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with first name + last name on fields",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with lastname + first name on fields",
+                "expected_result": ["List result matching with Search condition [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with full name is not exited",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with full name is deleted",
+                "expected_result": [
+                    "List result matching with Search condition",
+                    "Full name which deleted do not display in list search results"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search when searching with special characters",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with maxlength characters on fields",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with > maxlength characters on fields",
+                "expected_result": ["Do not allow input > maxlength characters [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify field is auto trim space character when searching with many space character in the begin and the end of Search condition",
+                "expected_result": [
+                    "Space character in the begin and the end of search condition is auto trim",
+                    "List result matching with Search condition"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with number",
+        "description": "Testing numeric search functionality including zero handling, decimal numbers, comparison operations (greater than, less than), and validation of non-numeric inputs.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with 0",
+                "expected_result": [
+                    "List result matching with Search condition",
+                    "Result has 0 number is displayed on list search result"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with exited number",
+                "expected_result": ["All result that have number <= (or >=) search condition is displayed on search result [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with number > exited number",
+                "expected_result": [
+                    "All result that have number <= search condition is displayed on search result [base on requirement]",
+                    "Result has exited number is not displayed on list search result [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with < exited number",
+                "expected_result": [
+                    "All result that have number <= search condition is displayed on search result [base on requirement]",
+                    "Result has exited number is displayed on list search result [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with decimal number",
+                "expected_result": ["List result matching with Search condition [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with alpha character",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with special characters",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with maxlength characters on fields",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with > maxlength characters on fields",
+                "expected_result": ["Do not allow input > maxlength characters [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify field is auto trim space character when searching with many space character in the begin and the end of Search condition",
+                "expected_result": [
+                    "Space character in the begin and the end of search condition is auto trim",
+                    "List result matching with Search condition"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with From date - To date fields and result is date",
+        "description": "Testing date range search functionality including validation of date formats, range comparisons, timezone handling, and various date combinations across years and months.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date",
+                "expected_result": ["All results that has date >= From date is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with To date",
+                "expected_result": ["All results that has date <= To date is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date and To date",
+                "expected_result": ["All results that has From date =< date <= To date is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on From date filed",
+                "expected_result": ["All results that has date >= From date is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on To date filed",
+                "expected_result": ["All results that has date <= To date is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing invalid format date on From date filed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing invalid format date on To date filed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date = To date",
+                "expected_result": ["All results that has date = From date =  To date is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date > To date",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with date is saved on DB after convest to time zone of Browser (or server)",
+                "expected_result": ["All result that has date + time zone of Browser (or server) is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with date is saved on DB",
+                "expected_result": ["All result that has date + time zone of Browser (or server) is displayed on list"]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with From date - To date fields and result are From date - To date",
+        "description": "Testing date range search functionality where both search criteria and results contain date ranges, including various date combinations, range comparisons, and validation of date formats.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date",
+                "expected_result": ["All results that has From date >= From date of search condition is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with To date",
+                "expected_result": ["All results that has To date <= To date of search condition is displayed on list [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with:\n- From date < exited From date\n- To date = exited To date",
+                "expected_result": ["Do not display result that not matching with From date and To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with:\n- From date = exited From date\n- To date > exited To date",
+                "expected_result": ["Do not display result that not matching with From date and To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with:\n- From date > exited From date\n- To date > exited To date",
+                "expected_result": ["Do not display result that not matching with From date and To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with:\n- From date < exited From date\n- To date < exited To date",
+                "expected_result": ["Do not display result that not matching with From date and To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with:\n- From date = exited From date\n- To date = exited To date",
+                "expected_result": ["Display all results that has From date >= From date of search condition and To date <= To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with:\n- From date > exited From date\n- To date < exited To date",
+                "expected_result": ["Display all results that has From date >= From date of search condition and To date <= To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on From date filed",
+                "expected_result": ["All results that has date >= From date is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on To date filed",
+                "expected_result": ["All results that has date <= To date is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on From date and To date fileds",
+                "expected_result": ["Display all results that has From date >= From date of search condition and To date <= To date of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing invalid format date on From date filed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing invalid format date on To date filed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date = To date",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with From date > To date",
+                "expected_result": ["Has no result on list search"]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with datetime field",
+        "description": "Testing datetime search functionality with separate date and time components, handling timezone conversions, and validation of various datetime formats and combinations.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with Date field",
+                "expected_result": ["All result has date matching with search condition is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with Time field",
+                "expected_result": ["All result has time matching with search condition is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with:\n- Date field = exited Date\n- Time field != exited Time",
+                "expected_result": ["Do not display result that not matching with datetime of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with:\n- Date field != exited Date\n- Time field = exited Time",
+                "expected_result": ["Do not display result that not matching with datetime of search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with:\n- Date field = exited Date\n- Time field = exited Time",
+                "expected_result": ["All result has datetime matching with search condition is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on Date filed",
+                "expected_result": ["All result has date matching with search condition is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on Time filed",
+                "expected_result": ["All result has time matching with search condition is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing valid date on Date and Time fileds",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing invalid format date on Date filed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search result when inputing invalid format date on Time filed",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with date is saved on DB after convest to time zone of Browser (or server)",
+                "expected_result": ["All result that has date + time zone of Browser (or server) is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search results when searching with date is saved on DB",
+                "expected_result": ["All result that has date + time zone of Browser (or server) is displayed on list"]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with Checkbox",
+        "description": "Testing search functionality using checkbox selections, including single and multiple checkbox selections.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with none value Checked",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with one value Checked",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with multiple value Checked",
+                "expected_result": ["List result matching with one of all search condition"]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with Dropdown list",
+        "description": "Testing dropdown list search functionality including suggestion features, single and multiple selections, and handling of different character types.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with none value selected",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with one value selected",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with multiple value selected",
+                "expected_result": ["List result matching with one of all search condition"]
+            },
+            {
+                "viewpoint": "Verify suggestion on field when input exited value",
+                "expected_result": ["Display list suggestion which has content like(or exactly) input [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify suggestion on field when input partial match exited value",
+                "expected_result": ["Display list suggestion which has content like(or exactly) input [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify suggestion on field when input not exited value",
+                "expected_result": ["Do not display any value on suggestion list"]
+            },
+            {
+                "viewpoint": "Verify list search result when selecting one value on suggestion list",
+                "expected_result": ["All result that has value matching with Search condition is displayed on list"]
+            },
+            {
+                "viewpoint": "Verify list search result when selecting multiple value on suggestion list",
+                "expected_result": ["All result that has value matching one of all Search condition is displayed on list"]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with mix condition",
+        "description": "Testing search functionality with multiple combined conditions, from single to all conditions combination.",
+        "test_view_points": [
+            {
+                "viewpoint": "Search with any Condition",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Search with 2 Conditions",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Search with > 2 Conditions",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Search with all Conditions",
+                "expected_result": ["List result matching with Search condition"]
+            }
+        ]
+    },
+    {
+        "item_type": "Search with mutiple keyword on field search",
+        "description": "Testing search functionality with multiple keywords, including different data types (text, date, ID/Code, numbers), AND/OR conditions, and handling of partial matches and special characters.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list search results when searching with default value on field",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with blank fields",
+                "expected_result": ["All results are returned on list results"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with one exited keyword",
+                "expected_result": ["Display results list matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with partial match exited keyword",
+                "expected_result": ["Display results list matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with one not exited keyword",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with 2 keyword: one exited and one not exited",
+                "expected_result": [
+                    "Display results that has keyword matching with Search condition, if search with OR condition",
+                    "Has no result on list search, if search with AND condition [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with 2 exited keyword",
+                "expected_result": [
+                    "Display results that has keyword matching with one of all Search condition, if search with OR condition",
+                    "Display results that has keyword matching with all Search condition, if search with AND condition [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with 2 not exited keyword",
+                "expected_result": ["Has no result on list search"]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with >2 keyword which has one exited keyword",
+                "expected_result": [
+                    "Display results that has keyword matching with Search condition, if search with OR condition",
+                    "Has no result on list search, if search with AND condition [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with >2 keyword which has one not exited keyword",
+                "expected_result": [
+                    "Display results that has keyword matching with Search condition, if search with OR condition",
+                    "Has no result on list search, if search with AND condition [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with >2 exited keyword",
+                "expected_result": [
+                    "Display results that has keyword matching with Search condition, if search with OR condition",
+                    "Has no result on list search, if search with AND condition [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search result when searching with >2 not exited keyword",
+                "expected_result": [
+                    "Display results that has keyword matching with Search condition, if search with OR condition",
+                    "Has no result on list search, if search with AND condition [base on requirement]"
+                ]
+            },
+            {
+                "viewpoint": "Verify list search when searching with special characters",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with maxlength characters on fields",
+                "expected_result": ["List result matching with Search condition"]
+            },
+            {
+                "viewpoint": "Verify list search when searching with > maxlength characters on fields",
+                "expected_result": ["Do not allow input > maxlength characters [base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify field is auto trim space character when searching with many space character in the begin and the end of Search condition",
+                "expected_result": [
+                    "Space character in the begin and the end of search condition is auto trim",
+                    "List result matching with Search condition"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Display of search result",
+        "description": "Testing the presentation and functionality of search results, including result count messages, pagination, formatting, sorting, and interactive elements.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the message which informs the number of result (if have) in case:\n+ Has result\n+ Has no result",
+                "expected_result": ["Display correct message"]
+            },
+            {
+                "viewpoint": "Verify the pagination",
+                "expected_result": ["Pagination is correct (Refer Checklist of Pagination item)"]
+            },
+            {
+                "viewpoint": "Verify format of each item on search result area",
+                "expected_result": ["All items display with correct format as spec"]
+            },
+            {
+                "viewpoint": "Verify default sort order of search result",
+                "expected_result": ["All items display with correct sort order as spec"]
+            },
+            {
+                "viewpoint": "Verify operation of all item on search result area (if have):\n+ Links \n+ Buttons\n+ Check boxes\n+ Radio buttons\n...",
+                "expected_result": ["All of item have correct behavior as spec"]
+            }
+        ]
+    }
+]

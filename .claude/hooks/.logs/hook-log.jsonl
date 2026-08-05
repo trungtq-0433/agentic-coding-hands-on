@@ -1,0 +1,4 @@
+{"ts":"2026-08-05T01:30:29.122Z","hook":"telemetry","event":"SessionStart","tool":"","target":"","note":"","dur":0,"status":"ok","exit":0,"error":""}
+{"ts":"2026-08-05T01:30:29.125Z","hook":"graph-reindex-sync","event":"SessionStart","tool":"","target":"","note":"graph:0 reindex:0","dur":16,"status":"ok","exit":0,"error":""}
+{"ts":"2026-08-05T01:30:29.182Z","hook":"session-init","event":"SessionStart","tool":"","target":"","note":"startup","dur":61,"status":"ok","exit":0,"error":""}
+{"ts":"2026-08-05T01:30:29.760Z","hook":"usage-quota-cache-refresh","event":"SessionStart","tool":"","target":"","note":"fetched","dur":678,"status":"ok","exit":0,"error":""}

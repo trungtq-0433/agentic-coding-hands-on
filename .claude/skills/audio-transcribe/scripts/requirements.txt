@@ -1,0 +1,15 @@
+# Audio Transcribe Skill Dependencies
+# Python 3.11+ required
+
+# CLI for Soniox-based speech-to-text transcription
+# Includes: typer, httpx, pypdf, websockets, rich, python-dotenv
+audio-transcribe-cli>=0.1.0
+
+# Note: This skill also requires ffmpeg for video input:
+#   macOS:  brew install ffmpeg
+#   Ubuntu: sudo apt-get install ffmpeg
+#   Windows: https://ffmpeg.org/download.html
+#
+# Soniox API key is optional — a demo key is auto-fetched if absent.
+# For higher quality (stt-async-v4), set SONIOX_API_KEY in .env:
+#   https://console.soniox.com

@@ -1,0 +1,21 @@
+# Copy this file to the project root as licenseal.policy.toml and edit for the project.
+# Deny entries take precedence over allow entries.
+
+[licenses]
+allow = ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC"]
+deny = ["AGPL-3.0-only", "GPL-3.0-only", "SSPL-1.0", "BUSL-1.1"]
+
+[risks]
+allow = ["permissive", "notice", "weak-copyleft"]
+deny = ["network-copyleft", "strong-copyleft", "unknown"]
+
+[[packages.allow]]
+ecosystem = "npm"
+package = "sharp"
+reason = "Approved internal use; libvips LGPL reviewed"
+expires = "2026-12-31"
+
+[[packages.deny]]
+ecosystem = "python"
+package = "pymupdf"
+reason = "AGPL/proprietary dual license not approved for MIT projects"

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-estimate.ai/schemas/discovery-qa.json",
+  "title": "Discovery Q&A Schema",
+  "description": "Schema for discovery Q&A intermediate format — AI generates, render-qa.py consumes",
+  "type": "object",
+  "required": ["project_name", "questions"],
+  "properties": {
+    "project_name": {
+      "type": "string",
+      "description": "Name of the project",
+      "minLength": 1
+    },
+    "generated_date": {
+      "type": "string",
+      "description": "Date when Q&A was generated (YYYY-MM-DD)",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "source_files": {
+      "type": "array",
+      "description": "List of source document filenames",
+      "items": { "type": "string" }
+    },
+    "language": {
+      "type": "string",
+      "enum": ["en", "vi", "ja"],
+      "description": "Language for output headers/labels",
+      "default": "en"
+    },
+    "questions": {
+      "type": "array",
+      "description": "List of discovery questions",
+      "items": {
+        "type": "object",
+        "required": ["id", "feature", "category", "question", "priority"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (e.g., Q1, Q2)",
+            "pattern": "^Q\\d+$"
+          },
+          "feature": {
+            "type": "string",
+            "description": "Feature or module this question relates to",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string",
+            "enum": ["functional", "technical", "scope"],
+            "description": "Question category"
+          },
+          "question": {
+            "type": "string",
+            "description": "The question text",
+            "minLength": 1
+          },
+          "context": {
+            "type": "string",
+            "description": "Why this question matters — what the spec says or omits"
+          },
+          "options": {
+            "type": "array",
+            "description": "Suggested answer options (if applicable)",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "answer": {
+            "type": "string",
+            "description": "Client's answer (blank initially)",
+            "default": ""
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["critical", "high", "medium"],
+            "description": "Priority level for getting this answered"
+          },
+          "priority_reason": {
+            "type": "string",
+            "description": "Brief reason for the priority assignment"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,183 @@
+[
+    {
+        "item_type": "Display Verification",
+        "description": "Check initial display states",
+        "test_view_points": [
+            {
+                "category": "Add New Form",
+                "viewpoint": "Check default display of Text area item",
+                "expected_result": [
+                    "Display correctly as designed:",
+                    "- Position",
+                    "- Label of item",
+                    "- Default value: blank",
+                    "- Place holder value"
+                ]
+            },
+            {
+                "category": "Edit Form",
+                "viewpoint": "Check default display of Text area item",
+                "expected_result": [
+                    "Display correctly as designed:",
+                    "- Position",
+                    "- Label of item",
+                    "- Default value: DB's value"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Control Features",
+        "description": "Testing textarea controls",
+        "test_view_points": [
+            {
+                "category": "Cursor Behavior",
+                "viewpoint": "Check display of Cursor in text area",
+                "expected_result": "Appear the cursor when focus into text area as normal"
+            },
+            {
+                "category": "Tab Navigation",
+                "viewpoint": "Click 'Tab' key on keyboard to Check tab order of item",
+                "expected_result": "Tab order is correct as designed"
+            },
+            {
+                "category": "Resize Functionality",
+                "viewpoint": "Check operation of text area when resized form",
+                "expected_result": [
+                    "- Text area has the resized icon (at the bottom right of form)",
+                    "- User can resize text area form by drag on the resized icon and drop it",
+                    "- Operation of text area is not effect after resized form"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Normal Cases",
+        "description": "Testing standard input scenarios",
+        "test_view_points": [
+            {
+                "category": "Empty Input",
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": "Success or failure base on spec"
+            },
+            {
+                "category": "Valid Characters",
+                "viewpoint": "Check when input valid character",
+                "test_cases": [
+                    "- Only spaces",
+                    "- Number",
+                    "- English characters",
+                    "- Has Lower cases characters",
+                    "- Has Upper cases characters",
+                    "- Has half-width Japanese characters"
+                ],
+                "expected_result": "Process successfully with inputed value"
+            },
+            {
+                "category": "Special Characters",
+                "viewpoints": [
+                    {
+                        "type": "Line breaks",
+                        "test_cases": [
+                            "- /n",
+                            "- /br",
+                            "- /r [in case use old version of MAC laptop]",
+                            "- Other symbol"
+                        ]
+                    },
+                    {
+                        "type": "Japanese characters",
+                        "test_cases": [
+                            "- Copy & Paste full-width Japanese characters",
+                            "- Input full-width Japanese characters"
+                        ]
+                    },
+                    {
+                        "type": "Code characters",
+                        "test_cases": [
+                            "- HTML characters",
+                            "- SQL injection",
+                            "- Programming languages"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Space Handling",
+        "description": "Testing space character handling",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when has redundant spaces",
+                "test_cases": [
+                    "- At the begin/end of string",
+                    "- Between string",
+                    "- Between lines"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Length Validation",
+        "description": "Testing length constraints",
+        "test_view_points": [
+            {
+                "category": "Multi-line Input",
+                "viewpoint": "Check when input multi lines when",
+                "test_cases": [
+                    "- Not display vertical scroll",
+                    "- Display vertical scroll"
+                ],
+                "expected_result": [
+                    "Process successfully with inputed value",
+                    "Vertical scroll operates normally"
+                ]
+            },
+            {
+                "category": "Boundary Values",
+                "viewpoints": [
+                    {
+                        "type": "Min/Max Values",
+                        "viewpoint": "Check when input Max/Mix value",
+                        "expected_result": "Process successfully with inputed value"
+                    },
+                    {
+                        "type": "Maximum Valid Input",
+                        "viewpoint": "Check when input max valid value",
+                        "test_cases": [
+                            "- Without Enter character",
+                            "- Has Enter character",
+                            "(includes all valid character types)"
+                        ],
+                        "expected_result": "Process successfully with inputed value"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Character Counter",
+        "description": "Testing character counting functionality",
+        "test_view_points": [
+            {
+                "category": "Empty State",
+                "viewpoint": "Check the number of remain character if not input data yet",
+                "expected_result": "The limited number of field displays correctly"
+            },
+            {
+                "category": "Input State",
+                "viewpoint": "Check the number of remain character if input data into text area",
+                "test_cases": [
+                    "- Half-width Japanese characters",
+                    "- Full-width Japanese characters",
+                    "- English characters",
+                    "- Special symbol",
+                    "- Enter symbol",
+                    "- Max length"
+                ],
+                "expected_result": "The remaining characters = Max length - number of input characters"
+            }
+        ]
+    }
+]

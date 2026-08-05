@@ -1,0 +1,144 @@
+[
+    {
+        "item_type": "Design of Email-sending sreen",
+        "description": "Testing the visual layout and input fields of email composition screen.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of screen:\n+ Fields to input email address: To, CC, BCC\n+ Title\n+ Content",
+                "expected_result": ["Same as the designed spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Confirm the person receive email",
+        "description": "Testing email delivery to various recipient configurations including single addresses, multiple addresses, and group aliases.",
+        "test_view_points": [
+            {
+                "viewpoint": "Set email address in To address\n+ Send to 1 address\n+ Send to address list (send 1 email to 100 persons)\n+ Send to address list (send 100 emails to 100 persons)\n+ Send to Group alias\nEx: Managergroup, Leadergroup...",
+                "expected_result": ["+ In To, email addresses of all person display correctly\n"]
+            },
+            {
+                "viewpoint": "Set email address in CC address\n+ Send to 1 address\n+ Send to address list\n+ Send to Group alias\nEx: Managergroup, Leadergroup...",
+                "expected_result": ["+ In To, email addresses of all person display correctly\n+ In CC, email addresses of all person display correctly\n"]
+            },
+            {
+                "viewpoint": "Set email address in BCC address\n+ Send to 1 address\n+ Send to address list\n+ Send to Group alias\nEx: Managergroup, Leadergroup...",
+                "expected_result": ["+ In To, email addresses of all person display correctly\n+ In BCC, email address of other persons are not shown\n   Email of that person displays correctly\n"]
+            },
+            {
+                "viewpoint": "Set email address in To/CC/BCC address",
+                "expected_result": ["+ In To, email addresses of all person display correctly\n+ In CC, email addresses of all person display correctly\n+ In BCC, email address of other persons are not shown\n   Email of that person displays correctly"]
+            },
+            {
+                "viewpoint": "Set no email address in To/CC/BCC address",
+                "expected_result": ["Alert message is displayed properly"]
+            },
+            {
+                "viewpoint": "Input a character in To/CC/BCC address",
+                "expected_result": ["Suggested email addresses are displayed correctly\nCan go to address when click TAB\nCan select address when click Enter"]
+            },
+            {
+                "viewpoint": "Email setting exclude list (person that do not receive email)\n+ Email A setting in exclude list",
+                "expected_result": ["Mailbox A cannot receive email"]
+            },
+            {
+                "viewpoint": "Email setting exclude list (person that do not receive email)\n+ Email A setting in both in include list and exclude list",
+                "expected_result": ["Mailbox A cannot receive email"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check email content when sending",
+        "description": "Testing email content handling including titles, body content, attachments, and formatting.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check sending email with different title\n+ Title contains alphabet, numbers, Japanese, Arabia, special symbols, emoji...\n+ Title blank\n+ Title with max length",
+                "expected_result": ["+ Check can/cannot send email as spec\n+ Title in received email displays correctly"]
+            },
+            {
+                "viewpoint": "Check sending email with different content\n+ Content in plain text\n+ Content in html\n+ Content has attached file: \nfile type: doc, docx, xls, xlsx, ppt, pptx, zip, rar, mp4, exe, ini, .... \nfile size: 0B, 1M, 1G, biggest size, > biggest size...\n+ Content includes links, image, table, buttons, maps, embeded youtube...\n",
+                "expected_result": ["+ Content in received email displays correctly\n+ Table/Map/Link operate correctly\n+ Attached files can be downloaded successfully. The content of files after download displays correctly."]
+            },
+            {
+                "viewpoint": "Check sending email from Draft box\n+ Save email as Draft\n+ Open Draft email to send",
+                "expected_result": ["+ Can save email in Draft box successfully\n+ Can send Draft email successfully"]
+            },
+            {
+                "viewpoint": "Check sending email on schedule: Set date, time in the future",
+                "expected_result": ["Can send email successfully"]
+            },
+            {
+                "viewpoint": "Check sending email on schedule: Set date in the past",
+                "expected_result": ["Email is not sent"]
+            },
+            {
+                "viewpoint": "Check case manager of system sending email with some special contents to user\n+ Content include sensitive information: password, token\n+ Links to reset password\n",
+                "expected_result": ["+ Received password/token/links can be used within specified period (ex: 24 hours)\n+ Received password/token/links cannot be used after specified period\n"]
+            },
+            {
+                "viewpoint": "Check sending email with digital signature\n+ Set digital Signature in email with text\n+ Set digital Signature include image",
+                "expected_result": ["Signature in received email displays correctly"]
+            },
+            {
+                "viewpoint": "Check email content when reply\n+ Create new email with content from 11~14 and send\n+ The receiver click reply button",
+                "expected_result": ["+ When click reply button, the content of email 11~ 14 display correctly\n+ When send reply email and open the received email, the content of email 11~14 display correctly"]
+            },
+            {
+                "viewpoint": "Check email content when forward\n+ Create new email with content from 11~14 and send\n+ The receiver click forward button",
+                "expected_result": ["+ When click forward button, the content of email 11~ 14 display correctly\n+ When send forward email and open the received email, the content of email 11~14 display correctly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check performance",
+        "description": "Testing email system performance under various load conditions.",
+        "test_view_points": [
+            {
+                "viewpoint": "One user is connected\n1. Send email to one user\n2. Check time taken to receive a single mail.",
+                "expected_result": ["The time taken to receive email is acceptable (not be too long with normal process)"]
+            },
+            {
+                "viewpoint": "1000 of users are connected\n1. Send email to 1000 users\n2. Check the time taken to receive the same mail.",
+                "expected_result": ["The time taken to receive email is acceptable (not be too long with normal process)"]
+            },
+            {
+                "viewpoint": "1000 of users are connected\n1. Send email to 1000 users\n2. Attach a huge file\n3. Check the time taken to receive a huge attachment file",
+                "expected_result": ["The time taken to receive email is acceptable (not be too long with normal process)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Some Speical case in sending email",
+        "description": "Testing edge cases and error handling in email sending system.",
+        "test_view_points": [
+            {
+                "viewpoint": "Sending to one person repeatedly",
+                "expected_result": ["Email is received successfully"]
+            },
+            {
+                "viewpoint": "+ When setting mail server, set domain name with prohibitted name\n+ Send email",
+                "expected_result": ["Email is not sent"]
+            },
+            {
+                "viewpoint": "When sending email to a list, get error in sending \n+ the first address / middle address\n+ the last address => after that continue send email to another list",
+                "expected_result": ["1. It will ignore the error email and continue sending to the next email\n2. In content of the next emails, the information mentioning in email of receiver is logical \nCorrect: Email address: To A\n              Email content:  Dear A\n                               Related information (company, tel, ... ) A\n\nWrong:  Email address: To A\n             Email content:  Dear B\n                               Related information (company, tel, ... ) B"]
+            },
+            {
+                "viewpoint": "1. When sending email to a list, get error in sending to a half of email address\n2. After fail to send some email addresses, continue to send email to another list",
+                "expected_result": ["1. It will ignore the error email and complete sending email successfully\n2. The next email sending will be run successfully\n3. In content of emails, the information mentioning in email of receiver is logical \nCorrect: Email address: To A\n              Email content:  Dear A\n                               Related information (company, tel, ... ) A\n\nWrong: Email address: To A\n             Email content:  Dear B\n                               Related information (company, tel, ... ) B"]
+            },
+            {
+                "viewpoint": "1. When sending email to a list, get error in all email addresses\n2. After fail to send email, continue to send email to another list",
+                "expected_result": ["1. No email is sent in step 1\n2. The next email sending will be run successfully\n3. In content of emails, the information mentioning in email of receiver is logical \nCorrect: Email address: To A\n              Email content:  Dear A\n                               Related information (company, tel, ... ) A\n\nWrong: Email address: To A\n             Email content:  Dear B\n                               Related information (company, tel, ... ) B"]
+            },
+            {
+                "viewpoint": "Set email content: Have auto-filled fields\nEx: Name, Address, Company, Tel",
+                "expected_result": ["1. Email content is displayed correctly\n2. In content of emails, the information mentioning in email of receiver is logical \nCorrect: Email address: To A\n              Email content:  Dear A\n                               Related information (company, tel, ... ) A\n\nWrong: Email address: To A\n             Email content:  Dear B\n                               Related information (company, tel, ... ) B"]
+            },
+            {
+                "viewpoint": "Check sender (trường hợp sender set cứng trong code)",
+                "expected_result": ["The address of sender is displayed correctly in received mail"]
+            }
+        ]
+    }
+]

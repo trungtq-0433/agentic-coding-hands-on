@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-estimate.dev/schemas/architecture-design-schema.json",
+  "title": "Architecture",
+  "description": "Schema for project architecture design including tech stack and components",
+  "type": "object",
+  "required": ["tech_stack", "components"],
+  "properties": {
+    "tech_stack": {
+      "type": "object",
+      "required": ["frontend", "backend", "database"],
+      "properties": {
+        "frontend": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Frontend frameworks and libraries"
+        },
+        "backend": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Backend frameworks and languages"
+        },
+        "database": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Database systems"
+        },
+        "infrastructure": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Cloud and infrastructure services"
+        },
+        "devops": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "DevOps tools and CI/CD"
+        }
+      },
+      "additionalProperties": false
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "responsibilities"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["service", "module", "library", "api", "database", "frontend", "worker"]
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "complexity": {
+            "type": "string",
+            "enum": ["simple", "medium", "complex", "very-complex"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["api", "sdk", "webhook", "database", "file", "message-queue"]
+          },
+          "provider": { "type": "string" },
+          "complexity": {
+            "type": "string",
+            "enum": ["simple", "medium", "complex"]
+          },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "diagrams": {
+      "type": "object",
+      "properties": {
+        "system_context": { "type": "string", "description": "Mermaid diagram for system context" },
+        "data_flow": { "type": "string", "description": "Mermaid diagram for data flow" },
+        "deployment": { "type": "string", "description": "Mermaid diagram for deployment" }
+      },
+      "additionalProperties": false
+    },
+    "patterns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Architectural patterns used (e.g., microservices, event-driven)"
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Technical constraints and limitations"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,114 @@
+[
+    {
+        "item_type": "Default number of records per page",
+        "description": "Testing the default pagination configuration",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the number of records per page",
+                "expected_result": ["Display correctly as config value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Pagination display\nwith Max records number per page is N",
+        "description": "Testing pagination visibility based on number of records",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of pagination when:\n+ Has no record\n+ Has 1 record only\n+ Has N-1 records\n+ Has N records",
+                "expected_result": ["Pagination is not displayed"]
+            },
+            {
+                "viewpoint": "Check display of pagination when:\n+ Has N records + 1",
+                "expected_result": ["2. Pagination is displayed correctly with correct format:\n+ Page button links \n+ Default page\n+ Position: \n+ Aligned:"]
+            },
+            {
+                "viewpoint": "Check display of pagination when:\n+ Has multi pages",
+                "expected_result": ["+ Each page has only N records\n+ Display pages correctly as designed"]
+            }
+        ]
+    },
+    {
+        "item_type": "Operation",
+        "description": "Testing navigation functionality of pagination controls",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation of Previous Link of pagination when:\n+ Current Page = First Page\n+ CurrentPage = Last Page\n+ firstPage < currentPage < lastPage",
+                "expected_result": ["+ Display pagination links correctly.\n+ Go to the destination page successfully"]
+            },
+            {
+                "viewpoint": "Check display and  operation of Next Link of pagination when:\n+ Current Page = First Page\n+ CurrentPage = Last Page\n+ firstPage < currentPage < lastPage",
+                "expected_result": ["+ Display pagination links correctly.\n+ Go to the destination page successfully"]
+            },
+            {
+                "viewpoint": "Check display and  operation of  First Link of pagination when:\n+ Current Page = First Page\n+ CurrentPage = Last Page\n+ firstPage < currentPage < lastPage",
+                "expected_result": ["+ Display pagination links correctly.\n+ Go to the destination page successfully"]
+            },
+            {
+                "viewpoint": "Check display and operation of Last Link of pagination when:\n+ Current Page = First Page\n+ CurrentPage = Last Page\n+ firstPage < currentPage < lastPage",
+                "expected_result": ["+ Display pagination links correctly.\n+ Go to the destination page successfully"]
+            }
+        ]
+    },
+    {
+        "item_type": "Max time to load page",
+        "description": "Testing page load performance",
+        "test_view_points": [
+            {
+                "viewpoint": "Check time to load page",
+                "expected_result": ["Load page in expected time"]
+            }
+        ]
+    },
+    {
+        "item_type": "Refresh page",
+        "description": "Testing pagination behavior with page refresh and URL manipulation",
+        "test_view_points": [
+            {
+                "viewpoint": "Check pagination display when press [F5] of keyboard",
+                "expected_result": ["All the records of current page is display correctly\n"]
+            },
+            {
+                "viewpoint": "Check pagination display when press [Enter] of keyboard while URL is selected",
+                "expected_result": ["All the records of current page is display correctly\n"]
+            },
+            {
+                "viewpoint": "Check pagination display when edit URL to:\n+ CurrentPage =0 on URL",
+                "expected_result": ["Display the first page of Error page (base on spec)"]
+            },
+            {
+                "viewpoint": "Check pagination display when edit URL to:\n+ CurrentPage =1 on URL",
+                "expected_result": ["+ URL is change to the first page\n+ All the records of page 1 is displayed"]
+            },
+            {
+                "viewpoint": "Check pagination display when edit URL to:\n+ CurrentPage = last page on URL",
+                "expected_result": ["+ URL is change to the last page \n+ All the records of the last page is displayed"]
+            },
+            {
+                "viewpoint": "Check pagination display when edit URL to:\n+ CurrentPage = any text on URL (Ex: \"abc\")",
+                "expected_result": ["+ URL is change to the first page\n+ All the records of current page is displayed"]
+            }
+        ]
+    },
+    {
+        "item_type": "Pagination appears/disappears",
+        "description": "Testing pagination behavior when deleting records from different pages",
+        "test_view_points": [
+            {
+                "viewpoint": "Check pagination when:\n+ Delete all items in the first pages",
+                "expected_result": ["The data sort is kept the same\nPerpage setting is kept the same\nThe data in each page displays correctly"]
+            },
+            {
+                "viewpoint": "Check pagination when:\n+ Delete all items in the middle pages",
+                "expected_result": ["The data sort is kept the same\nPerpage setting is kept the same\nThe data in each page displays correctly"]
+            },
+            {
+                "viewpoint": "Check pagination when:\n+ Delete all items in the last pages",
+                "expected_result": ["The data sort is kept the same\nPerpage setting is kept the same\nThe data in each page displays correctly"]
+            },
+            {
+                "viewpoint": "Check pagination when:\n+ Delete pagination",
+                "expected_result": ["Pagination is not displayed"]
+            }
+        ]
+    }
+]

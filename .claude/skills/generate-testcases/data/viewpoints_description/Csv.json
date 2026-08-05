@@ -1,0 +1,192 @@
+[
+    {
+        "item_type": "Design of CSV form",
+        "description": "Testing the UI elements and layout of the CSV form interface",
+        "test_view_points": [
+            {
+                "viewpoint": "Check UI of CSV form\n- Title\n- Layout of items\n- State of each items\n- Text",
+                "expected_result": ["CSV form is the same with design"]
+            }
+        ]
+    },
+    {
+        "item_type": "Import CSV",
+        "description": "Testing CSV import functionality including file upload security, file type validation, and import behavior for various file scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "Check btn Upload",
+                "expected_result": ["Btn is active when hover mouse"]
+            },
+            {
+                "viewpoint": "Click btn Upload many times",
+                "expected_result": ["Click 1 times --> open a window. Click one more time --> don't do anything because of this window opened"]
+            },
+            {
+                "viewpoint": "Check security of file: upload valid file",
+                "expected_result": ["Upload successfully. Display exact name of file"]
+            },
+            {
+                "viewpoint": "Check security of file: upload file that containt virus or some problem about security",
+                "expected_result": ["Display message that file not save. No upload"]
+            },
+            {
+                "viewpoint": "Upload file by drag and drop file",
+                "expected_result": ["Upload successfully. Display exact name of file"]
+            },
+            {
+                "viewpoint": "Delete file uploaded",
+                "expected_result": ["Delete file successfully. Click btn Import, display error message"]
+            },
+            {
+                "viewpoint": "Check selecting single file",
+                "expected_result": ["User can select only one file to upload"]
+            },
+            {
+                "viewpoint": "Change file that was uploaded before importing",
+                "expected_result": ["Import the latest file successfully"]
+            },
+            {
+                "viewpoint": "Upload empty file: no header, no data",
+                "expected_result": ["Upload successfully or display error messages (base on spec, maybe Check capacity when start uploading)"]
+            },
+            {
+                "viewpoint": "Upload empty file: header, no data",
+                "expected_result": ["Upload successfully or display error messages (base on spec, maybe Check capacity when start uploading)"]
+            },
+            {
+                "viewpoint": "Check btn Import",
+                "expected_result": ["Btn is active when hover mouse"]
+            },
+            {
+                "viewpoint": "Check working of button without upload file",
+                "expected_result": ["Display message: import file"]
+            },
+            {
+                "viewpoint": "Check click btn Import many times",
+                "expected_result": ["Imported Data is not duplicated"]
+            },
+            {
+                "viewpoint": "Import valid file (type: csv, template and data are right)",
+                "expected_result": ["Upload and import file successfully. Display exact data follow design. Update data into DB"]
+            },
+            {
+                "viewpoint": "Import file wrong type: xls, doc...and unicode file: UTF8...",
+                "expected_result": ["Display error messages"]
+            },
+            {
+                "viewpoint": "Import wrong file that edited type to csv (exam: .doc --> .csv)",
+                "expected_result": ["Display error messages"]
+            },
+            {
+                "viewpoint": "Import true file that edited file type to other type (exam: .csv --> .doc)",
+                "expected_result": ["Display error messages"]
+            },
+            {
+                "viewpoint": "Import file that was imported",
+                "expected_result": ["Upload and import file successfully. Display exact data follow design. Update data into DB\nOr display warning message that file's already existed"]
+            },
+            {
+                "viewpoint": "Import larges file (file size <= Max)",
+                "expected_result": ["Make sure uploading time within limits\nUpload and import file successfully. Display exact data follow design. Update data into DB"]
+            },
+            {
+                "viewpoint": "Check imported file with total rows <= max",
+                "expected_result": ["Upload and import file successfully and no timedout or slowly. Display exact data follow design. Update data into DB"]
+            },
+            {
+                "viewpoint": "Check imported file with total rows > max",
+                "expected_result": ["Display error messages that total of row is overed"]
+            },
+            {
+                "viewpoint": "Edit/ delete data that was imported",
+                "expected_result": ["Edit/ delete successfully"]
+            },
+            {
+                "viewpoint": "Multi users import file at the same time",
+                "expected_result": ["Upload and import file successfully. Display exact data follow design. Update data into DB"]
+            },
+            {
+                "viewpoint": "Check name of imported file: long name, special character, japanese, thailand, vietnamese...",
+                "expected_result": ["Upload and import file successfully. Display exact data follow design. Update data into DB"]
+            },
+            {
+                "viewpoint": "Validate data in file that the same with fields in entered screen with some cases following: \n- <= min, < min \n- <= max, > max\n- special text, no alphabet, Japanese full size/ half size, space before and after data\n- format number: interger, decimal (use: , or .), negative, start with 0...\n- cell: empty, all space\n- duplicate data (row or some unique data) in file\n- duplicate data with data in DB",
+                "expected_result": ["Valid data: Upload and import file successfully. Display exact data follow design. Update data into DB\nInvalid data: no import in DB and show the error data on result screen (base on spec)"]
+            },
+            {
+                "viewpoint": "Check import file that containt format of data\n- bold, Italic, trickthrough\n- fill color\n- change text color\n- wapt text\n- formular\n- font, size\n- alignment",
+                "expected_result": ["Valid data: Upload and import file successfully. Display exact data follow design. Update data into DB\nInvalid data: no import in DB and show the error data on result screen (base on spec)"]
+            },
+            {
+                "viewpoint": "Check import file that containt format of file\n- wrong field name\n- wrong location of columns\n- Miss/excess  column\n- format style of cell/text: bold, fill color...",
+                "expected_result": ["Valid data: Upload and import file successfully. Display exact data follow design. Update data into DB\nInvalid data: no import in DB and show the error data on result screen (base on spec)"]
+            },
+            {
+                "viewpoint": "Check importing file csv on many browsers",
+                "expected_result": ["Import file successfully on browsers"]
+            },
+            {
+                "viewpoint": "Valid Activities while importing (change tab, open another function, close browser...)",
+                "expected_result": ["Import file successfully"]
+            },
+            {
+                "viewpoint": "Invalid Activities while importing (off internet)",
+                "expected_result": ["Stop import"]
+            }
+        ]
+    },
+    {
+        "item_type": "Export file",
+        "description": "Testing CSV export functionality including download behavior, file format validation, and handling various export scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "Check btn Export",
+                "expected_result": ["Btn is active when hover mouse"]
+            },
+            {
+                "viewpoint": "Click btn many times",
+                "expected_result": ["Each clicking this btn, file will be downloaded"]
+            },
+            {
+                "viewpoint": "Download valid file",
+                "expected_result": ["Download file successfully. Display exact name format"]
+            },
+            {
+                "viewpoint": "Download valid file many times",
+                "expected_result": ["Download file successfully. Display exact name format"]
+            },
+            {
+                "viewpoint": "Download larges file",
+                "expected_result": ["Download file successfully. Display exact name format"]
+            },
+            {
+                "viewpoint": "Download file that no data",
+                "expected_result": ["Download file successfully or Display message that file no data and don't download file (base on spec)"]
+            },
+            {
+                "viewpoint": "Multi users download file at the same time",
+                "expected_result": ["Download file successfully. Display exact name format"]
+            },
+            {
+                "viewpoint": "Check file format of File",
+                "expected_result": ["Display exact format the same spec: CSV, UTF8.. (base on spec)"]
+            },
+            {
+                "viewpoint": "Check content of file download",
+                "expected_result": ["Display exact data with fields that match with set condition"]
+            },
+            {
+                "viewpoint": "Check download file csv on many browsers",
+                "expected_result": ["Download file successfully on browsers"]
+            },
+            {
+                "viewpoint": "Valid Activities while downloading (change tab, open another function, close browser...)",
+                "expected_result": ["Download file successfully"]
+            },
+            {
+                "viewpoint": "Invalid Activities while downloading (off internet)",
+                "expected_result": ["Stop downloading"]
+            }
+        ]
+    }
+]

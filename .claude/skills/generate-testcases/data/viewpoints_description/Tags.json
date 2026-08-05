@@ -1,0 +1,141 @@
+[
+    {
+        "item_type": "Check tag name field in Tag Creation screen",
+        "description": "Testing tag name input validation including character types, length limits, bad words handling, and duplicate checking",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default value\n+ Position\n+ Label of item\n+ Default value",
+                "expected_result": ["Display correctly as design"]
+            },
+            {
+                "viewpoint": "Set tag name with valid data\n+ No symbols, only letters, number and spaces allowed\n+ English characters\n+ Half-width Japanese characters\n+ Full-width Japanese characters\n+ Another supported languages\n+ Spaces characters\n+ Max length -1\n+ Max length\n+ Min length\n+ Min length +1\n",
+                "expected_result": ["+ Set tag name successfully\n+ Update DB correctly\n+ Tag displays correctly in Tag management page / tag session / article content / published tag page"]
+            },
+            {
+                "viewpoint": "Set tag name with bad words\n+ Input bad word which has been defined in config file before but  has been removed from Config file already",
+                "expected_result": ["+ Set tag name successfully\n+ Update DB correctly\n+ Tag displays correctly in Tag management page / tag session / article content / published tag page"]
+            },
+            {
+                "viewpoint": "Set tag name with Bad words \n+ Input bad word which has been already defined in config file \n+ Input bad word which has been updated  in config file \n+ Input bad word which has been new-added  in config file ",
+                "expected_result": ["Check if Bad words are removed from tag name (Base on spec)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check tag description field in Tag Creation screen",
+        "description": "Testing tag description input validation including character counting and various input types",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default value\n+ Position\n+ Label of item\n+ Default value",
+                "expected_result": ["Display correctly as design"]
+            },
+            {
+                "viewpoint": "Set tag description with valid data\nCheck number of character counting remaining each time input below characters\n\n+ NULL (Unrequired item)\n+ Only spaces\n+ Special characters, symbols, URL\n+ Numbers\n+ English characters\n+ Half-width Japanese characters\n+ Full-width Japanese characters\n+ Another supported languages\n+ Spaces characters  \n+ Max length -1\n+ Max length\n+ Min length\n+ Min length +1\n",
+                "expected_result": ["+ Set tag description successfully\n+ Update DB correctly\n+ Number of remaining character displays correctly\n+ Tag displays correctly in Tag management page / tag session / article content / published tag page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check status list of tag in Tag Creation screen",
+        "description": "Testing tag status management and its effect on tag display and operation",
+        "test_view_points": [
+            {
+                "viewpoint": "+ In Tag management screen, create new tag\n+ Set tag with status = 'active' / 'pending' / 'deleted'\n+ Create page/article and set with that tag",
+                "expected_result": ["+ In tag list, default status displays properly\n+ Can set status for tag successfully\n+ When set tag for page/article, tag is displayed and operated as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of tag in tag section / tag component",
+        "description": "Testing tag display behavior including status handling, ordering, and URL functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check if no tags for special screen [base on requirement]",
+                "expected_result": ["There are no Tags display\n+ Message\n+ Position\n+ Format"]
+            },
+            {
+                "viewpoint": "Check if Tags has status= 'active'",
+                "expected_result": ["Display correctly as designed:\n+ Tag name\n+ Position\n+ Format"]
+            },
+            {
+                "viewpoint": "Check if Tags has status= 'pending' / 'deleted'",
+                "expected_result": ["Tags having status = 'pending' / 'deleted' are not displayed on Tags section [base on requirement]"]
+            },
+            {
+                "viewpoint": "Check if Tag name has length = Max length",
+                "expected_result": ["Display correctly as designed:\n+ Tag name: <tag name>\n+ Truncate a string if 'Tag name' is longer than the specified number of characters\n+ Position: <position of message>\n+ Format:  <format, color>"]
+            },
+            {
+                "viewpoint": "Check order of Tags list\n+ When there is only 1st order\n+ When there is 2nd order: there are many Tags have same created date",
+                "expected_result": ["+ When there is only 1st order, tag list is ordered by CREATED DATE DESC\n+ When there is 2nd order, tag listed is ordered by ID ASC\n"]
+            },
+            {
+                "viewpoint": "Check URL of Tags",
+                "expected_result": ["URL is correct:\n+ URL displays when hovering mouse on tag name\n+ Tag screen displays when clicking on tag\n+ Tag screen opens on current tab [base on requirement]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of tag when set tag in content of article...",
+        "description": "Testing tag display within article content including limits, status handling, and URL functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when tag name contains in\n+ Title\n+ Content",
+                "expected_result": ["Display correctly as designed\n+ Tag name\n+ Position\n+ Format"]
+            },
+            {
+                "viewpoint": "Check limit number of tag when set tag in content\n\n+ Check limit of the number of Tags if the number of Tags less than Maximum number of Tags\n+ Check limit of the number of Tags if the number of Tags = Maximum number of Tags\n+ Check limit of the number of Tags if the number of Tags more than Maximum number of Tags\n+ Check the oldest / newest Tags display if there are more than Maximum number of Tags",
+                "expected_result": ["Display correctly as designed\n\n+ Tag name\n+ Position\n+ Format\n+ Only the maximum number of Tags display\n"]
+            },
+            {
+                "viewpoint": "Check if Tags has status= 'active'",
+                "expected_result": ["Display correctly as designed:\n+ Tag name\n+ Position\n+ Format"]
+            },
+            {
+                "viewpoint": "Check if Tags has status= 'pending' / 'deleted'",
+                "expected_result": ["Tags having status = 'pending' / 'deleted' are not displayed on Tags content [base on requirement]"]
+            },
+            {
+                "viewpoint": "Check URL of Tags",
+                "expected_result": ["URL is correct:\n+ URL displays when hovering mouse on tag name\n+ Tag screen displays when clicking on tag\n+ Tag screen opens on current tab [base on requirement]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check tag screen when click on a tag name\n\nEx: https://domain/tags/tags-name",
+        "description": "Testing tag page access and URL format verification",
+        "test_view_points": [
+            {
+                "viewpoint": "Check URL format",
+                "expected_result": ["URL is correct:\n+ URL: <format>\n\nEg: https://domain/tags/tags-name"]
+            },
+            {
+                "viewpoint": "Check access to tag page when\n\n+ User has login session\n+ User has no login session",
+                "expected_result": ["+ Tags screen displays correctly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check related articles in tag page",
+        "description": "Testing related articles functionality including article status, content matching, and information display",
+        "test_view_points": [
+            {
+                "viewpoint": "Check article when status of article is published\n\n+ In article there is no title / no content related to current Tag screen\n+ Article has the title that contain 'Tag name' displays in the list\n+ Article has the title that contain part of 'Tag name' Ex: Tag name: ABCD, Title: ABC\n+ Article has the content that contain 'Tag name' displays in the list\n+ Article has the content that contain part of 'Tag name' Ex: Tag name: ABCD, Content: ABC\n+ Article has that tag\n+ Article has not that tag\n",
+                "expected_result": ["+ When there are no title / no content related to current tag, artilce is not displayed in tag page\n+ When article is not set with that tag, artilce is not displayed in tag page\n+ When there are title / content related to current tag, article displays correctly in tag page\n+ When article is set with that tag, article is displayed in tag page"]
+            },
+            {
+                "viewpoint": "Check article when status of article is unpublished / publish in future\n\n+ In article there is no title / no content related to current Tag screen\n+ Article has the title that contain 'Tag name' displays in the list\n+ Article has the title that contain part of 'Tag name' Ex: Tag name: ABCD, Title: ABC\n+ Article has the content that contain 'Tag name' displays in the list\n+ Article has the content that contain part of 'Tag name' Ex: Tag name: ABCD, Content: ABC\n+ Article has that tag\n+ Article has not that tag\n",
+                "expected_result": ["Artilce is not displayed in tag page"]
+            },
+            {
+                "viewpoint": "Check information of each related article\n\n+ Thumbnail\n+ Title, description, content...\n+ URL\n+ Published Date\n+ Number of views\n+ Category, tag information\n+ Pagination \n",
+                "expected_result": ["Information of article displays the same with DB"]
+            },
+            {
+                "viewpoint": "Check open related articles\n\n+ Click on article link\n+ Click on Read more link",
+                "expected_result": ["In article page, tag is displayed properly"]
+            }
+        ]
+    }
+
+]

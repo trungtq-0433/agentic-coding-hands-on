@@ -1,0 +1,148 @@
+[
+    {
+        "item_type": "Bell notification : ON\nReal-time showing notification: OFF",
+        "description": "Testing bell notification system's display, behavior, and functionality with real-time notifications disabled.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display of notification\n+ Position\n+ Label of item\n+ Default value",
+                "expected_result": ["Display correctly as designed"]
+            },
+            {
+                "viewpoint": "When not have notification",
+                "expected_result": ["Notification is not displayed"]
+            },
+            {
+                "viewpoint": "Check notification is sent when other people have commented on post of yourself\n+ Account A sends comment to account B once /several times\n+ Account A likes activity of account B /several times\n+ Account A shares activity of account B /several times",
+                "expected_result": ["+ Account B display bell notification\n+ Account A not display bell notification\n+ Number of notification can increase each time send comment/like/share\n+ Content of notification is correct\n+ Real-time showing notification is not displayed"]
+            },
+            {
+                "viewpoint": "Check notification is not sent when you have comment on post of yourself\n+ Account A send comment to account A\n+ Account A liked activity of account A\n+ Account A shared activity of account A\n+ Account A unlike account B\n+ Account A unlike and re-like account B",
+                "expected_result": ["Not display notification"]
+            },
+            {
+                "viewpoint": "Check notification is sent when other people have comment on post of another person ( you have already commented/ liked/shared that post OR which you are tagged in that post)\n+ Account A send comment to you\n+ Account A liked your activity \n+ Account A shared your activity ",
+                "expected_result": ["+ You see bell notification\n+ Account A not display bell notification\n+ Number of notification can increase each time send comment/like/share\n+ Content of notification is correct\n+ Real-time showing notification is not displayed"]
+            },
+            {
+                "viewpoint": "Check notification is sent when other people have comment on post of another person ( you have already commented/ liked/shared that post OR which you are tagged in that post)\n+ Account A send comment to another person\n+ Account A liked activity of another person\n+ Account A shared activity of another person",
+                "expected_result": ["+ You see bell notification\n+ Account A not display bell notification\n+ Number of notification can increase each time send comment/like/share\n+ Content of notification is correct\n+ Real-time showing notification is not displayed"]
+            },
+            {
+                "viewpoint": "Check quantity of notification decrease when that notification has been read\n+ When there is 1 notification and user read notification\n+ When there are many notifications and user read each notification",
+                "expected_result": ["Number of notification is decreased properly when notification is read"]
+            },
+            {
+                "viewpoint": "Check quantity of notification is unchanged when notification is not read\n+ When there is 1 notification and user does not read notification\n+ When there are many notifications and user does not read any notifications",
+                "expected_result": ["Number of notification is unchanged"]
+            },
+            {
+                "viewpoint": "Check sending of notification when \n+ When receive notification from 1 account\n+ When receive notification from multi accounts\n+ When receive notification from multi accounts at the same time",
+                "expected_result": ["+ Quantity of notification is correct\n+ Each notification displays correctly"]
+            },
+            {
+                "viewpoint": "Check notification list\n+ Display of list\n+ Order của notice\n+ Limit of the number in the list\n+ \"See All\" button",
+                "expected_result": ["+ Notification list displays properly\n+ Notifications are sorted in correct order\n+ Number of notifications are limited as spec\n+ When click See All button, alert icon disappear\nNotification list is removed\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Real-time showing notification",
+        "description": "Testing the real-time notification system's display, behavior under various conditions including user interactions, system states, and external interruptions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default display of notification\n+ Position\n+ Label of item\n+ Default value",
+                "expected_result": ["Display correctly as designed"]
+            },
+            {
+                "viewpoint": "When not have notification",
+                "expected_result": ["Notification is not displayed"]
+            },
+            {
+                "viewpoint": "Check notification is sent when other people have commented on post of yourself\n+ Account A send comment to account B\n+ Account A liked activity of account B\n+ Account A shared activity of account B",
+                "expected_result": ["+ Account B display notification popup\n+ Account A not display notification popup\n+ Number of notification can increase each time send comment/like/share\n+ Content of notification is correct"]
+            },
+            {
+                "viewpoint": "Check notification is not sent when you have comment on post of yourself\n+ Account A send comment to account A\n+ Account A liked activity of account A\n+ Account A shared activity of account A",
+                "expected_result": ["Not display notification"]
+            },
+            {
+                "viewpoint": "Check notification is sent when other people have comment on post of another person ( you have already commented/ liked/shared that post OR which you are tagged in that post)\n+ Account A send comment to you\n+ Account A liked your activity \n+ Account A shared your activity ",
+                "expected_result": ["+ You see notification popup\n+ Account A not display notification popup\n+ Number of notification can increase each time send comment/like/share\n+ Content of notification is correct"]
+            },
+            {
+                "viewpoint": "Check notification is sent when other people have comment on post of another person ( you have already commented/ liked/shared that post OR which you are tagged in that post)\n+ Account A send comment to another person\n+ Account A liked activity of another person\n+ Account A shared activity of another person",
+                "expected_result": ["+ You see notification popup\n+ Account A not display notification popup\n+ Number of notification can increase each time send comment/like/share\n+ Content of notification is correct"]
+            },
+            {
+                "viewpoint": "Check quantity of notification decrease when that notification has been read\n+ When there is 1 notification and user read notification\n+ When there are many notifications and user read each notification",
+                "expected_result": ["Number of notification is decreased properly when notification is read"]
+            },
+            {
+                "viewpoint": "Check quantity of notification is unchanged when notification is not read\n+ When there is 1 notification and user does not read notification\n+ When there are many notifications and user does not read any notifications",
+                "expected_result": ["Number of notification is unchanged"]
+            },
+            {
+                "viewpoint": "Check sending of notification when \n+ When receive notification from 1 account\n+ When receive notification from multi accounts\n+ When receive notification from multi accounts at the same time",
+                "expected_result": ["+ Quantity of notification is correct\n+ Real-time showing notification is displayed seperatedly with proper display for customer to Check"]
+            },
+            {
+                "viewpoint": "Check notification sending when user is offline/logging out\n",
+                "expected_result": ["When user online/loggin in, can check notification properly"]
+            },
+            {
+                "viewpoint": "Check notification sending when user is working on another tab (not on tab of that web)\n",
+                "expected_result": ["Notification is displayed properly at correct position of screen"]
+            },
+            {
+                "viewpoint": "Check notification sending when browser window is minimized, showing desktop only",
+                "expected_result": ["Notification is displayed properly at correct position of screen"]
+            },
+            {
+                "viewpoint": "Check notification sending when\n+ Set a notication pushing before a deadline\n\nEx: Notification displays 5 minutes before meeting\n      Notification displays when an events starts\n",
+                "expected_result": ["Notification is displayed properly at correct position of screen"]
+            },
+            {
+                "viewpoint": "Check notification sending when\n1. After receive notification, user click ignore button\n2. Do action to send notification again",
+                "expected_result": ["Notification is displayed properly at correct position of screen"]
+            },
+            {
+                "viewpoint": "Click on notification when receiving",
+                "expected_result": ["It redirects to correct page"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of notification whether it is conflicted with notification of other software/app",
+        "description": "Testing notification display behavior when competing with other system notifications and window states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check real-time showing notification when \n\n+ There is another window/screen/popup displaying at the right corner\n+ There is notification of another software/web displaying at the right corner",
+                "expected_result": ["Real-time showing notification is not overlapped by other windows/screen/popup/notification"]
+            },
+            {
+                "viewpoint": "Check real-time showing notification when \n\n+ Set the window of the testing web with small size\n+ Minimize the window of the testing web",
+                "expected_result": ["Real-time showing notification is displayed correctly at the right corner"]
+            },
+            {
+                "viewpoint": "1. Do action to display notification 1\n2. Click a button in that notification, but not close notification yet\n3. Do action to display notification 2",
+                "expected_result": ["Button in notification 2 is displayed correctly as default"]
+            },
+            {
+                "viewpoint": "1. Do action to display notification 1, notification 2\nEx: From other PCs, send message to testing account\n2. When notification 1 displays, click button \"Not show notification any more\"\n3.Check notification 2",
+                "expected_result": ["1. Notification 2 is displayed / or not displayed the same as spec\n\n2. If notification displays, it displays at correct position as spec for customer to Check that notification"]
+            },
+            {
+                "viewpoint": "1. Do action to display notification 1\n2. At the time notification 1 display, lock the pc\n3. Check notification display",
+                "expected_result": ["1. Notification 1 is displayed / or not displayed the same as spec\n\n2. If notification displays, it displays at correct position as spec for customer to Check that notification"]
+            },
+            {
+                "viewpoint": "1. Do action to display notification 1\n2. At the time notification 1 display, have trouble with internet connection\n3. Connect internet again\n4. Check notification display",
+                "expected_result": ["1. Notification 1 is displayed / or not displayed the same as spec\n\n2. If notification displays, it displays at correct position as spec for customer to Check that notification"]
+            },
+            {
+                "viewpoint": "1. Do action to display notification 1\n2. At the time notification 1 display, have a phone call / a message\n3. Get phone call\n4. Check notification display",
+                "expected_result": ["1. Notification 1 is displayed / or not displayed the same as spec\n\n2. If notification displays, it displays at correct position as spec for customer to Check that notification"]
+            }
+        ]
+    }
+]

@@ -1,0 +1,64 @@
+[
+    {
+        "item_type": "Check upload image",
+        "description": "Testing image upload functionality across different sources, file types, dimensions, names and validation cases",
+        "test_view_points": [
+            {
+                "viewpoint": "Drag drop image / Click Upload button to upload image from\n+ PC\n+ Shared device: Mobile ...\n+ USB, Facebook, Instagram..",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Image displays in published WEB/APP correctly as setting\n+ Image displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with below extension\n+ .jpg, .jpeg, png, tiff, gif, ico, asf, svg",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Image displays in published WEB/APP correctly as setting\n+ Image displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with below types\n+ all images are horizontal images \n+ all images are vertical images\n+ both horizontal images and vertical images",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Image displays in published WEB/APP correctly as setting\n+ Image displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with all kinds of name\n+ Max value -1\n+ Max value\n+ Has special symbol: \".\", \"-\", \"_\", \"#\"\n+ Has English character (Upper and Lower char)\n+ Includes SQL injection \n+ Includes HTML (Scripts)\n+ Includes half-width characters\n+ Includes full-width characters",
+                "expected_result": ["+ Can upload image successfully\n+ Update into DB correctly\n+ Image displays in published WEB/APP correctly as setting\n+ Image displays in published WEB/APP correctly when EDIT uploaded image"]
+            },
+            {
+                "viewpoint": "Upload image with incorrect data\n+ Incorrect size: + 0 KB, > Max size, < Min size\n+ Incorrect height: > Max height, < Min height\n+ Incorrect width: > Max width, < Min width\n+ Incorrect extension: mp4, mov, txt, xls...\n+ XLS file that has been changed extention from jpg file\n+ JPG file that has been changed extention from xls file\n+ Upload more than max quantity",
+                "expected_result": ["+ Show error message properly\n+ Cannot upload image\n+ Not update into DB"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check display of image when change setting",
+        "description": "Testing image display behavior when adjusting size, rotation, and zoom settings",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of image when do below action\n\n+ Set Image with min size (input number or click + -)\n+ Set Image with normal size (input number or click + -)\n+ Set Image with max size (input number or click + -)\n+ Change rotation: Left - Right continuously\n+ Zoom in - zoom out until cannot zoom\n+ Fit size\n+ Click Fit size after change size / change rotation / zoom in zoom out",
+                "expected_result": ["Can edit successfully\nImage is not broken\nImage displays in published WEB/APP correctly as setting"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check link of image",
+        "description": "Testing image link functionality under different user authentication states and permissions",
+        "test_view_points": [
+            {
+                "viewpoint": "Click/ Double click on New link / Edited link in image\n\nCondition: \n+ Link is permitted to access with customer user\n+ User status: log-out",
+                "expected_result": ["Can open link successfully with the same tab / not the same tab [base on requirement]"]
+            },
+            {
+                "viewpoint": "Click/ Double click on New link / Edited link in image\n\nCondition: \n+ Link is permitted to access with customer user\n+ User status: log-in",
+                "expected_result": ["Can open link successfully with the same tab / not the same tab [base on requirement]"]
+            },
+            {
+                "viewpoint": "Click/ Double click on New link / Edited link in image\n\nCondition: \n+ Link is not permitted to access with customer user\n+ User status: log-out",
+                "expected_result": ["Can not open link\nOpen proper page (Ex: login page. After login, will open that link)"]
+            },
+            {
+                "viewpoint": "Click/ Double click on New link / Edited link in image\n\nCondition: \n+ Link is not permitted to access with customer user\n+ User status: log-in",
+                "expected_result": ["Can open link successfully with the same tab / not the same tab [base on requirement]"]
+            },
+            {
+                "viewpoint": "Check display of image after deleting link",
+                "expected_result": ["When hover on image, it shows mouse icon not  palm\nWhen click image, no link is opened"]
+            }
+        ]
+    }
+]

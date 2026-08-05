@@ -1,0 +1,174 @@
+[
+    {
+        "item_type": "GUI of Quiz",
+        "description": "Testing the visual presentation and text quality of the quiz interface.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify layout and format of Quiz",
+                "expected_result": ["- All layout and format are the same with design"]
+            },
+            {
+                "viewpoint": "Check Spelling in Quiz",
+                "expected_result": ["- All texts are displayed correct spelling"]
+            }
+        ]
+    },
+    {
+        "item_type": "Access Permision",
+        "description": "Testing access control based on publishing status, authentication, and user permissions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify user can access Quiz successfully when it in public time",
+                "expected_result": ["- Access Quiz successfully"]
+            },
+            {
+                "viewpoint": "Verify Quiz is not available to do when it has not been published yet",
+                "expected_result": ["- Quiz is not displayed\n- Access denied when user access by input URL"]
+            },
+            {
+                "viewpoint": "Verify Quiz is no longer available to do when published end date > current date",
+                "expected_result": ["- Quiz is not displayed\n- Access denied when user access by input URL"]
+            },
+            {
+                "viewpoint": "Verify user can not access Quiz without logging into system by input URL",
+                "expected_result": ["- Navigating to Login Screen \n[base on spec]"]
+            },
+            {
+                "viewpoint": "Verify user can not access Quiz if user does not have permision by input URL",
+                "expected_result": ["- Error message displays"]
+            }
+        ]
+    },
+    {
+        "item_type": "Information part",
+        "description": "Testing information display and validation of required fields before quiz initiation.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify all information displays corresponding information set on Admin page",
+                "expected_result": ["- All information displays corresponding information set on Admin page"]
+            },
+            {
+                "viewpoint": "Verify all required fields must be filled correctly to start Quiz\n- type of data",
+                "expected_result": ["- All infor is saved successfully\n- Navigating to Quiz"]
+            },
+            {
+                "viewpoint": "Verify error message displays when user inputs invalid data into fields\n- let required fields empty\n- input invalid format data (email, phone, ...)\n- input more than max length characters",
+                "expected_result": ["- Error message displays\n- Can not start quiz"]
+            }
+        ]
+    },
+    {
+        "item_type": "Quiz part",
+        "description": "Testing core quiz functionality including question display, answer submission, navigation controls, progress tracking, and time management.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify all questions displays correctly and fully like Admin set\n- question & answer respectively\n- question order like admin set\n- no answer is chosen/filled\n- total page number of questions\n- total page of quiz",
+                "expected_result": ["- All questions displays correctly and fully like Admin set"]
+            },
+            {
+                "viewpoint": "Verify user can choose/input Answer successfully base on question's type:\n- Choose only one answer\n- Choose more than 1 answer\n- Input answer",
+                "expected_result": ["- User can choose/input Answer successfully\n- Answer is saved temporary"]
+            },
+            {
+                "viewpoint": "Verify user can do some action in Quiz\n[base on spec]\n- skip question\n- move to the next question\n- move to the previous question\n- jump to any question by question map",
+                "expected_result": ["- Do action successfully\n- Keep answers user has chosen/inputted"]
+            },
+            {
+                "viewpoint": "Verify \"Previous\" button displays and works correctly in Quiz",
+                "expected_result": ["- Do not display Previous btn on the First Question/Page\n- Previous btn displays from the 2nd Question\n- Move to correct previous question/page when clicking on Previous button\n[base on spec]\n- Chosen/Inputted data on each page is kept when clicking on Previous button"]
+            },
+            {
+                "viewpoint": "Verify \"Next\" button displays and works correctly in Quiz",
+                "expected_result": ["- Do not display Previous btn on the Last Question/Page\n- Next btn displays on all Question/Page remaining\n- Move to correct next question/page when clicking on Next button\n[base on spec]\n- Chosen/Inputted data on each page is kept when clicking on Previous button"]
+            },
+            {
+                "viewpoint": "Verify \"Skip\" button displays and works correctly in Quiz",
+                "expected_result": ["- Display Skip button on every Question/Page\n- Move to correct next question/page or the first question/page (if on the last question/page) when clicking on Skips button\n[base on spec]\n- No answer is saved temporary when clicking on Skip btn"]
+            },
+            {
+                "viewpoint": "Verify error/warning message displays when user clicks to next question while has not chosen/inputted answer of current question yet  ",
+                "expected_result": ["- Error/Warning message displays\n- Can not move to other question"]
+            },
+            {
+                "viewpoint": "Verify error message displays when user inputs invalid data into answer fields\n- input more than max length characters of fields",
+                "expected_result": ["- Error message displays\n- Answer is not saved"]
+            },
+            {
+                "viewpoint": "Verify progress bar displays correctly (if have)\n- percent completed\n- percent incompleted",
+                "expected_result": ["- Progress bar displays correctly"]
+            },
+            {
+                "viewpoint": "Verify countdown time displays correctly\n- remaining time\n- format of time\n- remind time",
+                "expected_result": ["- Countdown time displays correctly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Other action",
+        "description": "Testing quiz behavior during browser interactions like tab switching, page reloads, and session management.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify warning message displays when user switches to other tab in Quiz \n[base on spec]",
+                "expected_result": ["- Warning message displays\n- Quiz is continue normally or Quiz is stopped [base on spec]"]
+            },
+            {
+                "viewpoint": "Verify warning message displays if user reloads page when quiz is in-progress\n[base on spec]",
+                "expected_result": ["- Warning message displays\n- Quiz is continue normally or Quiz is stopped [base on spec]"]
+            },
+            {
+                "viewpoint": "Verify warning message displays if user closes tab when quiz is in-progress\n[base on spec]",
+                "expected_result": ["- Warning message displays\n- Quiz infor is saved/is not saved  [base on spec]"]
+            },
+            {
+                "viewpoint": "Verify Quiz is continued from current question when user get URL and paste to other tab\n[base on spec]",
+                "expected_result": ["- Quiz is continue normally, all inputted answer is kept\n- Current tab is out of session\n[base on spec]"]
+            },
+            {
+                "viewpoint": "Verify navigating to Login screen when Quiz is in-progress but user logged out on other tabs",
+                "expected_result": ["- Navigating to Login Screen \n- Quiz infor is saved/is not saved \n[base on spec]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Result part",
+        "description": "Testing quiz result calculation, display, review functionality and result persistence.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify Quiz's result is displayed when quiz is finished (user finish or time's up)",
+                "expected_result": ["- Quiz's result page displays"]
+            },
+            {
+                "viewpoint": "Verify result is Passed when score is equal or more than score to Pass",
+                "expected_result": ["- Reult is Passed"]
+            },
+            {
+                "viewpoint": "Verify result is FAILED when score is less than score to Pass",
+                "expected_result": ["- Result is Failed"]
+            },
+            {
+                "viewpoint": "Verify Result of Quiz displays all informations correctly\n- Score\n- Passing score\n- Result: Passed/Failed\n- Elapsed time\n- Other message",
+                "expected_result": ["- Result of Quiz displays all informations correctly"]
+            },
+            {
+                "viewpoint": "Verify scroce is calculated correctly for each question:\n- correct answer\n- correct a part of answer\n[base on spec]",
+                "expected_result": ["- Scroce is calculated correctly"]
+            },
+            {
+                "viewpoint": "Verify total score of Quiz is calculated correctly ",
+                "expected_result": ["- Scroce is calculated correctly"]
+            },
+            {
+                "viewpoint": "Verify user can review answers\n[base on spec]",
+                "expected_result": ["- All Questions & answer respectively displays correctly\n- Displays answer of user\n- Displays correct answer\n- Notice correct/incorrect answer\n- Display score of question (if have)"]
+            },
+            {
+                "viewpoint": "Verify Quiz's result of user is saved into DB correctly",
+                "expected_result": ["- All result is saved on DB and displayed correctly on Admin page"]
+            },
+            {
+                "viewpoint": "Verify user can do Quiz only one time/or take quiz again\n[base on spec]",
+                "expected_result": ["- If user can do Quiz only one time: Can not access quiz again, error message displays\n- If user can do Quiz many times: Access quiz successfully"]
+            }
+        ]
+    }
+]

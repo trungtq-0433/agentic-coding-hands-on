@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-estimate.ai/schemas/qa-log.json",
+  "title": "Q&A Log Schema",
+  "description": "Schema for project Q&A log capturing questions, answers, and tracking status",
+  "type": "object",
+  "required": ["project_name", "questions"],
+  "properties": {
+    "project_name": {
+      "type": "string",
+      "description": "Name of the project this Q&A log is for",
+      "minLength": 1
+    },
+    "generated_date": {
+      "type": "string",
+      "description": "Date when this Q&A log was generated (ISO 8601 format recommended)",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+    },
+    "questions": {
+      "type": "array",
+      "description": "List of questions and their tracking information",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "question"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the question (e.g., T1, B1, I1)",
+            "pattern": "^[A-Z]\\d+$"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["tech", "business", "infra"],
+            "description": "Category of the question: tech (technical), business (functional/domain), infra (infrastructure/deployment)"
+          },
+          "question": {
+            "type": "string",
+            "description": "The question text",
+            "minLength": 1
+          },
+          "answer": {
+            "type": "string",
+            "description": "Answer to the question",
+            "default": ""
+          },
+          "status": {
+            "type": "string",
+            "enum": ["open", "answered", "deferred"],
+            "description": "Status of the question: open (waiting for answer), answered (resolved), deferred (postponed)",
+            "default": "open"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Priority level for getting this question answered",
+            "default": "medium"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source document or section where this question originated"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes or context about the question"
+          }
+        }
+      }
+    }
+  }
+}

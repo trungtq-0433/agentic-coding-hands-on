@@ -1,0 +1,218 @@
+[
+    {
+        "item_type": "GUI of Admin site",
+        "description": "Testing the layout and format compliance of the admin interface with design specifications.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify layout and format of Admin site",
+                "expected_result": ["- All layout and format are the same with design"]
+            }
+        ]
+    },
+    {
+        "item_type": "Create Quiz",
+        "description": "Testing quiz creation functionality including question management, answer types, formatting, and pagination settings. Testing quiz configuration including pagination settings, duration, scoring, button customization, preview functionality, and publishing controls.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify admin can create Quiz title successfully",
+                "expected_result": ["- Success message displays\n- Data is saved on DB"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin inputs invalid data for Quiz title:\n- more than max length characters\n- invalid data type",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify admin can create question successfully",
+                "expected_result": ["- Success message displays\n- Data is saved on DB"]
+            },
+            {
+                "viewpoint": "Verify admin can create answer for question successfully",
+                "expected_result": ["- Success message displays\n- Data is saved on DB corresponding question"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin creates a question duplicated, it is existing in Quiz",
+                "expected_result": ["- Error message displays\n- No data is saved on DB"]
+            },
+            {
+                "viewpoint": "Verify admin can choose one/or more than one types of answer for question\n[base on spec]\n- Multi Choice\n- Checkbox\n- Radio button\n- Single textbox\n...",
+                "expected_result": ["- Format of answer displays corresponding type to input answers"]
+            },
+            {
+                "viewpoint": "Verify admin can set correct answer for each question corresponding type of answer",
+                "expected_result": ["- Success message displays\n- Data is saved on DB corresponding question"]
+            },
+            {
+                "viewpoint": "Verify admin can set Question related to each others\n\nEg: Question 1: Answer A | Answer B\n- If user chooses Answer A => Go to Question 2\n- If user chooses Answer B => Go to Question 5",
+                "expected_result": ["- Question related is set successfully\n- Data is saved on DB"]
+            },
+            {
+                "viewpoint": "Verify error message displays when inpputting invalid related Question \n- Question is not existing\n- Question before itself\n...",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin sets a duplicate answer for one question",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin does not set answer for question",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin does not set correct answer for question",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify admin can set display format for question/answer",
+                "expected_result": ["- Admin set display format for question/answer successfully\n+ Font/Size\n+ Color\n+ Other format"]
+            },
+            {
+                "viewpoint": "Verify admin can update question/answer successfully",
+                "expected_result": ["- Update infor successfully\n- Data is updated on DB"]
+            },
+            {
+                "viewpoint": "Verify admin can delete question successfully",
+                "expected_result": ["- Delete question & answer respectively successfully"]
+            },
+            {
+                "viewpoint": "Verify Admin can sort question/answer order by drag and drop",
+                "expected_result": ["- Question/Answer order is sorted correctly"]
+            },
+            {
+                "viewpoint": "Verify Admin can set valid number of question on each page",
+                "expected_result": ["- The number of question on each page is set correctly"]
+            },
+            {
+                "viewpoint": "Verify the number of question on each page is 1 question default when admin does not set\n[base on spec]",
+                "expected_result": ["- The number of question on each page default is 1 question\n[base on spec]"]
+            },
+            {
+                "viewpoint": "Verify error message display when inputting invalid data for  number of question on each page:\n- incorrect data type\n- negative number / equal 0\n- more than max value number question on each page [base on spec]",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify admin can setting valid duration for Quiz successfully",
+                "expected_result": ["- Time for Quiz is set successfully"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin lets duration empty",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify error message display when inputting invalid data for duration:\n- incorrect data type\n- less than min time required\n- more than max time required",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify admin can setting name of buttons on Quiz\n- Done Button\n- Previous Button\n- Next Button",
+                "expected_result": ["- All button displays correct name"]
+            },
+            {
+                "viewpoint": "Verify admin can set valid score for each question successfully\n[base on spec]",
+                "expected_result": ["- Score of each question is set successfully"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin lets score of question empty\n[base on spec]",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify error message display when inputting invalid data for score:\n- incorrect data type\n- negative number / equal 0\n- more than max score",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify admin can set valid score or correct answer percent to Pass Quiz successfully\n[base on spec]",
+                "expected_result": ["- Score or correct answer percent to Pass Quiz is set successfully"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin lets score or correct answer percent to Pass Quiz empty\n[base on spec]",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify error message display when inputting invalid data for score or correct answer percent to Pass Quiz:\n- incorrect data type\n- negative number / equal 0\n- more than total score of all questions",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify preview quiz page displays correctly",
+                "expected_result": ["- Preview Quiz page displays corresponding design of admin"]
+            },
+            {
+                "viewpoint": "Verify admin can save Quiz successfully",
+                "expected_result": ["- All infor of quiz is saved on DB correctly"]
+            },
+            {
+                "viewpoint": "Verify admin can setting valid time to public Quiz successfully\n[base on spec]",
+                "expected_result": ["- Time to publish Quiz is set correctly\n- Status of Quiz is Waiting to public"]
+            },
+            {
+                "viewpoint": "Verify Quiz is published automatically when publish time has comming",
+                "expected_result": ["- Quiz is published automatically\n- Status of Quiz is Published"]
+            },
+            {
+                "viewpoint": "Verify error message display when inputting invalid data for time to public Quiz:\n- incorrect data type\n- time in the past\n- time FROM >= time TO",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify Quiz is published immediately if admin does not set time to published\n[base on spec]",
+                "expected_result": ["- Time to publish Quiz is set correctly\n- Status of Quiz is Published"]
+            },
+            {
+                "viewpoint": "Verify admin can unpublished Quiz for any editing successfully\n[base on spec]",
+                "expected_result": ["- Status of Quiz is Editing (Draft)\n- User can not access Quiz"]
+            }
+        ]
+    },
+    {
+        "item_type": "Edit Quiz",
+        "description": "Testing quiz editing functionality including validation, publishing state management, user answer handling, and role-based access control.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify admin can Edit Quiz successfully with all valid data in Editing (Draft) mode",
+                "expected_result": ["- Quiz infor is updated successfully\n- Data is updated on DB correctly"]
+            },
+            {
+                "viewpoint": "Verify error message displays when admin edit Quiz with any invalid data for any fields\n\n- Refer validation on Create Quiz function",
+                "expected_result": ["- Error message displays"]
+            },
+            {
+                "viewpoint": "Verify admin can not Edit Quiz when it is publishing",
+                "expected_result": ["- Admin can not update anything in published/waiting to publish mode\n[base on spec]"]
+            },
+            {
+                "viewpoint": "Verify Answer of user is updated when admin edit Quiz in case user had done Quiz before",
+                "expected_result": ["[base on spec]\n- Deleted answer of deleted Question\n- Set answer is NULL for Added Question\n- Update value of answer when changing order or content"]
+            },
+            {
+                "viewpoint": "Verify admin can Delete Quiz successfully",
+                "expected_result": ["- All infor of quiz is deleted successfully"]
+            },
+            {
+                "viewpoint": "Verify admin can set Roles can be access the Quiz successfully\n[base on spec]",
+                "expected_result": ["- Access Roles can access the Quiz when it's published\n- Un-access Roles can not access the Quiz anytime, Error message displays\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Manage Results",
+        "description": "Testing result management functionality including viewing user results, export capabilities, and statistical analysis.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify admin can view all result of users\n- user infor\n- quiz progress\n- result of quiz",
+                "expected_result": ["- All infor and result of user displays correctly on screen"]
+            },
+            {
+                "viewpoint": "Verify admin can not edit any information of user",
+                "expected_result": ["- User infor displays in readonly mode, can not edit"]
+            },
+            {
+                "viewpoint": "Verify admin can/can not Edit Quiz result of user\n[base on spec]",
+                "expected_result": ["- Quiz result is updated/is not updated\n[base on spec]"]
+            },
+            {
+                "viewpoint": "Verify admin can export quiz result\n\nRefer to \"Export File\" checklist for mor details",
+                "expected_result": ["- Quiz result is exported correctly"]
+            },
+            {
+                "viewpoint": "Verify admin can do more additional actions to result statistics\n- filter results\n- result statistics by percent of Failure/Pass\n.....\n[base on spec]",
+                "expected_result": ["- All action is implemented correctly"]
+            }
+        ]
+    }
+]

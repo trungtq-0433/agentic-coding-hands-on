@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-05-26T00:00:00Z",
+  "plan": "plan-incomplete",
+  "features": [
+    {
+      "fcode": "F001",
+      "name": "Authentication",
+      "slug": "F001_Auth",
+      "priority": "P0",
+      "type": "ui",
+      "related": {}
+    }
+  ]
+}

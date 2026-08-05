@@ -1,0 +1,102 @@
+[
+    {
+        "item_type": "Available",
+        "description": "Testing the availability and display of fixed navigation in specified screens.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify Fixed Navigation is available in some screens\n[base on requirement]",
+                "expected_result": ["Displays correctly as designed:\n+ Position: <Position>\n+ Label of item: <item name>\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Not available",
+        "description": "Testing the absence of fixed navigation in specific screens where it should not appear.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify Fixed Navigation is NOT available in some specific screens\n[base on requirement]",
+                "expected_result": ["Fixed Navigation is NOT available in some specific screens.\n[base on requirement]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Position",
+        "description": "Testing fixed navigation position behavior during various scroll and zoom actions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the position of Fixed Navigation when scroll down/up\n\nUsing:\n - The arrows on scroll bar\n - The arrows on the keyboard \n - The Page up/Page Down button on the keyboard\n - Zoom in/Zoom out",
+                "expected_result": ["- Fixed Navigation still displayed on the screen.\n- Fixed Navigation does not move to another position.\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Hover on",
+        "description": "Testing hover interactions and styling for single-level menu items.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify style of menu items when hoverred on",
+                "expected_result": ["Displays correctly as designed:\n- Format:  <background-color , text-color>\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Tooltip",
+        "description": "Testing tooltip behavior and display for menu items.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the tooltip is displayed when hovering on menu items\n[base on requirement]",
+                "expected_result": ["Display correctly as designed:\n+ Position: <Position>\n+ Content: <tooltip content>\n+ Format:  <format>"]
+            },
+            {
+                "viewpoint": "Verify the tooltip is not displayed when hovering on menu items\n[base on requirement]",
+                "expected_result": ["The tooltip is not displayed."]
+            },
+            {
+                "viewpoint": "Verify style if tooltip content is long\n[base on requirement]",
+                "expected_result": ["Display correctly as designed:\n+ Position: <Position>\n+ Content: <tooltip content>\n+ Format:  <format>\nLong content is broken in several lines or displayed \"...\" "]
+            }
+        ]
+    },
+    {
+        "item_type": "List sub-menu",
+        "description": "Testing sub-menu display, behavior and interactions.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify list sub menu items display: \n + Correct position/order\n + Correct item name\n + Correct item icon",
+                "expected_result": ["Display correctly as designed:\n + Position: <Position>\n + Label of item: <item name>\n + Icon"]
+            },
+            {
+                "viewpoint": "Verify status of sub-menu:\n - Enable/Disable or Visible/Invisible in specific screens \n - Enable/Disable or Visible/Invisible base on permission/role of User\n\n[base on requirement]",
+                "expected_result": ["Main items Enable/Disable or Visible/Invisible base on requirement."]
+            },
+            {
+                "viewpoint": "Verify style of sub-item when hoverred on",
+                "expected_result": ["Displays correctly as designed:\n- Format:  <background-color , text-color>\n"]
+            },
+            {
+                "viewpoint": "Verify the tooltip is displayed when hovering onsub-item\n[base on requirement]",
+                "expected_result": ["Display correctly as designed:\n+ Position: <Position>\n+ Content: <tooltip content>\n+ Format:  <format>"]
+            },
+            {
+                "viewpoint": "Verify the tooltip is not displayed when hovering on sub-item\n[base on requirement]",
+                "expected_result": ["The tooltip is not displayed."]
+            },
+            {
+                "viewpoint": "Verify style if tooltip content is long\n[base on requirement]",
+                "expected_result": ["Display correctly as designed:\n+ Position: <Position>\n+ Content: <tooltip content>\n+ Format:  <format>\nLong content is broken in several lines or displayed \"...\" "]
+            },
+            {
+                "viewpoint": "Verify appropriate screen displays when clicking on menu item",
+                "expected_result": ["+ Correct screen is opened when clicking on the menu item\n+ The scrceen is directed in the current browser tab or a new tab\n\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify appropriate screen displays by Pressing [Ctrl] and clicking on menu items\n\n[base on requirement]",
+                "expected_result": ["Correct screen is opened in new tab."]
+            },
+            {
+                "viewpoint": "Verify appropriate screen displays by clicking on [Wheel mouse] button \n\n[base on requirement]",
+                "expected_result": ["Correct screen is opened in new tab."]
+            }
+        ]
+    }
+]

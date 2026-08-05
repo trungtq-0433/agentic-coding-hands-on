@@ -1,0 +1,176 @@
+[
+    {
+        "item_type": "Sorting on table content (data list)",
+        "description": "Test default data sorting, verify order changes via column/icon clicks, handle ASC/DESC toggling. Ensure proper icon display and multi-column sorting logic. Validate performance with large datasets.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check default sort order",
+                "expected_result": [
+                    "Data is sorted by ASC/DESC (base on spec)",
+                    "Sorted columns is displayed correctly with a sort icon."
+                ]
+            },
+            {
+                "viewpoint": "Check when click on Column name the first time",
+                "expected_result": [
+                    "Data is sorted by ASC/DESC correctly (base on spec)",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on Column name the second time",
+                "expected_result": [
+                    "Data is sorted by ASC/DESC correctly (base on spec)",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on Column name multi times",
+                "expected_result": [
+                    "Data is switched between ASC/DESC order correctly",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on multi column names which has sort function",
+                "expected_result": [
+                    "Sorting is correct in all column (Sort all column by AND condition)",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on Sort icon the first time",
+                "expected_result": [
+                    "Data is sorted by ASC/DESC correctly (base on spec)",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on Sort icon the second time",
+                "expected_result": [
+                    "Data is sorted by ASC/DESC correctly (base on spec)",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on Sort icon multi times",
+                "expected_result": [
+                    "Data is switched between ASC/DESC order correctly",
+                    "Sort icon is changed correctly"
+                ]
+            },
+            {
+                "viewpoint": "Check when click on multi Sort icons",
+                "expected_result": [
+                    "Sorting is correct in all column (Sort all column by AND condition)",
+                    "Sort icon is changed correctly"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Edit data and sorting",
+        "description": "Verify sorting stability after adding/removing/updating rows, especially with large data. Confirm sorting order and icons remain consistent post-edits.",
+        "test_view_points": [
+            {
+                "viewpoint": "Delete/Update/Add new row and then sort",
+                "expected_result": [
+                    "Sorting is correct in all column",
+                    "Icon should change following on sorting ASC/DESC"
+                ]
+            },
+            {
+                "viewpoint": "Delete/Update/Add new row while sorting (has big data)",
+                "expected_result": [
+                    "Sorting is correct in all column (base on spec)",
+                    "Icon should change following on sorting ASC/DESC"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Sorting on browser",
+        "description": "Test cross-tab/browser consistency during copy-paste operations. Ensure compatibility with major browsers (IE, Firefox, Chrome, Safari).",
+        "test_view_points": [
+            {
+                "viewpoint": "Copy/paste page has sorting list data to another Tab or another Browser",
+                "expected_result": [
+                    "All columns still sort correctly"
+                ]
+            },
+            {
+                "viewpoint": "Sort data on some browser (IE, Firefox, Chrome, Safari...)",
+                "expected_result": [
+                    "All columns still sort correctly"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Save/download/import file",
+        "description": "Validate preserved sorting order in saved/exported files. Confirm data integrity after re-importing sorted files.",
+        "test_view_points": [
+            {
+                "viewpoint": "Save/download list data file to local device and check sorting columns in file",
+                "expected_result": [
+                    "Sorting is correct in all column (Base on spec)"
+                ]
+            },
+            {
+                "viewpoint": "Import list data file to App and check sorting",
+                "expected_result": [
+                    "On the screen display same list data that is imported (Base on spec)"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Sorting on multi page",
+        "description": "Test sorting across paginated data, including page navigation and browser Back/Next actions. Ensure order consistency throughout pages.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check sorting when list data contains many pages",
+                "expected_result": [
+                    "Base on requirement will sort in only one page or all pages"
+                ]
+            },
+            {
+                "viewpoint": "Check operation: Sort => Click any page => Page 1",
+                "expected_result": [
+                    "All columns still sort correctly base on spec"
+                ]
+            },
+            {
+                "viewpoint": "Check operation: Sort => Next/Previous paging",
+                "expected_result": [
+                    "All columns still sort correctly base on spec"
+                ]
+            },
+            {
+                "viewpoint": "Check repeated page navigation and sorting interactions",
+                "expected_result": [
+                    "All columns still sort correctly base on spec"
+                ]
+            },
+            {
+                "viewpoint": "Check browser Back/Next navigation impact",
+                "expected_result": [
+                    "All columns still sort correctly base on spec"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Sorting role",
+        "description": "Check user role impacts (Admin/Normal) on sorting functionality post-data changes. Validate consistent display across roles.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify sorting after Admin deletes rows and Normal user views",
+                "expected_result": [
+                    "All columns still sort correctly base on spec",
+                    "User only view role can see data list is sorted correctly"
+                ]
+            }
+        ]
+    }
+]

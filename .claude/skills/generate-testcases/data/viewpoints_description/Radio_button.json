@@ -1,0 +1,104 @@
+[
+    {
+        "item_type": "Default display",
+        "description": "Testing initial display of radio buttons in both add and edit forms",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default slected value\n+ List of values\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default slected value: DB's value\n+ List of values\n..."]
+            }
+        ]
+    },
+    {
+        "item_type": "Select a value",
+        "description": "Testing radio button selection functionality across different positions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when select a value:\n+ Select the first value \n+ Select any value\n+ Select the last value ",
+                "expected_result": ["+ The selected value is Check ON. Other values are unselected \n+ Process with selected value successfully."]
+            }
+        ]
+    },
+    {
+        "item_type": "Behaviour of Active radio button",
+        "description": "Testing hover interactions and database synchronization for active radio buttons",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when hover on each part of each active radio button",
+                "expected_result": ["Mouse becomes hand icon and can select [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when hover on each part of each active radio button",
+                "expected_result": ["Mouse becomes hand icon and can select [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when selecting value is edited from DB",
+                "expected_result": ["Display correct error message"]
+            },
+            {
+                "viewpoint": "Check operation when selecting value is deleted from DB",
+                "expected_result": ["Display correct error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "Behaviour of Disabled radio button",
+        "description": "Testing interactions with disabled radio buttons",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when hover on each part of each disabled radio button",
+                "expected_result": ["Mouse not becomes hand icon [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when hover on each part of each disabled radio button",
+                "expected_result": ["Mouse not becomes hand icon [Base on spec]"]
+            },
+            {
+                "viewpoint": "Check operation when select an disabled radio button",
+                "expected_result": ["Can not select that radio button"]
+            }
+        ]
+    },
+    {
+        "item_type": "Tab order on keyboard",
+        "description": "Testing keyboard navigation through radio buttons",
+        "test_view_points": [
+            {
+                "viewpoint": "Check tab order on keyboard",
+                "expected_result": ["Go to Left to Right, from Up to Down as normal and don't go to disable value (skip each value of radio button)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Edit radio button value by Inspect",
+        "description": "Testing client-side manipulation prevention",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when changed value of radio button on client web (inspect element)\nEx: Not select any value/ Select all options/ Change value of options/ Change text of options)",
+                "expected_result": ["Can not update wrong value to DB"]
+            }
+        ]
+    },
+    {
+        "item_type": "Change config on backend",
+        "description": "Testing backend configuration changes and their effects on frontend",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation of frontend after change config on backend [base on each spec]",
+                "expected_result": ["+ Change default value list and selected value correctly corresponding to backend setting\n+ Operation of radio button is correct after change config."]
+            },
+            {
+                "viewpoint": "Check operation if change config on backend while selecting value on frontend page [base on each spec]\n",
+                "expected_result": ["+ Can change config on backend successfully. \n+ Display notification to frontend [base on each spec]\n+ Operation of radio button is correct after reload."]
+            },
+            {
+                "viewpoint": "Check operation if change config on backend while selecting value on frontend page [base on each spec]\n",
+                "expected_result": ["+ Can change config on backend successfully. \n+ Display correct error message when submit on frontend."]
+            }
+        ]
+    }
+]

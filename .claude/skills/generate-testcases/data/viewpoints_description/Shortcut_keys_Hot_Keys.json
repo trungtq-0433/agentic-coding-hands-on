@@ -1,0 +1,126 @@
+[
+    {
+        "item_type": "Static/Fixed Keys",
+        "description": "Testing the display and functionality of predefined hotkeys across different screens.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the displaying of Hotkey label on corresponding menu/screens\n[base on requirement]",
+                "expected_result": ["Displays the same as design or specification about:\n - Label\n - Style\n"]
+            },
+            {
+                "viewpoint": "Verify action of Hotkey on defined screens/functions\n  - Press hotkey one time\n[base on requirement]",
+                "expected_result": ["Performs corresponding function of that Hotkey.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify action of Hotkey on defined screens/functions\n  - Press hotkey many times\n[base on requirement]",
+                "expected_result": ["Should only perform corresponding action of that Hotkey one time.\n"]
+            },
+            {
+                "viewpoint": "Verify action of Hotkey on other screens/functions that NOT defined\n",
+                "expected_result": ["No action.\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Add Hotkey \n(Input)",
+        "description": "Testing the addition of new hotkeys through input form including validation and duplicate checking.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify place holder/default value of <item name> \n[base on requirement]",
+                "expected_result": ["Displays the same as specification.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify if input allowed key\n[base on requirement]",
+                "expected_result": ["Hotkey will be accepted. Hotkey label displayed on the corresponding menu/screens.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify if input NOT allowed key.\n Example:- wrong format: only text, special key, number..\n[base on requirement]",
+                "expected_result": ["Show error message, hotkey will be not accepted.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify if input duplicate allowed key\n",
+                "expected_result": ["Show error message, hotkey will be not accepted.\n"]
+            },
+            {
+                "viewpoint": "Verify the action of Hotkey\n - When fucus on application\n - When NOT focus on application (lost focus or have alert, popup.. In case, form use Javascript and turn off JS)",
+                "expected_result": ["Perform corresponding function of that Hotkey.\n[base on requirement]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Add Hotkey \n(Select form)",
+        "description": "Testing the addition of new hotkeys through selection form including modifier combinations and validation.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the UI of modal",
+                "expected_result": ["Displays the same as design or specification.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list of Modifiers for Hotkeys\n[base on requirement]\n\nEx: Ctrl - Alt - Shift...",
+                "expected_result": ["Displays list of Modifiers.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify list of Keys will be used for Hotkeys\n[base on requirement]\n\nEx: Alpabet characters A - B - C -...\n      Or function keys F1 - F2 - F3 -...",
+                "expected_result": ["Displays list of Keys.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify User can add Hoykeys success by combining one Modifier item and one Key item\n[base on requirement]",
+                "expected_result": ["Add Hotkey successfully."]
+            },
+            {
+                "viewpoint": "Verify User can add Hoykeys success by combining multiple Modifier items and one Key item\n[base on requirement]",
+                "expected_result": ["Add Hotkeys successfully. "]
+            }
+        ]
+    },
+    {
+        "item_type": "Update Hotkey\n(Input form)",
+        "description": "Testing the update functionality of existing hotkeys through input form including validation and error handling.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the UI of modal",
+                "expected_result": ["Displays the same as design or specification.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify if update new allowed key\n[base on requirement]",
+                "expected_result": ["Hotkey will be accepted. Hotkey label updated on the corresponding menu/screens.\n[base on requirement]"]
+            },
+            {
+                "viewpoint": "Verify if update NOT allowed key\n[base on requirement]",
+                "expected_result": ["Show error message, hotkey will be not accepted.\n[base on requirement]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Update Hotkey \n(Select form)",
+        "description": "Testing the update functionality of existing hotkeys through selection form including modifier combinations.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify User can update new Hotkeys success by combining one Modifier item and one Key item\n[base on requirement]",
+                "expected_result": ["Update Hotkey successfully."]
+            },
+            {
+                "viewpoint": "Verify User can update Hoykeys success by combining multiple Modifier items and one Key item\n[base on requirement]",
+                "expected_result": ["Update Hotkeys successfully. "]
+            },
+            {
+                "viewpoint": "Verify User can update Hoykeys success by combining all Modifier items and one Key item\n[base on requirement]",
+                "expected_result": ["Update Hotkeys successfully. "]
+            }
+        ]
+    },
+    {
+        "item_type": "Delete Hotkey",
+        "description": "Testing the deletion of hotkeys through different methods and verifying the removal of functionality.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify the Hotkey deleted by clearing data in [Hotkey] textbox\n[base on requirement]",
+                "expected_result": ["Hotkey is deleted and No action occur when pressing it."]
+            },
+            {
+                "viewpoint": "Verify the Hotkey deleted by clicking on [Delete] button\n[base on requirement]",
+                "expected_result": ["Hotkey is deleted and No action occur when pressing it."]
+            }
+        ]
+    }
+]

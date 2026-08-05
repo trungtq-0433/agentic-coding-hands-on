@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kpi-insight": {
+      "type": "http",
+      "url": "https://kpi-insight.sun-asterisk.vn/mcp",
+      "headers": {
+        "Authorization": "Bearer ${KPI_INSIGHT_TOKEN}"
+      }
+    }
+  }
+}

@@ -1,0 +1,1239 @@
+[
+    {
+        "item_type": "Initialization",
+        "main_item": "Chatbox",
+        "descriptions": [
+            "Tests layout rendering and responsiveness of the chatbox",
+            "Verifies proper display across different screen sizes and zoom levels",
+            "Ensures consistent layout during browser window state changes"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify layout of chatbox",
+                "expected_result": "Layout is displayed as design:\n+ Position\n+ Initialization value\n+ List contact\n+ Input Text box\n+ Search \n+ Menu"
+            },
+            {
+                "test_view_point": "Verify layout of chatbox when do:\n+ Zoom in\n+ Zoom out",
+                "expected_result": "+ Layout of screen isn't broken\n+ The screen is zoom in / zoom out at the right rate\n+ Zoom out up to 500%\n+ Zoom in at least 25%"
+            },
+            {
+                "test_view_point": "Verify layout of chatbox when do: \n+ Maximize on broswer\n+ Minimize on broswer",
+                "expected_result": "+ Layout of screen isn't broken \n+ The screen is maximize / minimize at the right rate"
+            }
+        ]
+    },
+    {
+        "item_type": "User Name",
+        "main_item": "Chatbox",
+        "sub_item": "User Profile",
+        "descriptions": [
+            "Tests proper display of usernames including Japanese honorifics",
+            "Validates handling of long usernames",
+            "Ensures consistent formatting across different user types"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display of user name",
+                "expected_result": "+ Format of user name is displayed as design\n+ User name is displayed correctly \n+ Display \"さ ん\" or \"様\" after partner's user name\n(Depending on the SRS) "
+            },
+            {
+                "test_view_point": "Verify display of user name in the case too long",
+                "expected_result": "+ User name is displayed fully\n+ OR display ... after the characters"
+            }
+        ]
+    },
+    {
+        "item_type": "Avatar",
+        "main_item": "Chatbox",
+        "sub_item": "User Profile",
+        "descriptions": [
+            "Tests avatar image display and default fallbacks",
+            "Validates image quality preservation during upload",
+            "Ensures proper image scaling and cropping behavior"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify that the default image is displayed if the avatar image is not added",
+                "expected_result": "The default image should be displayed properly (with user is male/female/admin...)"
+            },
+            {
+                "test_view_point": "Verify that the avatar image is the same as the one uploaded",
+                "expected_result": "The image file displayed should be the same as the one uploaded"
+            },
+            {
+                "test_view_point": "Verify that the avatar image isn't cropped off",
+                "expected_result": "The avatar image should be fully displayed"
+            },
+            {
+                "test_view_point": "Verify that the quality of the avatar image isn't changed after uploading the image",
+                "expected_result": "The quality of the avatar image shouldn't be changed after uploading the image"
+            }
+        ]
+    },
+    {
+        "item_type": "Status",
+        "main_item": "Chatbox",
+        "sub_item": "User Profile",
+        "descriptions": [
+            "Tests different user status states and their display",
+            "Validates status visibility for both user and partner",
+            "Ensures proper functionality based on selected status"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display status of user and partner :\n+ Active\n+ Away\n+ Do not disturb\n+ Invisible",
+                "expected_result": "+ Status displayed correctly with the selected status\n+ Partner viewed correctly with the selected status\n+ User will work properly with the selected status"
+            }
+        ]
+    },
+    {
+        "item_type": "Input",
+        "main_item": "Chatbox",
+        "sub_item": "Input text area",
+        "descriptions": [
+            "Tests initialization and basic character input functionality",
+            "Validates handling of different character types including full-width, special characters, and emojis",
+            "Tests file attachment handling and display",
+            "Verifies space character handling and trimming behavior"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display initialization of input text area",
+                "expected_result": "+ Input text area is displayed as design\n+ Place Holder is \"Type a message here\""
+            },
+            {
+                "test_view_point": "Verify that user is able to type characters into the chat textarea",
+                "expected_result": "+ User should be able to type characters into input text area\n+ Place Holder \"Type a message here\" is cleared"
+            },
+            {
+                "test_view_point": "Verify handle when input data into input text area\n+ Input = N + 1 characters (multi lines)\n+ Input = N characters (multi lines)\n+ Input = N -1 characters (multi lines)\n(N: Max value is depended on the SRS)",
+                "expected_result": "+ Can't input more than N characters into input text area\n+ Scroll bar is display to view all content\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ Fullsize alphanumeric (１，２，ｐ，ｄ，Ａ，Ｒ，Ｋ)\n+ Decimal (0.1, 1.2..)\n+ Format date time (20190528)",
+                "expected_result": "At conversation box: \n+ Message is sent successfully\n+ Format is displayed correctly\n+ Number is displayed correctly"
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ Special character (!, @, #, <>, ,...)\n+ Alphabet character\n+ Fullsize character (hiragana, katakana)\n+ Half size character",
+                "expected_result": "At conversation box: \n+ Message is sent successfully\n+ Format is displayed correctly\n+ Character is displayed correctly with inputted characters"
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ Emoji\n+ Icon\n+ Gif\n+ Character & emoji",
+                "expected_result": "At conversation box: \n+ Message is sent successfully\n+ Format is displayed correctly\n+ Emoji/Icon/Gif is displayed correctly with inputted data.\n+ Position of Emoji/Icon/Gif displayed correctly"
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ Attached file (many types)\n+ Attached file & emoji & character",
+                "expected_result": "At conversation box: \n+ Message is sent successfully\n+ Thumbnail of attached file is displayed correctly\n+ Capacity of attached file is displayed correctly\n+ Name of attached file is displayed correctly"
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ URL\n+ SQL injection\n+ HTML code (Ex: \"&amp\", \"\")",
+                "expected_result": "At conversation box:\n+ Message is sent successfully\n+ Format is displayed correctly\n+ URL/SQL injection/HTML is displayed correctly with inputted data."
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ Not input\n+ Space half size\n+ Input multiple lines of space characters without text",
+                "expected_result": "+ Button Send is disable \n+ At input text area: scrollbar isn't displayed and resize"
+            },
+            {
+                "test_view_point": "Verify input below data into input text area: \n+ Space fullsize",
+                "expected_result": "Behavior base on spec: same as halfsize space or same as normal text"
+            },
+            {
+                "test_view_point": "Verify handle when input spaces characters at the begin/end of string into input text area",
+                "expected_result": "+ Message is auto TRIM spaces at the begin/end of string\n+ At conversation box: Message is displayed don't have space at the begin/end of string"
+            }
+        ]
+    },
+    {
+        "item_type": "Send Button",
+        "main_item": "Chatbox",
+        "sub_item": "Input text area",
+        "descriptions": [
+            "Tests different methods of sending messages",
+            "Validates button state based on input content",
+            "Verifies handling of network connection issues",
+            "Tests quote sending functionality"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify that user is able to send message\n+ By clicking on the physical Enter button\n+ By clicking on the Send button",
+                "expected_result": "The message should be sent normally"
+            },
+            {
+                "test_view_point": "Verify that the Send button is disabled when user inputed message contains all spaces",
+                "expected_result": "The Send button should be disabled"
+            },
+            {
+                "test_view_point": "Verify that the Send button is enabled when user inputted character into the input text area",
+                "expected_result": "The Send button should be enabled"
+            },
+            {
+                "test_view_point": "Verify handle when sending a quote",
+                "expected_result": "The message should be sent and displayed normally"
+            },
+            {
+                "test_view_point": "Verify handle when network connection failed while sending message",
+                "expected_result": "The warning message \"Please Check your network connection and try again\" should be displayed"
+            }
+        ]
+    },
+    {
+        "item_type": "Emoji",
+        "main_item": "Chatbox",
+        "sub_item": "Input text area",
+        "descriptions": [
+            "Tests emoji selection, display and interaction",
+            "Validates emoji input through typing and menu selection",
+            "Tests emoji manipulation (copy/paste/delete/replace)",
+            "Verifies emoji positioning and cursor interaction"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of emoji symbol",
+                "expected_result": "Icon emoji is displayed as design:\n+ Position\n+ Icon\n+ Tooltip"
+            },
+            {
+                "test_view_point": "Verify handle when select on emoji symbol on menu",
+                "expected_result": "+ List emoji is displayed correctly\n+ Each emoji type in each tab"
+            },
+            {
+                "test_view_point": "Verify displaying when list emoji too long",
+                "expected_result": "Scroll bar is displayed"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Select on emoji icon same type\n+ Select on emoji icon from many different types",
+                "expected_result": "At input text box & chatbox: \n+ Selected emoji is displayed correctly\n+ Sort: in the order of selecting."
+            },
+            {
+                "test_view_point": "Verify displaying emoji by typing character is correctly\nEx: symbol \":)\"",
+                "expected_result": "At input text box & chatbox: \n+ Typed emoji is displayed correctly\n+ Sort: in the order of typing."
+            },
+            {
+                "test_view_point": "Verify handle when copy/paste emoji\n+ On 1 conversation \n+ From this conversation to another conversation",
+                "expected_result": "Can copy/paste emoji correctly &fully."
+            },
+            {
+                "test_view_point": "Verify handle select multi on emoji",
+                "expected_result": "Emoji is displayed fully & correctly"
+            },
+            {
+                "test_view_point": "Verify handle when\n+ Input number of emoji > maxlength\n+ Input number of emoji = maxlength\n+ Input number of emoji < maxlength",
+                "expected_result": "+ Can't input number of emoji > maxlength\n+ Can input number of emoji <= maxlength"
+            },
+            {
+                "test_view_point": "Verify handle when emoji is deleted.",
+                "expected_result": "At input text area & conversation box: \nEmoji is deleted correctly"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Replace old emoji by text\n+ Replace old emoji by new emoji",
+                "expected_result": "At input text area & conversation box: \nOld emoji is replaced by text /new emoji"
+            },
+            {
+                "test_view_point": "Verify handle when insert cursor mouse (for inserting the emoji) into any position in input text area",
+                "expected_result": "+ Input text area: Position of cursor mouse(for insert the emoji) is correctly  \n+ At conversation box: Position of emoji is displayed correctly with position of cursor mouse\n+ Selected emoji is displayed correctly."
+            },
+            {
+                "test_view_point": "Verify handle when select on outsite emoji list",
+                "expected_result": "Emoji list is closed\n(Depending on the SRS)"
+            }
+        ]
+    },
+    {
+        "item_type": "Icon",
+        "main_item": "Chatbox",
+        "sub_item": "Input text area",
+        "descriptions": [
+            "Tests icon display and selection functionality",
+            "Validates icon set download and management",
+            "Tests multiple icon selection and ordering",
+            "Verifies icon interaction with text input"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of icon symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip"
+            },
+            {
+                "test_view_point": "Verify icon list in the case:\nNot download any Icon set",
+                "expected_result": "Icon list is displayed correctly:\n+ List icon is empty\n+ Download icon is displayed\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify icon list in the case:\nDownloaded Icon sets",
+                "expected_result": "Icon list is displayed correctly:\n+ Each icon type in each tab\n+ Download icon is displayed\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when select on icon symbol",
+                "expected_result": "After click on icon symbol:  \n + Recently tab is displayed\n + Or display previous openned tab.\n + Openned tab is highlight\n + Icon is alignment"
+            },
+            {
+                "test_view_point": "Verify displaying when list icon too long",
+                "expected_result": "Scroll bar is displayed"
+            },
+            {
+                "test_view_point": "Verify handle when\n+ select on icon same type\n+ select on icon from many different types",
+                "expected_result": "At conversation box: \n+ Selected icon is displayed correctly\n+ Sort: in the order of selecting."
+            },
+            {
+                "test_view_point": "Verify handle select multi on icon",
+                "expected_result": "Icon is displayed correctly and in the order of selecting."
+            },
+            {
+                "test_view_point": "Verify handle when icon is removed.",
+                "expected_result": "At conversation box: \nIcon is removed correctly"
+            },
+            {
+                "test_view_point": "Verify handle when click on icon while inputted text",
+                "expected_result": "Text message isn't sent. \nOnly icon is sent succesfully"
+            },
+            {
+                "test_view_point": "Verify handle when select on outsite icon list",
+                "expected_result": "Icon list is closed\n(Depending on the SRS)"
+            }
+        ]
+    },
+    {
+        "item_type": "Gif",
+        "main_item": "Chatbox",
+        "sub_item": "Input text area",
+        "descriptions": [
+            "Tests GIF display and search functionality",
+            "Validates GIF selection and interaction",
+            "Tests GIF search with various input conditions",
+            "Verifies GIF preview and removal features"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of GIF symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip\n+ Search box \n+ List GIF: defaut value is newest or popular GIF\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when select on GIF symbol",
+                "expected_result": "After click on GIF symbol:\n+ List gift is displayed  \n+ GIF tab is highlight"
+            },
+            {
+                "test_view_point": "Verify displaying when list GIF too long",
+                "expected_result": "Scroll bar is displayed fully"
+            },
+            {
+                "test_view_point": "Verify handle select multi on GIF",
+                "expected_result": "GIF is displayed correctly and in the order of selecting."
+            },
+            {
+                "test_view_point": "Verify handle when GIF is removed.",
+                "expected_result": "At conversation box: \nGIF is removed correctly"
+            },
+            {
+                "test_view_point": "Verify handle when click on GIF while inputted text",
+                "expected_result": "Inputted text is taken as a search for GIF"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Input search condition is NULL\n+ Input search condition is space full size\n+ Input search condition is space\nhalf size",
+                "expected_result": "+ Place Holder is cleared\n+ List GIF isn't changed"
+            },
+            {
+                "test_view_point": "Verify handle when\n+ Input search condition is \"a\"\n+ Input search condition is half size (Ex: namae)\n+ Input search condition is full size (Ex: ｎａｍａｅ)\n+ Input search condition is special character (Ex: $ OR *)\n+ Input search condition is HTML\n(Ex: <script>alert(\"XSS\")</script>)\n+ Input search condition is SQL injection\n(Ex:  OR=1)",
+                "expected_result": "Display all GIF name that match with search condition"
+            },
+            {
+                "test_view_point": "Verify handle when\n+ Select on GIF on chatbox\n+ Select outsite GIF list",
+                "expected_result": "+ GIF will be enlarged\n+ GIF list is closed\n"
+            }
+        ]
+    },
+    {
+        "item_type": "Add File",
+        "main_item": "Chatbox",
+        "sub_item": "Input text area",
+        "descriptions": [
+            "Tests file upload functionality with size limitations",
+            "Validates handling of different file types and formats",
+            "Tests file naming and duplicate file handling",
+            "Verifies file upload interruption and cancellation scenarios"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of Add File symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip\n+ Display window to choose file from computer when select on Add File Symbol"
+            },
+            {
+                "test_view_point": "Verify handle when upload valid file have\n+ Capacity < Max\n+ Capacity > Min",
+                "expected_result": "File is uploaded successfully & correctly\n+ Position: bottom of chat box\n+ Name file: the same with original file\n+ Capacity: the same with original file\n+ Style: highlight and active."
+            },
+            {
+                "test_view_point": "Verify handle when upload valid file have:\n+ Capacity = Max +1 \n+ Capacity = Min -1",
+                "expected_result": "Show message that file upload: <Capacity exceeding the permitted limit>"
+            },
+            {
+                "test_view_point": "Verify handle when upload valid file have\nCapacity = 0 byte",
+                "expected_result": "Show message that file upload: <Capacity of file upload is 0 byte> \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Upload invalid file (Ex: .jar)\n+ File upload  is changed format (Ex: .jar ->. doc)",
+                "expected_result": "\nShow message that file isn't valid: <message>\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when upload file that its name is: \n+  Haftsize  \n+  Fullsize\n+  Very long",
+                "expected_result": "File is uploaded successfully & correctly\n+ Position: bottom of chat box\n+ Name file: the same with original file\n+ Capacity: the same with original file\n+ Style: highlight and active."
+            },
+            {
+                "test_view_point": "Verify display when upload file excel, word,...",
+                "expected_result": "File excel, word,... is uploaded successfully & correctly\n+ Title \"New file uploaded\" is displayed\n+ Capacity of file is displayed correctly\n+ Name of file is displayed correctly\n+ Uploaded file is highlight and active"
+            },
+            {
+                "test_view_point": "Verify display when upload file image as jpg, png, ...",
+                "expected_result": "File image is uploaded successfully & correctly\n+ Title \"New file uploaded\" is displayed\n+ Thumbnail of file is displayed correctly\n+ Capacity of file is displayed correctly\n+ Name of file is displayed correctly\n+ Image file has preview mode"
+            },
+            {
+                "test_view_point": "Verify handle when upload another file that are the same name with uploaded file",
+                "expected_result": "File is uploaded successfully & correctly\n+ New file isn't overriding the previous file\n+ Number: number of selected files\n+ Position: bottom of chat box. The latest file is under.\n+ Name file: the same with original file\n+ Capacity:the same with original file\n+ Style: highlight and active."
+            },
+            {
+                "test_view_point": "Verify handle when open new conversation while uploading file",
+                "expected_result": "Continue uploading file until it's success"
+            },
+            {
+                "test_view_point": "Verify handle when clicking in uploaded file on chatbox",
+                "expected_result": "+ Upload file is downloaded successfully\n+ Downloaded file is opened normally\n+ Content &format of downloaded file is displayed nomally"
+            },
+            {
+                "test_view_point": "Verify handle when user A downloading file as soon as that file is removed by user B (user uploaded file)",
+                "expected_result": "+ Message \"File not exists\" is displayed\n+ User A can't download file successfully"
+            },
+            {
+                "test_view_point": "Verify handle when canceling a large file is being uploaded",
+                "expected_result": "+ A large file is cancelled succesfully\n+ At input text area: a large file is removed\n+ At conversation box: a large file isn't displayed"
+            }
+        ]
+    },
+    {
+        "item_type": "Sent message",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests message sending and display functionality across different formats",
+            "Validates typing indicator behavior",
+            "Tests message history and scrolling functionality",
+            "Verifies cross-device and cross-browser message synchronization"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify that the Typing icon appears/disappears when\n+ User is typing\n+ User is stopped typing",
+                "expected_result": "+ The Typing icon should appear while user is typing\n+ The Typing icon should disappear when user is stopped typing"
+            },
+            {
+                "test_view_point": "Verify handle when sent message is valid\n+  Multi lines\n+  Special character\n+  Fullsize character\n+  Half size character\n+  Emoji\n+  Character & emoji\n+  Attached file\n+  Attached file & emoji & character\n+  URL\n+  SQL injection",
+                "expected_result": "At conversation box: \n+ Message is sent successfully\n+ Sent message is displayed correctly and fully\n+ Sent message is displayed as soon as click button Send"
+            },
+            {
+                "test_view_point": "Verify handle when sent message is invalid",
+                "expected_result": "+ Error message is displayed\n+ Can't send message"
+            },
+            {
+                "test_view_point": "Verify handle when sending a quote",
+                "expected_result": "The message should be sent and displayed normally"
+            },
+            {
+                "test_view_point": "Verify handle when network connection failed while sending message",
+                "expected_result": "+ The warning message \"Please Check your network connection and try again\" should be displayed\n+ On conversation box:Message isn't displayed"
+            },
+            {
+                "test_view_point": "Verify handle when conversation is too long",
+                "expected_result": "+ Scrollbar is displayed\n+ User can scroll up & sroll down \n+ All content is displayed fully OR only be seen within 5 days, 30 days, ...\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify time when conversation have time\n+ Send message on the day\n+ Send message for many days",
+                "expected_result": "+ Real time is displayed as format hh:mm \n+ Previous sent message will be displayed before .\nlater sent message will be displayed later"
+            },
+            {
+                "test_view_point": "Verify realtime when send message in the case:\nThe first: internet connection is failed\nThe second: internet connection is normal again.",
+                "expected_result": "+ Time is displayed correctly with real time of server/local \n+ Real time is displayed as format hh:mm \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify can edit/ removed/ quote/ copy/paste on sent message when \n+ Send message on the days\n+ Send message for many days",
+                "expected_result": "+ User can edit/ removed/ quote/ copy/paste on sent message\n+ After edit/ removed/ quote/ copy/paste then sent message is displayed correctly"
+            },
+            {
+                "test_view_point": "Verify handle when select on file image (just sent)",
+                "expected_result": "+ Image is displayed correctly as original file\n+ Image file has preview mode"
+            },
+            {
+                "test_view_point": "Verify handle when chatting with user A content : \"what your name?\" \nBut change to chat user B\nIn the end, back to contact user A",
+                "expected_result": "+ Content \"what your name?\" is keep at input text area\n+ At conversation box: content  \"what your name?\" isn't displayed"
+            },
+            {
+                "test_view_point": "Verify handle when do:\n+ User send message at device 1, but view the sent message on device 2 \n+ User send message at FireFox, but view the sent message on Chrome",
+                "expected_result": "+ User can see sent message at any device/browser\n+ Sent message is displayed fully& correctly"
+            },
+            {
+                "test_view_point": "Verify handle when change user profile (avatar, name,...) by sender when:\n+ Calling video, audio\n+ Chatting",
+                "expected_result": "+ User profile is changed successfully.\n+ At Contact list, user profile: avatar, name is updated correctly.\n+ At conversation box: \nAvatar, name is updated for all conversations (new, old)\n+ At Calling screen: Nothing changes"
+            }
+        ]
+    },
+    {
+        "item_type": "Received message",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests received message display and handling",
+            "Validates typing indicator for partner",
+            "Tests message synchronization across devices",
+            "Verifies user profile and avatar functionality"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify that the Typing icon appears/disappears when\n+ Partner is typing\n+ Partner is stopped typing",
+                "expected_result": "+ The Typing icon should appear while user is typing\n+ The Typing icon should disappear when user is stopped typing"
+            },
+            {
+                "test_view_point": "Verify handle when received message is valid\n+  Multi lines\n+  Special character\n+  Fullsize character\n+  Half size character\n+  Emoji\n+  Character & emoji\n+  Attached file\n+  Attached file & emoji & character\n+  URL\n+  SQL injection",
+                "expected_result": "At conversation box: \n+ Message is received successfully\n+ Received message is displayed correctly and fully\n+ Received message is displayed as soon as click button Send"
+            },
+            {
+                "test_view_point": "Verify received message when sent message is valid\n(Depending on the SRS)",
+                "expected_result": "At conversation box: \n+ Received message is displayed correctly and fully\n+ Received message is displayed as soon as the partner sends the message"
+            },
+            {
+                "test_view_point": "Verify received message when sent message is invalid\n(Depending on the SRS)",
+                "expected_result": "At conversation box: Sent message isn't displayed"
+            },
+            {
+                "test_view_point": "Verify display of time when\n+ Received message on the day\n+ Received  message for many days",
+                "expected_result": "+ Real time is displayed as format hh:mm \n+ Previous received message will be displayed before.\nlater received message will be displayed later"
+            },
+            {
+                "test_view_point": "Verify can quote/ copy/paste on received message when\n+ Received message on the days\n+ Received message for many days",
+                "expected_result": "+ User can quote/ copy/paste on received message\n+ After quote/ copy/paste then received message is displayed correctly"
+            },
+            {
+                "test_view_point": "Verify can't edit/ removed on received message",
+                "expected_result": "+ Can't edit/ removed on received message"
+            },
+            {
+                "test_view_point": "Verify handle when select on image (just received)",
+                "expected_result": "+ Image is displayed correctly as original file\n+ Image file has preview mode"
+            },
+            {
+                "test_view_point": "Verify handle when do:\n+ User send message at device 1, but view the received message on device 2 \n+ User send message at FireFox, but view the received message on Chrome",
+                "expected_result": "+ User can see received message at any device/browser\n+ Received message is displayed fully& correctly"
+            },
+            {
+                "test_view_point": "Verify displays the avatar of the sender/recipient of the message",
+                "expected_result": "+ Avatar of the sender/recipient is displayed correctly\n+ Avatar is displayed every time the sender/recipient sends content\n"
+            },
+            {
+                "test_view_point": "Verify handle when select on avatar of the sender/recipient",
+                "expected_result": "+ Go to User Profile of sender/recipient correctly\n+ Just only view, can't edit profile of sender\n+ Can edit profile of recipient message."
+            },
+            {
+                "test_view_point": "Verify handle when change user profile (avatar, name,...) by recipient when:\n+ Calling video, audio\n+ Chatting",
+                "expected_result": "+ User profile is changed successfully.\n+ At Contact list, user profile: avatar, name is updated correctly.\n+ At conversation box: \nAvatar, name is updated for all conversations (new, old)\n+ At Calling screen: Nothing changes"
+            }
+        ]
+    },
+    {
+        "item_type": "Edit",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests message editing functionality",
+            "Validates edit button visibility and behavior",
+            "Tests editing different message types",
+            "Verifies edit indicator and tooltip"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display of Edit button",
+                "expected_result": "The Edit button is displayed as design"
+            },
+            {
+                "test_view_point": "Verify that the edit button is displayed when\n+ Hovering the mouse cursor over the message\n+ Clicking on the edit button on a message",
+                "expected_result": "The Edit button should appear"
+            },
+            {
+                "test_view_point": "Verify that when removing all text while editing",
+                "expected_result": "+ Can't edit successfully\n+ Can't send new message"
+            },
+            {
+                "test_view_point": "Verify that the Edit icon is displayed after editing successfully",
+                "expected_result": "The Edit icon should be displayed on the message which has been edited successfully"
+            },
+            {
+                "test_view_point": "Verify that the tooltip appears when hovering the mouse cursor over icon",
+                "expected_result": "The tooltip with the message\" This message has been edited\" should be displayed"
+            },
+            {
+                "test_view_point": "Verify handle when\n+ Edit text message \n+ Editing a text message to an emoji\n+ Editing a text message to a passage which contains more than 1000 characters\n+ Editing an emoji to a text message\n+ Editing an emoji to more than 50 emojis\n+ Editing link URL\n+ Editing SQL injection",
+                "expected_result": "+ User should be able to edit normally\n+ Edited message/emoji/URL/SQL injection should be updated correctly on the convensation box"
+            }
+        ]
+    },
+    {
+        "item_type": "Quote",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests quote functionality",
+            "Validates quote button visibility",
+            "Tests different quote combinations",
+            "Verifies quote editing and copying"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display of Quote button",
+                "expected_result": "The Quote button is displayed as design"
+            },
+            {
+                "test_view_point": "Verify that the Quote button is displayed\n+ Hovering the mouse cursor over the message\n+ After select on a passage",
+                "expected_result": "The Quote button should appear"
+            },
+            {
+                "test_view_point": "Verify the message is displayed on the input text area after clicking on the quote button",
+                "expected_result": "The message should be displayed on the input text area with the correct format:\n[Quote aid=2559167 time=1534993983]...[/Quote] \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Sending some quotes together\n+ Sending quote and normal text message/emoji\n+ Sending quote which contains only emoji\n+ Sending quote which contains user's tag\n+ Sending quote which contains a link\n+ Sending a quote which contains other quotes",
+                "expected_result": "Able to send normally, and the quotes should be displayed correctly"
+            },
+            {
+                "test_view_point": "Verify that user is able to copy a quote to other chat box",
+                "expected_result": "The quote message should be displayed normaly"
+            },
+            {
+                "test_view_point": "Verify editing quote \n+ In the chat area\n+ Which has been sent",
+                "expected_result": "User is able to edit quote normally &correctly"
+            }
+        ]
+    },
+    {
+        "item_type": "Remove",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests message removal functionality",
+            "Validates remove confirmation popup",
+            "Tests removal of different message types",
+            "Verifies removal indicators"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display of Remove button",
+                "expected_result": "The Remove button is displayed as design"
+            },
+            {
+                "test_view_point": "Verify that the remove popup is displayed after clicking on the remove button",
+                "expected_result": "The remove popup should be displayed as design"
+            },
+            {
+                "test_view_point": "Verify removing a message which contains a quote",
+                "expected_result": "The message should be removed normally"
+            },
+            {
+                "test_view_point": "Verify handle when on popup confirm remove\n+ User clicking on the Cancel button",
+                "expected_result": "+ The Remove popup should closed\n+ Message isn't removed\n"
+            },
+            {
+                "test_view_point": "Verify handle when on popup confirm remove\n+ User clicking on the Remove button",
+                "expected_result": "+ The Remove popup should closed\n+ The message should be removed successfully, and the it shouldn't be displayed on conversation box"
+            },
+            {
+                "test_view_point": "Verify that the warning message is displayed on the chat box after removing a message",
+                "expected_result": "The warning message \"This message has been deleted\" should be displayed on the chat box after deleting a message"
+            }
+        ]
+    },
+    {
+        "item_type": "Copy/Paste",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests copy/paste functionality for messages",
+            "Validates copy button visibility",
+            "Tests copying different content types",
+            "Verifies copy/paste operations"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify that the Copy button is displayed if hovering the mouse cursor over the message\n(Depending on SRS)",
+                "expected_result": "The Copy button appears (Depending on SRS)"
+            },
+            {
+                "test_view_point": "Verify that the Copy button is displayed after select on a passage",
+                "expected_result": "Copy/Paste button is displayed as design\n(Depending on SRS)"
+            },
+            {
+                "test_view_point": "Verify displaying of Copy/Paste button",
+                "expected_result": "Copy/Paste button is displayed as design\n(Depending on SRS)"
+            },
+            {
+                "test_view_point": "Verify copying/paste a message\n+ By using the copy button/paste button\n+ By using CRTL+C &CRTL+V\n+ By Selecting text, then right clicking on the mouse and Selecting \"Copy/Paste\"",
+                "expected_result": "\n+ Able to copying/ paste normally　(Depending on SRS)\n+ Content after pasting should be displayed normally & correctly\n (Depending on SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when copying/pasting: \n+ An emoji\n+ A quote\n+ An attached file (ex: documents...)\n+ A gif\n+ Some special characters (ex: html code, symbol...)",
+                "expected_result": "Content should be copied and pasted correctly for all types"
+            }
+        ]
+    },
+    {
+        "item_type": "Mention",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests mention functionality",
+            "Validates mention notifications",
+            "Tests mention highlighting",
+            "Verifies mention restrictions"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify mention function when\n+ Typing correctly format\n+ Selecting user from list",
+                "expected_result": "User should be mentioned correctly"
+            },
+            {
+                "test_view_point": "Verify user who has been mentioned is highlighted on the chat dialog",
+                "expected_result": "The mentioned message and username should be highlighted"
+            },
+            {
+                "test_view_point": "Verify suggestion list is displayed when typing an user name and format to mention",
+                "expected_result": "The suggestion list should be displayed and selected"
+            },
+            {
+                "test_view_point": "Verify user who has been mentioned is received notification",
+                "expected_result": "User should be received notification\n(Depending on SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when copying/paste a mention",
+                "expected_result": "The mention function should work correctly"
+            },
+            {
+                "test_view_point": "Verify handle when deleting a message contains mention",
+                "expected_result": "The message should be deleted correctly"
+            },
+            {
+                "test_view_point": "Verify handle when mention some people",
+                "expected_result": "Selected people should be highlighted and mentioned normally"
+            },
+            {
+                "test_view_point": "Verify handle when mention all people",
+                "expected_result": "All people should be highlighted and mentioned normally"
+            },
+            {
+                "test_view_point": "Verify handle mention:\n+ User name is longer name to be defined in the list mention\n+ User name is blocked\n+ User is not in group chat",
+                "expected_result": "+ Can not mention invalid user\n+ User name mention is displayed as text only\n+ User name shouldn't highlighted\n+ User shouldn't received notification\n+ The mention function shouldn't work"
+            }
+        ]
+    },
+    {
+        "item_type": "Read/Unread Status",
+        "main_item": "Chatbox",
+        "sub_item": "Conversation Box",
+        "descriptions": [
+            "Tests read/unread message status",
+            "Validates unread message counter",
+            "Tests status changes",
+            "Verifies real-time updates"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display of unread button when right click on received message",
+                "expected_result": "Button Unread is displayed as design"
+            },
+            {
+                "test_view_point": "Verify the user can change to status of the message from read to unread",
+                "expected_result": "+ At Contact list: the number of unread messages will be increased.\n+ In Conversation box: label unread will be marked from where the user selected is unread"
+            },
+            {
+                "test_view_point": "Verify displays in case of too many unread messages",
+                "expected_result": "+ The number of unread messages displayed is 100+, 1000+ or correctly displayed as 9998\n(Depending on SRS)"
+            },
+            {
+                "test_view_point": "Verify when real time then number of unread messages is auto increased",
+                "expected_result": "Number of unread message is auto increased by +1"
+            },
+            {
+                "test_view_point": "Verify the user can change to status of the message from unread to read",
+                "expected_result": "+ At Contact list: the number of unread messages will be decreased.\n+ In Conversation box: label unread will be remove"
+            }
+        ]
+    },
+    {
+        "item_type": "Video Call",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests video call functionality and interface",
+            "Validates call initiation and acceptance",
+            "Tests username and avatar display",
+            "Verifies various call scenarios and error handling"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of Video Call symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip"
+            },
+            {
+                "test_view_point": "Verify handle when select on video call \n+ The first time recipient does accept calls",
+                "expected_result": "Open calling screen that layout as design:\n+ Layout, color, style...\n+ Popup to confirm turning on microphone, video. \n+ Calling: connect to the particular person with calling ring tone and callers name.\n+ Popup to confirm turning on microphone, video."
+            },
+            {
+                "test_view_point": "Verify handle when select on video call \n+ The next time recipient does accept calls",
+                "expected_result": "Open calling screen that layout as design:\n+ Layout, color, style...\n+ Calling: connect to the particular person with calling ring tone and callers name.\n+ Open calling video screen"
+            },
+            {
+                "test_view_point": "Verify can chatting while calling video",
+                "expected_result": "User can chat and call video at the same time"
+            },
+            {
+                "test_view_point": "Verify can't calling multi video at the same time",
+                "expected_result": "User can't calling multi video at the same time\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify that the User name is displayed correctly when\n+ User who has a long name\n+ User name is haflsize\n+ Username is fullsize\n+ Username which contains special characters\nEx: html code, %$%&#*((&&$$, symbols... )",
+                "expected_result": "+ The Username should be displayed correctly on the header bar \n+ Display \"さ ん\" ／ \"様\" after partner's username"
+            },
+            {
+                "test_view_point": "Verify that the default image is displayed if the avatar image is not added",
+                "expected_result": "The default image should be displayed correctly"
+            },
+            {
+                "test_view_point": "Verify that the avatar image viewed is the same as the one uploaded",
+                "expected_result": "+ The image file displayed should be the same as the one uploaded\n+ The avatar image isn't cropped off\n+ The quality of the avatar image shouldn't be changed after uploading the image"
+            },
+            {
+                "test_view_point": "Verify display when \n+ Call 1 person before particular person accepts",
+                "expected_result": "Open calling screen that UI are the same with design:\n+ layout, color, style... \n+ Icon: video, mic, end call, add person, quality of internet, message, contact, full screen...\n+ Connect to the particlular person with calling ring tone\n+ Video Frame of caller: display image of caller by webcam.\n+ Video Frame of the particular person: display avatar and name."
+            },
+            {
+                "test_view_point": "Verify display when \n+ Call a group before particular person accepts",
+                "expected_result": "Open calling screen that UI are the same with design:\n+ layout, color, style... \n+ Icon: video, mic, end call, add person, quality of internet, message, contact, full screen...\n+ Connect to the particlular person with calling ring tone\n+ Video Frame of caller: display image of caller by webcam.\n+ Video Frame of the particular persons: display avatar and name of each persion in group. Each member has 1 frame"
+            },
+            {
+                "test_view_point": "Verify handle when do:\n+ Call is finished by recipient\n+ Call is cancelled by sender \n+ Recipient doesn't accept calls",
+                "expected_result": "+ Call is cancel/finish sucessfully.\n+ User and Partner can't connection\n+ User/ Partner can recall normally\n+ On the conversation box: Message \"Notice that a call has been canceled\"/\"Notice that there is a missed call\" is displayed"
+            },
+            {
+                "test_view_point": "Verify handle after call video sucessfully",
+                "expected_result": "+ On the conversation box: Message \"The video call within ... ended at ...\" is displayed\n+ User/ Partner can recall normally"
+            },
+            {
+                "test_view_point": "Verify handle when displaying video call icon on computer \n+ Has webcam\n+ Hasn't webcam",
+                "expected_result": "Computer or Device that have/haven't webcame/ camera. Display correctly popup as designed:\n+ Position: <Position>\n+ Symbol: <image>\n+ Tooltip: <text>\n+ Icon is active/inactive"
+            },
+            {
+                "test_view_point": "Verify handle when video call the caller has Camera while the recipient has no camera",
+                "expected_result": "+ The recipient still sees the image of the caller\n+ The caller can't see the image of the recipient\n+ The call is still performed normally"
+            },
+            {
+                "test_view_point": "Verify handle when calling then internet connection is failed",
+                "expected_result": "+ The call is stopped\n+ The caller & recipient can't see each other\n+ The call is automatically reconnected when internet connection returns to normal"
+            }
+        ]
+    },
+    {
+        "item_type": "Audio Call",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests audio call functionality and interface",
+            "Validates call initiation and acceptance",
+            "Tests username and avatar display",
+            "Verifies various call scenarios and error handling"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of Audio Call symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip"
+            },
+            {
+                "test_view_point": "Verify handle when select on audio call \n+ The first time recipient does accept calls",
+                "expected_result": "Open calling screen that layout as design:\n+ Layout, color, style...\n+ Popup to confirm turning on microphone, turning off video. \n+ Calling: connect to the particular person with calling ring tone and callers name.\n+ Popup to confirm turning on microphone."
+            },
+            {
+                "test_view_point": "Verify handle when select on audio call \n+ The next time recipient does accept calls",
+                "expected_result": "Open calling screen that layout as design:\n+ Layout, color, style...\n+ Calling: connect to the particular person with calling ring tone and callers name.\n+ Open calling audio screen"
+            },
+            {
+                "test_view_point": "Verify can chatting while calling audio",
+                "expected_result": "User can chat and call audio at the same time"
+            },
+            {
+                "test_view_point": "Verify can't calling multi audio at the same time",
+                "expected_result": "User can't calling multi audio at the same time\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify that the User name is displayed correctly when\n+ User who has a long name\n+ User name is haflsize\n+ Username is fullsize\n+ Username which contains special characters\nEx: html code, %$%&#*((&&$$, symbols...",
+                "expected_result": "+ The User name should be displayed correctly on the header bar \n+ Display the word さ ん ／ 様 after partner's username"
+            },
+            {
+                "test_view_point": "Verify that the default image is displayed if the avatar image is not added",
+                "expected_result": "The default image should be displayed correctly"
+            },
+            {
+                "test_view_point": "Verify that the avatar image viewed is the same as the one uploaded",
+                "expected_result": "+ The image file displayed should be the same as the one uploaded\n+ The avatar image isn't cropped off\n+ The quality of the avatar image shouldn't be changed after uploading the image"
+            },
+            {
+                "test_view_point": "Verify handle when displaying audio call icon on computer",
+                "expected_result": "Display correctly popup as designed:\n+ Position: <Position>\n+ Symbol: <image>\n+ Tooltip: <text>"
+            },
+            {
+                "test_view_point": "Verify display when audio call:\n+ Call 1 person before particular person accepts",
+                "expected_result": "Open calling screen that UI are the same with design:\n+ layout, color, style... \n+ Icon: mic, end call, add person, quality of internet, message, contact, full screen...\n+ Connect to the particlular person with calling ring tone\n+ Audio Frame of caller: display image of recipient \n+ Audio Frame of the particular person: display avatar and name."
+            },
+            {
+                "test_view_point": "Verify display when audio call:\n+ Call a group before particular person accepts",
+                "expected_result": "Open calling screen that UI are the same with design:\n+ layout, color, style... \n+ Icon: mic, end call, add person, quality of internet, message, contact, full screen...\n+ Connect to the particlular person with calling ring tone\n+ Audio Frame of caller: display image of recipient \n+ Audio Frame of the particular persons: display avatar and name of each person in group. Each member has 1 frame"
+            },
+            {
+                "test_view_point": "Verify handle when do:\n+ Call is finish by recipient\n+ Call is cancel by sender \n+ Recipient doesn't accept calls",
+                "expected_result": "+ Call is cancel/finish sucessfully.\n+ User and Partner can't connection\n+ User/ Partner can recall normally\n+ On the conversation box: Message \"Notice that a call has been canceled\"/\"Notice that there is a missed call\" is displayed"
+            },
+            {
+                "test_view_point": "Verify handle after call audio sucessfully",
+                "expected_result": "+ On the conversation box: Message \"The audio call within ... ended at ...\" is displayed\n+ User/ Partner can recall normally"
+            },
+            {
+                "test_view_point": "Verify handle when calling then internet connection is failed",
+                "expected_result": "+ The call is stopped\n+ The caller & recipient can't hear each other\n+ The call is automatically reconnected when internet connection returns to normal"
+            }
+        ]
+    },
+    {
+        "item_type": "Contact List",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests contact list display and functionality",
+            "Validates contact interactions",
+            "Tests avatar display",
+            "Verifies contact removal scenarios"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of Contact List symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip"
+            },
+            {
+                "test_view_point": "Verify handle when select on Contact list symbol",
+                "expected_result": "Contact list will be display as design"
+            },
+            {
+                "test_view_point": "Verify handle when select outsite Contact list",
+                "expected_result": "List contact popup is closed"
+            },
+            {
+                "test_view_point": "Verify displaying when: \n+ Don't have any contact",
+                "expected_result": "+ Text \"Don't have any contacts\" is displayed\n+ Scroll bar isn't displayed"
+            },
+            {
+                "test_view_point": "Verify displaying when: \n+ Just 1  contact",
+                "expected_result": "+ Just 1 contact is displayed\n+ Scroll bar isn't displayed"
+            },
+            {
+                "test_view_point": "Verify displaying when: \n+ Many contacts",
+                "expected_result": "+ List contact is displayed correctly & fully\n+ Scroll bar is displayed"
+            },
+            {
+                "test_view_point": "Verify displaying when:\n+ Contact have avatar",
+                "expected_result": "+ Avatar is displayed correctly\n+ Avatar is displayed as design"
+            },
+            {
+                "test_view_point": "Verify displaying when:\n+ Contacts don't have avatar",
+                "expected_result": "+ Defaut Avatar is displayed correctly\n+ Defaut  avatar is displayed as design"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Select on contact has been conversation",
+                "expected_result": "+ At Contact list: this contact is highlighted\n+ Content of conversation is displayed correctly with selected contact\n+ Title of conversation is displayed correctly with selected contact"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Select on contact hasn't been conversation yet",
+                "expected_result": "+ At Contact list: this contact is highlighted\n+ Content of conversation displayed is blank\n+ Title of conversation is displayed correctly with selected contact"
+            },
+            {
+                "test_view_point": "Verify handle when select on group chat",
+                "expected_result": "+ At Contact list: this group is highlighted\n+ Content of conversation is displayed correctly with selected group\n+ Title of conversation is displayed correctly with selected group"
+            },
+            {
+                "test_view_point": "Verify handle when multi select on different contact",
+                "expected_result": "+ At Contact list: contact is highlighted \n+ Go to the correct conversation of contact\n+ No delay or loading data too slowly\n+ The selected contact must be changed correctly in according to action clicks of user"
+            },
+            {
+                "test_view_point": "Verify handle when select on contact have unread message",
+                "expected_result": "+ At Contact list: Displays the number of unread messages correctly\n+ Mark unread on unread messages correctly"
+            },
+            {
+                "test_view_point": "Verify handle when read all unread messages",
+                "expected_result": "+ At Contact list: Number of unread messages is removed\n+ Mark unread is removed"
+            },
+            {
+                "test_view_point": "Verify handle when partner remove contact with user.",
+                "expected_result": "+ At list contact of user: \n        . Partner account is displayed\n        . Number of unread message is kept.\n+ At list contact of partner: user account isn't displayed  \n+ At convesation box:\n        . Conversation is displayed normally.\n        . User received/send calls, message"
+            },
+            {
+                "test_view_point": "Verify handle when user remove contact with partner.",
+                "expected_result": "+ At list contact of user: \n        . Partner account isn't displayed\n        . Number of unread message is kept.\n+ At list contact of partner: user account is displayed  \n+ At convesation box:\n        . Conversation is displayed normally.\n        . User received/send calls, message"
+            },
+            {
+                "test_view_point": "Verify handle when both user & partner remove contact.",
+                "expected_result": "+ At list contact of user: \n        . Partner account isn't displayed\n        . Number of unread message isn't kept.\n+ At list contact of partner:\n        . User account isn't displayed\n        . Number of unread message isn't kept.  \n+ At convesation box:\n        . Conversation is removed.\n        . User can't received/send calls, message"
+            }
+        ]
+    },
+    {
+        "item_type": "Add Contact",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests add contact functionality",
+            "Validates search functionality",
+            "Tests contact request handling",
+            "Verifies contact request notifications"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify display of button Add Contact",
+                "expected_result": "Button Add Contact is displayed as design"
+            },
+            {
+                "test_view_point": "Verify handle when select on Add Contact button",
+                "expected_result": "Add a new contact screen is displayed as design"
+            },
+            {
+                "test_view_point": "Verify at Add a new contact screen:\n  + Input search condition\n  + At Search result: click button Add New Contact",
+                "expected_result": "+ New Contact is add successfully\n+ At Contact list: new contact is added\n+ When search again 1 more time (new contact) then button Add isn't displayed."
+            },
+            {
+                "test_view_point": "Verify handle when input search condition is\n+ Half size (Ex: namae)\n+ Full size (Ex: ｎａｍａｅ)\n+ Spectial character (Ex: &#)\n+ Emoji (Ex: :) )",
+                "expected_result": "+ Display all username (Not belong to contact list) that match with search condition\n+ Display all username (Belong to contact list) that match with search condition\n+ Display all description that match with search condition\n+ Display all content chat that match with search condition"
+            },
+            {
+                "test_view_point": "Verify handle when input search condition doesn't exist",
+                "expected_result": "+ Test result is 0 record\n+ Displaying messages doesn't find suitable results"
+            },
+            {
+                "test_view_point": "Verify handle when select on search result",
+                "expected_result": "+ Go to contact detail screen sucessfully.\n+ Contact detail is displayed correctly"
+            },
+            {
+                "test_view_point": "Verify handle when do:\n+ Click button X on Add a new contact popup\n+ select outsize popup Add a new contact",
+                "expected_result": "Add a new contact popup is closed"
+            },
+            {
+                "test_view_point": "Verify handle when user recipient  \nisn't accept/pending to request Add Contact",
+                "expected_result": "+ Sent message is sent successfully.\n+ Sent Message move to mailbox waiting of receive message \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when someone add contact",
+                "expected_result": "+ At icon Add Contact: \nThe number of users who want to request contact with user is displayed correctly\n+ Number of users who want to request contact is red color\n+ When select on number of users then list user is displayed correctly\n(Depending on the SRS)"
+            }
+        ]
+    },
+    {
+        "item_type": "Add To Group",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests group creation functionality",
+            "Validates group member management",
+            "Tests group chat features",
+            "Verifies group deletion scenarios"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify displaying of Add to group symbol",
+                "expected_result": "Icon symbol is displayed as design:\n+ Position\n+ Icon\n+ Tooltip"
+            },
+            {
+                "test_view_point": "Verify handle when select on Add To Group symbol",
+                "expected_result": "Add to Group screen is displayed as design:\n+ Search box\n+ List contact\n..."
+            },
+            {
+                "test_view_point": "Verify handle when adding the number of users > max to the group",
+                "expected_result": "+ Can't add user to the group\n+ Warning message is displayed"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ Adding the number of users = max to the group\n+ Adding the number of users < max to the group",
+                "expected_result": "+ Can add user to the group\n+ Users join successfully into the group\n+ Users (in the group) can chat with each other normally"
+            },
+            {
+                "test_view_point": "Verify handle when \n+ select outsite Add To Group popup\n+ select on X button",
+                "expected_result": "Add to Group popup is closed"
+            },
+            {
+                "test_view_point": "Verify handle when input search condition is \n+ Half size (Ex: namae)\n+ Full size (Ex: ｎａｍａｅ)\n+ Spectial character (Ex: &#)",
+                "expected_result": "Display all user that match with search condition"
+            },
+            {
+                "test_view_point": "Verify handle when user recipient  \nisn't accept/pending to request Add To Group",
+                "expected_result": "+ Recipient can't receive message.\n+ Recipient isn't join group yet \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when chat on group",
+                "expected_result": "+ All users of the group will be received the message\n+ All  received messages are the same content\n+ All  received messages at the same time\n(Internet connection is good)"
+            },
+            {
+                "test_view_point": "Verify handle when have someone left the group (group video calling/group audio calling/ group chatting).",
+                "expected_result": "+ User has left the group can't receive / send calls, messages, ... in the group\n+ Other users in the group still see old conversation of users left the group\n+ The remaining users still make call video, call audio, chat normally"
+            },
+            {
+                "test_view_point": "Verify handle when group chat is deleted by owner",
+                "expected_result": "+ All user in the group is removed. Can't receive/send calls, message,... in the group\n+ Old conversation isn't saved.\n+ At list contact: group is deleted"
+            },
+            {
+                "test_view_point": "Add to group user who don't add contact yet",
+                "expected_result": "+ Can't add to group\n+ Error message \"User don't add contact yet\" is displayed.\n(Depending on the SRS)"
+            }
+        ]
+    },
+    {
+        "item_type": "Search function",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests search functionality",
+            "Validates search results",
+            "Tests various input conditions",
+            "Verifies result handling"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify layout of search box",
+                "expected_result": "Search box is displayed as design.\nPlace holder is displayed correctly\nEx: Seach..."
+            },
+            {
+                "test_view_point": "Verify handle when click button Close Seach",
+                "expected_result": "+ Search condition is cleared\n+ The list is returned to its original value"
+            },
+            {
+                "test_view_point": "Verify handle when input search condition is\n+ Half size (Ex: namae)\n+ Full size (Ex: ｎａｍａｅ)\n+ Spectial character (Ex: &#)\n+ Emoji (Ex: :) )",
+                "expected_result": "Display all name (Belong to contact list OR NOT) or content of conversation that match with search condition"
+            },
+            {
+                "test_view_point": "Verify handle when input search condition doesn't exist",
+                "expected_result": "+ Test result is 0 record\n+ Displaying messages doesn't find suitable results"
+            },
+            {
+                "test_view_point": "Verify handle when select on search result",
+                "expected_result": "+ Go to conversation box sucessfully.\n+ Content of conversation that match with search condition is highligh"
+            }
+        ]
+    },
+    {
+        "item_type": "File management",
+        "main_item": "Chatbox",
+        "sub_item": "Menu Bar",
+        "descriptions": [
+            "Tests file management interface",
+            "Validates file operations",
+            "Tests file search and sorting",
+            "Verifies file actions"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify layout of file management button",
+                "expected_result": "File management button is displayed as design."
+            },
+            {
+                "test_view_point": "Verify handle when select on file management button in the case file exists",
+                "expected_result": "+ File Management screen is displayed correctly as design.\n+ All file is displayed fully và correctly"
+            },
+            {
+                "test_view_point": "Verify handle when select on file management button in the absence of any file exists",
+                "expected_result": "+ Message \"It's empty right now.\" is displayed"
+            },
+            {
+                "test_view_point": "Verify display & handle of search for file box",
+                "expected_result": "+ Search for file box is displayed as design.\n+ Display all file that match with search condition (Input search condition is Half size,Full size,Spectial character, Emoji)"
+            },
+            {
+                "test_view_point": "Verify handle when input search condition doesn't exist",
+                "expected_result": "+ Test result is 0 record\n+ Displaying messages doesn't find suitable results"
+            },
+            {
+                "test_view_point": "Verify sort display of list management",
+                "expected_result": "+ The file list is displayed in the correct order\n(Ex: follow as name, capacity, send date,...) \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when select on search result",
+                "expected_result": "+ Detail of file is displayed correctly:\nImage name \nImage\nSize\nUpload date\nChat\n+ Can close detail of file"
+            },
+            {
+                "test_view_point": "Verify display of management file the case too long",
+                "expected_result": "+ Scroll bar is displayed\n+ Can scroll up & down list file\n+ List file is displayed fully\n+ Paging file list (if have)"
+            },
+            {
+                "test_view_point": "Verify handle of paging file list in the case there are more X files\n(X: Maximum number of files to display paging)",
+                "expected_result": "+ Paging is displayed correctly\n+ Button |<, >|, >, < is handle & displayed correctly\n+ When click on button  |<, >|, >, <  navigate correctly \n+ Button |<, >|, >, < inactive/ active correctly"
+            },
+            {
+                "test_view_point": "Verify handle when hovering the mouse cursor over file",
+                "expected_result": "+ Button Download is displayed correctly\n+ Button Jump To assignment is displayed correctly\n+ Button Edit file name is displayed correctly\n+ Button Delete file is displayed correctly\n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when select on button Download",
+                "expected_result": "+ File is downloaded successfully\n+ Downloaded file is opened normally\n+ Content &format of downloaded file is displayed nomally"
+            },
+            {
+                "test_view_point": "Verify handle when select on button Jump To assignment",
+                "expected_result": "Go to location of file send  in the conversation box"
+            },
+            {
+                "test_view_point": "Verify handle when select on button Edit",
+                "expected_result": "+ Go to edit file name popup\n+ Can edit file name successfully"
+            },
+            {
+                "test_view_point": "Verify handle when select on button Delete",
+                "expected_result": "+ Confirm popup is displayed. \n+ Have 2 button: Cancel AND Delete"
+            },
+            {
+                "test_view_point": "Verify handle when on popup confirm delete\n+ User clicking on the Cancel button",
+                "expected_result": "+ The Delete popup should closed\n+ File isn't deleted"
+            },
+            {
+                "test_view_point": "Verify handle when on popup confirm delete\n+ User clicking on the Delete button",
+                "expected_result": "+ The Delete popup should closed\n+ File is deleted\n+ At conversation box: File is deleted, too"
+            }
+        ]
+    },
+    {
+        "item_type": "Stress test",
+        "main_item": "Chatbox",
+        "sub_item": "Stress test",
+        "descriptions": [
+            "Tests system stability under stress",
+            "Validates behavior during connection issues",
+            "Tests file upload scenarios",
+            "Verifies service error handling"
+        ],
+        "test_view_points": [
+            {
+                "test_view_point": "Verify handle when click below buttons many times\n+ Send\n+ Add File\n+ Edit \n+ Quote\n+ Copy/Paste\n+ Unread\n+ Video Call\n+ Contact List\n+ Add Contact\n+ Add to group",
+                "expected_result": "+ Only one send processing\n+ Popup/ message isn't duplicated\n+ The chatbox screen isn't happens stalled"
+            },
+            {
+                "test_view_point": "Verify time when send message but internet connection is failed\n+ Send\n+ Add File\n+ Edit \n+ Quote\n+ Copy/Paste\n+ Unread\n+ Video Call\n+ Contact List\n+ Add Contact\n+ Add to group",
+                "expected_result": "+Warning message \"Please wait... The internet is having problems.\" is displayed\n+ No action will be executed until the internet reconnects normally"
+            },
+            {
+                "test_view_point": "Verify handle when just sent message for user A then internet disconnect. (user don't know)\nAfter that, change to chat with user B",
+                "expected_result": "+ Content message sent for user A just display on conversation of user A\n+ Content message sent for user A isn't display on conversation of user B\n+ After internet is reconnect: \n    . Content message sent for user A sucessfully \n    . Content message just display on conversation of user A"
+            },
+            {
+                "test_view_point": "Verify time when received message but internet connection is failed",
+                "expected_result": "+ Sent message isn't displayed \n+ Displayed time on conversation box is time received successfully (internet connection is good)"
+            },
+            {
+                "test_view_point": "Verify realtime when received message in the case:\nThe first: internet connection is failed\nThe second: internet connection is good",
+                "expected_result": "+ Time is displayed correctly with real time of server/local  \n+ Real time is displayed as format hh:mm \n(Depending on the SRS)"
+            },
+            {
+                "test_view_point": "Verify handle when:\n+ Upload 1 file & continue upload another file\n+ Upload multi files with the same format and same time\n+ Upload multi files that are different format at the same time\n+ Drag and drop 1 file \n+ Drag and drop multi file",
+                "expected_result": "File is uploaded successfully & correctly\n+ Number: number of selected files\n+ Position: bottom of chat box. The latest file is under.\n+ Name file: the same with original file\n+ Capacity:the same with original file\n+ Style: highlight and active."
+            },
+            {
+                "test_view_point": "Verify handle when send message in the case service is error after that service return normal",
+                "expected_result": "+ Send message isn't duplicated\n+ Received message isn't duplicated.\n+ All functions work normally"
+            }
+        ]
+    }
+]

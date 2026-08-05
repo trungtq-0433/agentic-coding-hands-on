@@ -1,0 +1,17 @@
+{
+  "context": {
+    "general": [
+      { "key": "project",  "value": "<project or product name>" },
+      { "key": "company",  "value": "<organization or team name>" },
+      { "key": "setting",  "value": "<recording setting, e.g. meeting / demo / interview / lecture>" },
+      { "key": "topic",    "value": "<one-line description of what is being discussed>" },
+      { "key": "language", "value": "<dominant language(s), e.g. Vietnamese + English>" }
+    ],
+    "terms": [
+      "ExactProperNoun1",
+      "ExactProductName2",
+      "TechnicalAcronym3"
+    ],
+    "text": "2–5 sentence natural-language description of the recording domain. Who is speaking, what they are discussing, and what vocabulary is typically used. The more specific and accurate this paragraph, the better Soniox can bias its language model toward the correct words."
+  }
+}

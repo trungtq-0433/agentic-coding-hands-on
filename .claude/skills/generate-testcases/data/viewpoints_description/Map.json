@@ -1,0 +1,110 @@
+[
+    {
+        "item_type": "Check map of a company/store in a website",
+        "description": "Testing map display functionality, content accuracy, interaction controls and UI elements including street names, landmarks, markers and visual elements",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of map\n+ when open a page that contains map\n+ when refresh a page that contains map\n+ when back/next a page that contains map",
+                "expected_result": ["+ Map is loaded and displayed at correct position in screen\n+ Show correct map of that company/store..."]
+            },
+            {
+                "viewpoint": "Check map content\n\n+ Name of street, city, area (Museum, Post Office, Bridge...)\n+ Position of Street, City, Area (Museum, Post Office, Bridge...) \n+ Symbol of Street, City, Area (Museum, Post Office, Bridge...)\n+ Position mark\n+ Color of text, symbol, mark, elements in map",
+                "expected_result": ["+ Names are displayed correctly with correct language and format \n+ Position of each items is correct\n+ Symbol of each items is correct\n+ Position mark is displayed correctly. When hover on mark, it shows correct name of that address\n"]
+            },
+            {
+                "viewpoint": "Check action on that map\n\n+ Cursor hover\n+ Cursor click\n+ Cursor drag\n+ Zoom in/ zoom out\n",
+                "expected_result": ["+ Cursor displays as palm when hover on map\n+ Map is zoomed out when click on map\n+ Hidden area at the top/bottom/ left / right are showed when drag up ⇔ down, left ⇔ right"]
+            },
+            {
+                "viewpoint": "Check buttons on map\n\n+ Show satellite imagery\n+ Show street map\n+ View larger map\n+ Account\n+ Map footer",
+                "expected_result": ["Map is displayed properly as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check function to search a map",
+        "description": "Testing map search functionality including search box behavior, side panel features, search logic with various input formats, and clear button functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check search box",
+                "expected_result": ["+ Search text box is displayed as Blank\n+ Search button is displayed\n+ Direction button is displayed\n+ Clear text button (X button) is not displayed when there is no text in search box"]
+            },
+            {
+                "viewpoint": "Check left side panel\n\n+ Set a home address\n+ Set a work address\n+ Switch to transit / Switch to driving\n+ Moderate traffic in this area\n+ Restaurants / Hotels / Bars / Coffee...\n+ Weather",
+                "expected_result": ["Operate properly as spec"]
+            },
+            {
+                "viewpoint": "Check search logic\n\n+ Input some texts and not click search to view suggestion\n+ Input address and click Search button\n+ Input address and click Enter\n+ Input longitude and latitude and click Search\n+ Input longitude and latitude and click Enter\n+ Input no text in address and  search\n+ Input only a letter\n+ Input only some words in long address\n+ Input full words of a long address without comma \",\" between street, town, city\n+ Input full words of a long address with comma \",\" between street, town, city\n+ Input address in English language\n+ Input address in Japanese language\n+ Input address in Vietnamese language\n+ Input address + some special characters: !@#$%^&*() ....\n+ Input only some special character and search\n+ Input incorrect address\n+ Add long space between words of correct address:\nEx: HA                                                            NOI\n+ Add long space at the beginning or at the end of keyword\nEX:                                               HANOI\n+ Add long underline between words of correct address\nEX: ha__________________________________noi\n+ Add  - between words of correct address\nEX: ha-noi\n+ Add @ at the beginning/middle/end of keyword\n+ Input both English, Japanese, Vietnamese in keyword\n+ Input symbol: ✈　🚃\n+ Input \"NULL\" \n",
+                "expected_result": ["If there is result when searching\n+ It shows suitable area on map\n+ Name, position, symbol, mark on map are displayed correctly\n\nIf there is no result when searching\n+ It shows \"Map can't find + keyword\""]
+            },
+            {
+                "viewpoint": "Check clear button\n\n+ Input address, search => Click clear button\n+ Input address, search => Click clear button. Then input the same address and search\n+ Input address, search => Click clear button. Then input different address and search",
+                "expected_result": ["+ Clear button appears after search\n+ Map is unchanged when click clear button\n+ Map is unchanged when click clear button and search with the same address\n+ Map is displayed new address when click clear button and search new address"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check function to search destination",
+        "description": "Testing destination search functionality with various input formats, address combinations, and travel modes including driving, transit, walking, cycling and flight options",
+        "test_view_points": [
+            {
+                "viewpoint": "Check destination logic\n+ Input Start Point, not input Destination\n+ Input Destination, not input Start Point\n+ Input the same address in Start Point and Destination\n+ Input some texts and not click search to view suggestion\n+ Input address and click Search button\n+ Input address and click Enter\n+ Input longitude and latitude and click Search\n+ Input longitude and latitude and click Enter\n+ Input no text in address and  search\n+ Input only a letter\n+ Input only some words in long address\n+ Input full words of a long address without comma \",\" between street, town, city\n+ Input full words of a long address with comma \",\" between street, town, city\n+ Input address in English language\n+ Input address in Japanese language\n+ Input address in Vietnamese language\n+ Input address + some special characters: !@#$%^&*() ....\n+ Input only some special character and search\n+ Input incorrect address\n+ Add long space between words of correct address:\nEx: HA                                                            NOI\n+ Add long space at the beginning or at the end of keyword\nEX:                                               HANOI\n+ Add long underline between words of correct address\nEX: ha__________________________________noi\n+ Add  - between words of correct address\nEX: ha-noi\n+ Add @ at the beginning/middle/end of keyword\n+ Input both English, Japanese, Vietnamese in keyword\n+ Input symbol: ✈　🚃\n+ Input \"NULL\" ",
+                "expected_result": ["If there is result when searching, it will show suitable address in Start Point and Destination\n1. Check the menu\nIt will show information from Start Point to Destination\nKm from Start Point to Destination \nHours/Minutes to go from Start Point to Destination\n\n2. Check the map\nIt will show the road to go from Start Point to Destination in Green color\nKm from Start Point to Destination \nHours/Minutes to go from Start Point to Destination\n\n\nIf there is no result when searching\n+ It shows \"Map can't find + keyword\""]
+            },
+            {
+                "viewpoint": "Check Swap Start Point and Destination\n+ Input Start Point only and Click button Swap ⇧⇩\n+ Input Destination only and Click button Swap ⇧⇩\n+ Input Start Point and Destination with different address and Click button Swap ⇧⇩\n",
+                "expected_result": ["1. Check the menu\nAddress in Start Point and Destination are replaced with each other\n2. Check the map\nMap is displayed properly\n"]
+            },
+            {
+                "viewpoint": "+ Input Start Point and Destination with same address and Click button Swap ⇧⇩",
+                "expected_result": ["1. Check the menu Show proper error message \n2. Check the map Map is displayed properly"]
+            },
+            {
+                "viewpoint": "Check travel mode with below Start Point and Destination \n+ A store to another store in a city \n+ A road to another road in a town \n+ A city to another city in a country \n+ A country to another country in the world",
+                "expected_result": ["Available travel modes are displayed correctly \n・For available travel mode, it shows correct Km/HoursMinutes to go \n・For unavailable travel mode, it shows correctly as XXX not available"]
+            },
+            {
+                "viewpoint": "Travel mode: Driving",
+                "expected_result": ["1. Check the menu\nIt will show information from Start Point to Destination\nKm from Start Point to Destination if driving\nHours/Minutes to go from Start Point to Destination if driving\nCan Check in detail how to go from the Start Point to Destination\n\n2. Check the map\nIt will show the road to go from Start Point to Destination in Green color\nKm from Start Point to Destination if driving\nHours/Minutes to go from Start Point to Destination if driving\n"]
+            },
+            {
+                "viewpoint": "Travel mode: Transit Address of Japan Ex: Tokyo => Kyoto",
+                "expected_result": ["1. Check the menu It will show information from Start Point to Destination Km from Start Point to Destination if going by Train like Shinkansen Hours/Minutes to go from Start Point to Destination if going by Shinkansen Can Check in detail how to go from the Start Point to destination Show price of ticket \n2. Check the map It will show the road to go from Start Point to Destination in Green color Km from Start Point to Destination if going by Shinkansen Hours/Minutes to go from Start Point to Destination if going by Shinkansen"]
+            },
+            {
+                "viewpoint": "Travel mode: Walking",
+                "expected_result": ["1. Check the menu It will show information from Start Point to Destination Km from Start Point to Destination if walking Hours/Minutes to go from Start Point to Destination if walking Can Check in detail how to go from the Start Point to destination \n2. Check the map It will show the road to go from Start Point to Destination in Green color Km from Start Point to Destination if walking Hours/Minutes to go from Start Point to Destination if walking"]
+            },
+            {
+                "viewpoint": "Travel mode: Cycling",
+                "expected_result": ["1. Check the menu It will show information from Start Point to Destination Km from Start Point to Destination if going by bicycle Hours/Minutes to go from Start Point to Destination if going by bicycle Can Check in detail how to go from the Start Point to destination \n2. Check the map It will show the road to go from Start Point to Destination in Green color Km from Start Point to Destination if going by bicycle Hours/Minutes to go from Start Point to Destinationif going by bicycle"]
+            },
+            {
+                "viewpoint": "Travel mode: Flight",
+                "expected_result": ["1. Check the menu It will show information from Start Point to Destination Km from Start Point to Destination if going by air Hours/Minutes to go from Start Point to Destination if going by air Can Check in detail how to go from the Start Point to destination 2. Check the map It will show the road to go from Start Point to Destination in Green color Km from Start Point to Destination if going by air Hours/Minutes to go from Start Point to Destinationif going by air"]
+            },
+            {
+                "viewpoint": "Set special address: + CatBa Islands, Everest Mountains, Halong Bays + Army Base that is permitted to visiable in Google map + Army Base that is not permitted to visiable in Google map",
+                "expected_result": ["1. Check the menu It will show proper travel mode \n2. Check the map The map is displayed properly"]
+            },
+            {
+                "viewpoint": "Input Start Point and Destination to search (User is not on the way from Start to Destination). Then Check displaying of map during user moving + Driving a car + In a shinkansen + In a boat + In a canal",
+                "expected_result": ["1. Check the menu It will show information from Start Point to Destination Km from Start Point to Destination Hours/Minutes to go from Start Point to Destination Can Check in detail how to go from the Start Point to destination \n2. Check the map It will show the road to go from Start Point to Destination in Green color Km from Start Point to Destination if going by bicycle Hours/Minutes to go from Start Point to Destinationif going by bicycle \n3. Check the position of people It will show the position that person is sitting in that map to Check whether they are going the corrrect direction or not"]
+            },
+            {
+                "viewpoint": "Input Start Point and Destination to search (User is on the way from Start to Destination). Then Check displaying of map during user moving + Driving a car + In a shinkansen + In a boat + In a canal",
+                "expected_result": ["1. Check the menu It will show information from Start Point to Destination Km from Start Point to Destination Hours/Minutes to go from Start Point to Destination Can Check in detail how to go from the Start Point to destination \n2. Check the map It will show the road to go from Start Point to Destination in Green color Km from Start Point to Destination if going by bicycle Hours/Minutes to go from Start Point to Destinationif going by bicycle \n3. Check the position of people It will show the position that person is sitting in that map to Check whether they are going the corrrect direction or not"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check view of map",
+        "description": "Testing map visualization under different screen resolutions, orientations, connectivity conditions and transportation scenarios",
+        "test_view_points": [
+            {
+                "viewpoint": "+ When viewing map, change the screen resolution \n1068 x 768\n1366 x 768\n+ When viewing map, change view from landscape ⇔ horizontal continuously\n+ When viewing map, there is a call/ message/notification\n+ When viewing map, person change his/her position continuously\n+ When viewing map, turnoff internet connection and turn on again \n+ Opening map in tel when driving a motorbike\n+ Opening map in tel when on a bus\n+ Opening map in tel when on a high-speed train\n+ Opening map in tel when on a flight",
+                "expected_result": ["Can / Cannot view the present map (As defined in spec)\nCan / Cannot Check the position of viewer (As defined in spec)"]
+            }
+        ]
+    }
+]

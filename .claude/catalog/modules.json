@@ -1,0 +1,758 @@
+{
+  "version": 1,
+  "generatedBy": "gen-catalog.cjs",
+  "kit": "engineer",
+  "modules": [
+    {
+      "id": "ai-collaboration",
+      "skills": [
+        {
+          "dir": "ask-expert",
+          "name": "tkm:ask-expert",
+          "triggers": [
+            "expert opinion",
+            "best practice advice",
+            "architectural guidance",
+            "ask an expert"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "automation-browser",
+      "skills": [
+        {
+          "dir": "automate-browser",
+          "name": "tkm:automate-browser",
+          "triggers": [
+            "screenshot",
+            "scrape",
+            "automate browser",
+            "Puppeteer",
+            "web automation",
+            "performance test"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backend-database",
+      "skills": [
+        {
+          "dir": "build-backend",
+          "name": "tkm:build-backend",
+          "triggers": [
+            "API",
+            "backend",
+            "REST endpoint",
+            "GraphQL",
+            "NestJS",
+            "FastAPI",
+            "Django",
+            "auth backend",
+            "microservice"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bug-fixing-debugging",
+      "skills": [
+        {
+          "dir": "audit-security",
+          "name": "tkm:audit-security",
+          "triggers": [
+            "security",
+            "vulnerabilities",
+            "OWASP",
+            "harden",
+            "security audit",
+            "scan for exploits"
+          ]
+        },
+        {
+          "dir": "debug-code",
+          "name": "tkm:debug-code",
+          "triggers": [
+            "investigate",
+            "why is X happening",
+            "root cause",
+            "strange behavior",
+            "unexpected",
+            "trace",
+            "diagnose"
+          ]
+        },
+        {
+          "dir": "fix-bug",
+          "name": "tkm:fix-bug",
+          "triggers": [
+            "bug",
+            "error",
+            "broken",
+            "not working",
+            "failing",
+            "crash",
+            "exception",
+            "CI failing",
+            "fix this"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "configuration-level",
+      "skills": [
+        {
+          "dir": "help",
+          "name": "tkm:help",
+          "triggers": [
+            "help",
+            "list skills",
+            "what skills",
+            "skill catalog",
+            "which skill",
+            "capabilities"
+          ]
+        },
+        {
+          "dir": "kaizen",
+          "name": "tkm:kaizen",
+          "triggers": [
+            "improve skill",
+            "tune skill",
+            "skill is weak",
+            "compare skill",
+            "extend skill",
+            "customize skill",
+            "kaizen"
+          ]
+        },
+        {
+          "dir": "set-level",
+          "name": "tkm:set-level",
+          "triggers": [
+            "explain simply",
+            "set level",
+            "junior mode",
+            "expert mode",
+            "ELI5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deployment-infrastructure",
+      "skills": [
+        {
+          "dir": "deploy-app",
+          "name": "tkm:deploy-app",
+          "triggers": [
+            "deploy",
+            "publish",
+            "go live",
+            "push to production",
+            "host this app"
+          ]
+        },
+        {
+          "dir": "devops",
+          "name": "tkm:devops",
+          "triggers": [
+            "Docker",
+            "Kubernetes",
+            "CI/CD pipeline",
+            "GitOps",
+            "Helm",
+            "Cloudflare Workers"
+          ]
+        },
+        {
+          "dir": "infra",
+          "name": "tkm:infra",
+          "triggers": [
+            "Terraform",
+            "AWS",
+            "infrastructure as code",
+            "IaC",
+            "EC2",
+            "RDS",
+            "cost estimate"
+          ]
+        },
+        {
+          "dir": "ship",
+          "name": "tkm:ship",
+          "triggers": [
+            "ship",
+            "merge feature",
+            "open PR",
+            "feature is done",
+            "ready to merge"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-frontend",
+      "skills": [
+        {
+          "dir": "build-frontend",
+          "name": "tkm:build-frontend",
+          "triggers": [
+            "React component",
+            "TypeScript frontend",
+            "TanStack Router",
+            "MUI",
+            "useSuspenseQuery",
+            "lazy loading"
+          ]
+        },
+        {
+          "dir": "design-to-code",
+          "name": "tkm:design-to-code",
+          "triggers": [
+            "redesign this",
+            "make it look like",
+            "replicate UI",
+            "from screenshot",
+            "from Figma",
+            "pixel-perfect",
+            "convert design to code",
+            "thiết kế lại"
+          ]
+        },
+        {
+          "dir": "design-ui",
+          "name": "tkm:design-ui",
+          "triggers": [
+            "design from scratch",
+            "choose colors",
+            "pick fonts",
+            "design system",
+            "what style should",
+            "UX guidelines",
+            "create UI from idea"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "documentation-knowledge",
+      "skills": [
+        {
+          "dir": "generate-llms-txt",
+          "name": "tkm:generate-llms-txt",
+          "triggers": [
+            "generate llms.txt",
+            "llm.txt",
+            "llms.txt",
+            "agent-first doc",
+            "file for agents"
+          ]
+        },
+        {
+          "dir": "manage-docs",
+          "name": "tkm:manage-docs",
+          "triggers": [
+            "update docs",
+            "document this",
+            "README",
+            "codebase summary",
+            "sync docs"
+          ]
+        },
+        {
+          "dir": "markdown-novel-viewer",
+          "name": "tkm:markdown-novel-viewer",
+          "triggers": [
+            "read in browser",
+            "open plan nicely",
+            "novel viewer",
+            "render markdown",
+            "reading view"
+          ]
+        },
+        {
+          "dir": "rebuild-spec",
+          "name": "tkm:rebuild-spec",
+          "triggers": [
+            "document existing codebase",
+            "reverse engineer",
+            "spec from code",
+            "what does this code do"
+          ]
+        },
+        {
+          "dir": "search-docs",
+          "name": "tkm:search-docs",
+          "triggers": [
+            "docs for X",
+            "API reference",
+            "how does X work in library Y",
+            "latest docs"
+          ]
+        },
+        {
+          "dir": "write-journal",
+          "name": "tkm:write-journal",
+          "triggers": [
+            "journal",
+            "write up session",
+            "wrap up",
+            "document what we did",
+            "session notes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-version-control",
+      "skills": [
+        {
+          "dir": "create-worktree",
+          "name": "tkm:create-worktree",
+          "triggers": [
+            "worktree",
+            "isolated branch",
+            "work in parallel",
+            "don't touch main branch",
+            "separate workspace"
+          ]
+        },
+        {
+          "dir": "git",
+          "name": "tkm:git",
+          "triggers": [
+            "commit",
+            "push",
+            "stage changes",
+            "git",
+            "commit message"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "implementation",
+      "skills": [
+        {
+          "dir": "bootstrap",
+          "name": "tkm:bootstrap",
+          "triggers": [
+            "new project",
+            "start from scratch",
+            "scaffold",
+            "init project",
+            "create new app"
+          ]
+        },
+        {
+          "dir": "brainstorm",
+          "name": "tkm:brainstorm",
+          "triggers": [
+            "should I use X or Y",
+            "trade-offs",
+            "architecture decision",
+            "which approach",
+            "help me think through",
+            "before deciding",
+            "CEO/CFO perspective",
+            "board feedback",
+            "course outline ideas",
+            "marketing angle"
+          ]
+        },
+        {
+          "dir": "create-plan",
+          "name": "tkm:create-plan",
+          "triggers": [
+            "plan this",
+            "create a plan",
+            "design architecture",
+            "blueprint",
+            "before implementing",
+            "plan only"
+          ]
+        },
+        {
+          "dir": "research",
+          "name": "tkm:research",
+          "triggers": [
+            "research",
+            "evaluate",
+            "compare libraries",
+            "best practice for",
+            "what technology",
+            "investigate options"
+          ]
+        },
+        {
+          "dir": "takumi",
+          "name": "tkm:takumi",
+          "triggers": [
+            "implement",
+            "build feature",
+            "add X to app",
+            "develop",
+            "create functionality",
+            "end-to-end"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "planning-architecture",
+      "skills": [
+        {
+          "dir": "migrate-aidd",
+          "name": "tkm:migrate-aidd",
+          "triggers": [
+            "migrate spec-kit",
+            "SDD migration",
+            "AIDD",
+            "import specs",
+            "spec-driven",
+            "migrate to takumi"
+          ]
+        },
+        {
+          "dir": "think-sequential",
+          "name": "tkm:think-sequential",
+          "triggers": [
+            "think through step by step",
+            "complex problem",
+            "analyze carefully",
+            "reason through"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "project-context-management",
+      "skills": [
+        {
+          "dir": "confidence",
+          "name": "tkm:confidence",
+          "triggers": [
+            "confidence level",
+            "EXTRACTED",
+            "INFERRED",
+            "AMBIGUOUS",
+            "evidence taxonomy",
+            "how sure"
+          ]
+        },
+        {
+          "dir": "manage-project",
+          "name": "tkm:manage-project",
+          "triggers": [
+            "project status",
+            "what's done",
+            "update plan",
+            "track progress",
+            "task management"
+          ]
+        },
+        {
+          "dir": "optimize-context",
+          "name": "tkm:optimize-context",
+          "triggers": [
+            "context full",
+            "token limit",
+            "optimize context",
+            "memory management"
+          ]
+        },
+        {
+          "dir": "organize-files",
+          "name": "tkm:organize-files",
+          "triggers": [
+            "organize files",
+            "where to put this",
+            "naming convention",
+            "file structure"
+          ]
+        },
+        {
+          "dir": "scan-codebase",
+          "name": "tkm:scan-codebase",
+          "triggers": [
+            "find files",
+            "where is X",
+            "what files do I need",
+            "scan code",
+            "map the codebase"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "specialized-output",
+      "skills": [
+        {
+          "dir": "artifact",
+          "name": "tkm:artifact",
+          "triggers": [
+            "artifact",
+            "tạo artifact",
+            "share HTML",
+            "publish artifact",
+            "upload artifact",
+            "shareable link"
+          ]
+        },
+        {
+          "dir": "audio-transcribe",
+          "name": "tkm:audio-transcribe",
+          "triggers": [
+            "transcribe",
+            "subtitles",
+            "SRT",
+            "audio to text",
+            "video captions"
+          ]
+        },
+        {
+          "dir": "document-skills",
+          "name": "tkm:document-skills",
+          "triggers": [
+            "Word doc",
+            "PDF",
+            "PowerPoint",
+            "Excel",
+            "office document"
+          ]
+        },
+        {
+          "dir": "generate-slide",
+          "name": "tkm:generate-slide",
+          "triggers": [
+            "slides",
+            "presentation",
+            "deck",
+            "tạo slide",
+            "gen deck",
+            "PPTX"
+          ]
+        },
+        {
+          "dir": "kensan",
+          "name": "tkm:kensan",
+          "triggers": [
+            "news briefing",
+            "learning digest",
+            "deep dive",
+            "technical analysis",
+            "what are people saying about",
+            "update my watchlist",
+            "what's new in",
+            "stay current",
+            "AI roundup",
+            "KOL digest"
+          ]
+        },
+        {
+          "dir": "pack-codebase",
+          "name": "tkm:pack-codebase",
+          "triggers": [
+            "pack codebase",
+            "repomix",
+            "LLM context",
+            "codebase snapshot"
+          ]
+        },
+        {
+          "dir": "preview-output",
+          "name": "tkm:preview-output",
+          "triggers": [
+            "show me",
+            "preview",
+            "explain visually",
+            "make a diagram",
+            "render this"
+          ]
+        },
+        {
+          "dir": "solve-problem",
+          "name": "tkm:solve-problem",
+          "triggers": [
+            "stuck",
+            "can't figure out",
+            "recurring problem",
+            "break the pattern"
+          ]
+        },
+        {
+          "dir": "translate-file",
+          "name": "tkm:translate-file",
+          "triggers": [
+            "translate this document",
+            "dịch file",
+            "translate PDF/Word/Excel",
+            "translate book",
+            "翻訳",
+            "dịch tài liệu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takumi-specific",
+      "skills": [
+        {
+          "dir": "estimate",
+          "name": "tkm:estimate",
+          "triggers": [
+            "estimate",
+            "man-days",
+            "WBS",
+            "effort estimate",
+            "function count",
+            "dự toán",
+            "見積もり",
+            "spec document",
+            "bidding"
+          ]
+        },
+        {
+          "dir": "generate-ui-specs",
+          "name": "tkm:generate-ui-specs",
+          "triggers": [
+            "UI specs",
+            "component spec",
+            "MoMorph spec"
+          ]
+        },
+        {
+          "dir": "propose-improvements",
+          "name": "tkm:propose-improvements",
+          "triggers": [
+            "improvement proposal",
+            "client proposal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "testing-code-quality",
+      "skills": [
+        {
+          "dir": "audit-doc-parity",
+          "name": "tkm:audit-doc-parity",
+          "triggers": [
+            "doc parity",
+            "docs match code",
+            "audit docs vs code",
+            "are the specs accurate",
+            "documentation drift",
+            "do the docs match",
+            "verify docs against code"
+          ]
+        },
+        {
+          "dir": "audit-licenses",
+          "name": "tkm:audit-licenses",
+          "triggers": [
+            "license audit",
+            "audit licenses",
+            "licenseal",
+            "dependency licenses",
+            "license compliance",
+            "license policy",
+            "blacklist license",
+            "whitelist license",
+            "blacklist package",
+            "whitelist package",
+            "blacklist risk",
+            "whitelist risk"
+          ]
+        },
+        {
+          "dir": "audit-synthesis-judgment",
+          "name": "tkm:audit-synthesis-judgment",
+          "triggers": [
+            "audit synthesis judgment",
+            "is the partition right",
+            "over-merge",
+            "under-merge",
+            "user stories sound",
+            "is the design intent sound",
+            "judgment soundness",
+            "synthesis soundness",
+            "feature partition audit"
+          ]
+        },
+        {
+          "dir": "auto-research",
+          "name": "tkm:auto-research",
+          "triggers": [
+            "improve coverage",
+            "optimize bundle",
+            "iterative improvement",
+            "auto-optimize",
+            "N iterations"
+          ]
+        },
+        {
+          "dir": "clean-code",
+          "name": "tkm:clean-code",
+          "triggers": [
+            "clean up code",
+            "simplify",
+            "refactor for clarity",
+            "reduce complexity",
+            "tidy this",
+            "code smell"
+          ]
+        },
+        {
+          "dir": "lint-code",
+          "name": "tkm:lint-code",
+          "triggers": [
+            "lint code",
+            "sunlint",
+            "code quality",
+            "static analysis",
+            "security lint",
+            "architecture lint"
+          ]
+        },
+        {
+          "dir": "predict-risks",
+          "name": "tkm:predict-risks",
+          "triggers": [
+            "risks",
+            "what could go wrong",
+            "before major change",
+            "predict failure",
+            "expert review of plan"
+          ]
+        },
+        {
+          "dir": "review-code",
+          "name": "tkm:review-code",
+          "triggers": [
+            "review code",
+            "code review",
+            "check my PR",
+            "before merging",
+            "is this safe"
+          ]
+        },
+        {
+          "dir": "run-tests",
+          "name": "tkm:run-tests",
+          "triggers": [
+            "run tests",
+            "test coverage",
+            "unit test",
+            "e2e",
+            "visual regression",
+            "does it pass"
+          ]
+        }
+      ]
+    }
+  ]
+}

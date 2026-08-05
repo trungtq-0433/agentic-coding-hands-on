@@ -1,0 +1,1056 @@
+{
+  "version": "0.7.2",
+  "generatedAt": "2026-07-31T10:10:39.719Z",
+  "files": [
+    {
+      "path": "agents/jp-project-manager.md",
+      "checksum": "f3ee3af0de89a9cca065fc3f668cbd1a5100d7afe18d680d3de5157429a3ca11",
+      "size": 15747,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "metadata.json",
+      "checksum": "8713999e46a96aaa062d5d215bc549abce631001bc199c338a6e899b3751188b",
+      "size": 788,
+      "lastModified": "2026-07-31T16:38:52+07:00"
+    },
+    {
+      "path": "skills/_shared/extras/kpi-insight/kpi-insight-kpi-reference.md",
+      "checksum": "edfcc883cc2682962c84525a2be30ada1d3251dcd0f3c3d83ebf50434dcc9d63",
+      "size": 4612,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/_shared/extras/kpi-insight/kpi-insight-mcp-config.json",
+      "checksum": "4d5c976ef08c901da04471f3968d82cfff3343a58c5de82d470d26adc5f0505e",
+      "size": 213,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/_shared/extras/kpi-insight/kpi-insight-mcp-connection.md",
+      "checksum": "1798f85216b13bcfd5fe26f21f6045047eee7e8b64c915a6ca41b67f676228e8",
+      "size": 2745,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/_shared/extras/pm-skills/function-breakdown.md",
+      "checksum": "409c85c3d3f59d455e4eb6a6f1d72132047eda6af0bb8487fe907506d3a41bf9",
+      "size": 3445,
+      "lastModified": "2026-07-31T16:38:52+07:00"
+    },
+    {
+      "path": "skills/_shared/extras/pm-skills/project-layout.md",
+      "checksum": "f172995c5d5589bf85e4c330d389fc23b5efd07b073d48d9e928304bf665418e",
+      "size": 5732,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/_shared/extras/pm-skills/wbs-task-breakdown.md",
+      "checksum": "4baeb084907b4bda1f520943ab0c1a25cee5ef65ed25417d5ec9bc6693df48b2",
+      "size": 2542,
+      "lastModified": "2026-07-31T16:38:52+07:00"
+    },
+    {
+      "path": "skills/clio-generate/SKILL.md",
+      "checksum": "a4a4d2e6ab36c8868b2857119669506644b6867f6499bc06d4d7d7a32e8b6851",
+      "size": 28324,
+      "lastModified": "2026-07-22T09:39:18+07:00"
+    },
+    {
+      "path": "skills/clio-generate/data/mcp-config-snippet.json",
+      "checksum": "f1e3368a87a7fe0c1aebf38eeb67cc32e85c71bd1a9da6453b4239035b10ad29",
+      "size": 183,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/references/generate-content-approach.md",
+      "checksum": "0bc7d3d310e0bbdca7f04fe830365814234f3b066e1f1cbb90aecdbf63bac8b6",
+      "size": 11158,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/references/generate-content-benefits.md",
+      "checksum": "489e2c7eb427efa1836ac757c13d75b34d53ca23492e24061a0b330e277bba2c",
+      "size": 9072,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/references/generate-content-flow.md",
+      "checksum": "19779d741b991ab01fab985d271c4038d3929935223d7cc5b0bf9f231039dfff",
+      "size": 16256,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/references/generate-content-overview.md",
+      "checksum": "5d6798fbff4cc6a3859eaa854f7d531179170d8c4cfeaa23b0b71d409f7d0ec8",
+      "size": 19974,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/references/generate-content-technical.md",
+      "checksum": "615d9fd39a62fb59bec4a53340ac652eded01c0f6a2c6f63b165bb393aeca145",
+      "size": 39550,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/references/generate-pptx.md",
+      "checksum": "a305deca8234ed06fc42baaa7774716f3a8879103b88e982fd6e3b17a3e088f2",
+      "size": 2559,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/clio-api.py",
+      "checksum": "8e9a971342bdb48694ee1e587c24f69d99f94adcebf87c2b93fbcf86a3f154c2",
+      "size": 3588,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/collect-qa-slides.py",
+      "checksum": "f56a1c6c651ee09253722d923d0fc55bc4d82c3ffc13af41ce5a91864fa0e8a8",
+      "size": 3751,
+      "lastModified": "2026-07-22T09:39:18+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/ensure_deps.py",
+      "checksum": "62f1742017d37300da2b2ba273a34c16dc606283b4d2cad7d068d48a16f92e5a",
+      "size": 5073,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/ensure_officecli.py",
+      "checksum": "86c7fb1bd5cc125832e785b9699dc042c3a7b7cab19b93912f664741e1ed79b4",
+      "size": 5473,
+      "lastModified": "2026-07-22T09:39:18+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/gen-md.py",
+      "checksum": "ca2294932c536b29693ff9397302912b642ac796b2771361865c0f1898a54054",
+      "size": 8458,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/gen-slide.py",
+      "checksum": "34cf24623ab20ab88f4307340c73c5ac7e7fda98fc8d6057796d3e0e257e0b7b",
+      "size": 3611,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/generate_pptx.py",
+      "checksum": "bf97f2e9188899e5499265426fb68a3a8db0440ec05653d0141e9708ee5f62c2",
+      "size": 6987,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/__init__.py",
+      "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/extra_slide_classifier.py",
+      "checksum": "0ee6387dde5dbf0ea2d8a7c9e3941ca65c069a2e4e7bf3730f68e01065cfb24f",
+      "size": 4049,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/extra_slide_layouts.py",
+      "checksum": "17ace016d815e83e0bf20604bf6006d6b95495bcbd00dbe04ee03cfbe0372b43",
+      "size": 9600,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/generator.py",
+      "checksum": "f903ad4b29b87e73059b58281af86132aaa9f26416210c4419091bfe376ab886",
+      "size": 4141,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/markdown_primitives.py",
+      "checksum": "8e61c7372b6f473553bbb8442bc04e2ba15856aaa4f5a94a1a6a1e27cc17f826",
+      "size": 2577,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/parser.py",
+      "checksum": "77a16a9223bd3d556cbd9e83e3902eb6de4a9a600055c82307599a82f996cc46",
+      "size": 10309,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/profile_parser.py",
+      "checksum": "2138e0f746371f5c684e90f61dbfeed6fdaab8fcde1b06ab20b0afe308f9ffe9",
+      "size": 8870,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/profile_schema.py",
+      "checksum": "5984f6840d3d7b1983d8e085494dec20471e575167c5a1984c6c43d18fc25e4e",
+      "size": 8575,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/renderer.py",
+      "checksum": "1a13e6c6a78824e233d430b0e722c62dd7dd5a4e6f44a331b74540cb95e00e4b",
+      "size": 128985,
+      "lastModified": "2026-07-22T09:39:18+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/schemas.py",
+      "checksum": "bf44935d28b201f0fc61c8d23f24fe8f831e761a23b552f27798791278a69d18",
+      "size": 1447,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/shape_discovery.py",
+      "checksum": "e00d66fe2a646c2136310822b35fc52beb559e6400b7db875ba54876443a698c",
+      "size": 7166,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/templates/__init__.py",
+      "checksum": "6c32a6d999d0e081dba3394b2bdb9bf393441a1cf3604f5810f4c9b351f6b1f6",
+      "size": 85,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/templates/base.py",
+      "checksum": "cc155fe52babbc04841f6adf55261cbdbe37c0281abbe793b0e26dece71b734c",
+      "size": 6234,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/lib/templates/svn.py",
+      "checksum": "4674e3b79844a4516c0ec83b284ff1c9afe0572ea4106afd4aee8aab3429986d",
+      "size": 16675,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/qa-slides.py",
+      "checksum": "cd62002f4e11ce30e9ff0af1ed3969edab510cae6f901f9d45d79b4fbabe9b20",
+      "size": 2941,
+      "lastModified": "2026-07-22T09:39:18+07:00"
+    },
+    {
+      "path": "skills/clio-generate/scripts/requirements.txt",
+      "checksum": "76bdef8130ec34e15482454bb1b58da6a0fbac10a0c254c4bf2bb67a917bf96e",
+      "size": 63,
+      "lastModified": "2026-07-01T08:53:28+07:00"
+    },
+    {
+      "path": "skills/clio-generate/templates/SVN Proposal Menu.pptx",
+      "checksum": "e1d52db79d242deae84106432fc1b3e6b7b5ad4845fc6b7c6e5ff6bb018210fe",
+      "size": 11879681,
+      "lastModified": "2026-07-14T14:57:31+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/SKILL.md",
+      "checksum": "5d0d1c95685bae6d27c8e6c0d33cee451e20dea88532874dd735508b32facf71",
+      "size": 6211,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/screen_descriptions.json",
+      "checksum": "9ca9c697528db47c2da2be0423cfa8d784028402f11e16ca8b2cd75bb0e59fb2",
+      "size": 14318,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Animation.json",
+      "checksum": "189b47a79a203beb69535706c0b687fda1db13368c8dd44371fadd85d76a6668",
+      "size": 5434,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Audio_Recorder.json",
+      "checksum": "1f0dc63e9b6406904bcf5dd8c46aba1bef1209cc620248764350c6c2e503212b",
+      "size": 20785,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Audio_bar_status.json",
+      "checksum": "08790919f509fe074c89683624d7c26e199cf45562b0f9e4ec5b2a81f294eede",
+      "size": 26862,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Bootstrap_datepicker.json",
+      "checksum": "666aa1b6c45d8dfbeae292addacfe2082003da98e1b592216217135a01d9e63c",
+      "size": 5945,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Carousel.json",
+      "checksum": "711cd96b4f3dd59d49e4585636294f5ffe91f5cbeb1a021e7ddeac310a52dd6a",
+      "size": 12761,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Change_password.json",
+      "checksum": "7849ca76c1169bef79dfd657ba04da783c45ef2fbfa0fea0649f011f55fb4969",
+      "size": 4726,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Chart.json",
+      "checksum": "ff066907e8bc4327772143677066c56f600c44fb0d505f66a84df373034ee403",
+      "size": 13094,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Chatbox.json",
+      "checksum": "71b6a9c972aed32dd34d4eba876a470aae3981e7c86a63f2b9f0892df72da523",
+      "size": 77833,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Checkbox.json",
+      "checksum": "fa36877a88d9c69b38800908377065d0dea441873571caa4429e3adfe16e6646",
+      "size": 9391,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Client_server.json",
+      "checksum": "dd1f57fc70cda626938ef51acd37544b7f455bbc92951d00516992478d38b183",
+      "size": 5594,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Combo_box.json",
+      "checksum": "e05e344672c3146fe3cfee96853f17eba962ab3b925b0f70ff6880673f7c459f",
+      "size": 12885,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Csv.json",
+      "checksum": "51dba4244289878769371475cb77860f097db641b9fc4d336909c8a6f86248dc",
+      "size": 10257,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Daterange_picker.json",
+      "checksum": "32007310784828dcf6a4e9cfb66aa8620a85f7274c3b7fc563ce61fab0b22533",
+      "size": 8131,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Daterange_picker_with_options.json",
+      "checksum": "65fcd0ff394e0a3b9068c508fc98ebb683b50df4b51ca637c20c9fa8383969d3",
+      "size": 12106,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Dialog_popup.json",
+      "checksum": "f9c8cb80cb30c25d6c234706f8c00e458a91561a8f8063f8fe09911559834576",
+      "size": 6485,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Download_File.json",
+      "checksum": "3202b21c6ffab1ef39ed2432f7128b0ca61206322c5abe4cc2726c99b8377199",
+      "size": 5322,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Download_Image.json",
+      "checksum": "b1a88f59c0f73d2089bff6daada48ef52f45ba85bfe1a75e6e9de1ed92a7499f",
+      "size": 4191,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Dynamic_Pagination.json",
+      "checksum": "6ad641351910fe84db92ecf9c886d479e86df9d32a9508cdf9c4eb6296c9a3d6",
+      "size": 2853,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Fixed_Navigation.json",
+      "checksum": "f7039cd7f639a3234e78df406cf158da89514e8527ac03f117be3e85532924a0",
+      "size": 5605,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Forgot_password.json",
+      "checksum": "d516f7ccb72e9556a1c2a170c4d4cd4bf0feb0d35ce98d05808c1dcb5a0b9139",
+      "size": 9978,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Galery.json",
+      "checksum": "fe6bb6638d1400e3b3b15069ad786b47c09666fdc0e923a6cc08c06c838f8032",
+      "size": 21137,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Global_navigation.json",
+      "checksum": "937733de894e62449c1a80c506be07bda30b4dc89471cc7e04ad43d6b28d0991",
+      "size": 3224,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Image.json",
+      "checksum": "914a910533026e97fd04ec89dadf9ef649c028643b054d20cafa4fa9501f4e7e",
+      "size": 5176,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/InputBox.json",
+      "checksum": "32fcacad8385495afe8d7a1bf1915da22263c97b3a862f034900b7e0de139b15",
+      "size": 27712,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Links.json",
+      "checksum": "ee6c007814a2063b1d2e337d84b99a66ef2a1395f907d95f713cc0f7aa9c21ed",
+      "size": 2840,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/List_Management.json",
+      "checksum": "b85f08c3089d126d3c985ba65002408254f949df2eabecb5b71221914d722391",
+      "size": 7044,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Login.json",
+      "checksum": "758020659bec4d85b4f7f3f68061d9e312055132067571b4e5ffa36a2a7b5a1f",
+      "size": 15242,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Map.json",
+      "checksum": "3e288c2ac98bbcb5a205608d6514088b1f6fb0813b904dc8ce18c7147fb2165d",
+      "size": 14905,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Notification.json",
+      "checksum": "206769a167dc0fa524af32f4f3ffb9e59ce2f637f1a47857695b1eec370e7e90",
+      "size": 12865,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Permission.json",
+      "checksum": "0751cc7c3959a11290d68f882aca99c4c395d021be6be1249257f37b83239baa",
+      "size": 4282,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Print.json",
+      "checksum": "0d50c6644298cf544a028c4c4bcae5aef41ab509445c235ff004f5b8a71f1880",
+      "size": 4062,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Quiz_Admin.json",
+      "checksum": "84fae3829866d90053b606288b828b4fdd5c872d20140be79aa10d1c9e3fe8b5",
+      "size": 12769,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Quiz_User.json",
+      "checksum": "cc4a498bf2c80324c8bd88dd5320c074af865e490f6c7ae8d8127a84e2b85455",
+      "size": 10503,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Radio_button.json",
+      "checksum": "0f4beb7438a2f833d0e537e37b2d1fa14d2c3e246a2237817de14942e1fabd8c",
+      "size": 5142,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Ranking.json",
+      "checksum": "07c796f728009b678fe4acfcedac35dd687d068f3e32ca3039d64608044b2d59",
+      "size": 9192,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/RichTextBox_Markdown.json",
+      "checksum": "4fe79235ce28bf568499722c680f258c58e947debc3d0437d2d6f0b1d19fc953",
+      "size": 13274,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Run_Batch_Process.json",
+      "checksum": "ae8e09bd0ffc61a86d92f2043998cfc3a09750673be22301cf357674407471ff",
+      "size": 12564,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Scrollbar.json",
+      "checksum": "3ba475bacf5d0f6b681836a3b6f5fcb3e8b407f2b22028158868dd37be2799e9",
+      "size": 8644,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Search.json",
+      "checksum": "02be53297aa8a84c846def53bf5a0e3b6053c1a5532167bbc706e34b9563c471",
+      "size": 35483,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Select_box.json",
+      "checksum": "d90d4dddff6dce522b77b82abff04f3058e52dbd5240781acaadbce5e9b9778a",
+      "size": 7586,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Send_email.json",
+      "checksum": "dedcf65badaf2ce6026747b8fd7b6ac8ccb20f245027a109a3e4db3948a802ef",
+      "size": 10997,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Share_to_Facebook.json",
+      "checksum": "717f109a36155c4c129f38ddfcec931a21366200b325d43d13e02fefe741fe62",
+      "size": 4890,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Shortcut_keys_Hot_Keys.json",
+      "checksum": "bd08bc213753ff05db471c077c9b45db7cc662daf4e09c712dd68989b1be407a",
+      "size": 6762,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Sidebar.json",
+      "checksum": "774e76e333f1c9d0d0c7f556bc58f1556db10dac8dee8e54540c10748b17cef3",
+      "size": 7270,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Sign_up.json",
+      "checksum": "c9b06c1d21afb619a3bd4a2b9ffe23a50e97d84a7358fab190d0570e6159b21c",
+      "size": 10356,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Sorting.json",
+      "checksum": "8b05d4502781340ef3515de04d4245ae3b2f67fb461c26ee1dd7a2664860aa99",
+      "size": 7344,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Static_Pagination.json",
+      "checksum": "041fa0c6cbdca7b7b2ffba0a213afcc2e60e17c064358a94804e7e7933dbb18d",
+      "size": 5934,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Statistic.json",
+      "checksum": "1aaeaab4f0408696155c8f87f4e18b0d0cf901263789910a1efed36f06b59d94",
+      "size": 17299,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Tags.json",
+      "checksum": "e37f80631d051a22db5dcc341d6a6217064b7c357976d7e876c08383c21b94b5",
+      "size": 10337,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Text_only.json",
+      "checksum": "99b1afce5bc78e9924cc47b971e6814e2e3f1077d7927fe3b2f3869b7c6f15ff",
+      "size": 3755,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Textarea.json",
+      "checksum": "bb4daadf902413ad36dd38c765eec210a9d30f4014ee3bef39ac9809beed25fa",
+      "size": 6965,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Update.json",
+      "checksum": "bf86a2c1c6cac7e3f6a6492070b27f765c1c964b0cabe6754690193f22cd545f",
+      "size": 13871,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Upload_File.json",
+      "checksum": "c5ea73b3237888eb9b4d4ea9c1119402939438b9908cdc69ba15ab1a96441371",
+      "size": 8945,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Upload_Image.json",
+      "checksum": "ec211bf24ce2c2f02ce8a7cf6c95e2e6abb84b1ceb7b2d7a65f3675192496446",
+      "size": 11457,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/data/viewpoints_description/Video.json",
+      "checksum": "3802760bd4e7a30dc19f8bbb1983849336f3b4aea1f633bf1d4220df89d4e1b9",
+      "size": 17341,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/momorph/category-and-format-rules.md",
+      "checksum": "7b551631c1e465f4e1eb06fb8a5ce82c1e243dcefb876bb0c7fab53d99d40ffa",
+      "size": 7615,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/momorph/common-rules.md",
+      "checksum": "03ad4872f03ada688dca63b05277e7aaafb02ad0fa2097b2b1173ce8967816d1",
+      "size": 4319,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/momorph/create-mode.md",
+      "checksum": "c48281d704842725df54e9c6ceab053276968c4231a1c8632965848544795ae1",
+      "size": 5619,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/momorph/update-mode.md",
+      "checksum": "e8547cc57a2c825d08a8e5958bf9e43148fa19f407f2e5ab69b9752b06b6bae9",
+      "size": 4169,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/rebuild-spec/category-and-format-rules.md",
+      "checksum": "842f702b6810dbcc70a3872ab130abbd5d80d72c08510716d5cf0d337978872c",
+      "size": 9644,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/rebuild-spec/common-rules.md",
+      "checksum": "d98bdde06c311609f199b5309263ed8719b5b7c71b58c7b8944521ea979222bd",
+      "size": 8608,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/rebuild-spec/context-objective.md",
+      "checksum": "c0d8f791dcf7a0f36234b2037e009a08ba8f8ca05be0c91fa4e8ff61eca95250",
+      "size": 3601,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/rebuild-spec/create-mode.md",
+      "checksum": "19bbe1ad1f97939998df155ef2fa70b55eedb16494a539702f937acdfcaeaacc",
+      "size": 8608,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/rebuild-spec/ticket-rules.md",
+      "checksum": "8fbe2f525362418d90c27a77af7a96611a7b167dfb5aae98f317990fe8458296",
+      "size": 4383,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/generate-testcases/references/rebuild-spec/update-mode.md",
+      "checksum": "37a59eaa134f3c828fbe2f2ebd4a628f4e9f86b3fb90289facd80cea92b66881",
+      "size": 6666,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/ki-inc-analysis/SKILL.md",
+      "checksum": "7158347632d46a39f227e45233fd74345fb0b35d4af2bd9f49c3bc99d921f166",
+      "size": 4124,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-kpi-drilldown/SKILL.md",
+      "checksum": "eb6b27ac2e1d4ef972cbecf09c6324bfd0d558fdb87f46efd26d8507ea608d75",
+      "size": 2795,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-kpi-health/SKILL.md",
+      "checksum": "eae6ca0882f0a68c1a64f04ece12e1ead049e032ee86fe62ddd08be64d292485",
+      "size": 7946,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-kpi-health/references/html-report.md",
+      "checksum": "ab5115e6f61bd6da8396929585e26851d21b75a9012ff5c45818672d9d882016",
+      "size": 3720,
+      "lastModified": "2026-07-29T23:32:34+07:00"
+    },
+    {
+      "path": "skills/ki-kpi-insight/SKILL.md",
+      "checksum": "9916a2821491a20e44285ec00da18f7b4b229e4c87ac6a93058426dc9c2800b1",
+      "size": 3097,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-pm-data-quality/SKILL.md",
+      "checksum": "469e86ed116ecfb22095c8e4e90d94f4bd1cf9ef0a672fb5b64c070e883b9682",
+      "size": 3429,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-pm-estimate/SKILL.md",
+      "checksum": "3d04df3a4bbf061a71b83c07808033c6259105ac5456165dcf8f6b95e91a11e8",
+      "size": 4523,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-pm-tooling-audit/SKILL.md",
+      "checksum": "8aeeee85a5e977e14c485e28410c0ab1c83a5a9f524397de19d5850c28db586b",
+      "size": 3414,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-pm-tooling-audit/references/github-standardization-checks.md",
+      "checksum": "f22896f90529efe0588502c7ac70bdb4c6104b7d008ceba85572324a50048082",
+      "size": 2025,
+      "lastModified": "2026-07-29T23:32:34+07:00"
+    },
+    {
+      "path": "skills/ki-pm-tooling-audit/references/github-standardization.md",
+      "checksum": "16316c0eebb8a141074accf16b22e534a7ddf51f05ab604c39bc99f40bdfe2bb",
+      "size": 1669,
+      "lastModified": "2026-07-29T23:32:34+07:00"
+    },
+    {
+      "path": "skills/ki-voice-action-plan/SKILL.md",
+      "checksum": "e226c6d91d314fbe015ddd3be18a2fbc12efc01708b41d7df0d7b70c4828adfa",
+      "size": 3423,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-voice-campaign/SKILL.md",
+      "checksum": "da3d56f8c73be0af8bb67876ae77374ad6b3ebbda0fcc07a84e0b3a256fc5dd9",
+      "size": 3923,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/ki-voice-project/SKILL.md",
+      "checksum": "baddbd51d2597ed6efdfff350791fe272c804c27c754cb4dd8da92d5aee992fa",
+      "size": 4144,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/SKILL.md",
+      "checksum": "db714cf0233f835a2812dffea31cf31f58f8398d866f46a23142316b21adc38e",
+      "size": 13977,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/references/code-rules.md",
+      "checksum": "b9ada29e58bcc5233f8522acb0b3d0718d350639c82d5a5c56f23790d70c527c",
+      "size": 11058,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/references/mcp-template.json",
+      "checksum": "822897583d5631686aa388e05b3862b3669d19dd89823b84581a97883bd6d0fa",
+      "size": 183,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/references/polish-rules.md",
+      "checksum": "b20f0181c9791b0bccc6d613b3f946be81e99946480b440fef98c73fcdc14190",
+      "size": 6496,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/references/subagent-prompt-template.md",
+      "checksum": "66c427539f50b99620b5694be2129deccc20bd6720097a24b9a6a379535ed6a2",
+      "size": 8483,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/scripts/README.md",
+      "checksum": "a76f0cffebe1e766471bccac76ce68e4081eac0def341e431d417192577cef37",
+      "size": 2536,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/scripts/asset_downloader.py",
+      "checksum": "3f97f2412f86101235e02d615db8371bb505085a51bf2cda0b3a9d6a08390051",
+      "size": 9930,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/momorph-implement-design/scripts/validate_coverage.py",
+      "checksum": "4a81ab4c975cb145bafe47f57c1efc46574530ee305c48953b612c166d4f112c",
+      "size": 3151,
+      "lastModified": "2026-06-11T17:47:32+07:00"
+    },
+    {
+      "path": "skills/pm-collect-feedback/SKILL.md",
+      "checksum": "36fb773226ed514d2db12c8070dc262e26eff7757ffed5c4699f8ae29a7de1da",
+      "size": 16997,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-collect-feedback/references/detection-catalog.md",
+      "checksum": "fbec9012bd88b4031c015b49675f262bc2a29a3fad9e10938b9606666787d23a",
+      "size": 6578,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-collect-feedback/references/hearing.md",
+      "checksum": "495679a27119b50a52142a3a90bb6024c4a6ffa70d738f0c9fea2062f7c60344",
+      "size": 5551,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-collect-feedback/references/skeletons.md",
+      "checksum": "7d1f194b90ed587500de122e0c77977ab3f65ff189ea4262c768fd0a6407f47b",
+      "size": 3049,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-create-stories/SKILL.md",
+      "checksum": "b76182168215a4bd745b9fe50e17a929e9d3d87370ec1127977ad072957c7ccf",
+      "size": 13636,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-create-stories/references/hearing.md",
+      "checksum": "db2c2fecd4fd4c410d875ae4e8c5b753d173d5994bc86a620fe73c29b17a9e55",
+      "size": 6196,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-create-stories/references/skeletons.md",
+      "checksum": "f669bb62b72e90d78603cc075b269f02d68f10b331921b72792fae906a9e0248",
+      "size": 2852,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-create-tasks/SKILL.md",
+      "checksum": "bf7f10c8393554c018a280084c6136e0f5d62844ff41a1d08c3ae415dbe143a8",
+      "size": 15891,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-create-tasks/references/skeletons.md",
+      "checksum": "5d985bff64861cd4539656b8c703d2f000587e66d6894ab0234e221258c11d3b",
+      "size": 2152,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-create-tasks/references/task-breakdown.md",
+      "checksum": "7abe058ceaf6455778a6e0553601f5748496f22321beca0ef1a8a82ec224a1fd",
+      "size": 8445,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-define-dod/SKILL.md",
+      "checksum": "c74cb268b909c72b11ffbed470b606dcda8c48abb15590a96c1d239e1b837e57",
+      "size": 10662,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-define-dod/references/criteria-catalog.md",
+      "checksum": "f28eb9cdc4c79de3b37fb75b7b16b07e2b25fdc69f25b34797f1536a6b708459",
+      "size": 4881,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-define-dod/references/hearing.md",
+      "checksum": "4dfd32cc3ebd851d2cda6afc5993872aa053b7700b567ce0561a02b10b23bb21",
+      "size": 6348,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-define-dod/references/skeletons.md",
+      "checksum": "808f2fef33171f2a90ed3f4f3577ae54b391e65984f426dd42a11f955f89a93e",
+      "size": 3418,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-design-wireframe/SKILL.md",
+      "checksum": "64971f4560e081883d28fc829575e9e8d742ab484526ec324b5d812d55eb49cb",
+      "size": 14338,
+      "lastModified": "2026-07-29T22:31:44+07:00"
+    },
+    {
+      "path": "skills/pm-design-wireframe/references/hearing.md",
+      "checksum": "e24745aea56cde42eafe2061f2916aa4bcfc06770f16b4d7745ea2e50d769516",
+      "size": 9078,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-design-wireframe/references/output-template.md",
+      "checksum": "1cc3f96c6d69b662f281e027ca196c51f2af43dacfe0ec84f509d903fae05b39",
+      "size": 5780,
+      "lastModified": "2026-07-29T22:31:44+07:00"
+    },
+    {
+      "path": "skills/pm-design-wireframe/references/wireframe-guide.md",
+      "checksum": "b7914e48b738f3db30a85720a00dbc62d410eb2e56fb1c023e3b0eac77427896",
+      "size": 7471,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-gather-requirements/SKILL.md",
+      "checksum": "859832236ce8e791d4b4b962c9b594549d94adca142e78e4899a117a0b5396c2",
+      "size": 10912,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-gather-requirements/references/hearing.md",
+      "checksum": "52a5453eb54faf12029a5dc4cbd8dddca18c2686010f1785313df55facab5676",
+      "size": 7372,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-gather-requirements/references/nfr-catalog.md",
+      "checksum": "9fe05700d66acbf1d8c5c8a46994027271309d1db29676fdd657aa8c859f3801",
+      "size": 5427,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-gather-requirements/references/skeletons.md",
+      "checksum": "4594d0d09728f0f9570e325c3649ae4b2c11c99eb8fa59e804626d593244a126",
+      "size": 6093,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-plan-project/SKILL.md",
+      "checksum": "e3ead532306708169037682c490c9b5669f6b4443e58d8ad6fbb7d3de05137b9",
+      "size": 9494,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-plan-project/references/field-mapping.md",
+      "checksum": "712c5351a3f56dc9593b23830379c1865de325a4de02c5b3fe61e42f288b602c",
+      "size": 4900,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-plan-project/references/hearing.md",
+      "checksum": "d1e110922c1e2cfc48d60e0cd9dc9281e50155510ddda22740ab18b8c069e608",
+      "size": 7179,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-plan-project/references/skeletons.md",
+      "checksum": "8a28ba935658ca3726b897561018dd078053eba7dd43fa2b865ad418b727fd8e",
+      "size": 5645,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-plan-schedule/SKILL.md",
+      "checksum": "c56a78b61a8654a57878017e228a21935b98ca8c26d3a7e8afdd118a9c9e7ea1",
+      "size": 10350,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-plan-schedule/references/hearing.md",
+      "checksum": "e9edb96e4192031520bafc7066b75228a7feafc500dd57c22d21edae6dd5c1b4",
+      "size": 3075,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-plan-schedule/references/skeletons.md",
+      "checksum": "9445eda9b2cf39b37b47ca37e319b2d4cb87fe77501360b857fcb16d36165dd7",
+      "size": 2864,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-plan-schedule/references/wbs-breakdown.md",
+      "checksum": "53517111d30bb7d80e8ba74c2269adc98e89be7f94a1d41d7db00489c42f6a29",
+      "size": 7198,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-plan-test/SKILL.md",
+      "checksum": "4f643dfaa5d41e6653fc70245f030597600a2774f15cc55c6fc66c5775302598",
+      "size": 11104,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-plan-test/references/hearing.md",
+      "checksum": "beff352740770e1ce5a0d2015f4493454e63417e79da4b184f9226bdcd6b9c2b",
+      "size": 4401,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-plan-test/references/skeletons.md",
+      "checksum": "1599a275d5ea1e99ce13ba684b9dfb66521a6f1a63c983fd98e760db2bc6b687",
+      "size": 5585,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-plan-test/references/test-breakdown.md",
+      "checksum": "55a349ce302dc69252b5bc22a619be1721a78f217ea38f32d936073d9140cf8d",
+      "size": 5391,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-report-project/SKILL.md",
+      "checksum": "c9f7b55298487df6d075297e4faec5fc6a8170473c3217105c80fae032a09dc3",
+      "size": 17841,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-report-project/references/field-mapping.md",
+      "checksum": "dc4729f9794134b4adaeb3e2bf44763db980270a0f83a8f330cad08859c2d5d5",
+      "size": 5647,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-report-project/references/hearing.md",
+      "checksum": "65067c96af4d906c451d221051370d67399a5848be735f523682b72f24247fa9",
+      "size": 5610,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-report-project/references/skeletons.md",
+      "checksum": "387750f73f4b072c34e451c2bc5c2edc7bf43f6d4f2eb530a2ad963d52cc4661",
+      "size": 3781,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-track-risks-issues/SKILL.md",
+      "checksum": "16421c9ec35741252d5ec8955d88b2f4f86305cf1d683fb2e018ffb24d715d03",
+      "size": 16112,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-track-risks-issues/references/detection-catalog.md",
+      "checksum": "07e7613f81b528909188c6576352629e44d06d496f0668a179ee02c5ad658f93",
+      "size": 5859,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": "skills/pm-track-risks-issues/references/hearing.md",
+      "checksum": "445a3a26896584d6102ec75b65486288a82cdff57f83dc6f782fd4bd551e6175",
+      "size": 5461,
+      "lastModified": "2026-07-29T17:13:57+07:00"
+    },
+    {
+      "path": "skills/pm-track-risks-issues/references/skeletons.md",
+      "checksum": "addf29e8a7d673df559f29dc9d8cebcfe1d2481c62b4aa7dd3c61d860e303c6f",
+      "size": 4401,
+      "lastModified": "2026-07-31T16:38:53+07:00"
+    },
+    {
+      "path": ".gitignore",
+      "checksum": "c31dcfb6410d3f8df40f73e70f84d3a393f06be97eae074b14e431c0a57881eb",
+      "size": 825,
+      "lastModified": "2026-07-06T10:27:45+07:00"
+    },
+    {
+      "path": ".repomixignore",
+      "checksum": "9ba7e159120b02522a7dc06799bdb5a953e8d8db71335fee14e550a8b56a6d4a",
+      "size": 210,
+      "lastModified": "2026-06-11T16:51:16+07:00"
+    },
+    {
+      "path": "CLAUDE.md",
+      "checksum": "2d37a1152d16efef15279c68bb6ba6f2b073856e8c79a75b04e2cefcb2973e87",
+      "size": 2367,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "AGENTS.md",
+      "checksum": "e51009ebbfd9434f86b78c4be41a765f75ba26f6aa2055c838a7a30384a0d327",
+      "size": 899,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    },
+    {
+      "path": "README.md",
+      "checksum": "d87dba14a32296711b5e15f065548551ac078c7e22667e43f871d0584ab16672",
+      "size": 4243,
+      "lastModified": "2026-07-31T15:30:11+07:00"
+    }
+  ]
+}

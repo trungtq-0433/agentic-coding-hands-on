@@ -1,0 +1,8 @@
+      * Resolvable COPY target for copy_split_screen.cbl (real screen shape:
+      * LINE/COLUMN literals, PIC FROM a data item, comment-noise disabled field).
+000010 01  S-HDR.
+000020     03  LINE  3 COLUMN  3 VALUE "Item code     ".
+000030     03          COLUMN 37 VALUE "Bin".
+000040     03  LINE  4 COLUMN  3 PIC X(14) FROM WS-ITEM-CODE.
+      *    03  LINE  5 COLUMN  3 VALUE "Obsolete field - do not use".
+000050     03  LINE  6 COLUMN  3 VALUE "Sales ledger  ".

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-estimate.dev/schemas/requirement-item-schema.json",
+  "title": "Requirement",
+  "description": "Schema for a single project requirement extracted from documents",
+  "type": "object",
+  "required": ["id", "title", "type", "priority", "complexity"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-[0-9]{3,}$",
+      "description": "Unique identifier in format REQ-XXX"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 200,
+      "description": "Brief requirement title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed requirement description"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["functional", "non-functional"],
+      "description": "Requirement classification"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["must", "should", "could", "wont"],
+      "description": "MoSCoW priority classification"
+    },
+    "complexity": {
+      "type": "string",
+      "enum": ["simple", "medium", "complex", "very-complex"],
+      "description": "Implementation complexity level"
+    },
+    "category": {
+      "type": "string",
+      "description": "Feature category (e.g., authentication, payments)"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of acceptance criteria"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^REQ-[0-9]{3,}$" },
+      "description": "IDs of dependent requirements"
+    },
+    "source": {
+      "type": "string",
+      "description": "Original document or section where requirement was found"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or clarifications"
+    }
+  },
+  "additionalProperties": false
+}

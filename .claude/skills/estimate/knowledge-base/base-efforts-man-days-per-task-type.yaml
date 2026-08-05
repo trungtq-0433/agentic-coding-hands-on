@@ -1,0 +1,150 @@
+# Base Effort Values in Man-Days
+# These represent typical effort for common software development tasks
+# Values are calibrated for a mid-level developer working on familiar technology
+
+# CRUD Operations
+crud:
+  simple: 0.5          # Single model, basic fields
+  standard: 1.0        # With validation, relationships
+  complex: 1.5         # Multiple models, complex validation
+
+# Authentication & Authorization
+authentication:
+  basic: 2.0           # Email/password login
+  oauth_single: 3.0    # Single OAuth provider
+  oauth_multiple: 4.0  # Multiple OAuth providers
+  sso: 5.0             # Enterprise SSO integration
+  mfa: 2.0             # Multi-factor authentication add-on
+
+authorization:
+  basic: 1.0           # Simple role-based
+  rbac: 2.0            # Full RBAC implementation
+  abac: 4.0            # Attribute-based access control
+
+# File Handling
+file_operations:
+  upload_simple: 1.0   # Single file upload
+  upload_multiple: 1.5 # Multiple files
+  upload_large: 2.5    # Large file with chunking
+  processing: 1.0      # Image resize, conversion
+  storage_cloud: 1.5   # Cloud storage integration
+
+# Notifications
+notifications:
+  email_simple: 0.5    # Basic email sending
+  email_templated: 1.0 # With templates
+  push: 1.5            # Push notifications
+  sms: 1.0             # SMS integration
+  realtime: 2.0        # WebSocket notifications
+
+# Search
+search:
+  basic: 1.0           # Simple DB search
+  advanced: 2.0        # Filters, sorting, pagination
+  fulltext: 3.0        # Full-text search engine
+
+# Payments
+payments:
+  integration: 5.0     # Payment gateway setup
+  subscription: 4.0    # Recurring billing
+  marketplace: 8.0     # Multi-party payments
+
+# Reports
+reports:
+  simple: 1.0          # Basic data export
+  dashboard: 2.0       # Dashboard with charts
+  complex: 5.0         # Complex analytics (calibrated: fintech reporting +24%)
+
+# API
+api:
+  endpoint_simple: 0.25  # GET single resource
+  endpoint_crud: 0.5     # Full CRUD endpoint
+  endpoint_complex: 1.0  # Complex logic
+  documentation: 0.5     # API docs per module
+
+# UI Pages
+ui:
+  page_simple: 1.0     # Static or simple form
+  page_standard: 2.0   # Standard CRUD page
+  page_complex: 4.0    # Complex interactions
+  component: 0.5       # Reusable component
+
+# Infrastructure
+infrastructure:
+  # Design & Planning
+  architecture_design: 1.0
+  cost_estimation: 0.5
+  # Account & IAM
+  account_setup: 1.0
+  # Networking
+  networking: 3.0
+  dns_ssl: 1.0
+  # Compute
+  compute_setup: 4.0
+  static_hosting: 2.0
+  # Database & Cache
+  database_infra: 1.5
+  cache_search_infra: 1.5
+  # CI/CD
+  ci_cd_per_service: 4.0
+  # Monitoring & Security
+  monitoring_alerting: 3.0
+  waf_security: 1.5
+  # Documentation
+  infra_documentation: 3.0
+
+# Testing
+testing:
+  unit_per_module: 1.0   # Unit tests per module
+  integration: 2.0       # Integration tests
+  e2e_basic: 2.0         # Basic E2E tests
+  e2e_comprehensive: 4.0 # Full E2E coverage
+
+# Documentation
+documentation:
+  api: 1.0             # API documentation
+  user_guide: 2.0      # User documentation
+  technical: 2.0       # Technical documentation
+
+# Data Management (versioning, history, rollback)
+data_management:
+  simple: 1.5            # Audit log / change history display
+  standard: 3.0          # Version history with restore
+  complex: 5.0           # Full data versioning with diff and rollback
+
+# Database Design & Setup
+database:
+  schema_design: 2.0     # Schema design and modeling
+  setup: 1.5             # Initial DB setup and build
+  optimization: 2.0      # Index tuning, query optimization
+
+# User Management
+user_management:
+  invitation: 2.0        # Email invitation flow
+  role_assignment: 1.5   # Permission/role management
+  profile: 1.0           # User profile CRUD
+
+# Management (project-level coordination tasks)
+management:
+  coordination: 5.0      # Per-sprint/milestone coordination
+  planning: 3.0          # Project planning and scheduling
+  communication: 2.0     # Stakeholder communication
+
+# Per-Feature Composite Base Efforts (MD)
+# Total base effort for a complete feature including all subtasks, before multipliers.
+# Derived from historical data (fintech-pension-202509, 1 entry).
+# Use for quick estimation; for detailed breakdown, use per-subtask values above.
+feature_composite:
+  crud_feature: 4.0         # ~4 CRUD subtasks (list/create/read/update/delete)
+  auth_feature: 3.5         # Login + registration + password flow
+  api_module: 5.0           # ~10 endpoints per module
+  notifications_feature: 5.0 # Template + sending + preferences
+  file_ops_feature: 3.5     # Upload + processing + storage
+  reports_feature: 7.5      # Data aggregation + visualization + export
+  ui_feature: 3.0           # Page + forms + components
+
+# Buffer (per project type)
+buffer:
+  mvp: 0.15            # 15% buffer
+  standard: 0.20       # 20% buffer
+  enterprise: 0.30     # 30% buffer

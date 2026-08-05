@@ -1,0 +1,144 @@
+[
+    {
+        "item_type": "Default display",
+        "description": "Testing initial display properties of daterange picker in both add/edit forms and default range values",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of Daterange picker item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of Daterange picker item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check default value of default range",
+                "expected_result": ["Display correctly as spec:\n+ Use the correct library and correct CSS.\n+ Selected range value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Calendar control",
+        "description": "Testing calendar functionality including navigation, date/time selection, and range operations",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation of calendar when has event from user:\n+ Click input box\n+ Click the calendar icon\n+ Click next icon in calendar\n+ Click previous icon in calendar\n+ Click time icon in calendar",
+                "expected_result": ["All actions are performed correctly as normal"]
+            },
+            {
+                "viewpoint": "Check operation of Arrow keys of calendar:\n+ Up\n+ Down\n+ Right\n+ Left",
+                "expected_result": ["All actions are performed correctly as normal"]
+            },
+            {
+                "viewpoint": "Check when select date value of Fromdate/Todate\n+ Select a current date in the calendar\n+ Select a past date in the calendar\n+ Select a future date in the calendar",
+                "expected_result": ["Can select and peform successfully with select value."]
+            },
+            {
+                "viewpoint": "Check when select time value of Fromdate/Todate\n+ Select a current time in the calendar\n+ Select a past time in the calendar\n+ Select a future time in the calendar",
+                "expected_result": ["Can select and peform successfully with select value."]
+            },
+            {
+                "viewpoint": "Check when select date value\n+ Fromdate < Todate\n+ Fromdate = Todate\n+ Fromdate > Todate",
+                "expected_result": ["Can select and peform successfully with select value."]
+            },
+            {
+                "viewpoint": "Click on Clear button on Calendar widget",
+                "expected_result": ["The calendar is closed and date range value is blank."]
+            }
+        ]
+    },
+    {
+        "item_type": "Input Fromdate",
+        "description": "Testing various input scenarios for the From date field, including valid formats, invalid inputs, and boundary cases",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when Input each valid value:\n+ Valid date format\n+ The special value (base on spec) \n+ The past time\n+ The future time\n+ Min date\n+ Max date",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when Input invalid year value (YYYY):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese year",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid month value (MM):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese month\n+ < 1\n+ > 12",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid day value (DD):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese day\n+ < 1\n+ > Max days of month",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid hour value (hh):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ < 0\n+ > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid minute value (mm):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ < 0\n+ > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid second value (ii):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ < 0\n+ > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input wrong format to date time input box:\n+ \"00000000\"\n+ YYYY//MM//DD\n+ YYYY / MM / DD\n+ YYYY-MM-DD\n+ YY/MM/DD",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            },
+            {
+                "viewpoint": "Check when Fromdate = Null",
+                "expected_result": ["Success or failure base on spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Combine Fromdate and Todate",
+        "description": "Testing date range functionality including various combinations of from and to dates across different time spans",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when input From date < To date",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input From date = To date",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input From date = To date = Null",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check operation when:\n+ Todate - Fromdate = several days",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check operation when:\n+ Todate - Fromdate = several months",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check operation when:\n+ Todate - Fromdate = several years",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when input From date > To date",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "AM/PM option",
+        "description": "Testing AM/PM functionality including time value constraints and conversion",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when select \"AM\" option",
+                "expected_result": ["+ Can not input or select timevalue > 12:00:00 AM\n+ If try to edit by inspect, auto convert: newtime = inputted time - 12:00:00"]
+            },
+            {
+                "viewpoint": "Check operation when select \"PM\" option",
+                "expected_result": ["+ Can not input or select timevalue > 12:00:00 AM\n+ If try to edit by inspect, auto convert: newtime = inputted time - 12:00:00"]
+            }
+        ]
+    }
+]

@@ -1,0 +1,190 @@
+# Risk Patterns and Mitigation Strategies
+# Used by risk-assessor agent to identify project risks
+
+technical_risks:
+  integration_complexity:
+    indicators:
+      - "multiple external APIs"
+      - "third-party services"
+      - "legacy system integration"
+      - "data migration"
+    impact: high
+    probability_multiplier: 1.3
+    mitigations:
+      - "Create integration test suite early"
+      - "Build API mocks for development"
+      - "Document integration points"
+      - "Add retry and fallback mechanisms"
+
+  new_technology:
+    indicators:
+      - "unfamiliar framework"
+      - "new language"
+      - "cutting-edge tech"
+      - "experimental features"
+    impact: medium
+    probability_multiplier: 1.4
+    mitigations:
+      - "Allocate learning time"
+      - "Create proof-of-concept first"
+      - "Identify fallback technologies"
+      - "Plan for additional debugging time"
+
+  performance_requirements:
+    indicators:
+      - "high throughput"
+      - "real-time"
+      - "large data volume"
+      - "concurrent users"
+      - "millisecond response"
+    impact: high
+    probability_multiplier: 1.25
+    mitigations:
+      - "Early performance testing"
+      - "Implement caching strategy"
+      - "Design for horizontal scaling"
+      - "Set up monitoring and alerts"
+
+  security_sensitive:
+    indicators:
+      - "authentication"
+      - "payment processing"
+      - "PII data"
+      - "HIPAA"
+      - "GDPR"
+      - "encryption"
+    impact: critical
+    probability_multiplier: 1.35
+    mitigations:
+      - "Security audit before launch"
+      - "Penetration testing"
+      - "Compliance review"
+      - "Implement security logging"
+
+scope_risks:
+  unclear_requirements:
+    indicators:
+      - "TBD"
+      - "to be determined"
+      - "unclear"
+      - "vague"
+      - "approximate"
+    impact: high
+    probability_multiplier: 1.5
+    mitigations:
+      - "Schedule requirements clarification sessions"
+      - "Create prototypes for validation"
+      - "Define scope boundaries explicitly"
+      - "Add buffer for requirement changes"
+
+  scope_creep:
+    indicators:
+      - "nice to have"
+      - "future enhancement"
+      - "stretch goal"
+      - "if time permits"
+    impact: medium
+    probability_multiplier: 1.2
+    mitigations:
+      - "Define clear MVP boundaries"
+      - "Use change request process"
+      - "Prioritize features explicitly"
+      - "Track scope changes"
+
+  complex_business_logic:
+    indicators:
+      - "complex rules"
+      - "multiple workflows"
+      - "conditional logic"
+      - "state machine"
+      - "approval process"
+    impact: medium
+    probability_multiplier: 1.3
+    mitigations:
+      - "Document business rules formally"
+      - "Create decision tables"
+      - "Build comprehensive test cases"
+      - "Get stakeholder sign-off on logic"
+
+resource_risks:
+  team_availability:
+    indicators:
+      - "part-time team"
+      - "shared resources"
+      - "contractor dependency"
+      - "key person risk"
+    impact: high
+    probability_multiplier: 1.4
+    mitigations:
+      - "Cross-train team members"
+      - "Document knowledge thoroughly"
+      - "Identify backup resources"
+      - "Plan for handoffs"
+
+  skill_gaps:
+    indicators:
+      - "specialized skills needed"
+      - "expert required"
+      - "rare technology"
+    impact: medium
+    probability_multiplier: 1.35
+    mitigations:
+      - "Training plan"
+      - "Hire consultant if needed"
+      - "Pair programming sessions"
+      - "External code review"
+
+external_risks:
+  vendor_dependency:
+    indicators:
+      - "third-party vendor"
+      - "external API"
+      - "SaaS dependency"
+      - "licensed software"
+    impact: medium
+    probability_multiplier: 1.25
+    mitigations:
+      - "Verify vendor SLAs"
+      - "Build abstraction layer"
+      - "Identify alternative vendors"
+      - "Monitor vendor health"
+
+  regulatory_compliance:
+    indicators:
+      - "compliance required"
+      - "audit"
+      - "certification"
+      - "legal review"
+    impact: high
+    probability_multiplier: 1.3
+    mitigations:
+      - "Early compliance review"
+      - "Legal consultation"
+      - "Documentation for auditors"
+      - "Compliance testing"
+
+# Risk scoring thresholds
+risk_levels:
+  low:
+    score_range: [0, 3]
+    color: green
+    action: "Monitor"
+  medium:
+    score_range: [4, 6]
+    color: yellow
+    action: "Mitigation plan required"
+  high:
+    score_range: [7, 9]
+    color: orange
+    action: "Active management required"
+  critical:
+    score_range: [10, 15]
+    color: red
+    action: "Escalate to stakeholders"
+
+# Impact to score mapping
+impact_scores:
+  low: 1
+  medium: 2
+  high: 3
+  critical: 5

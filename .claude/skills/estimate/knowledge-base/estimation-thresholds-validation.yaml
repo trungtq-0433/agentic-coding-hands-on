@@ -1,0 +1,129 @@
+# Estimation Validation Thresholds
+# Used by reviewer agent to validate estimates
+
+# Reasonable ranges for estimates
+estimate_bounds:
+  story_points:
+    min_per_requirement: 1
+    max_per_requirement: 21
+    warning_threshold: 13  # Fibonacci - larger needs breakdown
+
+  man_days:
+    min_per_requirement: 0.25
+    max_per_requirement: 20
+    warning_threshold: 10  # Consider splitting
+
+  total_project:
+    min_story_points: 5
+    max_story_points: 500
+    min_man_days: 2
+    max_man_days: 250
+
+# Ratio validations
+ratio_checks:
+  story_points_to_man_days:
+    expected_ratio: 0.5  # 1 SP ≈ 0.5 days
+    tolerance: 0.3  # Allow 20-80% variance
+
+  requirements_to_story_points:
+    min_avg: 2
+    max_avg: 13
+
+  buffer_percentage:
+    min: 10
+    max: 50
+    recommended_by_confidence:
+      high: 15
+      medium: 25
+      low: 40
+
+# Phase distribution expectations
+phase_distribution:
+  analysis_design:
+    min_percentage: 10
+    max_percentage: 25
+    typical: 15
+
+  development:
+    min_percentage: 40
+    max_percentage: 60
+    typical: 50
+
+  testing:
+    min_percentage: 15
+    max_percentage: 30
+    typical: 20
+
+  deployment:
+    min_percentage: 5
+    max_percentage: 15
+    typical: 10
+
+  buffer:
+    min_percentage: 5
+    max_percentage: 20
+    typical: 10
+
+# Complexity distribution sanity checks
+complexity_distribution:
+  expected_simple_percentage: [20, 50]  # 20-50% should be simple
+  expected_medium_percentage: [30, 50]  # 30-50% should be medium
+  expected_complex_percentage: [10, 30]  # 10-30% should be complex
+  max_very_complex_percentage: 15  # Red flag if > 15%
+
+# Confidence level criteria
+confidence_criteria:
+  high:
+    min_requirements_clarity: 80  # % of requirements clearly defined
+    max_undefined_items: 5
+    max_risk_score: 4
+    description: "Well-defined scope, familiar tech, experienced team"
+
+  medium:
+    min_requirements_clarity: 50
+    max_undefined_items: 15
+    max_risk_score: 7
+    description: "Some unknowns, manageable risks"
+
+  low:
+    min_requirements_clarity: 0
+    max_undefined_items: 100
+    max_risk_score: 15
+    description: "Significant unknowns, high-risk areas"
+
+# Warning triggers
+warnings:
+  - condition: "single_requirement_over_13_sp"
+    message: "Requirement exceeds 13 SP - consider breaking down"
+    severity: medium
+
+  - condition: "no_testing_phase"
+    message: "No testing phase identified - add QA time"
+    severity: high
+
+  - condition: "buffer_under_10_percent"
+    message: "Buffer under 10% - increase for safety"
+    severity: medium
+
+  - condition: "all_requirements_same_complexity"
+    message: "All requirements same complexity - review classification"
+    severity: low
+
+  - condition: "ratio_deviation_over_30_percent"
+    message: "SP to man-days ratio outside expected range"
+    severity: medium
+
+# Automatic adjustments
+auto_adjustments:
+  missing_testing:
+    action: "add_phase"
+    phase_name: "Testing"
+    percentage_of_dev: 30
+
+  missing_buffer:
+    action: "add_buffer"
+    default_percentage: 20
+
+  extreme_complexity_skew:
+    action: "flag_for_review"
+    message: "Complexity distribution unusual - manual review recommended"

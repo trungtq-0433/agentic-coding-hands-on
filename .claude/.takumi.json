@@ -1,0 +1,37 @@
+{
+  "kits": {
+    "Core": {
+      "installedSettings": {
+        "hooks": [
+          "node $HOME/.claude/hooks/session-init.cjs",
+          "node $HOME/.claude/hooks/takumi-bootstrap.cjs",
+          "node $HOME/.claude/hooks/session-state.cjs",
+          "node $HOME/.claude/hooks/telemetry.cjs",
+          "node $HOME/.claude/hooks/graph-reindex-sync.cjs",
+          "node $HOME/.claude/hooks/memory-graph-nudge.cjs",
+          "node $HOME/.claude/hooks/usage-quota-cache-refresh.cjs",
+          "node $HOME/.claude/hooks/subagent-init.cjs",
+          "node $HOME/.claude/hooks/team-context-inject.cjs",
+          "node $HOME/.claude/hooks/takumi-after-plan-reminder.cjs",
+          "node $HOME/.claude/hooks/dev-rules-reminder.cjs",
+          "node $HOME/.claude/hooks/descriptive-name.cjs",
+          "node $HOME/.claude/hooks/scout-block.cjs",
+          "node $HOME/.claude/hooks/privacy-block.cjs",
+          "node $HOME/.claude/hooks/skill-extension-loader.cjs",
+          "node $HOME/.claude/hooks/workflow-opt-in-guard.cjs",
+          "node $HOME/.claude/hooks/evidence-gate-guard.cjs",
+          "node $HOME/.claude/hooks/iron-laws-guard.cjs",
+          "node $HOME/.claude/hooks/post-edit-simplify-reminder.cjs",
+          "node $HOME/.claude/hooks/guardrail-realtime.cjs",
+          "node $HOME/.claude/hooks/plan-format-kanban.cjs",
+          "node $HOME/.claude/hooks/usage-context-awareness.cjs",
+          "node $HOME/.claude/hooks/task-completed-handler.cjs",
+          "node $HOME/.claude/hooks/memory-graph-queue.cjs",
+          "node $HOME/.claude/hooks/precompact-guard.cjs",
+          "node $HOME/.claude/hooks/teammate-idle-handler.cjs"
+        ],
+        "mcpServers": []
+      }
+    }
+  }
+}

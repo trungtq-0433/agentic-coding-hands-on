@@ -1,0 +1,218 @@
+[
+    {
+        "screen_name": "InputBox",
+        "description": "This screen is designed to test the Comprehensive Input Validation and Data Handling Functionality within the application, includes difference types: Multi Search input box, Email, Number_Integer, Number_Float, Currency, Phone number, String, Password, Confirm Password, Postcode, Zipcode"
+    },
+    {
+        "screen_name": "Textarea",
+        "description": "This screen is designed to test multi-line text area input fields, enabling users to enter extended text such as comments, descriptions, or feedback"
+    },
+    {
+        "screen_name": "RichTextBox_Markdown",
+        "description": "This screen is designed to test the functionality of RichTextBox or Markdown input fields, enabling users to create and format rich text content such as articles, reports, or detailed feedback"
+    },
+    {
+        "screen_name": "Bootstrap_datepicker",
+        "description": "This screen is designed to test the functionality of a Datepicker input component, allowing users to select dates and times efficiently"
+    },
+    {
+        "screen_name": "Daterange_picker",
+        "description": "This screen is designed to test the functionality of a Date Range Picker input component, allowing users to select both start and end dates, and optionally times"
+    },
+    {
+        "screen_name": "Daterange_picker_with_options",
+        "description": "This screen is designed to test the functionality of a Date Range Picker input component, allowing users to select both start and end dates, and optionally times, for applications such as booking, scheduling, or filtering data within specific periods"
+    },
+    {
+        "screen_name": "Combo_box",
+        "description": "This screen is designed to test the functionality of a ComboBox input component, allowing users to select from a predefined list of options or enter custom values"
+    },
+    {
+        "screen_name": "Select_box",
+        "description": "This screen is designed to test the functionality of a Select Box component, allowing users to choose single or multiple predefined options from a dropdown list"
+    },
+    {
+        "screen_name": "Radio_button",
+        "description": "This screen is designed to test the functionality of a Radio Button component, enabling users to select a single option from a predefined set of choices"
+    },
+    {
+        "screen_name": "Checkbox",
+        "description": "This screen is designed to test the functionality of Radio Buttons and Check Boxes, including TriState Check Boxes, allowing users to make single or multiple selections from predefined options"
+    },
+    {
+        "screen_name": "Upload_File",
+        "description": "This screen is designed to test the functionality of Upload File (like CSV) components, enabling users to upload files from various sources and download files with specific requirements"
+    },
+    {
+        "screen_name": "Upload_Image",
+        "description": "This screen is designed to test the functionality of Upload Image components, enabling users to upload image from various sources and download image with specific requirements"
+    },
+    {
+        "screen_name": "Download_File",
+        "description": "This screen is designed to test the functionality of Download File (like CSV) components, enabling users to Download files from system"
+    },
+    {
+        "screen_name": "Download_Image",
+        "description": "This screen is designed to test the functionality of Download Image components, enabling users to Download image from system"
+    },
+    {
+        "screen_name": "Forgot_password",
+        "description": "This screen is designed to test the Forgot Password and Password Reset functionalities, ensuring that users can securely recover and update their passwords"
+    },
+    {
+        "screen_name": "Change_password",
+        "description": "This screen is designed to test the Change Password functionality, ensuring that users can securely update their existing passwords"
+    },
+    {
+        "screen_name": "Send_email",
+        "description": "This screen is designed to test the Email Sending functionality, ensuring that users can compose and send emails accurately and efficiently"
+    },
+    {
+        "screen_name": "Chart",
+        "description": "This screen is designed to test the Chart Display and Functionality within the application, ensuring that various types of charts render accurately and respond correctly to data changes"
+    },
+    {
+        "screen_name": "Static_Pagination",
+        "description": "This screen is designed to test the Pagination Functionality within data-driven applications, ensuring that large datasets are displayed and navigated efficiently"
+    },
+    {
+        "screen_name": "Dynamic_Pagination",
+        "description": "This screen is designed to test the Pagination Functionality within data-driven applications, ensuring that large datasets are displayed and navigated efficiently"
+    },
+    {
+        "screen_name": "Notification",
+        "description": "This screen is designed to test the Notification System within the application, ensuring that users receive and manage notifications accurately and efficiently"
+    },
+    {
+        "screen_name": "Share_to_Facebook",
+        "description": "This screen is designed to test the Post Sharing functionality within the application, ensuring that users can seamlessly share their content to various social media platforms such as Facebook, Twitter, and Gmail"
+    },
+    {
+        "screen_name": "Dialog_popup",
+        "description": "This screen is designed to test the Dialog/Popup Functionality within the application, ensuring that dialogs and popups operate correctly and provide a seamless user experience"
+    },
+    {
+        "screen_name": "List_Management",
+        "description": "This screen is designed to test the List Management Functionality within the application, ensuring that users can effectively add, edit, delete, and navigate through list items"
+    },
+    {
+        "screen_name": "Tags",
+        "description": "This screen is designed to test the Tag Creation and Management functionality within the application, ensuring that users can efficiently create, edit, delete, and organize tags for categorizing content"
+    },
+    {
+        "screen_name": "Text_only",
+        "description": "This screen is designed to test the Text Display and Label Management functionality within the application, ensuring that all static and dynamic text elements are rendered accurately and adhere to design specifications"
+    },
+    {
+        "screen_name": "Global_navigation",
+        "description": "This screen is designed to test the Menu Display and Functionality within the application, ensuring that all menu types—main, single-level, and multi-level—are correctly displayed across various pages such as the home page, product list, and product detail pages"
+    },
+    {
+        "screen_name": "Image",
+        "description": "This screen is designed to test the Image Upload Functionality within the application, ensuring that users can efficiently upload images from various sources and devices. It is typically used in scenarios where users need to add images to their profiles, create content, or manage media galleries"
+    },
+    {
+        "screen_name": "Video",
+        "description": "This screen is designed to test the Video Upload and Playback Functionality within the application, ensuring that users can seamlessly upload, manage, and view videos from various sources and devices"
+    },
+    {
+        "screen_name": "Map",
+        "description": "This screen is designed to test the Map and Location Services functionality within the website, ensuring that interactive maps display accurately and respond seamlessly to user interactions"
+    },
+    {
+        "screen_name": "Gallery",
+        "description": "This screen is designed to test the Album Management Functionality within the application, ensuring that users can effectively create, edit, delete, and organize albums containing various media items such as images and videos"
+    },
+    {
+        "screen_name": "Carousel",
+        "description": "This screen is designed to test the Carousel Management Functionality within the application, ensuring that users can effectively create, edit, delete, and manage carousel elements such as titles, descriptions, and images"
+    },
+    {
+        "screen_name": "Sign_up",
+        "description": "This screen is designed to test the User Registration Functionality within the application, ensuring that users can register accounts smoothly using either email or SMS verification methods"
+    },
+    {
+        "screen_name": "Login",
+        "description": "This screen is designed to test the User Login Functionality within the application, ensuring that users can securely and efficiently access their accounts through various authentication methods"
+    },
+    {
+        "screen_name": "Search",
+        "description": "This screen is designed to test the Advanced Search and Filtering Functionality within the application, ensuring that users can efficiently retrieve data based on various search criteria"
+    },
+    {
+        "screen_name": "Links",
+        "description": "This screen is designed to test the Link Functionality and User Interface (UI) within the application, ensuring that all hyperlinks operate correctly and adhere to the specified design standards"
+    },
+    {
+        "screen_name": "Csv",
+        "description": "This screen is designed to test the CSV Import and Export Functionality within the application, ensuring that users can efficiently upload and download data in CSV format"
+    },
+    {
+        "screen_name": "Audio_bar_status",
+        "description": "This screen is designed to test the Audio Player Functionality and User Interface (UI) within the application, ensuring that users can smoothly interact with audio content"
+    },
+    {
+        "screen_name": "Ranking",
+        "description": "This screen is designed to test the Ranking Management Functionality within the application, enabling users to add, edit, and delete rankings for various items"
+    },
+    {
+        "screen_name": "Quiz_Admin",
+        "description": "This screen is designed to test the Quiz Management and Participation Functionality with admin role within the application, ensuring that administrators can efficiently create, edit, publish, and manage quizzes"
+    },
+    {
+        "screen_name": "Quiz_User",
+        "description": "This screen is designed to test the Quiz Management and Participation Functionality with user role within the application, ensuring users can successfully take quizzes and view their results"
+    },
+    {
+        "screen_name": "Print",
+        "description": "This screen is designed to test the Print Functionality and User Interface (UI) within the Admin site of the application, ensuring that users can effectively print data and reports as required"
+    },
+    {
+        "screen_name": "Fixed_Navigation",
+        "description": "This screen is designed to test the Fixed Navigation (Sticky Navigation) Functionality within a website, ensuring that the navigation bar remains consistently visible and fixed in position as users scroll through the page"
+    },
+    {
+        "screen_name": "Sidebar",
+        "description": "This screen is designed to test the Sidebar Navigation Functionality and User Interface (UI) within the application, ensuring consistent performance across various browsers and pages"
+    },
+    {
+        "screen_name": "Statistic",
+        "description": "This screen is designed to test the Statistics Dashboard Functionality and User Interface (UI) within the application, ensuring that all statistical data is accurately displayed and updated in real-time or upon specific conditions"
+    },
+    {
+        "screen_name": "Chatbox",
+        "description": "This screen is designed to test the Chatbox Functionality and User Interface (UI) within the application, ensuring that all common chat features operate seamlessly and as intended"
+    },
+    {
+        "screen_name": "Shortcut_keys_Hot_Keys",
+        "description": "This screen is designed to test the Shortcut Keys/Hot Keys Functionality within the application, ensuring that keyboard shortcuts are correctly displayed and perform their intended actions across various menus and screens"
+    },
+    {
+        "screen_name": "Run_Batch_Process",
+        "description": "This screen is designed to test the Batch Processing Functionality and Environment Setup within the application, ensuring that automated batch jobs run smoothly and handle various scenarios correctly"
+    },
+    {
+        "screen_name": "Scrollbar",
+        "description": "This screen is designed to test the Scrollbar and Web Page Layout Functionality within the application, ensuring that content is displayed appropriately and that scrolling mechanisms operate smoothly"
+    },
+    {
+        "screen_name": "Audio_Recorder",
+        "description": "This screen is designed to test the Audio Recording and Playback Functionality within the application, ensuring that users can effectively record, manage, and interact with audio files seamlessly"
+    },
+    {
+        "screen_name": "Animation",
+        "description": "This screen is designed to test the Animation Display and Behavior Functionality within the application, ensuring that animations are rendered correctly across various browsers, screen sizes, and user interactions"
+    },
+    {
+        "screen_name": "Client_server",
+        "description": "This screen is designed to test the Client-Server Performance, Reliability, and Security within the application, ensuring robust interactions under various conditions"
+    },
+    {
+        "screen_name": "Sorting",
+        "description": "This screen is designed to test the Table Sorting Functionality within the application, ensuring that data tables are sortable and behave as expected under various conditions"
+    },
+    {
+        "screen_name": "Update",
+        "description": "This screen is designed to test the Data Update and Validation Functionality within the application, ensuring that users can successfully modify existing records while maintaining data integrity"
+    }
+]

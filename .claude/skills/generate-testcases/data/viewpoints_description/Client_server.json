@@ -1,0 +1,86 @@
+[
+    {
+        "item_type": "Performance test",
+        "description": "Testing system performance under various load conditions, including sustained high user loads and stress testing beyond normal capacity limits.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check Load test between client - server\n \nEx: Using Jmeter/LoadRunner to create a start situation with 800 users, every 1 minute increase 2 people, up to 1000 people maximum, and keep That level continues to run for 2 days",
+                "expected_result": ["+ Server is not crashed\n+ Response time is fast\n+ Observation: Usage resources such as RAM, CPU, response time with true and false results when the application is loaded at the highest level and works for a long time."]
+            },
+            {
+                "viewpoint": "Check stress test between client - server \n\nEx: Using LoadRunner to create a situation with 1100 visitors, when the threshold is reached, LoadRunner stops loading",
+                "expected_result": ["+ Server is not crashed\n+ First, how are the 100 requests then rejected, can the webserver be restarted or not, ... From there, it will help to determine how the application will behave when it reaches the maximum load threshold.\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Function testing",
+        "description": "Testing data transfer operations between client and server with various file types and processing scenarios.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when upload/Download data between client and server:\n+ With many valid file types\n+ From small to large data\n+ Invidual processing each task\n+ Parallel processing multi task",
+                "expected_result": ["Server is not crashed and it still good working it return data correctly"]
+            }
+        ]
+    },
+    {
+        "item_type": "Connection between client-server",
+        "description": "Testing connection scenarios including multi-server systems, third-party connections, and handling of various connection states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check connection in a big system which includes more than 2 servers:\n+ Send request from client to server",
+                "expected_result": ["+ Connect successfully\n+ Application still good working"]
+            },
+            {
+                "viewpoint": "Check connection to the third party's server ( Window server , CentOS,...- Base on specification document of project)",
+                "expected_result": ["+ Connect successfully\n+ Application still good working"]
+            },
+            {
+                "viewpoint": "Check response message in cases:\n+ Client not connect to server\n+ The server is in maintenance phase\n+ Server is not working",
+                "expected_result": ["Display correct message base on customer's expected"]
+            },
+            {
+                "viewpoint": "Check returned message when The internet is lost during the transmission request from client to server\n",
+                "expected_result": ["Display correct message base on customer's expected"]
+            },
+            {
+                "viewpoint": "Check when re-connect to server and re-send request from client to server \n",
+                "expected_result": ["Server received request and response data correclty"]
+            }
+        ]
+    },
+    {
+        "item_type": "Updated data",
+        "description": "Testing data synchronization between client and server during various data operations.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check client when Add, Update, delete data on server",
+                "expected_result": ["Data is handled and it is added/updated/deleted or change status correct on Client"]
+            },
+            {
+                "viewpoint": "Check server when Add, Update, delete data on client",
+                "expected_result": ["Data is handled and it is added/updated/deleted or change status in DB\nClient display data is Added, Updated, deleted"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check security",
+        "description": "Testing various security aspects including SSL, firewalls, database security, and password management.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check security in case application: \n+ Have SSL certificate on the server to ensure the traffic is secure.\n+ Have a firewall set up between the server and client.\n+ Have a separate SQL DB server.\n+ Have a separate DB for my security model data.\n+ Store my passwords in the database using a secure hashing function such as PBKDF2.\n+ Passwords generated using a salt which is stored in a different db to the passwords.\n+ Use cloud based infrastructure such as AWS to ensure that the system is easily scalable.\n\n(Base on spec. Please check this case if have any item)",
+                "expected_result": ["Ensure security between client and server"]
+            }
+        ]
+    },
+    {
+        "item_type": "Other",
+        "description": "Testing specific application scenarios in server environments.",
+        "test_view_points": [
+            {
+                "viewpoint": "Send request of each/some application to server in case:\n+ Application is a menu driven use in one server",
+                "expected_result": ["Server is not crashed, it still good working request is received and responsed with status 200 OK"]
+            }
+        ]
+    }
+]

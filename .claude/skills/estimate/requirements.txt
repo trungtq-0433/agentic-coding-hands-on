@@ -1,0 +1,18 @@
+# Core dependencies (always required)
+pyyaml>=6.0
+jsonschema>=4.20
+python-dateutil>=2.8
+
+# Document parsing (parse-document.py)
+pymupdf>=1.23
+pdfplumber>=0.10
+pandas>=2.1
+openpyxl>=3.1
+pytesseract>=0.3
+pillow>=10.0
+python-docx>=1.1
+python-pptx>=0.6
+
+# Output rendering (render-estimate.py Excel output)
+# weasyprint>=60.0   # PDF output — optional, requires system libs
+# jinja2>=3.1        # PDF templates — optional

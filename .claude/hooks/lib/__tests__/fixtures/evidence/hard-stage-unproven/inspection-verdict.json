@@ -1,0 +1,17 @@
+{
+  "score": 8,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "does X"
+  ],
+  "regressionChecked": [
+    "X path"
+  ],
+  "contractStatus": "UNKNOWN",
+  "refuted": [],
+  "unproven": [
+    "claim Y not demonstrated"
+  ],
+  "reachableRegressions": []
+}

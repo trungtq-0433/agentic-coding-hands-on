@@ -1,0 +1,96 @@
+# Complexity Multipliers
+# Applied to base effort values based on task complexity
+
+# Base complexity multipliers
+complexity_levels:
+  simple: 1.0          # Straightforward implementation
+  medium: 1.5          # Some edge cases, moderate logic
+  complex: 2.5         # Many edge cases, complex logic
+  very_complex: 4.0    # Highly complex, novel solutions
+
+# Complexity factors (multiplicative)
+# These compound with base complexity
+factors:
+  # Requirements Quality
+  requirements:
+    clear: 1.0           # Well-defined, detailed specs
+    moderate: 1.2        # Some ambiguity
+    unclear: 1.4         # Significant ambiguity
+    missing: 1.6         # Major gaps in requirements
+
+  # Integration Complexity
+  integration:
+    none: 1.0            # Standalone feature
+    internal: 1.1        # Internal system integration
+    external_simple: 1.2 # Simple external API
+    external_complex: 1.4 # Complex external system
+    legacy: 1.5          # Legacy system integration
+
+  # Performance Requirements
+  performance:
+    standard: 1.0        # Normal performance needs
+    optimized: 1.2       # Some optimization needed
+    high: 1.4            # High performance required
+    realtime: 1.6        # Real-time requirements
+
+  # Security Requirements
+  security:
+    standard: 1.0        # Standard security
+    enhanced: 1.2        # Enhanced security measures
+    compliance: 1.3      # Regulatory compliance (GDPR, etc.)
+    critical: 1.5        # Security-critical system
+
+  # Data Complexity
+  data:
+    simple: 1.0          # Simple data models
+    moderate: 1.2        # Moderate relationships
+    complex: 1.4         # Complex relationships
+    distributed: 1.6     # Distributed data
+
+  # UI/UX Complexity
+  ui_ux:
+    basic: 1.0           # Standard UI patterns
+    custom: 1.2          # Custom components
+    complex: 1.4         # Complex interactions
+    animations: 1.3      # Heavy animations/transitions
+
+  # Testing Requirements
+  testing:
+    standard: 1.0        # Standard test coverage
+    comprehensive: 1.2   # High coverage requirement
+    critical: 1.4        # Critical system testing
+
+  # Team Factors
+  team:
+    experienced: 0.9     # Experienced team (discount)
+    standard: 1.0        # Standard team
+    mixed: 1.1           # Mixed experience levels
+    new: 1.3             # New team members
+
+  # Project Type
+  project_type:
+    greenfield: 1.0      # New project
+    enhancement: 1.1     # Existing project enhancement
+    refactoring: 1.3     # Major refactoring
+    migration: 1.4       # System migration
+
+# Compound factor calculation rules
+calculation:
+  method: multiplicative  # Multiply all applicable factors
+  max_multiplier: 3.0     # Cap total multiplier at 3x
+  round_to: 0.5           # Round results to nearest 0.5
+
+# Example calculation:
+# Base: 2 man-days
+# Complexity: complex (2.5x)
+# Unclear requirements (1.4x)
+# Legacy integration (1.5x)
+# Result: 2 * 2.5 * 1.4 * 1.5 = 10.5 man-days (capped at 6 if using max_multiplier)
+
+# Environment multipliers for infrastructure effort
+# Applied to total infra base effort to account for multi-environment setup
+environment_multipliers:
+  single: 1.0        # Dev only
+  dual: 1.6          # Dev + Prod (Prod ~60% of Dev effort due to similarity)
+  triple: 2.2        # Dev + Stag + Prod
+  quad: 2.8           # Dev + Stag + UAT + Prod

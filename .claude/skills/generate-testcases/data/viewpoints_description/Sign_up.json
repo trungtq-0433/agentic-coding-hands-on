@@ -1,0 +1,178 @@
+[
+    {
+        "item_type": "Sign up by Email",
+        "description": "Testing email-based registration functionality including form validation, database storage, email verification, and account activation process.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify user can register successfully when inputting all valid data into required fields and clicking \"Sign up\" button",
+                "expected_result": ["Register successfully\n- Displays success message"]
+            },
+            {
+                "viewpoint": "Verify register info is saved to database correctly when registering account successfully",
+                "expected_result": ["Data is saved on DB successfully"]
+            },
+            {
+                "viewpoint": "Verify register info is saved to database correctly when many users register at the same time",
+                "expected_result": ["Data is saved on DB corresponding user"]
+            },
+            {
+                "viewpoint": "Verify only one account is created successfully when user clicks on \"Submit\" button many time",
+                "expected_result": ["- Only one record user is saved on DB\n- System send only one email"]
+            },
+            {
+                "viewpoint": "Verify that Email is sent to user email after registering successfully",
+                "expected_result": ["Email is sent to user email successfully"]
+            },
+            {
+                "viewpoint": "Verify email is sent with correct title and content when users register successfully",
+                "expected_result": ["Title and content email is correctly"]
+            },
+            {
+                "viewpoint": "Verify account is active successfully when user clicks on link in email",
+                "expected_result": ["- Active account successfully\n- User can login with account"]
+            },
+            {
+                "viewpoint": "Verify link on email is invalid when over X hours\n[base on spec]",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify link on email is invalid when account was actived",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify Account is not activated when user does not any action with received email",
+                "expected_result": ["Can not login with registerd account"]
+            },
+            {
+                "viewpoint": "Verify Account is not activated when user's email is locked",
+                "expected_result": ["Can not login with registerd account"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when inputting invalid email:\n- Invalid format email\n- Existing active email [base on spec]\n- Deleted/Block/Inactive account",
+                "expected_result": ["Display the corresponding error message on each fields"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when inputting a registered email but not actived yet",
+                "expected_result": ["Display the corresponding error message on email fields"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when let other any required fields empty",
+                "expected_result": ["Display the corresponding error message on each fields"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when turning off \"Agree with terms & conditions\"",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when inputting invalid data for other fields",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify register information is not saved to database when happening any error in registation",
+                "expected_result": ["DB is not saved any information"]
+            },
+            {
+                "viewpoint": "Verify email is note sent to user's email when happening any error in registation",
+                "expected_result": ["User can not receive any emails"]
+            },
+            {
+                "viewpoint": "Verify pop-up \"Terms & conditions\" displays when clicking on link \"terms & conditions\"",
+                "expected_result": ["Display pop-up \"Terms & conditions\""]
+            },
+            {
+                "viewpoint": "Verify content of popup \"Terms & conditions\" displays correctly",
+                "expected_result": ["Content of \"Terms & conditions\" displays correctly"]
+            },
+            {
+                "viewpoint": "Verify login screen displays when clicking on link \"Log-in\"",
+                "expected_result": ["Display Login screen"]
+            },
+            {
+                "viewpoint": "Verify navigate to corresponding other linked on Register screen",
+                "expected_result": ["Displays the corresponding screen"]
+            }
+        ]
+    },
+    {
+        "item_type": "Sign up by SMS",
+        "description": "Testing SMS-based registration functionality including phone verification, verification code management, and form validation.",
+        "test_view_points": [
+            {
+                "viewpoint": "Verify Verification code is sent to phone when user inputting valid phone number and clicking on button Send Verification code",
+                "expected_result": ["Verification code is sent to phone"]
+            },
+            {
+                "viewpoint": "Verify content of text message is correctly",
+                "expected_result": ["Content of text message is correct and contains Verification code"]
+            },
+            {
+                "viewpoint": "Verify Verification code is expired after X hours\n[base on spec]",
+                "expected_result": ["Error message displays when using expired verification code to register"]
+            },
+            {
+                "viewpoint": "Verify error message displays when inputting invalid phone number",
+                "expected_result": ["- Display the corresponding error message\n- Verification code is not sent to any phone number\n** Can request developer write log send Verification code to verify"]
+            },
+            {
+                "viewpoint": "Verify error message displays when inputting existing active phone number",
+                "expected_result": ["- Display the corresponding error message\n- Verification code is not sent to phone number\n** Can request developer write log send Verification code to verify"]
+            },
+            {
+                "viewpoint": "Verify Verification code can be sent again after X seconds\n[base on spec]",
+                "expected_result": ["Another verification code is sent to phone"]
+            },
+            {
+                "viewpoint": "Verify user can register successfully when inputting all valid data into required fields and clicking \"Sign up\" button\n- correct verification code",
+                "expected_result": ["Register successfully\n- Displays success message\n- Can login with registerd account"]
+            },
+            {
+                "viewpoint": "Verify register info is saved to database correctly when registering account successfully",
+                "expected_result": ["Data is saved on DB successfully"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when let any required field empty",
+                "expected_result": ["Display the corresponding error message on each fields"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when iputting expired verification code",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when not iputting lastest verification code",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when iputting verification code of other phone number",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when turning off \"Agree with terms & conditions\"",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify error message displays and user can not register account when inputting other invalid data for any fields",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Verify register information is not saved to database when happening any error in registation",
+                "expected_result": ["DB is not saved any information"]
+            },
+            {
+                "viewpoint": "Verify pop-up \"Terms & conditions\" displays when clicking on link \"terms & conditions\"",
+                "expected_result": ["Display pop-up \"Terms & conditions\""]
+            },
+            {
+                "viewpoint": "Verify content of popup \"Terms & conditions\" displays correctly",
+                "expected_result": ["Content of \"Terms & conditions\" displays correctly"]
+            },
+            {
+                "viewpoint": "Verify login screen displays when clicking on link \"Log-in\"",
+                "expected_result": ["Display Login screen"]
+            },
+            {
+                "viewpoint": "Verify navigate to corresponding other linked on Register screen",
+                "expected_result": ["Displays the corresponding screen"]
+            }
+        ]
+    }
+]

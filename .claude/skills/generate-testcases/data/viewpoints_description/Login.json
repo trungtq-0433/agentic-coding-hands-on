@@ -1,0 +1,306 @@
+[
+    {
+        "item_type": "Design of Login sreen",
+        "description": "Testing the visual and functional elements of the login screen interface, including layout, input fields, and message display.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display of screen:\n+ Header\n+ Title\n+ Footer\n+ Layout of items\n+ State of each items\n+ Mask input for Password item\n+ Copy paste password\n+ Position and format of Message area",
+                "expected_result": ["Same as the designed spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Login by Email\n(the same with login by User name)",
+        "description": "Testing email-based login functionality including validation of input fields, handling of different email formats, and error scenarios.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check login with blank Email & blank Password",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check login with blank Email or blank Password",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check successful login with registered Email",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check successful login with max/min lenght Email",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check successful login with max/min lenght password",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check login with TRIM(Email)",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check login with unregistered Email",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check login with incorrect Email",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check login with incorrect Password (not map with Email)",
+                "expected_result": ["Display the corresponding error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "Login by Mobile number",
+        "description": "Testing mobile number-based login functionality including validation of input fields and error handling for various scenarios.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check login with blank mobile number & blank Password",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check login with blank mobile number OR blank Password",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check successful login with registered Mobile number",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check login with TRIM(mobile number)",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check successful login with max/min lenght password",
+                "expected_result": ["Login sucessfully"]
+            },
+            {
+                "viewpoint": "Check login with unregistered mobile number",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check login with incorrect mobile number",
+                "expected_result": ["Display the corresponding error message"]
+            },
+            {
+                "viewpoint": "Check login with incorrect Password (not map with mobile number)",
+                "expected_result": ["Display the corresponding error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "Login by Facebook account",
+        "description": "Testing Facebook login functionality including first-time login, auto-login scenarios, token expiration, and various Facebook account states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check login with configure id Facebook is added.",
+                "expected_result": ["Can login"]
+            },
+            {
+                "viewpoint": "Check login with configure id Facebook is changed",
+                "expected_result": ["Can not login if edited id Facebook is allowed"]
+            },
+            {
+                "viewpoint": "Check the first time login when registered account is online FB",
+                "expected_result": ["Can login successfully even if not input username/password"]
+            },
+            {
+                "viewpoint": "Check the first time login when other account is online FB",
+                "expected_result": ["Handle auto login or can not login base on spec"]
+            },
+            {
+                "viewpoint": "Check the first time login when all accounts are offline FB",
+                "expected_result": ["Display Facebook login screen. \nCan login successfully after login FB by registered account"]
+            },
+            {
+                "viewpoint": "Check the first time login by FB account but not install FB app on device (PC/Mobile)",
+                "expected_result": ["Display Facebook login screen (on Web version)\nCan login successfully after login FB by registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Not expired login token\n+ Registered account is online FB",
+                "expected_result": ["Auto login by Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Not expired login token\n+ Registered account is offline FB",
+                "expected_result": ["Auto login by Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Expired login token\n+ Registered account is online FB",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Expired login token\n+ Registered account is offline FB",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login after clear Cookies of browser",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login after Logout",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login on another Web browser",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Login with Facebook account which has Email and registed Email are the same",
+                "expected_result": ["Can login/can not login base on spec"]
+            },
+            {
+                "viewpoint": "Login after removing your application from Facebook Application",
+                "expected_result": ["Required login again"]
+            },
+            {
+                "viewpoint": "Login after cancelling Read /Write Facebook permission",
+                "expected_result": ["Can not login by Facebook"]
+            },
+            {
+                "viewpoint": "Login after changing the password of Facebook account\t",
+                "expected_result": ["Required login again"]
+            },
+            {
+                "viewpoint": "Login with Facebook account if user TURN OFF Application on Facebook",
+                "expected_result": ["Required login again"]
+            }
+        ]
+    },
+    {
+        "item_type": "Login by Google account",
+        "description": "Testing Google login functionality including first-time login, auto-login scenarios, token expiration, and various Google account states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check the first time login when registered account is logging Google",
+                "expected_result": ["Can login successfully even if not input username/password"]
+            },
+            {
+                "viewpoint": "Check the first time login when other account is logging Google",
+                "expected_result": ["Handle auto login or can not login base on spec"]
+            },
+            {
+                "viewpoint": "Check the first time login when not login Google by any user (PC)",
+                "expected_result": ["Display Google login screen. \nCan login successfully after login Google by registered account"]
+            },
+            {
+                "viewpoint": "Check the first time login by Google account but not add any GG account to device (Mobile)",
+                "expected_result": ["Display Google login screen\nCan login successfully after login Google by registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Not expired login token\n+ Registered account is logging Google",
+                "expected_result": ["Auto login by Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Not expired login token\n+ Registered account is not logging Google",
+                "expected_result": ["Auto login by Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Expired login token\n+ Registered account is logging Google",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login when:\n+ Expired login token\n+ Registered account is not logging Google",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login after clear Cookies of browser",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login after Logout",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            },
+            {
+                "viewpoint": "Check the next time login on another Web browser",
+                "expected_result": ["Can not auto login. Display login page. Can login successfully with Registered account"]
+            }
+        ]
+    },
+    {
+        "item_type": "Login via another application (For example: WSM)",
+        "description": "Testing login integration with other applications, including auto-login scenarios and handling of logged/non-logged states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Check login when required application is logged",
+                "expected_result": ["Auto login by Registered account"]
+            },
+            {
+                "viewpoint": "Check login when required application is not logged",
+                "expected_result": ["Display login page of required application. Can login successfully after login by Registered account"]
+            }
+        ]
+    },
+    {
+        "item_type": "Remember Checkbox on Login screen",
+        "description": "Testing remember me functionality including session persistence, token expiration, and browser behavior.",
+        "test_view_points": [
+            {
+                "viewpoint": "Back to Login screen by Back button of browser",
+                "expected_result": ["Can not display login screen after logged successfully"]
+            },
+            {
+                "viewpoint": "Reopen Login screen by URL on other window after login",
+                "expected_result": ["Can not display login screen after logged successfully, display the default screen after login"]
+            },
+            {
+                "viewpoint": "Reopen any valid URL on other window after login",
+                "expected_result": ["Display the corresponding screen successfully"]
+            },
+            {
+                "viewpoint": "Check operation when ON remember Checkbox",
+                "expected_result": ["Keep login state until logout or expired date (base on spec)"]
+            },
+            {
+                "viewpoint": "Check operation when OFF remember Checkbox",
+                "expected_result": ["Required login again."]
+            },
+            {
+                "viewpoint": "Not expired token",
+                "expected_result": ["Auto login by Registered account"]
+            },
+            {
+                "viewpoint": "Expired login token",
+                "expected_result": ["Required login again."]
+            },
+            {
+                "viewpoint": "Clear /Edit Cookies",
+                "expected_result": ["Required login again."]
+            },
+            {
+                "viewpoint": "Logout",
+                "expected_result": ["Required login again."]
+            },
+            {
+                "viewpoint": "Log in by another Web browser",
+                "expected_result": ["Required login again."]
+            }
+        ]
+    },
+    {
+        "item_type": "Other cases",
+        "description": "Testing special login scenarios including multi-device login, multiple accounts, and special account states.",
+        "test_view_points": [
+            {
+                "viewpoint": "Login on multi devices",
+                "expected_result": ["Can login/can not login base on spec"]
+            },
+            {
+                "viewpoint": "Log in multi accounts on 1 device",
+                "expected_result": ["Can login/can not login base on spec"]
+            },
+            {
+                "viewpoint": "Regist an account => login by related mobile number",
+                "expected_result": ["Can login/can not login base on spec"]
+            },
+            {
+                "viewpoint": "Regist an account => login by related Email",
+                "expected_result": ["Can login/can not login base on spec"]
+            },
+            {
+                "viewpoint": "Login by special account:\n+ Deleted account\n+ Inactive account\n+ Block account",
+                "expected_result": ["Can not login by this account.\nDisplay corresponding error message"]
+            }
+        ]
+    }
+]

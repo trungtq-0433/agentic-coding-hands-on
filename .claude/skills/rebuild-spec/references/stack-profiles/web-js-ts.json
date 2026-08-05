@@ -1,0 +1,36 @@
+{
+  "id": "web-js-ts",
+  "graphable": true,
+  "display_name": "Web app (JS/TS, PHP, Ruby, Python, Java, Go, Rust)",
+  "detected_language_heading": "JS/TS",
+  "detection": {
+    "globs": [
+      "package.json", "composer.json", "Gemfile", "pyproject.toml",
+      "pom.xml", "build.gradle", "go.mod", "Cargo.toml"
+    ]
+  },
+  "source_encoding": { "primary": "utf-8", "fallback": "utf-8" },
+  "resource_decode": null,
+  "artifact_map": {
+    "system-overview": { "action": "produce", "class": "universal" },
+    "architecture": { "action": "produce", "class": "universal" },
+    "data-model": { "action": "produce", "class": "universal" },
+    "entities": { "action": "produce", "class": "universal" },
+    "user-stories": { "action": "produce", "class": "universal" },
+    "feature-list": { "action": "produce", "class": "universal" },
+    "business-rules": { "action": "produce", "class": "universal" },
+    "permissions": { "action": "produce", "class": "universal" },
+    "permissions-matrix": { "action": "produce", "class": "universal" },
+    "behavior-logic": { "action": "produce", "class": "universal" },
+    "route-list": { "action": "produce", "class": "web" },
+    "screen-list": { "action": "produce", "class": "web" },
+    "screen-flow": { "action": "produce", "class": "web" },
+    "api-map": { "action": "produce", "class": "web" },
+    "crud-matrix": { "action": "skip", "class": "stack-specific" },
+    "db-objects": { "action": "skip", "class": "stack-specific" }
+  },
+  "screen_source": "route-view",
+  "extractors": [],
+  "probe": { "bootable": true },
+  "module_layout": "feature-grouped"
+}

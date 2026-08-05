@@ -1,0 +1,108 @@
+[
+    {
+        "item_type": "+ Check list when add new 1 item\n\n+ Check list when add new 10, 20 items at the same time",
+        "description": "Testing list behavior when adding single or multiple items, including position, filtering, sorting, pagination and page focus.",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Check position of item after adding\n+ Check filter/sort that item\n",
+                "expected_result": ["+ Item is placed at correct position after adding\n+ Item is displayed correctly when filtering/sorting"]
+            },
+            {
+                "viewpoint": "+ Set default filter, add new item and Check item order\n+ Set filter condition, add new item and Check item order\n",
+                "expected_result": ["+ Item is placed at correct position with default filtering \n+ Item is placed at correct position when set different filtering"]
+            },
+            {
+                "viewpoint": "+ Set default sort, add new item and Check item order\n+ Set sort condition, add new item and Check item order\n",
+                "expected_result": ["+ Item is placed at correct position with default sorting\n+ Item is placed at correct position when set different sorting"]
+            },
+            {
+                "viewpoint": "+ Set default per page, add new item and Check item order\n+ Set different per page, add new item and Check item order",
+                "expected_result": ["+ Pagination displays correctly with default pagination\n+ Pagination displays correctly when set different pagination"]
+            },
+            {
+                "viewpoint": "+ Focus on page 1, add new item and Check focus page\n+ Focus on middle page, add new item and Check focus page\n+ Focus on end page, add new item and Check focus page",
+                "expected_result": [" + Focused page is correct as spec\n(Focus on the current page or Focus on the page that item is added)"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check list when edit item",
+        "description": "Testing list behavior when editing items, including position updates, filtering, sorting, and pagination handling.",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Check position of item\n+ Check filter/sort that item\n",
+                "expected_result": ["+ Item is placed at correct position after editing\n+ Item is displayed correctly when filtering/sorting"]
+            },
+            {
+                "viewpoint": "+ Set default filter, edit item and Check item order\n+ Set filter condition, edit item and Check item order\n",
+                "expected_result": ["+ Item is placed at correct position with default filtering \n+ Item is placed at correct position when set different filtering"]
+            },
+            {
+                "viewpoint": "+ Set default sort, edit item and Check item order\n+ Set sort condition, edit item and Check item order\n",
+                "expected_result": ["+ Item is placed at correct position with default sorting\n+ Item is placed at correct position when set different sorting"]
+            },
+            {
+                "viewpoint": "+ Set default per page, edit item and Check item order\n+ Set different per page, edit item and Check item order",
+                "expected_result": ["+ Pagination displays correctly with default pagination\n+ Pagination displays correctly when set different pagination"]
+            },
+            {
+                "viewpoint": "+ Focus on page 1, edit item and Check focus page\n+ Focus on middle page, edit item and Check focus page\n+ Focus on end page, edit item and Check focus page",
+                "expected_result": [" + Focused page is correct as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check list when delete 1 item",
+        "description": "Testing list behavior when deleting single items, including filtering, sorting, and pagination updates.",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Set default filter, delete item and Check item order\n+ Set filter condition, delete item and Check item order\n",
+                "expected_result": ["+ List displays correctly with default filtering \n+ List displays correctly when set different filtering"]
+            },
+            {
+                "viewpoint": "+ Set default sort, delete item and Check item order\n+ Set sort condition, delete item and Check item order\n",
+                "expected_result": ["+ List displays correctly with default sorting\n+ List displays correctly when set different sorting"]
+            },
+            {
+                "viewpoint": "+ Set default per page, delete item and Check item order\n+ Set different per page, delete item and Check item order",
+                "expected_result": ["+ Pagination displays correctly with default pagination\n+ Pagination displays correctly when set different pagination"]
+            },
+            {
+                "viewpoint": "+ Focus on page 1, delete item and Check focus page\n+ Focus on middle page, delete item and Check focus page\n+ Focus on end page, delete item and Check focus page",
+                "expected_result": [" + Focused page is correct as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check list when delete all item",
+        "description": "Testing list behavior when all items are deleted, including layout and default settings.",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Check layout of list\n+ Check pagination of list",
+                "expected_result": ["+ List displays as designed when there is no item\n+ Pagination displays correctly as spec"]
+            },
+            {
+                "viewpoint": "+ Check default filter/sort after deleting all item => add new item",
+                "expected_result": ["+ List displays correctly with default filtering / sorting\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "Check filter list",
+        "description": "Testing filter functionality including column handling and various filter combinations.",
+        "test_view_points": [
+            {
+                "viewpoint": "+ Check item in filter list with default value\n+ Check item in filter list when add new column / edit column / delete column",
+                "expected_result": ["Name of all columns are displayed properly in filter list"]
+            },
+            {
+                "viewpoint": "+ Check layout of filter list when have one column\n+ Check layout of filter list when have max column\n",
+                "expected_result": ["Filter list displays properly"]
+            },
+            {
+                "viewpoint": "Select filter condition\n+ Filter with 1 column\n+ Filter with Max column\n+ Filter then sort Asc -> Desc\n+ Filter then sort Desc -> Asc\n+ Filter then sort 1 column Asc -> Desc, 1 column Desc -> Asc",
+                "expected_result": ["List is filtered correctly"]
+            }
+        ]
+    }
+]

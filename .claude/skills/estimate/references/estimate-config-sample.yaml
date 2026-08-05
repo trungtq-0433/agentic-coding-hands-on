@@ -1,0 +1,25 @@
+# estimate-config.yaml — Place in same directory as input documents
+# Controls which roles appear in the estimate and per-role cost overrides
+
+# Toggle roles on/off (defaults: fe, be, qa_manual are active)
+roles:
+  fe: true              # Frontend development
+  be: true              # Backend development
+  qa_manual: true       # Manual QA testing
+  qa_auto: false        # Test automation
+  design: false         # UI/UX design
+  pm: false             # Project management
+  brse: false           # Bridge SE (translation, liaison)
+  infra: false          # Infrastructure/DevOps
+
+# Optional: per-role cost overrides (currency from parameters)
+# Roles not listed use parameters.cost_per_md
+cost_per_md:
+  pm: 50000             # PM typically has higher daily rate
+  brse: 60000           # BrSE may have premium rate
+
+# Optional: team headcount per role (for timeline calculations)
+team:
+  fe: 2                 # 2 frontend developers
+  be: 3                 # 3 backend developers
+  qa_manual: 1          # 1 manual tester

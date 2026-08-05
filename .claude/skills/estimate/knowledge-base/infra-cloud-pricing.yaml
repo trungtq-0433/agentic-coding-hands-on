@@ -1,0 +1,302 @@
+metadata:
+  last_updated: "2026-05-07"
+  currency: USD
+  disclaimer: "Reference prices for estimation. Verify with provider calculators before client submission."
+  staleness_warning_months: 6
+
+providers:
+  aws:
+    region_default: ap-northeast-1
+    services:
+      compute:
+        fargate:
+          small:
+            spec: "0.25 vCPU / 0.5 GB"
+            monthly_usd: 14.26
+          medium:
+            spec: "0.5 vCPU / 1 GB"
+            monthly_usd: 26.60
+          large:
+            spec: "1 vCPU / 2 GB"
+            monthly_usd: 53.20
+          ha_multiplier: 2.0
+        ec2:
+          small:
+            spec: "t4g.micro (2 vCPU / 1 GB)"
+            monthly_usd: 8.47
+          medium:
+            spec: "t4g.small (2 vCPU / 2 GB)"
+            monthly_usd: 16.94
+          large:
+            spec: "t4g.medium (2 vCPU / 4 GB)"
+            monthly_usd: 33.87
+          ha_multiplier: 2.0
+      database:
+        aurora:
+          small:
+            spec: "db.t4g.medium (2 vCPU / 4 GB)"
+            monthly_usd: 82.72
+          medium:
+            spec: "db.r6g.large (2 vCPU / 16 GB)"
+            monthly_usd: 219.73
+          large:
+            spec: "db.r6g.xlarge (4 vCPU / 32 GB)"
+            monthly_usd: 439.46
+          ha_multiplier: 2.0
+        rds_postgres:
+          small:
+            spec: "db.t4g.micro (2 vCPU / 1 GB)"
+            monthly_usd: 17.81
+          medium:
+            spec: "db.t4g.medium (2 vCPU / 4 GB)"
+            monthly_usd: 71.25
+          ha_multiplier: 2.0
+      cache:
+        elasticache:
+          small:
+            spec: "cache.t4g.micro (2 vCPU / 0.5 GB)"
+            monthly_usd: 13.68
+          medium:
+            spec: "cache.t4g.small (2 vCPU / 1.37 GB)"
+            monthly_usd: 35.87
+          large:
+            spec: "cache.t4g.medium (2 vCPU / 3.09 GB)"
+            monthly_usd: 65.70
+          ha_multiplier: 3.0
+      search:
+        opensearch:
+          small:
+            spec: "t3.small.search (2 vCPU / 2 GB)"
+            monthly_usd: 40.88
+          medium:
+            spec: "t3.medium.search (2 vCPU / 4 GB)"
+            monthly_usd: 81.98
+          ha_multiplier: 2.0
+      networking:
+        nat_gateway:
+          flat:
+            spec: "per AZ"
+            monthly_usd: 45.38
+        alb:
+          flat:
+            spec: "Application Load Balancer"
+            monthly_usd: 22.66
+        route53:
+          flat:
+            spec: "hosted zone + queries"
+            monthly_usd: 1.50
+        waf:
+          flat:
+            spec: "Web ACL + rules"
+            monthly_usd: 10.60
+      storage:
+        s3:
+          flat:
+            spec: "50 GB standard"
+            monthly_usd: 7.65
+        cloudfront:
+          small:
+            spec: "100 GB transfer"
+            monthly_usd: 3.78
+          medium:
+            spec: "500 GB transfer"
+            monthly_usd: 18.90
+          large:
+            spec: "1 TB transfer"
+            monthly_usd: 35.10
+      monitoring:
+        cloudwatch:
+          flat:
+            spec: "dashboards + alarms + logs"
+            monthly_usd: 5.71
+      ci_cd:
+        codepipeline:
+          flat:
+            spec: "per pipeline"
+            monthly_usd: 1.00
+        codebuild:
+          small:
+            spec: "general1.small (100 min/mo)"
+            monthly_usd: 0.50
+          medium:
+            spec: "general1.medium (300 min/mo)"
+            monthly_usd: 1.50
+
+  gcp:
+    region_default: asia-northeast1
+    services:
+      compute:
+        cloud_run:
+          small:
+            spec: "0.25 vCPU / 0.5 GB"
+            monthly_usd: 12.00
+          medium:
+            spec: "1 vCPU / 1 GB"
+            monthly_usd: 30.00
+          large:
+            spec: "2 vCPU / 2 GB"
+            monthly_usd: 55.00
+        gke_autopilot:
+          small:
+            spec: "0.25 vCPU / 0.5 GB per pod"
+            monthly_usd: 20.00
+          medium:
+            spec: "0.5 vCPU / 1 GB per pod"
+            monthly_usd: 40.00
+      database:
+        cloud_sql_postgres:
+          small:
+            spec: "db-f1-micro (shared vCPU / 0.6 GB)"
+            monthly_usd: 9.37
+          medium:
+            spec: "db-custom-2-8192 (2 vCPU / 8 GB)"
+            monthly_usd: 115.00
+          ha_multiplier: 2.0
+        firestore:
+          flat:
+            spec: "pay-per-use (estimated 1M reads/mo)"
+            monthly_usd: 6.00
+      cache:
+        memorystore_redis:
+          small:
+            spec: "M1 (1 GB)"
+            monthly_usd: 43.80
+          medium:
+            spec: "M2 (5 GB)"
+            monthly_usd: 175.20
+          ha_multiplier: 2.0
+      storage:
+        gcs:
+          flat:
+            spec: "50 GB standard"
+            monthly_usd: 1.30
+        cloud_cdn:
+          small:
+            spec: "100 GB transfer"
+            monthly_usd: 8.50
+          medium:
+            spec: "500 GB transfer"
+            monthly_usd: 38.00
+      monitoring:
+        cloud_monitoring:
+          flat:
+            spec: "free tier + 150 MB logs"
+            monthly_usd: 0.00
+      ci_cd:
+        cloud_build:
+          small:
+            spec: "120 min/day free + overage"
+            monthly_usd: 0.00
+          medium:
+            spec: "e2-medium (300 min/mo)"
+            monthly_usd: 3.00
+
+  azure:
+    region_default: japaneast
+    services:
+      compute:
+        app_service:
+          small:
+            spec: "B1 (1 vCPU / 1.75 GB)"
+            monthly_usd: 13.14
+          medium:
+            spec: "P1v3 (2 vCPU / 8 GB)"
+            monthly_usd: 108.04
+        container_apps:
+          small:
+            spec: "0.25 vCPU / 0.5 GB"
+            monthly_usd: 15.00
+          medium:
+            spec: "0.5 vCPU / 1 GB"
+            monthly_usd: 30.00
+      database:
+        azure_postgres_flex:
+          small:
+            spec: "Burstable B1ms (1 vCPU / 2 GB)"
+            monthly_usd: 24.82
+          medium:
+            spec: "GP D2ds_v5 (2 vCPU / 8 GB)"
+            monthly_usd: 146.74
+          ha_multiplier: 2.0
+      cache:
+        azure_cache_redis:
+          small:
+            spec: "C0 Basic (250 MB)"
+            monthly_usd: 16.79
+          medium:
+            spec: "C1 Standard (1 GB)"
+            monthly_usd: 58.40
+          ha_multiplier: 2.0
+      storage:
+        blob:
+          flat:
+            spec: "50 GB hot tier"
+            monthly_usd: 1.04
+        azure_cdn:
+          small:
+            spec: "100 GB transfer"
+            monthly_usd: 8.13
+          medium:
+            spec: "500 GB transfer"
+            monthly_usd: 35.10
+
+  managed_platforms:
+    supabase:
+      free:
+        spec: "500 MB DB, 1 GB storage, 50K MAU"
+        monthly_usd: 0.00
+      pro:
+        spec: "8 GB DB, 100 GB storage, 100K MAU"
+        monthly_usd: 25.00
+      team:
+        spec: "dedicated infra, SOC2, priority support"
+        monthly_usd: 599.00
+    vercel:
+      free:
+        spec: "hobby use, 100 GB bandwidth"
+        monthly_usd: 0.00
+      pro:
+        spec: "team use, 1 TB bandwidth, analytics"
+        monthly_usd: 20.00
+      enterprise:
+        spec: "custom SLA, SSO, dedicated support"
+        monthly_usd: 0.00
+    cloudflare:
+      free:
+        spec: "CDN, DDoS, SSL"
+        monthly_usd: 0.00
+      pro:
+        spec: "WAF, image optimization"
+        monthly_usd: 20.00
+      business:
+        spec: "advanced WAF, custom SSL"
+        monthly_usd: 200.00
+    railway:
+      starter:
+        spec: "$5 credit, shared resources"
+        monthly_usd: 5.00
+      pro:
+        spec: "team features, increased limits"
+        monthly_usd: 20.00
+
+environment_profiles:
+  dev:
+    sizing: small
+    ha: false
+    multi_az: false
+    notes: "Development environment — single instance, no redundancy"
+  staging:
+    sizing: small
+    ha: false
+    multi_az: false
+    notes: "Staging environment — mirrors dev sizing"
+  production:
+    sizing: large
+    ha: true
+    multi_az: true
+    notes: "Production — HA enabled, multi-AZ for databases and cache"
+  uat:
+    sizing: small
+    ha: false
+    multi_az: false
+    notes: "UAT environment — same as staging"

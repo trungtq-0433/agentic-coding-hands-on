@@ -1,0 +1,177 @@
+[
+    {
+        "item_type": "UI Verification",
+        "description": "Check visual elements across browsers",
+        "test_view_points": [
+            {
+                "viewpoint": "Check UI of sidebar on many browsers and all page:",
+                "aspects": [
+                    "- position",
+                    "- dimension",
+                    "- color of background",
+                    "- font",
+                    "- Title"
+                ],
+                "expected_result": [
+                    "Display exactly UI as the design:",
+                    "- Left Sidebar/Right Sidebar/Left-Right Sidebar)",
+                    "- width... height..."
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Functional Elements",
+        "description": "Testing sidebar functionality",
+        "test_view_points": [
+            {
+                "category": "Basic Functions",
+                "viewpoint": "Check functions that set on sidebar",
+                "aspects": [
+                    "- name of functions",
+                    "- sort",
+                    "- color",
+                    "- icon to hide"
+                ],
+                "expected_result": [
+                    "Display exactly name, order, text color the same with spec",
+                    "Ex:",
+                    "  - Quick Search",
+                    "  - inputbox",
+                    "  - pull down menu",
+                    "  - Menu item"
+                ]
+            },
+            {
+                "category": "Menu Without Submenu",
+                "viewpoint": "Check menu/link text/ image of each function with no submenu",
+                "expected_result": [
+                    "- Hover mouse: highlight text, active mouse, show link at the end of page",
+                    "- Click on link or image: open exact page and highlight exact selected link"
+                ]
+            },
+            {
+                "category": "Menu With Submenu",
+                "viewpoint": "Check menu/link text/image of each function with submenus",
+                "expected_result": {
+                    "main_menu": [
+                        "- Hover mouse: highlight text, active mouse, no show link at the end of page",
+                        "- Click on link/image: open submenus right under main menu",
+                        "- Click on link/image again: close submenus"
+                    ],
+                    "submenu": [
+                        "- Hover mouse: highlight text, active mouse, show link at the end of page",
+                        "- Click on link/image: open exact page and highlight exact selected link"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "item_type": "Interaction Testing",
+        "description": "Testing user interactions",
+        "test_view_points": [
+            {
+                "category": "Mixed Content Interaction",
+                "viewpoint": "Check link if title function on side bar has text and image/icon",
+                "expected_result": "Clicking on image and clicking on text link will be opened the same page"
+            },
+            {
+                "category": "Multiple Clicks",
+                "viewpoints": [
+                    {
+                        "action": "Double click on link",
+                        "expected_result": "Menu on sidebar operate exactly page (no duplicate page)"
+                    },
+                    {
+                        "action": "Click many links on Sidebar continuously",
+                        "expected_result": "Menu on sidebar operate exactly, open exact selected link"
+                    }
+                ]
+            },
+            {
+                "category": "Keyboard Navigation",
+                "viewpoint": "Check using Tab and press Enter to choose items on Side bar",
+                "expected_result": [
+                    "Can use Tab key to move items on Sidebar",
+                    "Can select items by pressing Enter and open exactly page"
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Responsive Behavior",
+        "description": "Testing sidebar responsiveness",
+        "test_view_points": [
+            {
+                "category": "Hide/Show Functionality",
+                "viewpoints": [
+                    {
+                        "action": "Check hiding sidebar",
+                        "expected_result": [
+                            "- Default display Hide icon",
+                            "- UI of sidebar is changed to compact form",
+                            "- Change Hide icon to Show icon"
+                        ]
+                    },
+                    {
+                        "action": "Check operating of sidebar when hiding",
+                        "expected_result": [
+                            "- All icon will be active",
+                            "- Click on menu (no sub): open exact page and still keep compact form",
+                            "- Click on menu (has sub): display submenu pane"
+                        ]
+                    },
+                    {
+                        "action": "Show sidebar",
+                        "expected_result": [
+                            "- UI of sidebar is changed to full/default form",
+                            "- Change Show icon to Hide icon"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "Screen Adaptability",
+                "viewpoints": [
+                    {
+                        "action": "Check maximize/minimize screen",
+                        "expected_result": "Sidebar will be auto responding follow dimension of screen"
+                    },
+                    {
+                        "action": "Check drag border of browser",
+                        "expected_result": "Sidebar will be auto responding follow dimension of screen"
+                    },
+                    {
+                        "action": "Check zoom in, zoom out screen",
+                        "expected_result": "Sidebar will be auto responding follow action: zoom in/out of screen"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Special Conditions",
+        "description": "Testing edge cases",
+        "test_view_points": [
+            {
+                "category": "Offline Behavior",
+                "viewpoint": "Click/press link when The Internet disconnect",
+                "expected_result": "No open selected link"
+            },
+            {
+                "category": "Scroll Behavior",
+                "viewpoint": "Check display sidebar when scroll",
+                "expected_result": [
+                    "Base on spec, sidebar will fixed or move follow scroll screen",
+                    "Highlight menu that selected with fixed side bar or Highlight corresponding menu"
+                ]
+            },
+            {
+                "category": "Cross-browser Compatibility",
+                "viewpoint": "Check operating sidebar on many browsers",
+                "expected_result": "On all browsers, sidebar will operate exactly"
+            }
+        ]
+    }
+]

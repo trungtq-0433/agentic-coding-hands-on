@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estimate Viewer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--blue:#4472C4;--lblue:#D9E2F3;--green:#70AD47;--lgreen:#E2EFDA;--orange:#ED7D31;--lorange:#FCE4D6;--purple:#7030A0;--lpurple:#E2D0F0;--red:#C00000;--lred:#F4CCCC;--bg:#f8f9fa;--border:#dee2e6;--text:#212529}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.4}
+#drop-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px}
+#drop-zone.drag-over{background:#e3f2fd}
+#drop-zone h1{font-size:24px;color:var(--blue)}
+#drop-zone p{color:#666}
+.drop-area{border:2px dashed var(--border);border-radius:12px;padding:48px 64px;text-align:center;cursor:pointer;transition:border-color .2s}
+.drop-area:hover,.drag-over .drop-area{border-color:var(--blue)}
+#file-input{display:none}
+#toolbar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);padding:8px 24px;display:flex;align-items:center;gap:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+#toolbar h2{flex:1;font-size:16px;color:var(--blue);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{padding:6px 16px;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:600;transition:opacity .15s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-secondary{background:#6c757d;color:#fff}
+.btn:hover{opacity:.85}
+#content{max-width:100%;padding:16px 24px 64px;display:none}
+section{margin-bottom:24px;background:#fff;border-radius:8px;border:1px solid var(--border);overflow:hidden}
+section h3{padding:10px 16px;font-size:14px;background:var(--lblue);color:var(--blue);border-bottom:1px solid var(--border)}
+section h4{padding:8px 16px;font-size:13px;background:#f1f3f5;border-bottom:1px solid var(--border);border-top:1px solid var(--border)}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:4px 6px;border:1px solid var(--border);text-align:center;white-space:nowrap}
+th{font-weight:600;font-size:11px;position:sticky;top:0;z-index:1}
+td:nth-child(2){text-align:left;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.role-hdr{color:#fff;font-size:10px}
+.sub-row td{font-weight:700;background:#f1f3f5}
+.total-row td{font-weight:700;background:var(--lgreen)}
+input[type=number]{width:48px;padding:2px 4px;border:1px solid transparent;border-radius:3px;text-align:right;font-size:12px;background:#fafafa;-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--blue);outline:none;background:#fff}
+.md-cell{font-weight:700;background:#f8f9fa;min-width:36px}
+.total-md{font-weight:700;background:var(--lgreen)}
+.no-role{color:#ccc}
+.exec-tbl th{background:var(--green);color:#fff}
+.exec-tbl td:first-child{text-align:left;font-weight:600}
+.param-tbl th{background:var(--blue);color:#fff}
+.param-tbl td:first-child{font-weight:600}
+.risk-tbl th{background:var(--orange);color:#fff}
+.cmp-tbl th{background:var(--purple);color:#fff}
+.list-section{padding:12px 16px}
+.list-section ol{padding-left:20px}
+.list-section li{margin:2px 0}
+.toast{position:fixed;top:16px;right:16px;background:#dc3545;color:#fff;padding:10px 20px;border-radius:6px;z-index:999;display:none;font-size:13px}
+.meta{padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:12px}
+.meta dt{font-weight:600;color:#666}
+.meta dd{color:var(--text)}
+</style>
+</head>
+<body>
+<div id="drop-zone">
+  <h1>Estimate Interactive Viewer</h1>
+  <p>Load a JSON estimate file to view and edit</p>
+  <div class="drop-area" onclick="document.getElementById('file-input').click()">
+    <p style="font-size:32px;margin-bottom:8px">📂</p>
+    <p><strong>Drop JSON file here</strong> or click to browse</p>
+    <input type="file" id="file-input" accept=".json">
+  </div>
+</div>
+<div id="toolbar" style="display:none">
+  <h2 id="project-title"></h2>
+  <button class="btn btn-secondary" onclick="document.getElementById('file-input2').click()">Load Another</button>
+  <input type="file" id="file-input2" accept=".json" style="display:none">
+  <button class="btn btn-primary" onclick="exportJSON()">Export JSON</button>
+</div>
+<div id="content"></div>
+<div class="toast" id="toast"></div>
+<script>
+const ROLE_COLORS = {0:['var(--blue)','var(--lblue)'],1:['var(--green)','var(--lgreen)'],2:['var(--orange)','var(--lorange)'],3:['var(--purple)','var(--lpurple)'],4:['var(--red)','var(--lred)']};
+const DEFAULTS = {base:0,complexity:1.0,experience:1.0,buffer_pct:0};
+let data = null;
+let execSummaryEl = null;
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) Object.entries(attrs).forEach(([k,v]) => {
+    if (k === 'style' && typeof v === 'object') Object.assign(e.style, v);
+    else if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
+    else e.setAttribute(k, v);
+  });
+  if (children) (Array.isArray(children) ? children : [children]).forEach(c => {
+    if (c == null) return;
+    e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  });
+  return e;
+}
+
+function recalcMd(eff) {
+  if (!eff || !eff.base) { eff.md = 0; return; }
+  const b = eff.base || 0, c = eff.complexity || 1, e = eff.experience || 1, buf = eff.buffer_pct || 0;
+  eff.md = Math.round(b * c * e * (1 + buf / 100));
+}
+
+function recalcTask(task) {
+  let total = 0;
+  for (const r of Object.values(task.effort || {})) {
+    if (r && typeof r === 'object') total += (r.md || 0);
+  }
+  task.total_md = total;
+}
+
+function allTasks(option) {
+  const t = [];
+  for (const c of (option.categories || [])) t.push(...(c.tasks || []));
+  t.push(...(option.tasks || []));
+  return t;
+}
+
+function computeOptionTotals(option, roles) {
+  const tasks = allTasks(option);
+  const rt = {};
+  roles.forEach(r => rt[r] = 0);
+  let total = 0, sp = 0, devMd = 0, nonDevMd = 0;
+  for (const t of tasks) {
+    for (const r of roles) {
+      const md = t.effort?.[r]?.md || 0;
+      rt[r] = (rt[r] || 0) + md;
+    }
+    total += t.total_md || 0;
+    sp += t.story_points || 0;
+    if (t.is_dev_task) devMd += t.total_md || 0;
+    else nonDevMd += t.total_md || 0;
+  }
+  const aiPct = option.ai_reduction_pct || 0;
+  const aiTotal = Math.round(devMd * (1 - aiPct / 100)) + nonDevMd;
+  return { roleTotals: rt, total, sp, aiTotal, devMd, nonDevMd };
+}
+
+function computeCatTotals(tasks, roles) {
+  const rt = {};
+  roles.forEach(r => rt[r] = 0);
+  let total = 0, sp = 0;
+  for (const t of tasks) {
+    for (const r of roles) rt[r] += (t.effort?.[r]?.md || 0);
+    total += t.total_md || 0;
+    sp += t.story_points || 0;
+  }
+  return { roleTotals: rt, total, sp };
+}
+
+function fmt(n, cur) {
+  if (cur === 'JPY') return '¥' + n.toLocaleString();
+  return cur + ' ' + n.toLocaleString();
+}
+
+// --- File I/O ---
+function loadFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      data = JSON.parse(e.target.result);
+      renderAll();
+    } catch (err) {
+      showToast('Invalid JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function exportJSON() {
+  if (!data) return;
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = el('a', { href: url, download: (data.project_name || 'estimate').replace(/\s+/g, '-') + '-edited.json' });
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 4000);
+}
+
+// --- Setup ---
+const dz = document.getElementById('drop-zone');
+document.getElementById('file-input').addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+document.getElementById('file-input2').addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]); });
+
+// --- Renderers ---
+function renderAll() {
+  const roles = data.parameters?.active_roles || [];
+  const names = data.parameters?.role_names || {};
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  content.style.display = 'block';
+  document.getElementById('drop-zone').style.display = 'none';
+  document.getElementById('toolbar').style.display = 'flex';
+  document.getElementById('project-title').textContent = data.project_name || 'Estimate';
+
+  content.appendChild(renderHeader());
+  execSummaryEl = renderExecSummary(roles, names);
+  content.appendChild(execSummaryEl);
+  content.appendChild(renderParams());
+  for (const opt of (data.options || [])) content.appendChild(renderOption(opt, roles, names));
+  if (data.future_phases?.length) content.appendChild(renderFuturePhases(roles, names));
+  if (data.risks?.length) content.appendChild(renderRisks());
+  if (data.tbd_items?.length) content.appendChild(renderTbd());
+  if (data.comparison?.length) content.appendChild(renderComparison());
+  content.appendChild(renderLists());
+}
+
+function renderHeader() {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Project Information'));
+  const dl = el('dl', { class: 'meta' });
+  const items = [
+    ['Project', data.project_name], ['Date', data.generated_date], ['Estimator', data.estimator],
+    ['Confidence', `${data.confidence?.level || '?'} (±${data.confidence?.range_pct || '?'}%)`],
+    ['Source', data.source_document], ['Tier', data.template_tier]
+  ];
+  items.forEach(([k, v]) => { dl.appendChild(el('dt', null, k)); dl.appendChild(el('dd', null, v || '-')); });
+  s.appendChild(dl);
+  return s;
+}
+
+function renderExecSummary(roles, names) {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Executive Summary'));
+  const tbl = el('table', { class: 'exec-tbl' });
+  const costPerMd = data.parameters?.cost_per_md || 0;
+  const cur = data.parameters?.currency || 'JPY';
+
+  // Headers
+  const hr = el('tr');
+  hr.appendChild(el('th', null, 'Metric'));
+  for (const opt of (data.options || [])) {
+    hr.appendChild(el('th', null, opt.name || opt.id));
+    if (opt.ai_reduction_pct) hr.appendChild(el('th', null, (opt.name || opt.id) + ' + AI'));
+  }
+  tbl.appendChild(el('thead', null, hr));
+
+  const tbody = el('tbody');
+  const optTotals = (data.options || []).map(o => computeOptionTotals(o, roles));
+
+  // Role rows
+  for (const r of roles) {
+    const tr = el('tr');
+    tr.appendChild(el('td', null, names[r] || r.toUpperCase()));
+    optTotals.forEach((ot, i) => {
+      const opt = data.options[i];
+      const cell = el('td', null, String(ot.roleTotals[r] || 0));
+      cell.dataset.execRole = r; cell.dataset.optIdx = i;
+      tr.appendChild(cell);
+      if (opt.ai_reduction_pct) tr.appendChild(el('td', null, '-'));
+    });
+    tbody.appendChild(tr);
+  }
+  // Total row
+  const trTotal = el('tr', { style: { fontWeight: '700' } });
+  trTotal.appendChild(el('td', null, 'Total MD'));
+  optTotals.forEach((ot, i) => {
+    const opt = data.options[i];
+    const cell = el('td', null, String(ot.total));
+    cell.dataset.execTotal = i;
+    trTotal.appendChild(cell);
+    if (opt.ai_reduction_pct) {
+      const ai = el('td', null, String(ot.aiTotal));
+      ai.dataset.execAi = i;
+      trTotal.appendChild(ai);
+    }
+  });
+  tbody.appendChild(trTotal);
+
+  // Cost row
+  if (costPerMd) {
+    const trCost = el('tr');
+    trCost.appendChild(el('td', null, 'Cost'));
+    optTotals.forEach((ot, i) => {
+      const opt = data.options[i];
+      trCost.appendChild(el('td', null, fmt(ot.total * costPerMd, cur)));
+      if (opt.ai_reduction_pct) trCost.appendChild(el('td', null, fmt(ot.aiTotal * costPerMd, cur)));
+    });
+    tbody.appendChild(trCost);
+  }
+  tbl.appendChild(tbody);
+  s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  return s;
+}
+
+function refreshExecSummary(roles) {
+  if (!execSummaryEl) return;
+  const costPerMd = data.parameters?.cost_per_md || 0;
+  const cur = data.parameters?.currency || 'JPY';
+  const optTotals = (data.options || []).map(o => computeOptionTotals(o, roles));
+
+  // Update role cells
+  for (const r of roles) {
+    optTotals.forEach((ot, i) => {
+      const cell = execSummaryEl.querySelector(`[data-exec-role="${r}"][data-opt-idx="${i}"]`);
+      if (cell) cell.textContent = ot.roleTotals[r] || 0;
+    });
+  }
+  // Update total/AI/cost
+  const costCells = execSummaryEl.querySelectorAll('tr:last-child td');
+  optTotals.forEach((ot, i) => {
+    const tc = execSummaryEl.querySelector(`[data-exec-total="${i}"]`);
+    if (tc) tc.textContent = ot.total;
+    const ac = execSummaryEl.querySelector(`[data-exec-ai="${i}"]`);
+    if (ac) ac.textContent = ot.aiTotal;
+  });
+  // Rebuild cost row (simpler than targeted update)
+  const tbody = execSummaryEl.querySelector('tbody');
+  const lastRow = tbody.lastElementChild;
+  if (lastRow && lastRow.querySelector('td')?.textContent === 'Cost') {
+    let ci = 1;
+    optTotals.forEach((ot, i) => {
+      const opt = data.options[i];
+      if (lastRow.children[ci]) lastRow.children[ci].textContent = fmt(ot.total * costPerMd, cur);
+      ci++;
+      if (opt.ai_reduction_pct) {
+        if (lastRow.children[ci]) lastRow.children[ci].textContent = fmt(ot.aiTotal * costPerMd, cur);
+        ci++;
+      }
+    });
+  }
+}
+
+function renderParams() {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Estimation Parameters'));
+
+  // Project multipliers
+  if (data.parameters?.project_multipliers?.length) {
+    s.appendChild(el('h4', null, 'Project-Level Multipliers'));
+    const tbl = el('table', { class: 'param-tbl' });
+    const hr = el('tr');
+    ['Factor', 'Value', 'Rationale'].forEach(h => hr.appendChild(el('th', null, h)));
+    tbl.appendChild(el('thead', null, hr));
+    const tb = el('tbody');
+    for (const m of data.parameters.project_multipliers) {
+      const tr = el('tr');
+      tr.appendChild(el('td', null, m.name));
+      tr.appendChild(el('td', null, String(m.value)));
+      tr.appendChild(el('td', { style: { textAlign: 'left' } }, m.rationale || ''));
+      tb.appendChild(tr);
+    }
+    tbl.appendChild(tb); s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  }
+
+  // Per-task factors
+  if (data.parameters?.per_task_factors?.length) {
+    s.appendChild(el('h4', null, 'Per-Task Complexity Factors'));
+    const tbl = el('table', { class: 'param-tbl' });
+    const hr = el('tr');
+    ['Factor', 'Value', 'Scope'].forEach(h => hr.appendChild(el('th', null, h)));
+    tbl.appendChild(el('thead', null, hr));
+    const tb = el('tbody');
+    for (const f of data.parameters.per_task_factors) {
+      const tr = el('tr');
+      tr.appendChild(el('td', null, f.name));
+      tr.appendChild(el('td', null, String(f.value) + 'x'));
+      tr.appendChild(el('td', { style: { textAlign: 'left' } }, f.scope || ''));
+      tb.appendChild(tr);
+    }
+    tbl.appendChild(tb); s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  }
+  return s;
+}
+
+function makeInput(effEntry, field, step, onRecalc) {
+  const inp = el('input', { type: 'number', step: String(step), value: String(effEntry[field] ?? DEFAULTS[field]) });
+  inp.addEventListener('input', () => {
+    const v = parseFloat(inp.value);
+    if (!isNaN(v) && v >= 0) {
+      effEntry[field] = v;
+      onRecalc();
+    }
+  });
+  return inp;
+}
+
+function renderTaskRow(task, roles, names, option, catSubCells, optTotalCells) {
+  const tr = el('tr');
+  tr.appendChild(el('td', null, task.id || ''));
+  tr.appendChild(el('td', { title: task.name }, task.name || ''));
+
+  const mdCells = {};
+  const doRecalc = () => {
+    recalcTask(task);
+    // Update MD cells
+    for (const r of roles) {
+      const md = task.effort?.[r]?.md || 0;
+      if (mdCells[r]) mdCells[r].textContent = md || '-';
+    }
+    // Update total_md
+    if (mdCells._total) mdCells._total.textContent = task.total_md;
+    // Update category subtotals
+    if (catSubCells) updateSubCells(catSubCells);
+    // Update option totals
+    if (optTotalCells) updateSubCells(optTotalCells);
+    // Update exec summary
+    refreshExecSummary(roles);
+  };
+
+  for (let ri = 0; ri < roles.length; ri++) {
+    const r = roles[ri];
+    const eff = task.effort?.[r];
+    const [, lc] = ROLE_COLORS[ri % 5] || ['', ''];
+    if (eff && typeof eff === 'object') {
+      const recalcRole = () => { recalcMd(eff); doRecalc(); };
+      const tdB = el('td', { style: { background: lc } }, makeInput(eff, 'base', 0.1, recalcRole));
+      const tdC = el('td', { style: { background: lc } }, makeInput(eff, 'complexity', 0.01, recalcRole));
+      const tdE = el('td', { style: { background: lc } }, makeInput(eff, 'experience', 0.01, recalcRole));
+      const tdBuf = el('td', { style: { background: lc } }, makeInput(eff, 'buffer_pct', 1, recalcRole));
+      const tdMd = el('td', { class: 'md-cell', style: { background: lc } }, String(eff.md || 0));
+      mdCells[r] = tdMd;
+      tr.append(tdB, tdC, tdE, tdBuf, tdMd);
+    } else {
+      for (let i = 0; i < 5; i++) tr.appendChild(el('td', { class: 'no-role' }, '-'));
+    }
+  }
+
+  const totalTd = el('td', { class: 'total-md' }, String(task.total_md || 0));
+  mdCells._total = totalTd;
+  tr.appendChild(totalTd);
+  tr.appendChild(el('td', null, String(task.story_points || 0)));
+  tr.appendChild(el('td', null, String(task.original_md ?? '-')));
+  tr.appendChild(el('td', { style: { textAlign: 'left', maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis' }, title: task.notes || '' }, task.notes || ''));
+  return tr;
+}
+
+function buildTableHeaders(roles, names) {
+  const thead = el('thead');
+
+  // Top header row (role groups)
+  const tr1 = el('tr');
+  tr1.appendChild(el('th', { rowspan: '2' }, 'ID'));
+  tr1.appendChild(el('th', { rowspan: '2', style: { minWidth: '180px' } }, 'Task'));
+  for (let i = 0; i < roles.length; i++) {
+    const [hc] = ROLE_COLORS[i % 5];
+    tr1.appendChild(el('th', { colspan: '5', class: 'role-hdr', style: { background: hc } }, names[roles[i]] || roles[i].toUpperCase()));
+  }
+  tr1.appendChild(el('th', { rowspan: '2', style: { background: 'var(--green)', color: '#fff' } }, 'Total'));
+  tr1.appendChild(el('th', { rowspan: '2', style: { background: 'var(--green)', color: '#fff' } }, 'SP'));
+  tr1.appendChild(el('th', { rowspan: '2', style: { background: 'var(--green)', color: '#fff' } }, 'Orig'));
+  tr1.appendChild(el('th', { rowspan: '2', style: { background: 'var(--green)', color: '#fff', minWidth: '100px' } }, 'Notes'));
+  thead.appendChild(tr1);
+
+  // Sub header row (B/C/E/B%/MD per role)
+  const tr2 = el('tr');
+  for (let i = 0; i < roles.length; i++) {
+    const [hc] = ROLE_COLORS[i % 5];
+    ['B', 'C', 'E', 'B%', 'MD'].forEach(h =>
+      tr2.appendChild(el('th', { class: 'role-hdr', style: { background: hc, fontSize: '10px' } }, h))
+    );
+  }
+  thead.appendChild(tr2);
+  return thead;
+}
+
+function buildSubtotalRow(label, tasks, roles, colspan) {
+  const cells = {};
+  const tr = el('tr', { class: 'sub-row' });
+  tr.appendChild(el('td', { colspan: '2' }, label));
+  const totals = computeCatTotals(tasks, roles);
+  for (const r of roles) {
+    tr.appendChild(el('td', { colspan: '4' }));
+    const td = el('td', null, String(totals.roleTotals[r]));
+    cells[r] = td;
+    tr.appendChild(td);
+  }
+  const totalTd = el('td', null, String(totals.total));
+  cells._total = totalTd;
+  tr.appendChild(totalTd);
+  const spTd = el('td', null, String(totals.sp));
+  cells._sp = spTd;
+  tr.appendChild(spTd);
+  tr.appendChild(el('td')); tr.appendChild(el('td'));
+  cells._tasks = tasks;
+  cells._roles = roles;
+  return { tr, cells };
+}
+
+function updateSubCells(cells) {
+  if (!cells._tasks || !cells._roles) return;
+  const totals = computeCatTotals(cells._tasks, cells._roles);
+  for (const r of cells._roles) {
+    if (cells[r]) cells[r].textContent = totals.roleTotals[r];
+  }
+  if (cells._total) cells._total.textContent = totals.total;
+  if (cells._sp) cells._sp.textContent = totals.sp;
+}
+
+function renderOption(option, roles, names) {
+  const s = el('section');
+  const title = (option.name || 'Option ' + option.id) + (option.subtitle ? ' — ' + option.subtitle : '');
+  s.appendChild(el('h3', null, title));
+
+  if (option.scope_reductions?.length) {
+    s.appendChild(el('h4', null, 'Scope Reductions'));
+    const tbl = el('table');
+    const hr = el('tr');
+    ['Item', 'Impact (MD)'].forEach(h => hr.appendChild(el('th', { style: { background: 'var(--orange)', color: '#fff' } }, h)));
+    tbl.appendChild(el('thead', null, hr));
+    const tb = el('tbody');
+    for (const r of option.scope_reductions) {
+      const tr = el('tr');
+      tr.appendChild(el('td', { style: { textAlign: 'left' } }, r.item));
+      tr.appendChild(el('td', null, String(r.impact_md)));
+      tb.appendChild(tr);
+    }
+    tbl.appendChild(tb);
+    s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  }
+
+  const allOptionTasks = allTasks(option);
+  const { tr: optTotalTr, cells: optTotalCells } = buildSubtotalRow('OPTION TOTAL', allOptionTasks, roles);
+  optTotalTr.className = 'total-row';
+
+  if (option.categories?.length) {
+    for (const cat of option.categories) {
+      s.appendChild(el('h4', null, cat.name));
+      const tbl = el('table');
+      tbl.appendChild(buildTableHeaders(roles, names));
+      const tbody = el('tbody');
+      const { tr: subTr, cells: subCells } = buildSubtotalRow(cat.name + ' Subtotal', cat.tasks, roles);
+      for (const t of (cat.tasks || [])) {
+        tbody.appendChild(renderTaskRow(t, roles, names, option, subCells, optTotalCells));
+      }
+      tbody.appendChild(subTr);
+      tbl.appendChild(tbody);
+      s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+    }
+  } else {
+    const tbl = el('table');
+    tbl.appendChild(buildTableHeaders(roles, names));
+    const tbody = el('tbody');
+    for (const t of (option.tasks || [])) {
+      tbody.appendChild(renderTaskRow(t, roles, names, option, null, optTotalCells));
+    }
+    tbl.appendChild(tbody);
+    s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  }
+
+  // Grand total
+  const tblTotal = el('table');
+  tblTotal.appendChild(buildTableHeaders(roles, names));
+  const tbTotal = el('tbody');
+  tbTotal.appendChild(optTotalTr);
+
+  // Cost row
+  const costPerMd = data.parameters?.cost_per_md || 0;
+  const cur = data.parameters?.currency || 'JPY';
+  if (costPerMd) {
+    const totals = computeOptionTotals(option, roles);
+    const costTr = el('tr', { class: 'total-row' });
+    costTr.appendChild(el('td', { colspan: '2' }, 'COST'));
+    for (const r of roles) {
+      costTr.appendChild(el('td', { colspan: '4' }));
+      costTr.appendChild(el('td', null, fmt(totals.roleTotals[r] * costPerMd, cur)));
+    }
+    costTr.appendChild(el('td', { style: { fontWeight: '700' } }, fmt(totals.total * costPerMd, cur)));
+    costTr.appendChild(el('td')); costTr.appendChild(el('td')); costTr.appendChild(el('td'));
+    tbTotal.appendChild(costTr);
+  }
+  tblTotal.appendChild(tbTotal);
+  s.appendChild(el('div', { class: 'tbl-wrap' }, tblTotal));
+  return s;
+}
+
+function renderFuturePhases(roles, names) {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Future Phases'));
+  for (const phase of data.future_phases) {
+    s.appendChild(el('h4', null, phase.name));
+    const tbl = el('table');
+    tbl.appendChild(buildTableHeaders(roles, names));
+    const tbody = el('tbody');
+    const tasks = phase.tasks || [];
+    const { tr: subTr, cells: subCells } = buildSubtotalRow('Phase Subtotal', tasks, roles);
+    for (const t of tasks) tbody.appendChild(renderTaskRow(t, roles, names, null, subCells, null));
+    tbody.appendChild(subTr);
+    tbl.appendChild(tbody);
+    s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  }
+  return s;
+}
+
+function renderRisks() {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Risk Assessment'));
+  const tbl = el('table', { class: 'risk-tbl' });
+  const hr = el('tr');
+  ['ID', 'Risk', 'Category', 'P', 'I', 'Score', 'Mitigation'].forEach(h => hr.appendChild(el('th', null, h)));
+  tbl.appendChild(el('thead', null, hr));
+  const tb = el('tbody');
+  for (const r of data.risks) {
+    const tr = el('tr');
+    tr.appendChild(el('td', null, r.id || ''));
+    tr.appendChild(el('td', { style: { textAlign: 'left' } }, r.description));
+    tr.appendChild(el('td', null, r.category || ''));
+    tr.appendChild(el('td', null, String(r.probability ?? '')));
+    tr.appendChild(el('td', null, String(r.impact ?? '')));
+    tr.appendChild(el('td', null, String(r.score ?? '')));
+    tr.appendChild(el('td', { style: { textAlign: 'left', maxWidth: '300px' } }, r.mitigation || ''));
+    tb.appendChild(tr);
+  }
+  tbl.appendChild(tb); s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  return s;
+}
+
+function renderTbd() {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'TBD Items'));
+  const tbl = el('table', { class: 'risk-tbl' });
+  const hr = el('tr');
+  ['Item', 'Status', 'Risk Impact', 'Recommendation'].forEach(h => hr.appendChild(el('th', null, h)));
+  tbl.appendChild(el('thead', null, hr));
+  const tb = el('tbody');
+  for (const t of data.tbd_items) {
+    const tr = el('tr');
+    tr.appendChild(el('td', { style: { textAlign: 'left' } }, t.item));
+    tr.appendChild(el('td', null, t.status || ''));
+    tr.appendChild(el('td', null, t.risk_impact || ''));
+    tr.appendChild(el('td', { style: { textAlign: 'left' } }, t.recommendation || ''));
+    tb.appendChild(tr);
+  }
+  tbl.appendChild(tb); s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  return s;
+}
+
+function renderComparison() {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Comparison with Original'));
+  const tbl = el('table', { class: 'cmp-tbl' });
+  const hr = el('tr');
+  ['Area', 'My MD', 'Original MD', 'Reason'].forEach(h => hr.appendChild(el('th', null, h)));
+  tbl.appendChild(el('thead', null, hr));
+  const tb = el('tbody');
+  for (const c of data.comparison) {
+    const tr = el('tr');
+    tr.appendChild(el('td', null, c.area));
+    tr.appendChild(el('td', null, String(c.my_md)));
+    tr.appendChild(el('td', null, String(c.original_md)));
+    tr.appendChild(el('td', { style: { textAlign: 'left' } }, c.reason || ''));
+    tb.appendChild(tr);
+  }
+  tbl.appendChild(tb); s.appendChild(el('div', { class: 'tbl-wrap' }, tbl));
+  return s;
+}
+
+function renderLists() {
+  const s = el('section');
+  s.appendChild(el('h3', null, 'Additional Information'));
+  const lists = [
+    ['Assumptions', data.assumptions],
+    ['Recommendations', data.recommendations],
+    ['Unresolved Questions', data.unresolved_questions]
+  ];
+  for (const [title, items] of lists) {
+    if (!items?.length) continue;
+    const div = el('div', { class: 'list-section' });
+    div.appendChild(el('strong', null, title));
+    const ol = el('ol');
+    for (const item of items) ol.appendChild(el('li', null, item));
+    div.appendChild(ol);
+    s.appendChild(div);
+  }
+  return s;
+}
+</script>
+</body>
+</html>

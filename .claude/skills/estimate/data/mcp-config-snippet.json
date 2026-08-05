@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "clio": {
+      "type": "http",
+      "url": "https://clio.sun-asterisk.vn/mcp",
+      "headers": {
+        "x-api-key": "${CLIO_API_KEY}"
+      }
+    }
+  }
+}

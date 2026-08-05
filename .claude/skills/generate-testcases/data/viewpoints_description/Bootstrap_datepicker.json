@@ -1,0 +1,102 @@
+[
+    {
+        "item_type": "Check display",
+        "description": "Testing display properties of datepicker in both add/edit forms and calendar appearance",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of Datepicker item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank\n+ Place holder value\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of Datepicker item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: DB's value"]
+            },
+            {
+                "viewpoint": "Check default display of the calendar",
+                "expected_result": ["Display correctly as spec:\n+ Use the correct library and CSS.\n+ Selected value"]
+            }
+        ]
+    },
+    {
+        "item_type": "Calendar control",
+        "description": "Testing calendar control functionality including navigation and date/time selection",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation of calendar when has event from user:\n+ Click input box\n+ Click the calendar icon\n+ Click next icon in calendar\n+ Click previous icon in calendar\n+ Click time icon in calendar",
+                "expected_result": ["All actions are performed correctly as normal"]
+            },
+            {
+                "viewpoint": "Check operation of Arrow keys of calendar:\n+ Up\n+ Down\n+ Right\n+ Left",
+                "expected_result": ["All actions are performed correctly as normal"]
+            },
+            {
+                "viewpoint": "Check when select date value\n+ Select a current date in the calendar\n+ Select a past date in the calendar\n+ Select a future date in the calendar",
+                "expected_result": ["Can select and peform successfully with select value."]
+            },
+            {
+                "viewpoint": "Check when select time value\n+ Select a current time in the calendar\n+ Select a past time in the calendar\n+ Select a future time in the calendar",
+                "expected_result": ["Can select and peform successfully with select value."]
+            }
+        ]
+    },
+    {
+        "item_type": "Input value",
+        "description": "Testing various input scenarios including valid and invalid date/time values",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when Input each valid value:\n+ Valid date format\n+ The special value (base on spec) \n+ The past time\n+ The future time\n+ Min date\n+ Max date",
+                "expected_result": ["Process successfully with inputed value"]
+            },
+            {
+                "viewpoint": "Check when Input invalid year value (YYYY):\n+ Null (blank value)\n+ Has Japanese number\n+ Has Alphabet character\n+ Japanese year",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid month value (MM): + Null (blank value) + Has Japanese number + Has Alphabet character + Japanese month + < 1 + > 12",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid day value (DD): + Null (blank value) + Has Japanese number + Has Alphabet character + Japanese day + < 1 + > Max days of month",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid hour value (hh): + Null (blank value) + Has Japanese number + Has Alphabet character + < 0 + > 24",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid minute value (mm): + Null (blank value) + Has Japanese number + Has Alphabet character + < 0 + > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when Input invalid second value (ii): + Null (blank value) + Has Japanese number + Has Alphabet character + < 0 + > 60",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when input over boundary value:\n+ Min - 1\n+ Max +1",
+                "expected_result": ["Display exact error message with correct format and position"]
+            },
+            {
+                "viewpoint": "Check when not input value/multi spaces",
+                "expected_result": ["Success or failure base on spec"]
+            },
+            {
+                "viewpoint": "Check when input wrong format to date time input box:\n+ \"00000000\"\n+ YYYY//MM//DD\n+ YYYY / MM / DD\n+ YYYY-MM-DD\n+ YY/MM/DD",
+                "expected_result": ["Display exact error message with correct format and position\n"]
+            }
+        ]
+    },
+    {
+        "item_type": "AM/PM option",
+        "description": "Testing AM/PM functionality and time constraints",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when select \"AM\" option",
+                "expected_result": ["+ Can not input or select timevalue > 12:00:00 AM\n+ If try to edit by inspect, auto convert: newtime = inputted time - 12:00:00"]
+            },
+            {
+                "viewpoint": "Check operation when select \"PM\" option",
+                "expected_result": ["+ Can not input or select timevalue > 12:00:00 AM\n+ If try to edit by inspect, auto convert: newtime = inputted time - 12:00:00"]
+            }
+        ]
+    }
+]

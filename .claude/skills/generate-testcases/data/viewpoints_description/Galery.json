@@ -1,0 +1,312 @@
+[
+    {
+        "item_type": "List album",
+        "description": "Testing album list display including default views, ordering, and different view modes.",
+        "sub_items": [
+            {
+                "item_type": "Title of album",
+                "description": "Testing album title display with various character types and length constraints while ensuring design compliance.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify Title of album display matching with design\n\nTest with:\n- EN characters\n- JP characters: Full size, half size...\n- Number characters\n- Special characters (Spaces, symbols...)\n- Bad words from config file\n....",
+                        "expected_result": ["- Title of album is displayed with format matching design"]
+                    },
+                    {
+                        "viewpoint": "Verify Title of album display when having min/max length\n\nTest with many character types",
+                        "expected_result": ["- Title of album is displayed with format matching design"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Description of album",
+                "description": "Testing album description display with various character types and length constraints while maintaining design compliance.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify description of album display matching with design\n\nTest with:\n- EN characters\n- JP characters: Full size, half size...\n- Number characters\n- Special characters (Spaces, symbols...)\n- Bad words from config file\n....",
+                        "expected_result": ["- Description of album is displayed with format matching design"]
+                    },
+                    {
+                        "viewpoint": "Verify description of album display when having min/max length\n\nTest with many character types",
+                        "expected_result": ["- Description of album is displayed with format matching design"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Add items",
+                "description": "Testing the ability to add different types of media to albums, including capacity limit handling.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify that can create album successfully without items",
+                        "expected_result": ["Add item successfully"]
+                    },
+                    {
+                        "viewpoint": "Verify that can add image to album\n\nTest with:\n- Add image horizontal\n- Add image vertical\n- Add all format image supported\n- Add >=2 images",
+                        "expected_result": ["Add item successfully"]
+                    },
+                    {
+                        "viewpoint": "Verify that can add video to album\n\nTest with:\n- Add 1 video\n- Add >=2 video",
+                        "expected_result": ["Add item successfully"]
+                    },
+                    {
+                        "viewpoint": "Verify that can add items  = max capacity of album\n\nTest with:\n- Image\n- Video",
+                        "expected_result": ["Add item successfully"]
+                    },
+                    {
+                        "viewpoint": "Verify that can add items  > max capacity of album\n\nTest with:\n- Image\n- Video",
+                        "expected_result": ["Add item successfully"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Display of List album",
+                "description": "Testing album list display including default views, ordering, and different view modes.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify the display default of list album\n\nTest with:\n- Album default\n- Has 1 Album create\n- Has >= 2 Albums create\n",
+                        "expected_result": ["Display list album matching with design\n\nEx:\n+ List album item default : photo album and favorite album..\n+ Title of album\n+ Thumbnails of album"]
+                    },
+                    {
+                        "viewpoint": "Verify order of list items\n\nTest with:\n- Order by title\n- Order by create_date",
+                        "expected_result": ["Display list album as order setting correctly"]
+                    },
+                    {
+                        "viewpoint": "Verify the display of all items with all view mode\n\nTest with:\n- List mode\n- Grid mode\n",
+                        "expected_result": ["Items is displayed matching with view mode which is seleted\n\nEx:\n+ Size of album title\n+ Size of album description\n+ Thumbnails of albums"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Delete album",
+                "description": "Testing album deletion functionality with protection for default albums and handling of contained items.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify that can not delete album default\n\nEx:\n- Photo album\n- Favorite album\n...",
+                        "expected_result": ["- Delete album successfully\n- All items on album is not deleted on default album and other album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can delete album which is create successfully\n\nTest with:\n- Delete 1 album\n- Delete >=2 album\n- Delete album",
+                        "expected_result": ["- Delete album successfully\n- All items on album is not deleted on default album and other album"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Default album details",
+        "description": "Testing default album display including default views, ordering, and different view modes.",
+        "sub_items": [
+            {
+                "item_type": "Upload item",
+                "description": "Testing upload functionality for images and videos to default albums, including capacity limit handling.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify that can upload image to default album\n\nTest with:\n- Add image horizontal\n- Add image vertical\n- Add all format image supported\n- Add >=2 images",
+                        "expected_result": ["- Update image successfully\n- Display correclty number items on album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can upload video to default album\n\nTest with:\n- Add 1 video\n- Add >=2 video",
+                        "expected_result": ["- Update video successfully\n- Display correclty number items on album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can upload items when size of album =  max capacity\n\nTest with:\n- Image\n- Video",
+                        "expected_result": ["- Update video successfully\n- Display correclty number items on album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can not upload items when size of album >  max capacity\n\nTest with:\n- Image\n- Video",
+                        "expected_result": ["- Update video unsuccessfully"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Items display",
+                "description": "Testing display of items in default album including pagination, view modes, and ordering.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify list item is displayed on default album\n\nTest with:\n- Has 1 image on album\n- Has 1 video on album \n- Has >=2 image only\n- Has >=2 video\n- Has >= image and video",
+                        "expected_result": ["Display list item matching with design \n\nEx\n- Position of item\n- Item attributes: width, height..\n- Format items\n- Icon favorite"]
+                    },
+                    {
+                        "viewpoint": "Verify the display pagination of list item\n\nTest with:\n- List has 1 items\n- List has number item = number condition to pagin\n- List has number item > number condition to pagin\n- List item on pagin page",
+                        "expected_result": ["Display list item matching with design \n\nEx\n- Position of item\n- Item attributes: width, height..\n- Format items\n- Icon favorite"]
+                    },
+                    {
+                        "viewpoint": "Verify the display of all items when setting view mode\n\nEx:\n- Lager mode\n- Medium mode\n- Small mode\n- List mode\n- Grid mode\n",
+                        "expected_result": ["Items is displayed matching with view mode which is seleted\n\nEx:\n+ Size of album title\n+ Size of album description\n+ Thumbnails of albums"]
+                    },
+                    {
+                        "viewpoint": "Verify order of list items\n\nTest with:\n- Order by title\n- Order by create_date",
+                        "expected_result": ["Display list album as order setting correctly"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Media player of item",
+                "description": "Testing media player functionality including fullscreen display, favorite management, and navigation controls.",
+                "sub_items": [
+                    {
+                        "item_type": "Next item icon",
+                        "test_view_points": [
+                            {
+                                "viewpoint": "Verify can move to next item successfully\n\nText with:\n- Current item at the first on album \n- Current item at the midle on album \n- Current item at the end - 1 on album",
+                                "expected_result": ["- Move to next item corresponding"]
+                            },
+                            {
+                                "viewpoint": "Verify can not move to next item when do not have next item\n\nEx:\n- List audio has 1 item\n- Current item at the end on album",
+                                "expected_result": ["- Next icon is disable\n[base on required]"]
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "Previous item icon",
+                        "test_view_points": [
+                            {
+                                "viewpoint": "Verify can move to previous item successfully\n\nText with:\n- Current item at the end on album \n- Current item at the midle on album \n- Current item at the first + 1 on album",
+                                "expected_result": ["- Move to next item corresponding"]
+                            },
+                            {
+                                "viewpoint": "Verify can not move to previous item when do not have next item\n\nEx:\n- List audio has 1 item\n- Current item at the end on album",
+                                "expected_result": ["- Next icon is disable\n[base on required]"]
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "List slider items",
+                        "test_view_points": [
+                            {
+                                "viewpoint": "Verify the display of list sliderr items on below item",
+                                "expected_result": ["Display list slider matching with design\n\nEx:\n+ Position of slider\n+ Item atributes: width, height...\n+ Number of list"]
+                            },
+                            {
+                                "viewpoint": "Verify the display of item when clicking on slider \n\nTest with:\n- Slider at the first item\n- Slider at the midle item\n- Slider at the last item\n- Slider at on the current item",
+                                "expected_result": ["- Display item corresponding \n- Highlight slider after clicking"]
+                            },
+                            {
+                                "viewpoint": "Verify item is auto move item after condition time\n\nTest with:\n- Do not have any action on page\n- After click Next/Previous button\n- After click slick slide control \n[base on requirement to auto move items when click on items or click on button present]",
+                                "expected_result": ["List item auto move after condtion time"]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "item_type": "Delete item",
+                "description": "Testing item deletion functionality in default albums.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify that can delete item on album default\n\nEx:\n- Delete image \n- Delete video\n- Delete >=2 items\n- Delete all items\n...",
+                        "expected_result": ["- Item is deleted on default album and all albums\n- Display correclty number remain items on album"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Albums are created details",
+        "description": "Testing album creation display including default views, ordering, and different view modes.",
+        "sub_items": [
+            {
+                "item_type": "Upload item",
+                "description": "Testing upload functionality for images and videos to created albums, including capacity limit handling.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify that can upload image to album which is created\n\nTest with:\n- Add image horizontal\n- Add image vertical\n- Add all format image supported\n- Add >=2 images",
+                        "expected_result": ["- Update image successfully\n- Display correclty number items on album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can upload video to album which is created\n\nTest with:\n- Add 1 video\n- Add >=2 video",
+                        "expected_result": ["- Update video successfully\n- Display correclty number items on album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can upload items when size of album =  max capacity\n\nTest with:\n- Image\n- Video",
+                        "expected_result": ["- Update video successfully\n- Display correclty number items on album"]
+                    },
+                    {
+                        "viewpoint": "Verify that can not upload items when size of album >  max capacity\n\nTest with:\n- Image\n- Video",
+                        "expected_result": ["- Update video unsuccessfully"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Items display",
+                "description": "Testing display of items in created albums including pagination, view modes, and ordering.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify list item is displayed on album which is created\n\nTest with:\n- Has 1 image on album\n- Has 1 video on album \n- Has >=2 image only\n- Has >=2 video\n- Has >= image and video",
+                        "expected_result": ["Display list item matching with design \n\nEx\n- Position of item\n- Item attributes: width, height..\n- Format items\n- Icon favorite"]
+                    },
+                    {
+                        "viewpoint": "Verify the display pagination of list item\n\nTest with:\n- List has 1 items\n- List has number item = number condition to pagin\n- List has number item > number condition to pagin\n- List item on pagin page",
+                        "expected_result": ["Display list item matching with design \n\nEx\n- Position of item\n- Item attributes: width, height..\n- Format items\n- Icon favorite"]
+                    },
+                    {
+                        "viewpoint": "Verify the display of all items when setting view mode\n\nEx:\n- Lager mode\n- Medium mode\n- Small mode\n- List mode\n- Grid mode",
+                        "expected_result": ["Items is displayed matching with view mode which is seleted\n\nEx:\n+ Size of album title\n+ Size of album description\n+ Thumbnails of albums"]
+                    },
+                    {
+                        "viewpoint": "Verify order of list items\n\nTest with:\n- Order by title\n- Order by create_date",
+                        "expected_result": ["Display list album as order setting correctly"]
+                    }
+                ]
+            },
+            {
+                "item_type": "Media player of item",
+                "description": "Testing media player functionality including fullscreen display, favorite management, and navigation controls.",
+                "sub_items": [
+                    {
+                        "item_type": "Next item icon",
+                        "test_view_points": [
+                            {
+                                "viewpoint": "Verify can move to next item successfully\n\nText with:\n- Current item at the first on album \n- Current item at the midle on album \n- Current item at the end - 1 on album",
+                                "expected_result": ["- Move to next item corresponding"]
+                            },
+                            {
+                                "viewpoint": "Verify can not move to next item when do not have next item\n\nEx:\n- List audio has 1 item\n- Current item at the end on album",
+                                "expected_result": ["- Next icon is disable\n[base on required]"]
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "Previous item icon",
+                        "test_view_points": [
+                            {
+                                "viewpoint": "Verify can move to previous item successfully\n\nText with:\n- Current item at the end on album \n- Current item at the midle on album \n- Current item at the first + 1 on album",
+                                "expected_result": ["- Move to next item corresponding"]
+                            },
+                            {
+                                "viewpoint": "Verify can not move to previous item when do not have next item\n\nEx:\n- List audio has 1 item\n- Current item at the end on album",
+                                "expected_result": ["- Next icon is disable\n[base on required]"]
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "List slider items",
+                        "test_view_points": [
+                            {
+                                "viewpoint": "Verify the display of list sliderr items on below item",
+                                "expected_result": ["Display list slider matching with design\n\nEx:\n+ Position of slider\n+ Item atributes: width, height...\n+ Number of list"]
+                            },
+                            {
+                                "viewpoint": "Verify the display of item when clicking on slider \n\nTest with:\n- Slider at the first item\n- Slider at the midle item\n- Slider at the last item\n- Slider at on the current item",
+                                "expected_result": ["- Display item corresponding \n- Highlight slider after clicking"]
+                            },
+                            {
+                                "viewpoint": "Verify item is auto move item after condition time\n\nTest with:\n- Do not have any action on page\n- After click Next/Previous button\n- After click slick slide control \n[base on requirement to auto move items when click on items or click on button present]",
+                                "expected_result": ["List item auto move after condtion time"]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "item_type": "Delete item",
+                "description": "Testing item deletion functionality in created albums, ensuring items are only deleted from the specific album.",
+                "test_view_points": [
+                    {
+                        "viewpoint": "Verify that can delete item on album which is created\n\nEx:\n- Delete image \n- Delete video\n- Delete >=2 items\n- Delete all items\n...",
+                        "expected_result": ["- Item is deleted only on corresponding album \n- Item is not delete on default album and other albums\n- Display correclty number remain items on album"]
+                    }
+                ]
+            }
+        ]
+    }
+]

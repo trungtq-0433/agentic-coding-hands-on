@@ -1,0 +1,77 @@
+version: '1.0'
+type: accepted
+project:
+  name: example-fintech-web-app
+  date: '2025-09-10'
+  domain: fintech
+  tech_stack:
+  - react
+  - nestjs
+  - gcp
+  team_size: 8
+  team_experience: mid
+estimate:
+  total_md: 1622
+  tasks:
+  - task_type: infrastructure
+    total_md: 98
+    effort:
+      be: 11
+      fe: 3
+      qa_manual: 1
+      infra: 83
+  - task_type: authentication
+    total_md: 41
+    effort:
+      be: 12
+      fe: 15
+      qa_manual: 14
+  - task_type: crud
+    total_md: 325
+    effort:
+      be: 113
+      fe: 98
+      qa_manual: 114
+  - task_type: reports
+    total_md: 92
+    effort:
+      be: 29
+      fe: 34
+      qa_manual: 29
+  - task_type: notifications
+    total_md: 58
+    effort:
+      be: 18
+      fe: 19
+      qa_manual: 21
+  - task_type: api
+    total_md: 74
+    effort:
+      be: 28
+      fe: 23
+      qa_manual: 23
+  - task_type: file_operations
+    total_md: 25
+    effort:
+      be: 9
+      fe: 8
+      qa_manual: 8
+  - task_type: ui
+    total_md: 61
+    effort:
+      be: 20
+      fe: 22
+      qa_manual: 19
+  - task_type: documentation
+    total_md: 179
+    effort:
+      design: 179
+  - task_type: testing
+    total_md: 110
+    effort:
+      uat: 110
+  - task_type: management
+    total_md: 559
+    effort:
+      brse: 298
+      pm: 261

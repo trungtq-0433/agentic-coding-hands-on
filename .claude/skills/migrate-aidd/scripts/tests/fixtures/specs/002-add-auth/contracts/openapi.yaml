@@ -1,0 +1,17 @@
+openapi: "3.0.0"
+info:
+  title: Add Auth API
+  version: "1.0.0"
+paths:
+  /auth/register:
+    post:
+      summary: Register a new account
+      responses:
+        "201":
+          description: Account created
+  /auth/login:
+    post:
+      summary: Login and receive session token
+      responses:
+        "200":
+          description: Session token issued

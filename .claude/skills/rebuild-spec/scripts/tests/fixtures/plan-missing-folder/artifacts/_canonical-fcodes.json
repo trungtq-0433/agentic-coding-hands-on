@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-05-16T00:00:00Z",
+  "plan": "plan-missing-folder",
+  "features": [
+    {
+      "fcode": "F001",
+      "name": "Authentication",
+      "slug": "F001_Auth",
+      "priority": "P0",
+      "type": "ui",
+      "related": {"screens": [], "user_stories": [], "routes": [], "models": [], "bl": [], "perms": []}
+    },
+    {
+      "fcode": "F002",
+      "name": "Search",
+      "slug": "F002_Search",
+      "priority": "P1",
+      "type": "ui",
+      "related": {"screens": [], "user_stories": [], "routes": [], "models": [], "bl": [], "perms": []}
+    }
+  ]
+}

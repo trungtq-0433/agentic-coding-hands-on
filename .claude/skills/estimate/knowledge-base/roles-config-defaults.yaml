@@ -1,0 +1,43 @@
+# Default role definitions for multi-role estimation
+# Each role can be toggled on/off in estimate-config.yaml
+
+roles:
+  fe:
+    name: "Frontend"
+    active: true
+    description: "Frontend development (UI, components, pages)"
+
+  be:
+    name: "Backend"
+    active: true
+    description: "Backend development (API, business logic, DB)"
+
+  qa_manual:
+    name: "QA (Manual)"
+    active: true
+    description: "Manual testing, test case creation"
+
+  qa_auto:
+    name: "QA (Automation)"
+    active: false
+    description: "Test automation scripts, CI test integration"
+
+  design:
+    name: "UI/UX Design"
+    active: false
+    description: "Wireframes, mockups, design system"
+
+  pm:
+    name: "Project Management"
+    active: false
+    description: "Planning, coordination, client communication"
+
+  brse:
+    name: "Bridge SE"
+    active: false
+    description: "Translation, requirement bridging, client liaison"
+
+  infra:
+    name: "Infrastructure"
+    active: false
+    description: "CI/CD, deployment, monitoring, cloud setup"

@@ -1,0 +1,204 @@
+[
+    {
+        "item_type": "Web page",
+        "description": "Testing scrollbar display conditions",
+        "test_view_points": [
+            {
+                "category": "Don't display",
+                "viewpoint": "The content does not exceed the page limit:\n- Short content\n- Zoom in page",
+                "expected_result": ["Web page doesn't display Horizontal and Vertical scroll bar"]
+            },
+            {
+                "category": "Display",
+                "viewpoint": "The content exceed the page limit:\n- Long content\n- Zoom out page",
+                "expected_result": ["Web page displayed Horizontal and Vertical scroll bar"]
+            }
+        ]
+    },
+    {
+        "item_type": "UI of ScrollBar",
+        "description": "Testing scrollbar visual elements",
+        "test_view_points": [
+            {
+                "category": "Vertical scrollbar",
+                "viewpoint": "Check UI of Vertical Scrollbar",
+                "expected_result": ["Display exactly Vertical ScrollBar, with: Scroll bar, 2 icon: ▼ and ▲"]
+            },
+            {
+                "category": "Horizontal scrollbar",
+                "viewpoint": "Check UI of Horizontal Scrollbar",
+                "expected_result": ["Display exactly Vertical ScrollBar, with: Scroll bar, 2 icon: ◄ and ►"]
+            }
+        ]
+    },
+    {
+        "item_type": "Event",
+        "description": "Testing scrollbar interactions",
+        "test_view_points": [
+            {
+                "category": "Mouse interactions",
+                "viewpoints": [
+                    {
+                        "action": "Click ▼",
+                        "expected_result": "Display content below the current position"
+                    },
+                    {
+                        "action": "Click ▲",
+                        "expected_result": "Display content above the current position"
+                    },
+                    {
+                        "action": "Click and hold ▼/▲",
+                        "expected_result": "1. Scroll to the bottom of Page\n2. Scroll to the top of Page"
+                    },
+                    {
+                        "action": "Scroll down",
+                        "viewpoint": "Click and drag scroll bar move down",
+                        "expected_result": "Display content below the current position"
+                    },
+                    {
+                        "action": "Scroll up",
+                        "viewpoint": "Click and drag scroll bar move up",
+                        "expected_result": "Display content above the current position"
+                    },
+                    {
+                        "action": "Roll mouse",
+                        "viewpoint": "Roll mouse up or down",
+                        "expected_result": "Scroll Bar move exactly"
+                    },
+                    {
+                        "action": "Click ◄",
+                        "expected_result": "Display content at the left the current position"
+                    },
+                    {
+                        "action": "Click ►",
+                        "expected_result": "Display content at the right the current position"
+                    },
+                    {
+                        "action": "Click and hold ◄/►",
+                        "expected_result": "1. Scroll to the leftmost of page\n2. Scroll to the rightmost of page"
+                    },
+                    {
+                        "action": "Scroll Left",
+                        "viewpoint": "Click and drag scroll bar move to the left",
+                        "expected_result": "Display content at the left the current position"
+                    },
+                    {
+                        "action": "Scroll Right",
+                        "viewpoint": "Click and drag scroll bar move to the right",
+                        "expected_result": "Display content at the right the current position"
+                    }
+                ]
+            },
+            {
+                "category": "Page interactions",
+                "viewpoints": [
+                    {
+                        "action": "Resize page",
+                        "expected_result": "Auto display or not scrollbar"
+                    },
+                    {
+                        "action": "Duplicate content check",
+                        "viewpoint": "Click into icon or drag scroll Bar",
+                        "expected_result": "Content on the screen is not display duplicates, unusual, hidden"
+                    }
+                ]
+            },
+            {
+                "category": "Keyboard interactions",
+                "viewpoints": [
+                    {
+                        "key": "Down Arrow (↓)",
+                        "expected_result": "Scroll down a line"
+                    },
+                    {
+                        "key": "Up Arrow (↑)",
+                        "expected_result": "Scroll up a line"
+                    },
+                    {
+                        "key": "Left Arrow (←)",
+                        "expected_result": "Scroll the left a line"
+                    },
+                    {
+                        "key": "Right Arrow (→)",
+                        "expected_result": "Scroll the right a line"
+                    },
+                    {
+                        "key": "Page Up (PgUp)",
+                        "expected_result": "Scroll down a page"
+                    },
+                    {
+                        "key": "Page Down (PgDn)",
+                        "expected_result": "Scroll up a page"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "Table Data/Text area",
+        "description": "Testing scrollbar behavior in data containers",
+        "test_view_points": [
+            {
+                "category": "Don't display conditions",
+                "viewpoints": [
+                    {
+                        "condition": "No data (No record/No line)",
+                        "expected_result": "Don't display Vertical and Horizontal scroll bar [Base on spec]"
+                    },
+                    {
+                        "condition": "Number of records <= Max row of Table/Textarea",
+                        "expected_result": "Don't display Vertical scroll bar [Base on spec]"
+                    },
+                    {
+                        "condition": "Number of column <= Max column of Table/Textarea",
+                        "expected_result": "Don't display Horizontal scroll bar [Base on spec]"
+                    }
+                ]
+            },
+            {
+                "category": "Display conditions",
+                "viewpoints": [
+                    {
+                        "condition": "Number of records > Max row of Table/Textarea",
+                        "expected_result": "Display Vertical scroll bar"
+                    },
+                    {
+                        "condition": "Number of column > Max column of Table/Textarea",
+                        "expected_result": "Display Horizontal scroll bar"
+                    }
+                ]
+            },
+            {
+                "category": "UI and Event verification",
+                "viewpoints": [
+                    {
+                        "aspect": "UI of scrollbar",
+                        "viewpoint": "Check the same of web page",
+                        "expected_result": "Should match web page scrollbar UI"
+                    },
+                    {
+                        "aspect": "Event handling",
+                        "viewpoint": "Check the same of web page",
+                        "expected_result": "Should match web page scrollbar behavior"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "item_type": "General",
+        "description": "Testing integrated scrolling behavior",
+        "test_view_points": [
+            {
+                "category": "Focus-based scrolling",
+                "viewpoint": "With: Web page include Table / Text area\n- Focus mouse on Table/Text area, scroll mouse\n- Focus mouse on Page, scroll mouse",
+                "expected_result": "Content on table/Text area or Page will scroll exactly"
+            },
+            {
+                "category": "Navigation button behavior",
+                "viewpoint": "Page has: Button Top Up or Bottom Down\n- Click button Top Up\n- Click button Bottom Down",
+                "expected_result": "Scroll exactly"
+            }
+        ]
+    }
+]

@@ -1,0 +1,168 @@
+[
+    {
+        "item_type": "Default display",
+        "description": "Testing initial display states of upload component",
+        "test_view_points": [
+            {
+                "viewpoint": "[Add new form]\nCheck default display of upload item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank with correct place holder\n..."]
+            },
+            {
+                "viewpoint": "[Edit form]\nCheck default display of upload CSV item",
+                "expected_result": ["Display correctly as designed:\n+ Position\n+ Label of item\n+ Default value: blank with correct place holder\n..."]
+            }
+        ]
+    },
+    {
+        "item_type": "File name",
+        "description": "Testing file name handling with various characters",
+        "test_view_points": [
+            {
+                "viewpoint": "Check name of CSV file after Selected CSV file when it has:\n+ Max lenght\n+ Special symbol: \".\", \"-\", \"_\", \"#\", \"&\", \"$\"...\n+ Number & Alphabet characters (Upper/Lower case)\n+ Japanese characters  (Half/Full-width)\n+ Unicode characters\n+ Spaces\n+ SQL injection\n+ HTML code",
+                "expected_result": ["+ Display correctly as original CSV file name with correct format\n+ Can upload successfully"]
+            }
+        ]
+    },
+    {
+        "item_type": "File capacity",
+        "description": "Testing file size limitations",
+        "test_view_points": [
+            {
+                "viewpoint": "Check Upload operation when file capacity is:\n+ Min size/Min size +1\n+ Max size/Max size -1",
+                "expected_result": ["Can upload successfully"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file capacity is:\n+ Min size - 1\n+ Max size + 1\n+ Size = 0 bytes",
+                "expected_result": [" Display correct error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "File content",
+        "description": "Testing CSV content validation",
+        "test_view_points": [
+            {
+                "viewpoint": "Check Upload operation when file content has:\n+ Number of Columns < Number of Min value",
+                "expected_result": [" Display correct error message"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has:\n+ Number of Columns > Number of Max value",
+                "expected_result": [" Display correct error message"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has:\n+ Without header line\n+ All column headers are blank\n+ Any header is blank\n+ Incorrect header\n+ File only contain header\n+ Duplicate header",
+                "expected_result": [" Display correct error message"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has:\n+ Blank row on Top\n+ Blank row is any row\n+ Blank row on Bottom",
+                "expected_result": ["Can upload successfully or display error message (Base on spec)"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has Number of rows:\n+ <Number of Max value\n+ = > Number of  Max value",
+                "expected_result": ["Can upload successfully "]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has Number of rows:\n+ > Number of  Max value",
+                "expected_result": [" Display correct error message"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has:\n+ Duplicate rows\n+ Duplicate value of normal column\n+ Duplicate value of unique column",
+                "expected_result": ["Can upload successfully with overwrite value or display error message (Base on spec)"]
+            },
+            {
+                "viewpoint": "Check Upload operation when file content has:\n+ Null",
+                "expected_result": [" Display correct error message"]
+            },
+            {
+                "viewpoint": "Check validate of each column in file",
+                "expected_result": ["Validate same as checklist of [Input item]"]
+            }
+        ]
+    },
+    {
+        "item_type": "Permission",
+        "description": "Testing file permission handling",
+        "test_view_points": [
+            {
+                "viewpoint": "Check Upload operation when:\n+ Upload file read only",
+                "expected_result": ["Process successfully as spec"]
+            },
+            {
+                "viewpoint": "Check Upload operation when:\n+ Upload file can write",
+                "expected_result": ["Process successfully as spec"]
+            }
+        ]
+    },
+    {
+        "item_type": "File type",
+        "description": "Testing file type restrictions",
+        "test_view_points": [
+            {
+                "viewpoint": "Check operation when upload a file which has type is:\n+ .csv / .CSV\n+ .tsv /.TSV",
+                "expected_result": ["Can upload successfully with supported file types"]
+            },
+            {
+                "viewpoint": "Check operation when upload a file which has type is:\n+ Image\n+ Video \n+ Document\n+ Change type from abnormal to normal \n+ Change type from normal to abnormal",
+                "expected_result": ["Display correct error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "File location",
+        "description": "Testing file upload from various sources",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when location of CSV file is:\n+ Upload from PC\n+ Drag&Drop between folders on PC\n+ Upload from shared folder\n+ Upload from External device (USB, Memory card...)\n+ Read only Forder",
+                "expected_result": ["Always display correctly:\n+ CSV file path\n+ File icon thumnail\nand upload successfully."]
+            },
+            {
+                "viewpoint": "Check display and operation when path file is:\n+ Long path (max lenght)\n+ Includes special characters\n+ Includes Unicode characters\n+ Includes half-width characters\n+ Includes full-width characters",
+                "expected_result": ["Always display correctly:\n+ CSV file path\n+ File icon thumnail\nand upload successfully."]
+            }
+        ]
+    },
+    {
+        "item_type": "Operation of Upload button",
+        "description": "Testing upload button functionality",
+        "test_view_points": [
+            {
+                "viewpoint": "Check display and operation when Number of upload file is:\n+ 0 file upload",
+                "expected_result": ["Upload button is not enabled"]
+            },
+            {
+                "viewpoint": "Check display and upload operation when:\n+ upload only 1 file\n+ Upload multi files at the same time\n+ Upload multi files which has same name and same content \n+ Upload multi files which has same name only\n+ Upload multi files which has same content only\n+ Upload duplicate file with an uploaded file\n+ Upload continuously",
+                "expected_result": ["Process successfully or display error message (base on spec)"]
+            },
+            {
+                "viewpoint": "Check display and upload operation when:\n+ Click Upload button multiple times",
+                "expected_result": ["Process successfully or display error message (base on spec)"]
+            },
+            {
+                "viewpoint": "Check display and upload operation when:\n+ Many users upload the same file",
+                "expected_result": ["Process successfully or display error message (base on spec)"]
+            },
+            {
+                "viewpoint": "While uploading file, Disconect network",
+                "expected_result": ["Display correct error message"]
+            }
+        ]
+    },
+    {
+        "item_type": "File Format",
+        "description": "Testing file format compatibility",
+        "test_view_points": [
+            {
+                "viewpoint": "Check when upload a file which has delimiter is:\n+ Apostrophes ('')\n+ Quote (\"\")\n+ Other character\n+ Not use",
+                "expected_result": ["Upload file successfully or Display correct error message base on supported file format"]
+            },
+            {
+                "viewpoint": "Check when upload a file which has Separater is:\n+ Tab\n+ Comma\n+ Semicolon\n+ Other character",
+                "expected_result": ["Upload file successfully or Display correct error message base on supported file format"]
+            },
+            {
+                "viewpoint": "Check when upload a file which has Endcoding is:\n+ Unicode UTF-8\n+ UTF-16\n+ Shift JIS \n+ zipcode",
+                "expected_result": ["Upload file successfully or Display correct error message base on supported file format"]
+            }
+        ]
+    }
+]
