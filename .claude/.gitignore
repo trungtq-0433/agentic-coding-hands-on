@@ -1,0 +1,8 @@
+# Log runtime của hook — đổi mỗi phiên, không có giá trị lịch sử
+hooks/.logs/
+
+# Backup do công cụ tự sinh, tên có timestamp
+settings.json.*.bak
+
+# Cấu hình cá nhân từng máy — settings.json mới là bản dùng chung
+settings.local.json
