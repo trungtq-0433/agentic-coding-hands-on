@@ -55,7 +55,11 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
-**PRE-REQ-01 — Google OAuth client.** Tạo trên Cloud Console, redirect URI `http://localhost:54321/auth/v1/callback` (cổng **Supabase**), giao `GOOGLE_CLIENT_ID=***REVOKED-SEE-ENV-LOCAL***.apps.googleusercontent.com` + `GOOGLE_SECRET=GOCSPX-***REVOKED-SEE-ENV-LOCAL***`. Người làm: có quyền admin Google Workspace Sun\* — **ĐÃ GIAO**. Chặn phase-03 → 04 → 05 → 16; Track A không ảnh hưởng. Agent không có và không nên có quyền này. Nếu trễ, phase-04 vẫn code/test được bằng phiên giả lập (`set request.jwt.claims`); chỉ đăng nhập thật phải chờ.
+**PRE-REQ-01 — Google OAuth client.** Tạo trên Cloud Console, redirect URI `http://localhost:54321/auth/v1/callback` (cổng **Supabase**). Client ID + secret đặt vào `.env.local` dưới hai biến `GOOGLE_CLIENT_ID` và `GOOGLE_SECRET` — xem `.env.local.example`. Người làm: có quyền admin Google Workspace Sun\* — **ĐÃ GIAO**. Chặn phase-03 → 04 → 05 → 16; Track A không ảnh hưởng. Agent không có và không nên có quyền này. Nếu trễ, phase-04 vẫn code/test được bằng phiên giả lập (`set request.jwt.claims`); chỉ đăng nhập thật phải chờ.
+
+> **Không bao giờ dán giá trị credential vào file trong `plans/` hay `docs/`.** Bản kế hoạch này
+> từng chứa client ID + secret thật ở đúng dòng trên; GitHub secret scanning chặn push và secret
+> đó phải xoay lại. Nơi duy nhất của giá trị thật là `.env.local` (đã gitignore).
 
 ## Bản đồ route + ranh giới sở hữu file (chốt ở đây, mọi phase theo)
 
