@@ -334,6 +334,26 @@ skip_nonce_check = false
 # If enabled, it will allow the user to successfully authenticate when the provider does not return an email address.
 email_optional = false
 
+# Phase-03: Google OAuth — MỌI tài khoản Google đều được phép đăng nhập (spec Login
+# item 2.2.1, tường minh), KHÔNG giới hạn domain @sun-asterisk.com.
+# client_id/secret đọc từ env() thay thế bằng biến trong file `.env` (CLI Supabase
+# đọc `.env`, KHÔNG đọc `.env.local` — đã kiểm chứng thực nghiệm). TUYỆT ĐỐI không
+# ghi giá trị literal vào đây, file này được commit.
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+# PHẢI khai tường minh. Để trống thì GoTrue tự suy ra
+# http://127.0.0.1:54321/... nhưng Google Cloud Console đăng ký là
+# http://localhost:54321/... — Google so khớp redirect_uri theo CHUỖI TUYỆT ĐỐI,
+# 127.0.0.1 không tương đương localhost, nên đăng nhập thật sẽ gãy
+# redirect_uri_mismatch ngay lần đầu. Đã kiểm chứng bằng
+# `curl "/auth/v1/authorize?provider=google"` và đọc query trả về.
+redirect_uri = "http://localhost:54321/auth/v1/callback"
+url = ""
+skip_nonce_check = false
+email_optional = false
+
 # Allow Solana wallet holders to sign in to your project via the Sign in with Solana (SIWS, EIP-4361) standard.
 # You can configure "web3" rate limit in the [auth.rate_limit] section and set up [auth.captcha] if self-hosting.
 [auth.web3.solana]

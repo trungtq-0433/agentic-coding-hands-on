@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { isBeforeLaunchGate, PRELAUNCH_PATH } from "./lib/launch-gate";
 import { updateSession } from "./lib/supabase/proxy-session";
+import { evaluateRouteAccess } from "./lib/auth/route-guard";
 
 /**
  * Next 16 đã đổi tên Middleware → Proxy: file `proxy.ts` ở root, export tên `proxy`.
@@ -13,7 +14,7 @@ import { updateSession } from "./lib/supabase/proxy-session";
  * Không truy vấn DB ở đây — proxy chạy trên mọi request, kể cả prefetch.
  */
 export async function proxy(request: NextRequest) {
-  const { response } = await updateSession(request);
+  const { response, user } = await updateSession(request);
 
   const { pathname } = request.nextUrl;
   const onPrelaunch = pathname === PRELAUNCH_PATH;
@@ -27,6 +28,13 @@ export async function proxy(request: NextRequest) {
   // Đã mở màn nhưng còn nằm ở /prelaunch → đá về trang chủ.
   if (!beforeLaunch && onPrelaunch) {
     return redirectKeepingSession(new URL("/", request.url), response);
+  }
+
+  // Lớp Proxy (phase-03): kiểm tra lạc quan theo session, không query DB.
+  // Bảo vệ thật nằm ở lib/auth/dal.ts (requireUser/requireAdmin).
+  const routeAccess = evaluateRouteAccess(pathname, Boolean(user));
+  if (routeAccess) {
+    return redirectKeepingSession(new URL(routeAccess.redirectTo, request.url), response);
   }
 
   return response;

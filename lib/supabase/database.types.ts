@@ -517,6 +517,10 @@ export type Database = {
         Returns: undefined
       }
       is_admin: { Args: never; Returns: boolean }
+      sync_profile_from_google: {
+        Args: { p_avatar_url: string; p_full_name: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
