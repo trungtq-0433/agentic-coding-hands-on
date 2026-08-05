@@ -55,6 +55,42 @@ Key lấy **nguyên văn** từ output `npx supabase start` — tên key đổi 
 
 `SECRET_KEY` / `SERVICE_ROLE_KEY` **không bao giờ** mang tiền tố `NEXT_PUBLIC_` và chưa dùng tới ở giai đoạn này.
 
+### `supabase:reset` không trả về DB rỗng — nó trả về DB seed
+
+`npm run supabase:reset` chạy lại toàn bộ migration rồi nạp `supabase/seed.sql`. Từ phase-02,
+`seed.sql` là dữ liệu demo đầy đủ: 50 phòng ban, 13 hashtag, 6 huy hiệu, ~8 profile, ~30 kudos mẫu.
+Nghĩa là sau khi chạy lệnh này, Live board **sẽ không trống** — nó hiện ngay 30 kudos giả trông
+như thật. Chạy nhầm lệnh này giữa hoặc sau sự kiện xoá sạch mọi Kudos người dùng thật đã gửi,
+và giao diện không báo lỗi gì để nhận ra — chỉ có ai biết nội dung seed mới phân biệt được dữ liệu
+thật với demo. **Không chạy `supabase:reset` sau khi sự kiện đã có dữ liệu thật**, kể cả để "sửa"
+một migration — nếu bắt buộc phải đổi schema, thêm migration mới thay vì reset lại từ đầu.
+
+## Secret Box hết hộp giữa sự kiện
+
+Rule cấp phát hộp Secret Box tự động vẫn để ngỏ (gap #9,
+`plans/260805-1032-sun-kudos-website/clarifications.md`) — hộp **sẽ** hết nếu sự kiện chạy dài,
+không có cơ chế tự cấp thêm. Đường cấp tay duy nhất là RPC
+`admin_grant_secret_box(p_profile_ids uuid[], p_count int)` (`supabase/migrations/0004_secret_box_tables.sql`).
+
+```sql
+-- cấp thêm 2 hộp cho toàn bộ Sunner đang hoạt động (chạy bằng phiên admin)
+select admin_grant_secret_box(array(select id from profiles), 2);
+
+-- cấp cho một nhóm cụ thể
+select admin_grant_secret_box(array['<uuid-1>','<uuid-2>']::uuid[], 1);
+
+-- kiểm tồn kho trước khi cấp
+select status, count(*) from secret_box_grants group by status;
+```
+
+Người chạy: bất kỳ ai có `user_roles.role = 'admin'`, qua Studio SQL Editor
+(`http://127.0.0.1:54323`). Hàm tự chặn người không phải admin
+(`raise exception 'FORBIDDEN'`) — chạy nhầm bằng phiên không phải admin sẽ báo lỗi ngay,
+không cấp thiếu kiểm soát.
+
+Đây là giải pháp cầu, không phải đích đến — khi có rule earn thật (gap #9 chốt), thay chỗ này
+bằng trigger tự động.
+
 ## Chuẩn bị máy trước khi chạy lần đầu
 
 1. Docker đang chạy — kiểm bằng `docker info`. Không có Docker thì `supabase start` fail ngay.
