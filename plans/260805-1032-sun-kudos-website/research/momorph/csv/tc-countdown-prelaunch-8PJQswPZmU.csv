@@ -1,0 +1,78 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,68d82c58-14c4-46b6-84a7-0aca2d4fdf72,Countdown Timer Screen,Check access condition,Access control unspecified,,,User authenticated with any privilege,Valid user credentials,"1. Login as a valid user with any privilege.
+2. Access the Countdown Timer Screen via UI navigation.
+3. Access the Countdown Timer Screen directly via its URL.
+4. Attempt to access the Countdown Timer Screen with an invalid/malformed/non-existent URL.","1. ---
+2. The Countdown Timer Screen is displayed.
+3. The Countdown Timer Screen is displayed.
+4. The system returns an error message or redirects the user appropriately.",,,Access control and security,,,,
+ACCESSING,e6a59553-8c15-43f6-a415-15790978b94f,Countdown Timer Screen,Check access condition,Access control unspecified,,,User NOT authenticated,Countdown Timer Screen URL,"1. Ensure the user is not logged in.
+2. Access the Countdown Timer Screen URL directly.","1. ---
+2. Access is allowed or the user is blocked/redirected (as per application configuration).",,,Access control and security,,,,
+ACCESSING,1c266552-52b0-4d72-9d36-ba878dae67ad,Countdown Timer Screen,Check access condition,Access control unspecified,,,Authenticated user without privileges,"Low-privilege user credentials, Countdown Timer Screen URL or navigation path","1. Login as a low-privilege user without required permissions.
+2. Attempt to access the Countdown Timer Screen via UI navigation.
+3. Attempt to access the Countdown Timer Screen directly via its URL.","1. ---
+2. Access is denied, or the user is redirected appropriately.
+3. Access is denied, or the user is redirected appropriately.",,,Access control and security,,,,
+ACCESSING,17aa9e0d-892a-4b29-9445-5d857920ab62,Countdown Timer Screen,Check access condition,Access control unspecified,,,Active session,"Valid user credentials, Countdown Timer Screen URL","1. Login as a valid user.
+2. Allow the session to expire or become invalid.
+3. Attempt to access the Countdown Timer Screen.","1. ---
+2. The session is expired.
+3. User is redirected to login page, or a session timeout message is displayed.",,,Access control and security,,,,
+GUI,400e248f-53a3-4c2f-a2f9-dce75c6d09d9,Countdown Timer Screen,Check layout,Countdown unit DAYS,LED digit display and label,,Countdown Timer Screen loaded,,1. Observe the '1.Days/Days' countdown unit area.,1. The '1.Days/Days' area shows two digit LED-style display and an uppercase white label 'DAYS'.,,,User interface,,,,
+GUI,25d9ddaa-b8f2-4df1-ac7d-d8fb65214633,Countdown Timer Screen,Check layout,Countdown unit HOURS,LED digit display and label,,Countdown Timer Screen loaded,,1. Observe the '2.Hours/Hours' countdown unit area.,1. The '2.Hours/Hours' area shows two digit LED-style display and an uppercase white label 'HOURS'.,,,User interface,,,,
+GUI,68cf8e17-c6c7-4f44-8716-a56caa16af76,Countdown Timer Screen,Check layout,Countdown unit MINUTES,LED digit display and label,,Countdown Timer Screen loaded,,1. Observe the '3.Minutes/Minutes' countdown unit area.,1. The '3.Minutes/Minutes' area shows two digit LED-style display and an uppercase white label 'MINUTES'.,,,User interface,,,,
+GUI,37fd89d1-f6bc-44a0-9ae9-10ab024d0c65,Countdown Timer Screen,Check layout,All labels,Uppercase and color,,Countdown Timer Screen loaded,,"1. Inspect the labels for 1.Days/Days, 2.Hours/Hours, and 3.Minutes/Minutes.
+2. Observe the color and case of all labels.","1. The labels display 'DAYS', 'HOURS', 'MINUTES' in all uppercase.
+2. All labels are white in color.",,,User interface,,,,
+GUI,33fe648b-5ba3-4e98-a8d3-f7788e088284,Countdown Timer Screen,Initialize,Countdown unit DAYS,Initial value two digits,,Countdown Timer Screen loaded with varied 'Days' values,"Days values: 0, 9, 10, 31","1. Set or simulate the timer so that the 'Days' unit value is 0.
+2. Set the timer so that the value is 9.
+3. Set the timer so that the value is 10.
+4. Set the timer so that the value is 31.","1. The '1.Days/Days' display shows '00'.
+2. The '1.Days/Days' display shows '09'.
+3. The '1.Days/Days' display shows '10'.
+4. The '1.Days/Days' display shows '31'.",,,User interface,,,,
+GUI,1bd69f78-3736-4504-bc98-23fac68a7564,Countdown Timer Screen,Initialize,Countdown unit HOURS,Initial value two digits,,Countdown Timer Screen loaded with varied 'Hours' values,"Hours values: 0, 9, 10, 23","1. Set or simulate the timer so that the 'Hours' value is 0.
+2. Set the timer so that the value is 9.
+3. Set the timer so that the value is 10.
+4. Set the timer so that the value is 23.","1. The '2.Hours/Hours' display shows '00'.
+2. The '2.Hours/Hours' display shows '09'.
+3. The '2.Hours/Hours' display shows '10'.
+4. The '2.Hours/Hours' display shows '23'.",,,User interface,,,,
+GUI,8dc4bba6-c644-4861-938e-6cd5aba45a6c,Countdown Timer Screen,Initialize,Countdown unit MINUTES,Initial value two digits,,Countdown Timer Screen loaded with varied 'Minutes' values,"Minutes values: 0, 9, 10, 59","1. Set or simulate the timer so that the 'Minutes' value is 0.
+2. Set the timer so that the value is 9.
+3. Set the timer so that the value is 10.
+4. Set the timer so that the value is 59.","1. The '3.Minutes/Minutes' display shows '00'.
+2. The '3.Minutes/Minutes' display shows '09'.
+3. The '3.Minutes/Minutes' display shows '10'.
+4. The '3.Minutes/Minutes' display shows '59'.",,,User interface,,,,
+FUNCTION,840dd6be-b0d6-49c5-992c-e2bf86584175,Countdown Timer Screen,Check component interaction,Auto-update mechanism,Real-time countdown update,,Countdown timer running with valid values,"Timer set with various countdown values (e.g., Days>1, Days<1, Hours:01, Minutes:30)","1. Start the countdown timer with days greater than 1.
+2. Observe '1.Days/Days', '2.Hours/Hours', and '3.Minutes/Minutes' as time decreases.","1. ---
+2. The 'Days', 'Hours', and 'Minutes' values update automatically in real time as time decreases.",,,Normal_Others,,,,
+FUNCTION,b373626d-cd6f-4fb7-98cc-968f2e6df8c3,Countdown Timer Screen,Check component interaction,Unit DAYS,Show 00 if less than one day,,Timer set to less than 1 day remaining,Countdown timer where Days < 1,"1. Set timer so that the 'Days' value falls below 1 (e.g., 0.5 days, or timer reaches <24 hours).
+2. Observe the '1.Days/Days' unit display.","1. ---
+2. The '1.Days/Days' display shows '00'.",,,Normal_Others,,,,
+FUNCTION,f98adad8-f486-4c5b-be69-3dce92c92af0,Countdown Timer Screen,Check data validation,Unit HOURS,Range 00 to 23,,Countdown timer initialized,"Hours values: -1, 0, 12, 23, 25","1. Set the timer so the '2.Hours/Hours' value is -1.
+2. Set the timer so the value is 0.
+3. Set the timer so the value is 12.
+4. Set the timer so the value is 23.
+5. Set the timer so the value is 25.","1. The '2.Hours/Hours' display shows '00' for invalid value.
+2. The '2.Hours/Hours' display shows '00'.
+3. The '2.Hours/Hours' display shows '12'.
+4. The '2.Hours/Hours' display shows '23'.
+5. The '2.Hours/Hours' display shows '00' for invalid value.",,,Normal_Others,,,,
+FUNCTION,724e6e17-1b9f-4bad-8baa-b48ad9e178be,Countdown Timer Screen,Check data validation,Unit MINUTES,Range 00 to 59,,Countdown timer initialized,"Minutes values: -1, 0, 30, 59, 60","1. Set the timer so the '3.Minutes/Minutes' value is -1.
+2. Set the timer so the value is 0.
+3. Set the timer so the value is 30.
+4. Set the timer so the value is 59.
+5. Set the timer so the value is 60.","1. The '3.Minutes/Minutes' display shows '00' for invalid value.
+2. The '3.Minutes/Minutes' display shows '00'.
+3. The '3.Minutes/Minutes' display shows '30'.
+4. The '3.Minutes/Minutes' display shows '59'.
+5. The '3.Minutes/Minutes' display shows '00' for invalid value.",,,Normal_Others,,,,
+FUNCTION,50fc4021-ab9f-4bdf-bb0b-07cde3753b65,Countdown Timer Screen,Check business logic,Completion handling,Specific display on complete,,Countdown timer at or below zero,Timer reaches zero,"1. Start the countdown timer and allow it to count down to zero (or negative value).
+2. Observe '1.Days/Days', '2.Hours/Hours', and '3.Minutes/Minutes' displays.","1. ---
+2. Each unit's display shows '00'.",,,Normal_Others,,,,
+FUNCTION,c715cb38-382b-43ac-885a-d84c78273aa6,Countdown Timer Screen,Check error handling mentioned,Formatting enforcement,Two digits per unit,,Countdown timer active or running,"Single digit values for Days, Hours, Minutes","1. Set timer units to values less than 10 (e.g., 5, 9, 0) for Days, Hours, and Minutes.
+2. Observe the displays for all three units.","1. ---
+2. Each unit ('1.Days/Days', '2.Hours/Hours', '3.Minutes/Minutes') displays two digits with leading zero as needed (e.g., '05', '09', '00').",,,Normal_Others,,,,

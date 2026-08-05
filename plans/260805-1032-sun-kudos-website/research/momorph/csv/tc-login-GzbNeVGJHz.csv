@@ -1,0 +1,58 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,45278c06-f4d9-49d8-a579-9ee3793cb9e2,Login Screen,Check access condition,Unauthenticated user,Visible for unauthenticated,,,,"1. Access the Login Screen as an unauthenticated user.
+2. Log out from an authenticated page and access the Login Screen.
+3. Attempt to access the Login Screen while authenticated.","1. The Login Screen is displayed.
+2. The system redirects to the Login Screen after logout.
+3. The authenticated user is redirected to the main application page.",,,Access control and security,,,,
+GUI,b9805e65-7bee-4450-ae77-edbb2ecc0812,Login Screen,Check layout,Header section,Logo left position,,,,"1. Open the Login Screen.
+2. Inspect the header area for Logo (A.1.Logo Sun Annual Awards 2025/Logo Sun Annual Awards 2025).
+3. Resize the browser window to various sizes.
+4. Attempt to interact with the Logo.","1. ---
+2. The Logo Sun Annual Awards 2025 (A.1.Logo Sun Annual Awards 2025/Logo Sun Annual Awards 2025) is displayed at the top-left of the header section.
+3. The logo maintains its position at the top-left across all window sizes.
+4. The logo is not interactive (click/hover has no effect).",,,User interface,,,,
+GUI,8415b629-7751-49c0-924c-1de6983fdc43,Login Screen,Check layout,Header section,Language control right position,,,,"1. Open the Login Screen.
+2. Inspect the header area for the Language selector (A.2.Language/Language).
+3. Resize the browser window to various sizes.","1. ---
+2. The Language selector (A.2.Language/Language) is displayed at the top-right of the header section.
+3. The Language selector remains at the top-right for all window sizes.",,,User interface,,,,
+GUI,33a1dacf-293c-4305-8333-4cbfec25b983,Login Screen,Check layout,Footer section,Visibility and fixed position,,,,"1. Open the Login Screen.
+2. Scroll the page up and down.
+3. Hover and click the footer (D.Chân trang/Footer).","1. The footer (D.Chân trang/Footer) is visible and fixed at the bottom of the page.
+2. The footer remains visible and stationary regardless of scrolling.
+3. The footer is not interactive (no actions on click or hover).",,,User interface,,,,
+GUI,5fbe2a18-3f7d-488a-8e22-aef1ba1629fa,Login Screen,Check layout,Hero area,Background artwork presence,,,,"1. Open the Login Screen.
+2. Inspect the hero section for background artwork (B.1.Hình ảnh chủ đạo (Key Visual)/Key Visual).","1. ---
+2. The hero section has hero key visual/background artwork covering the area as described.",,,User interface,,,,
+GUI,42b82364-735c-4451-8e65-9a96270aebb9,Login Screen,Check layout,Hero area,Title and description arrangement,,,,"1. Open the Login Screen.
+2. Inspect the hero section for the title (B.1.Hình ảnh chủ đạo (Key Visual)/Key Visual) and description texts (B.2.Nội dung giới thiệu (hero)/content).
+3. Attempt to interact with the description texts.","1. ---
+2. The title ""ROOT FURTHER"" and the following descriptions are present: ""Bắt đầu hành trình của bạn cùng SAA 2025."" and ""Đăng nhập để khám phá!"". The descriptions are well arranged and visually distinct.
+3. The descriptions are not interactive or selectable.",,,User interface,,,,
+GUI,6ae76d15-0c29-4592-8fba-15eee8b69e25,Login Screen,Check layout,Login button,Visibility and position,,,,"1. Open the Login Screen.
+2. Locate the ""LOGIN With Google"" button (B.3.Nút Đăng nhập bằng Google/Login).
+3. Inspect its position, label, and icon.","1. ---
+2. The login button ""LOGIN With Google"" (B.3.Nút Đăng nhập bằng Google/Login) is centered below the hero descriptions and has the Google icon visible.
+3. The label and icon are displayed as specified.",,,User interface,,,,
+GUI,20d87e28-2d5c-4c72-a4da-79419e9f9991,Login Screen,Check layout,Language dropdown,Opens on language click,,,,"1. Open the Login Screen.
+2. Click the Language selector (A.2.Language/Language).
+3. Hover the Language selector.","1. ---
+2. The language dropdown menu opens upon click.
+3. The selector is highlighted and shows a pointer cursor on hover.",,,User interface,,,,
+GUI,5f1cbabd-6661-4810-9f6f-da68f7d00aeb,Login Screen,Initialize,Language control,Default language Vietnamese,,,,"1. Open the Login Screen.
+2. Observe the Language selector (A.2.Language/Language).","1. ---
+2. The default language code ""VN"" is shown in the language selector.",,,User interface,,,,
+GUI,98e20775-ff7d-4a0e-8d8c-8f5de17ecee7,Login Screen,Initialize,Language control,Flag and chevron display,,,,"1. Open the Login Screen.
+2. Observe the Language selector (A.2.Language/Language).","1. ---
+2. The Vietnam flag icon is displayed to the left of ""VN"" and a down chevron is displayed to the right.",,,User interface,,,,
+FUNCTION,f62b0c97-7595-4d30-b38c-44dbdf071e83,Login Screen,Check access condition,Authenticated user,Should be redirected,,User is already authenticated,,1. Attempt to access the Login Screen as an authenticated user.,1. The system redirects the authenticated user to the main application page.,,,Access control and security,,,,
+FUNCTION,60bc5bbb-cee8-4544-bfe2-f56f9d0ca07e,Login Screen,Check component interaction,Login button,On click Google authentication,,,,"1. On the Login Screen, click the ""LOGIN With Google"" button (B.3.Nút Đăng nhập bằng Google/Login).",1. The Google authentication flow starts in a new tab or popup.,,,Normal_Others,,,,
+FUNCTION,c18649fa-e5f6-42b3-8ac8-54163839a758,Login Screen,Check component interaction,Login button,Shadow effect on hover,,,,"1. On the Login Screen, hover over the ""LOGIN With Google"" button (B.3.Nút Đăng nhập bằng Google/Login).",1. The login button displays a shadow or elevated effect while hovered.,,,Normal_Others,,,,
+FUNCTION,37eae882-ef2b-46df-89ef-386976d2f8e6,Login Screen,Check component interaction,Login button,Disabled with loader during authentication,,,Valid Google credentials,"1. On the Login Screen, click the ""LOGIN With Google"" button (B.3.Nút Đăng nhập bằng Google/Login).
+2. While authentication is processing, observe the login button.","1. ---
+2. The login button is disabled and shows a loading indicator.",,,Normal_Others,,,,
+FUNCTION,4426635b-86e6-4f06-a692-07a8d1f7c6f3,Login Screen,Check component interaction,Language control button,Dropdown opens on click,,,,"1. On the Login Screen, click the Language selector (A.2.Language/Language).",1. The language dropdown menu opens.,,,Normal_Others,,,,
+FUNCTION,cb42461d-2c0b-4fc0-bae2-dd225167ac6d,Login Screen,Check component interaction,Language control button,Hover highlight and pointer,,,,"1. On the Login Screen, hover the Language selector (A.2.Language/Language).",1. The language selector is highlighted and the cursor changes to a pointer.,,,Normal_Others,,,,
+FUNCTION,e76aa170-85dd-469f-b73e-eac6f574cf57,Login Screen,Check business logic,Authentication flow,User info returned on success,,,Valid Google credentials,"1. On the Login Screen, click the ""LOGIN With Google"" button (B.3.Nút Đăng nhập bằng Google/Login).
+2. Authenticate with a valid Google account.","1. ---
+2. User information is returned and the user is redirected to the main application page.",,,Normal_Others,,,,

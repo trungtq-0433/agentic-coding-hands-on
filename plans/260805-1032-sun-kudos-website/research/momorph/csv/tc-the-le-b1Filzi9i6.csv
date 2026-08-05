@@ -1,0 +1,21 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+GUI,TC_THELE_GUI_001,Thể lệ UPDATE,Check layout,Screen-wide layout,Overall structure,Verify the panel renders every element declared in the design,"Panel ""Thể lệ"" is open",,"1. Open panel ""Thể lệ""
+2. Observe the whole panel","Panel shows tiêu đề, mô tả, danh sách thưởng, 6 huy hiệu, and footer with ""Đóng"" + ""Viết KUDOS""",Yes,High,User interface,,,,
+GUI,TC_THELE_GUI_002,Thể lệ UPDATE,Check layout,Data-present state,With data,Verify footer button styling matches the design,"Panel ""Thể lệ"" is open",,"1. Open panel ""Thể lệ""
+2. Inspect the two footer buttons","""Đóng"" is secondary/outlined with icon ""X"" + text; ""Viết KUDOS"" is primary gold with pen icon + text",Yes,Medium,User interface,,,,
+GUI,TC_THELE_GUI_003,Thể lệ UPDATE,Initialize,Nút hành động (Footer modal),Disabled boundary state,Verify a disabled footer button is rendered dimmed,"Panel ""Thể lệ"" is open with a footer button in disabled state",Footer button state = disabled,"1. Open panel ""Thể lệ""
+2. Observe the disabled footer button",Disabled button is dimmed,Yes,Medium,User interface,,,,
+GUI,TC_THELE_GUI_004,Thể lệ UPDATE,Initialize,Nút hành động (Footer modal),Active/inactive styling,Verify hover restyles the footer buttons,"Panel ""Thể lệ"" is open with footer buttons enabled",,"1. Open panel ""Thể lệ""
+2. Hover over ""Đóng""
+3. Hover over ""Viết KUDOS""",Each hovered button changes color/elevation,Yes,Medium,User interface,,,,
+FUNCTION,TC_THELE_FUN_001,Thể lệ UPDATE,Check component interaction,Panel nội dung thể lệ,Scroll,Verify the panel scrolls when its content overflows,"Panel ""Thể lệ"" is open",Rules content longer than the panel height,"1. Open panel ""Thể lệ""
+2. Scroll down inside the panel
+3. Scroll back up",Panel content scrolls and reaches the end of the content,Yes,High,Normal_Others,,,,
+FUNCTION,TC_THELE_FUN_002,Thể lệ UPDATE,Check component interaction,Panel nội dung thể lệ,Scroll,Verify no scrolling occurs when content fits,"Panel ""Thể lệ"" is open",Rules content shorter than the panel height,"1. Open panel ""Thể lệ""
+2. Attempt to scroll inside the panel","Content stays fixed, no scroll",Yes,Low,Abnormal_Others,,,,
+FUNCTION,TC_THELE_FUN_003,Thể lệ UPDATE,Check component interaction,"Nút ""Đóng""",Close,"Verify ""Đóng"" closes the panel","Panel ""Thể lệ"" is open over previous content",,"1. Open panel ""Thể lệ""
+2. Click ""Đóng""",Panel closes and the previous content is shown,Yes,High,Normal_Others,,,,
+FUNCTION,TC_THELE_FUN_004,Thể lệ UPDATE,Check navigation behavior,"Nút ""Viết KUDOS""",Open,"Verify ""Viết KUDOS"" opens the KUDOS form","Panel ""Thể lệ"" is open, ""Viết KUDOS"" enabled",,"1. Open panel ""Thể lệ""
+2. Click ""Viết KUDOS""","The ""Viết KUDOS"" input modal opens",Yes,High,Normal_Others,,,,
+FUNCTION,TC_THELE_FUN_005,Thể lệ UPDATE,Check state transition,Nút hành động (Footer modal),Disabled,Verify a disabled footer button rejects clicks,"Panel ""Thể lệ"" is open with a footer button in disabled state",Footer button state = disabled,"1. Open panel ""Thể lệ""
+2. Click the disabled footer button","Nothing happens, no action is triggered",Yes,Medium,Abnormal_Others,,,,

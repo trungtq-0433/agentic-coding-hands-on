@@ -1,0 +1,74 @@
+{
+  "commands": [
+    {
+      "command": "npx tsc --noEmit",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Typecheck sạch trên toàn bộ code phase-01 sau khi sửa lỗi Critical ở proxy.ts.",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "next build (Turbopack) compile thành công; Next nhận diện 'ƒ Proxy (Middleware)' xác nhận proxy.ts được nạp đúng convention Next 16.",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "npx eslint proxy.ts lib app next.config.ts",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Lint sạch trên đúng phạm vi code phase-01 sở hữu.",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Xanh sau khi thêm .claude/**, plans/**, supabase/** và database.types.ts vào globalIgnores của eslint.config.mjs. Trước đó đỏ 866 error, toàn bộ từ .claude/hooks/*.cjs của bộ kit (lỗi có sẵn trên HEAD 2a1edf1, không do phase-01). Cổng npm run validate của phase-17 nay không còn bị chặn.",
+      "ts": "2026-08-05T18:42:29+07:00"
+    },
+    {
+      "command": "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:3123/ (gate quá khứ)",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Gate mở: / trả 200; /prelaunch trả 307 về /; /favicon.ico trả 200 (matcher không nuốt static asset).",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "curl http://127.0.0.1:3123/{,kudos,login} sau khi build với gate 2027",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Gate đóng: cả ba route đều 307 về /prelaunch; /prelaunch không redirect vòng (404 vì trang thuộc phase-14, đúng thiết kế).",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "curl -H 'Cookie: NEXT_LOCALE=<vi|en|xx>' http://127.0.0.1:3123/",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Không cookie → lang=vi; en → lang=en; giá trị rác xx → fallback vi. Hai file locale cùng tập key (parity OK).",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "sửa NEXT_PUBLIC_LAUNCH_GATE_AT + restart (không build) rồi build lại",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Tái hiện đúng bẫy inline env: chỉ restart thì / vẫn 200 (giá trị cũ nằm trong bundle); build lại thì thành 307. Xác nhận runbook nói đúng.",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "end-to-end cookie refresh: tạo user Supabase local, cookie sb-127-auth-token expires_at quá khứ, GET /prelaunch",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Chứng minh fix lỗi Critical: response 307 mang set-cookie sb-127-auth-token, cookie session vừa refresh sống sót qua redirect. User test đã xoá sau khi kiểm (còn 0 user).",
+      "ts": "2026-08-05T17:23:41+07:00"
+    },
+    {
+      "command": "sunlint --all --input=. --output-summary=.takumi/reports/sunlint.json",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "0 error, 221 warning trên 216 file toàn repo (phần lớn là .claude/ của bộ kit). Quét riêng code phase-01: lib/ 3 warning, app/ 4 warning — 4 cái trong app/page.tsx là boilerplate create-next-app chưa đụng (phase-08 sẽ thay). 3 warning thuộc code phase-01 (C030 x2 generic Error, C029 catch rỗng trong server.ts) là chủ ý giữ: catch rỗng là pattern chính thức @supabase/ssr, còn custom error class cho 2 chỗ throw là YAGNI. 0 error nên không chặn.",
+      "ts": "2026-08-05T18:42:29+07:00"
+    }
+  ]
+}

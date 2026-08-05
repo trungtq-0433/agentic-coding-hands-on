@@ -1,0 +1,219 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,ID-0,Viết Kudo,Check access permission,Modal access,Authenticated user,,Người dùng đã đăng nhập vào hệ thống,User: authenticated user,"1. Đăng nhập vào hệ thống
+2. Điều hướng đến màn hình có nút/link ""Viết Kudo""
+3. Click vào nút/link ""Viết Kudo""","Modal ""Viết Kudo"" mở thành công",,High,Access control and security,,,,
+ACCESSING,ID-1,Viết Kudo,,,Unauthenticated user,,Người dùng chưa đăng nhập,User: unauthenticated user,"1. Truy cập vào hệ thống (không đăng nhập)
+2. Cố gắng truy cập chức năng ""Viết Kudo""",Người dùng được chuyển hướng đến trang đăng nhập hoặc hiển thị thông báo yêu cầu đăng nhập,,High,Access control and security,,,,
+ACCESSING,ID-2,Viết Kudo,Check navigation path,From other screens,Via button/link,,"Người dùng đã đăng nhập, đang ở màn hình có nút/link ""Viết Kudo""",Valid navigation path,"1. Đăng nhập vào hệ thống
+2. Điều hướng đến màn hình nguồn
+3. Click vào nút/link ""Viết Kudo""","Modal ""Viết Kudo"" hiển thị chính xác với tiêu đề và các trường đầy đủ",,Medium,Access control and security,,,,
+GUI,ID-3,Viết Kudo,Check layout,Screen-wide layout,Overall structure,,Người dùng đã mở modal Viết Kudo,,"1. Mở modal Viết Kudo
+2. Quan sát cấu trúc tổng thể
+3. Kiểm tra vị trí các thành phần chính","Tiêu đề hiển thị ở đầu modal
+Các trường hiển thị theo thứ tự: Người nhận, Textarea, Hashtag, Image, Checkbox gửi ẩn danh
+Nút Hủy và Gửi ở footer bottom right",,High,Normal_Others,,,,
+GUI,ID-4,Viết Kudo,Initialize,Trường tìm kiếm người nhận,Placeholder text,,Người dùng đã mở modal Viết Kudo,,"1. Mở modal Viết Kudo
+2. Quan sát trường Người nhận
+3. Kiểm tra placeholder","Placeholder ""Tìm kiếm"" hiển thị trong trường input",,Medium,Normal_Others,,,,
+GUI,ID-5,Viết Kudo,,Trường nhập văn bản (textarea lời cảm ơn),Placeholder text,,Người dùng đã mở modal Viết Kudo,,"1. Mở modal Viết Kudo
+2. Quan sát textarea
+3. Kiểm tra placeholder","Placeholder ""Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!"" hiển thị",,Medium,Normal_Others,,,,
+GUI,ID-6,Viết Kudo,,Checkbox gửi ẩn danh,Default value/state,,Người dùng đã mở modal Viết Kudo,,"1. Mở modal Viết Kudo
+2. Quan sát checkbox ""Gửi lời cám ơn và ghi nhận ẩn danh""
+3. Kiểm tra trạng thái mặc định",Checkbox unchecked (không được chọn) theo mặc định,,Medium,Normal_Others,,,,
+FUNCTION,ID-7,Viết Kudo,Check data validation,Người nhận,Required field,,Modal Viết Kudo đã mở,Người nhận: empty,"1. Mở modal Viết Kudo
+2. Để trống trường Người nhận
+3. Nhập các trường khác hợp lệ
+4. Click nút ""Gửi""","Hiển thị viền đỏ và thông báo lỗi cho trường Người nhận
+Form không được submit",,High,Normal_Others,,,,
+FUNCTION,ID-8,Viết Kudo,,,Autocomplete search,,Modal Viết Kudo đã mở,"Input: ""Nguyễn""","1. Mở modal Viết Kudo
+2. Click vào trường Người nhận
+3. Nhập ""Nguyễn"" vào trường tìm kiếm","Danh sách gợi ý hiển thị các tên có chứa ""Nguyễn""
+Có thể chọn từ danh sách",,High,Normal_Others,,,,
+FUNCTION,ID-9,Viết Kudo,,,,,Modal Viết Kudo đã mở,"Input: ""@ # $""","1. Mở modal Viết Kudo
+2. Nhập ""@ # $"" vào trường Người nhận",Danh sách gợi ý lọc chính xác hoặc hiển thị không có kết quả,,Medium,Normal_Others,,,,
+FUNCTION,ID-10,Viết Kudo,,,,,Modal Viết Kudo đã mở,"Input: ""  Nguyễn  "" (có spaces)","1. Mở modal Viết Kudo
+2. Nhập ""  Nguyễn  "" vào trường tìm kiếm",Hệ thống trim khoảng trắng và hiển thị gợi ý chính xác,,Medium,Normal_Others,,,,
+FUNCTION,ID-11,Viết Kudo,,Nội dung lời cảm ơn,Required field,,Modal Viết Kudo đã mở,Nội dung: empty,"1. Mở modal Viết Kudo
+2. Chọn Người nhận hợp lệ
+3. Để trống textarea
+4. Thêm hashtag hợp lệ
+5. Click ""Gửi""","Hiển thị lỗi ""Không được để trống""
+Form không được submit",,High,Normal_Others,,,,
+FUNCTION,ID-12,Viết Kudo,,,Mention functionality (@),,"Modal Viết Kudo đã mở, đã chọn Người nhận","Input: ""Cảm ơn @""","1. Mở modal Viết Kudo
+2. Nhập vào textarea: ""Cảm ơn @""
+3. Tiếp tục gõ tên","Hiển thị danh sách gợi ý tên đồng nghiệp
+Có thể chọn để mention",,High,Normal_Others,,,,
+FUNCTION,ID-13,Viết Kudo,,,,,Modal Viết Kudo đã mở,"Input: ""Cảm ơn @NguyenVanA""","1. Mở modal Viết Kudo
+2. Nhập ""Cảm ơn @""
+3. Chọn ""NguyenVanA"" từ gợi ý",Tên được mention chính xác trong textarea,,High,Normal_Others,,,,
+FUNCTION,ID-14,Viết Kudo,,Hashtag,Required field,,Modal Viết Kudo đã mở,Hashtag: empty (0 tags),"1. Mở modal Viết Kudo
+2. Chọn Người nhận và nhập nội dung hợp lệ
+3. Không thêm hashtag nào
+4. Click ""Gửi""","Hiển thị lỗi ""Không được để trống""
+Form không được submit",,High,Normal_Others,,,,
+FUNCTION,ID-15,Viết Kudo,,,Minimum 1 tag,,Modal Viết Kudo đã mở,Hashtag: 1 tag valid,"1. Mở modal Viết Kudo
+2. Điền các trường bắt buộc khác
+3. Click ""+ Hashtag""
+4. Thêm 1 hashtag
+5. Click ""Gửi""","Hashtag được thêm thành công
+Form submit thành công",,High,Normal_Others,,,,
+FUNCTION,ID-16,Viết Kudo,,,Maximum 5 tags,,Modal Viết Kudo đã mở,Hashtag: 5 tags valid,"1. Mở modal Viết Kudo
+2. Click ""+ Hashtag""
+3. Thêm 5 hashtag lần lượt","5 hashtag được thêm thành công
+Nút ""+ Hashtag"" vẫn hiển thị hoặc disabled (theo spec)",,High,Normal_Others,,,,
+FUNCTION,ID-17,Viết Kudo,,,,,"Modal Viết Kudo đã mở, đã có 5 hashtag",Hashtag: 6th tag,"1. Mở modal Viết Kudo
+2. Thêm 5 hashtag
+3. Cố gắng thêm hashtag thứ 6","Hiển thị thông báo ""Tối đa 5 hashtag""
+Không thể thêm hashtag thứ 6",,High,Abnormal_Others,,,,
+FUNCTION,ID-18,Viết Kudo,,Image upload,Maximum 5 images,,Modal Viết Kudo đã mở,Image: 3 ảnh .jpg hợp lệ,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn 3 ảnh hợp lệ","3 ảnh được upload và hiển thị thumbnail
+Nút ""+ Image"" vẫn hiển thị",,High,Normal_Others,,,,
+FUNCTION,ID-19,Viết Kudo,,,,,Modal Viết Kudo đã mở,Image: 5 ảnh .jpg hợp lệ,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn 5 ảnh hợp lệ","5 ảnh được upload và hiển thị thumbnail
+Nút ""+ Image"" bị ẩn",,High,Normal_Others,,,,
+FUNCTION,ID-20,Viết Kudo,,,,,"Modal Viết Kudo đã mở, đã có 5 ảnh",Image: 6th image,"1. Mở modal Viết Kudo
+2. Upload 5 ảnh
+3. Cố gắng thêm ảnh thứ 6","Nút ""+ Image"" đã ẩn
+Không thể thêm ảnh thứ 6",,High,Abnormal_Others,,,,
+FUNCTION,ID-21,Viết Kudo,,,File type validation,,Modal Viết Kudo đã mở,Image: file .jpg,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn file .jpg",Ảnh được upload thành công và hiển thị thumbnail,,High,Normal_Others,,,,
+FUNCTION,ID-22,Viết Kudo,,,,,Modal Viết Kudo đã mở,Image: file .png,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn file .png",Ảnh được upload thành công và hiển thị thumbnail,,High,Normal_Others,,,,
+FUNCTION,ID-23,Viết Kudo,,,,,Modal Viết Kudo đã mở,Image: file .pdf,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn file .pdf","Hiển thị thông báo lỗi định dạng file không hợp lệ
+File không được upload",,High,Abnormal_Others,,,,
+FUNCTION,ID-24,Viết Kudo,,,,,Modal Viết Kudo đã mở,Image: file .mp4,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn file .mp4","Hiển thị thông báo lỗi định dạng file không hợp lệ
+File không được upload",,High,Abnormal_Others,,,,
+FUNCTION,ID-25,Viết Kudo,Check component interaction,Trường tìm kiếm người nhận,Input and search,,Modal Viết Kudo đã mở,"Input: ""An""","1. Mở modal Viết Kudo
+2. Click vào trường Người nhận
+3. Nhập ""An""","Danh sách gợi ý hiển thị ngay khi gõ
+Danh sách lọc theo input",,High,Normal_Others,,,,
+FUNCTION,ID-26,Viết Kudo,,,Select from dropdown,,"Modal Viết Kudo đã mở, đã nhập tìm kiếm","Selected: ""Nguyễn Văn An""","1. Mở modal Viết Kudo
+2. Nhập tìm kiếm ""An""
+3. Click chọn ""Nguyễn Văn An"" từ dropdown","Tên ""Nguyễn Văn An"" được điền vào trường
+Dropdown đóng",,High,Normal_Others,,,,
+FUNCTION,ID-27,Viết Kudo,,Textarea,Format text (Bold),,"Modal Viết Kudo đã mở, đã nhập text","Text: ""Cảm ơn bạn""","1. Mở modal Viết Kudo
+2. Nhập ""Cảm ơn bạn"" vào textarea
+3. Bôi đen text
+4. Click nút ""B"" (Bold)",Text được định dạng in đậm,,Medium,Normal_Others,,,,
+FUNCTION,ID-28,Viết Kudo,,,Format text (Italic),,"Modal Viết Kudo đã mở, đã nhập text","Text: ""Cảm ơn bạn""","1. Mở modal Viết Kudo
+2. Nhập ""Cảm ơn bạn"" vào textarea
+3. Bôi đen text
+4. Click nút ""I"" (Italic)",Text được định dạng in nghiêng,,Medium,Normal_Others,,,,
+FUNCTION,ID-29,Viết Kudo,,,Format text (Stroke),,"Modal Viết Kudo đã mở, đã nhập text","Text: ""Cảm ơn bạn""","1. Mở modal Viết Kudo
+2. Nhập ""Cảm ơn bạn"" vào textarea
+3. Bôi đen text
+4. Click nút ""S"" (Stroke)",Text được định dạng gạch ngang,,Medium,Normal_Others,,,,
+FUNCTION,ID-30,Viết Kudo,,,Format text (Number list),,"Modal Viết Kudo đã mở, đã nhập text","Text: ""Điểm 1
+Điểm 2""","1. Mở modal Viết Kudo
+2. Nhập text nhiều dòng
+3. Bôi đen text
+4. Click nút Number list",Text được định dạng thành danh sách đánh số,,Medium,Normal_Others,,,,
+FUNCTION,ID-31,Viết Kudo,,,Insert link,,Modal Viết Kudo đã mở,"URL: ""https://example.com""","1. Mở modal Viết Kudo
+2. Nhập text vào textarea
+3. Click nút Link
+4. Nhập URL ""https://example.com""
+5. Xác nhận","Hộp thoại nhập URL hiển thị
+Liên kết được chèn vào text",,Medium,Normal_Others,,,,
+FUNCTION,ID-32,Viết Kudo,,,Insert quote,,"Modal Viết Kudo đã mở, đã nhập text","Text: ""Đây là quote""","1. Mở modal Viết Kudo
+2. Nhập ""Đây là quote"" vào textarea
+3. Bôi đen text
+4. Click nút Quote",Text được định dạng trích dẫn,,Medium,Normal_Others,,,,
+FUNCTION,ID-33,Viết Kudo,,,Mention (@+name),,Modal Viết Kudo đã mở,"Input: ""@Nguyen""","1. Mở modal Viết Kudo
+2. Nhập ""@Nguyen"" vào textarea","Danh sách gợi ý tên hiển thị
+Có thể chọn để mention",,High,Normal_Others,,,,
+FUNCTION,ID-34,Viết Kudo,,"Nút ""+ Hashtag""",Add hashtag,,Modal Viết Kudo đã mở,"Hashtag: ""TeamWork""","1. Mở modal Viết Kudo
+2. Click ""+ Hashtag""
+3. Chọn hoặc nhập ""TeamWork""
+4. Xác nhận","Dropdown hashtag hiển thị
+Hashtag ""TeamWork"" được thêm dưới dạng chip",,High,Normal_Others,,,,
+FUNCTION,ID-35,Viết Kudo,,,,,Modal Viết Kudo đã mở,"Hashtag: ""Tag1"", ""Tag2"", ""Tag3""","1. Mở modal Viết Kudo
+2. Click ""+ Hashtag"" và thêm ""Tag1""
+3. Click ""+ Hashtag"" và thêm ""Tag2""
+4. Click ""+ Hashtag"" và thêm ""Tag3""",3 hashtag được thêm dưới dạng chip riêng biệt,,High,Normal_Others,,,,
+FUNCTION,ID-36,Viết Kudo,,Chip hashtag,Remove hashtag,,"Modal Viết Kudo đã mở, đã có 2 hashtag","Existing: ""Tag1"", ""Tag2""","1. Mở modal Viết Kudo
+2. Thêm 2 hashtag ""Tag1"" và ""Tag2""
+3. Click nút ""x"" trên chip ""Tag1""","Chip ""Tag1"" biến mất
+Còn lại chip ""Tag2""",,High,Normal_Others,,,,
+FUNCTION,ID-37,Viết Kudo,,"Nút ""+ Image""",Add image,,Modal Viết Kudo đã mở,Image: 1 file .jpg,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn 1 file ảnh .jpg từ file picker","File picker mở
+Ảnh được upload và hiển thị thumbnail",,High,Normal_Others,,,,
+FUNCTION,ID-38,Viết Kudo,,,,,Modal Viết Kudo đã mở,Image: 5 files,"1. Mở modal Viết Kudo
+2. Upload 5 ảnh","Nút ""+ Image"" bị ẩn sau khi upload ảnh thứ 5",,High,Normal_Others,,,,
+FUNCTION,ID-39,Viết Kudo,,Thumbnail ảnh,Remove image,,"Modal Viết Kudo đã mở, đã có 3 ảnh",Existing: 3 images,"1. Mở modal Viết Kudo
+2. Upload 3 ảnh
+3. Click nút ""x"" trên thumbnail ảnh thứ 2","Ảnh thứ 2 bị xóa
+Còn lại 2 ảnh",,High,Normal_Others,,,,
+FUNCTION,ID-40,Viết Kudo,,,,,"Modal Viết Kudo đã mở, đã có 5 ảnh (nút ẩn)",Existing: 5 images,"1. Mở modal Viết Kudo
+2. Upload 5 ảnh (nút ""+ Image"" ẩn)
+3. Click ""x"" xóa 1 ảnh","Ảnh bị xóa
+Nút ""+ Image"" hiện lại",,Medium,Normal_Others,,,,
+FUNCTION,ID-41,Viết Kudo,,Checkbox gửi ẩn danh,Toggle on/off,,Modal Viết Kudo đã mở,Checkbox: unchecked -> checked,"1. Mở modal Viết Kudo
+2. Click checkbox ""Gửi lời cám ơn và ghi nhận ẩn danh""",Checkbox được check,,Medium,Normal_Others,,,,
+FUNCTION,ID-42,Viết Kudo,,,,,"Modal Viết Kudo đã mở, checkbox đã check",Checkbox: checked -> unchecked,"1. Mở modal Viết Kudo
+2. Check checkbox
+3. Click lại để uncheck",Checkbox được uncheck,,Medium,Normal_Others,,,,
+FUNCTION,ID-43,Viết Kudo,,,Show/hide name field,,Modal Viết Kudo đã mở,Checkbox: unchecked -> checked,"1. Mở modal Viết Kudo
+2. Click checkbox ""Gửi ẩn danh""",Text field nhập tên ẩn danh hiển thị,,Medium,Normal_Others,,,,
+FUNCTION,ID-44,Viết Kudo,,,,,"Modal Viết Kudo đã mở, checkbox checked",Checkbox: checked -> unchecked,"1. Mở modal Viết Kudo
+2. Check checkbox (text field hiện)
+3. Uncheck checkbox",Text field nhập tên ẩn danh bị ẩn,,Medium,Normal_Others,,,,
+FUNCTION,ID-45,Viết Kudo,,"Nút ""Hủy""",Close modal,,"Modal Viết Kudo đã mở, đã nhập dữ liệu","Data: Người nhận, nội dung đã nhập","1. Mở modal Viết Kudo
+2. Nhập một số dữ liệu
+3. Click nút ""Hủy""","Modal đóng
+Dữ liệu không được lưu",,High,Normal_Others,,,,
+FUNCTION,ID-46,Viết Kudo,,"Nút ""Gửi""",Submit form,,Modal Viết Kudo đã mở,"Người nhận: valid, Nội dung: valid, Hashtag: 2 tags, Image: 2 images","1. Mở modal Viết Kudo
+2. Điền đầy đủ các trường bắt buộc
+3. Thêm hashtag và ảnh
+4. Click ""Gửi""","Form được validate thành công
+Hiển thị loading
+Modal đóng sau khi gửi thành công",,High,Normal_Others,,,,
+FUNCTION,ID-47,Viết Kudo,,,,,Modal Viết Kudo đã mở,"Người nhận: valid, Nội dung: valid, Hashtag: 1 tag, Image: 0","1. Mở modal Viết Kudo
+2. Chọn Người nhận
+3. Nhập nội dung
+4. Thêm 1 hashtag
+5. Click ""Gửi"" (không thêm ảnh)","Form được submit thành công
+Modal đóng",,High,Normal_Others,,,,
+FUNCTION,ID-48,Viết Kudo,,,Enable/disable state,,Modal Viết Kudo đã mở,"Người nhận: empty, Nội dung: empty, Hashtag: empty","1. Mở modal Viết Kudo
+2. Không điền các trường bắt buộc
+3. Quan sát nút ""Gửi""","Nút ""Gửi"" bị disable",,High,Normal_Others,,,,
+FUNCTION,ID-49,Viết Kudo,,,,,Modal Viết Kudo đã mở,"Người nhận: valid, Nội dung: valid, Hashtag: 1 tag","1. Mở modal Viết Kudo
+2. Chọn Người nhận
+3. Nhập nội dung
+4. Thêm 1 hashtag
+5. Quan sát nút ""Gửi""","Nút ""Gửi"" được enable",,High,Normal_Others,,,,
+FUNCTION,ID-50,Viết Kudo,Check error handling,Người nhận,Empty field error,,Modal Viết Kudo đã mở,Người nhận: empty,"1. Mở modal Viết Kudo
+2. Điền các trường khác hợp lệ
+3. Để trống Người nhận
+4. Click ""Gửi""",Hiển thị viền đỏ và thông báo lỗi tại trường Người nhận,,High,Abnormal_Others,,,,
+FUNCTION,ID-51,Viết Kudo,,Nội dung lời cảm ơn,Empty field error,,Modal Viết Kudo đã mở,Nội dung: empty,"1. Mở modal Viết Kudo
+2. Chọn Người nhận và thêm Hashtag
+3. Để trống nội dung
+4. Click ""Gửi""","Hiển thị thông báo lỗi ""Không được để trống"" tại textarea",,High,Abnormal_Others,,,,
+FUNCTION,ID-52,Viết Kudo,,Hashtag,Empty field error,,Modal Viết Kudo đã mở,Hashtag: empty (0 tags),"1. Mở modal Viết Kudo
+2. Chọn Người nhận và nhập nội dung
+3. Không thêm hashtag
+4. Click ""Gửi""","Hiển thị thông báo lỗi ""Không được để trống"" tại trường Hashtag",,High,Abnormal_Others,,,,
+FUNCTION,ID-53,Viết Kudo,,,Exceed maximum error,,"Modal Viết Kudo đã mở, đã có 5 hashtag",Hashtag: add 6th,"1. Mở modal Viết Kudo
+2. Thêm 5 hashtag
+3. Cố gắng thêm hashtag thứ 6","Hiển thị thông báo ""Tối đa 5 hashtag""
+Không cho phép thêm",,High,Abnormal_Others,,,,
+FUNCTION,ID-54,Viết Kudo,,Image upload,Exceed maximum error,,"Modal Viết Kudo đã mở, đã có 5 ảnh",Image: add 6th,"1. Mở modal Viết Kudo
+2. Upload 5 ảnh
+3. Nút ""+ Image"" đã ẩn","Nút ""+ Image"" ẩn, không thể thêm ảnh thứ 6",,High,Abnormal_Others,,,,
+FUNCTION,ID-55,Viết Kudo,,,Invalid file type,,Modal Viết Kudo đã mở,Image: file .txt,"1. Mở modal Viết Kudo
+2. Click ""+ Image""
+3. Chọn file .txt",Hiển thị thông báo lỗi định dạng file không hợp lệ,,High,Abnormal_Others,,,,
+FUNCTION,ID-56,Viết Kudo,,Form submission,Validation errors,,Modal Viết Kudo đã mở,Tất cả trường: empty,"1. Mở modal Viết Kudo
+2. Để trống tất cả trường bắt buộc
+3. Click ""Gửi""","Hiển thị lỗi cho tất cả các trường bắt buộc: Người nhận, Nội dung, Hashtag
+Form không được submit",,High,Abnormal_Others,,,,

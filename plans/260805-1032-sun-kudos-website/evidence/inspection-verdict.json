@@ -1,0 +1,57 @@
+{
+  "score": 9.6,
+  "criticalCount": 0,
+  "decision": "SEALED",
+  "acceptanceCovered": [
+    "npx supabase status liệt kê đủ API/DB/Studio; Studio mở được ở localhost:54323 — verify: API 54321, DB 54322, Studio 54323 đều phản hồi",
+    "Ở root repo có proxy.ts, KHÔNG có middleware.ts — verify: ls proxy.ts trả về, ls middleware.ts không tồn tại; next build in ra 'ƒ Proxy (Middleware)'",
+    "grep -rn cookies() lib app | grep -v await trả rỗng — verify: chạy grep, kết quả rỗng",
+    "Đặt NEXT_PUBLIC_LAUNCH_GATE_AT ở tương lai thì mọi URL đáp về /prelaunch; đặt ở quá khứ thì truy cập bình thường và /prelaunch đá về / — verify: gate 2027 sau build lại thì /, /kudos, /login đều 307 về /prelaunch; gate 2025 thì / trả 200 và /prelaunch trả 307 về /",
+    "Đổi cookie NEXT_LOCALE từ vi sang en thì chuỗi trong common.json đổi theo và html lang đổi theo — verify: không cookie → lang=vi, NEXT_LOCALE=en → lang=en, giá trị rác xx → fallback vi",
+    "Kiểm chứng hành vi inline: sửa env rồi chỉ restart thì countdown KHÔNG đổi; build lại thì countdown đổi — verify: chỉ restart thì / vẫn 200, build lại thì thành 307",
+    "next.config.ts có images.remotePatterns — verify: khai lh3.googleusercontent.com và 127.0.0.1:54321/storage/v1/object/public/**",
+    "npm run build exit 0 — verify: exit code 0, compile thành công"
+  ],
+  "regressionChecked": [
+    "app/layout.tsx chuyển sang async và bọc LocaleProvider — mọi trang render qua root layout; build sinh trang tĩnh thành công, / trả 200",
+    "proxy.ts chạy trên mọi request — kiểm static asset không bị matcher nuốt: /favicon.ico trả 200",
+    "config.matcher regex loại _next/static, _next/image, favicon.ico và các đuôi ảnh — kiểm không có redirect vòng ở /prelaunch",
+    "package.json thêm 5 script — kiểm supabase:types chạy thật, sinh lib/supabase/database.types.ts 179 dòng, tsc vẫn xanh",
+    ".gitignore thêm negation cho .env.local.example — kiểm git check-ignore: .env.local IGNORED, .env.local.example tracked được",
+    "Sửa lỗi Critical ở proxy.ts (redirectKeepingSession) — build lại và chạy lại toàn bộ kiểm tra redirect, không hồi quy"
+  ],
+  "contractStatus": "STABLE",
+  "refuted": [],
+  "unproven": [],
+  "reachableRegressions": [],
+  "findings": [
+    {
+      "severity": "Critical",
+      "category": "correctness",
+      "location": "proxy.ts:23-30",
+      "summary": "Hai nhánh redirect trả về NextResponse.redirect() mới, làm rơi cookie session mà updateSession vừa refresh. Refresh token Supabase là single-use nên browser giữ token đã bị đốt, dẫn tới đăng xuất ngẫu nhiên; trong giai đoạn prelaunch mọi request đều redirect nên sẽ đăng xuất toàn bộ người dùng. ĐÃ SỬA bằng helper redirectKeepingSession() và verify end-to-end: response 307 mang set-cookie.",
+      "disposition": "Accept"
+    },
+    {
+      "severity": "Warning",
+      "category": "plan-consistency",
+      "location": "plans/260805-1032-sun-kudos-website/phase-01-nen-tang-supabase-va-next.md:99",
+      "summary": "File ownership glob thiếu docs/runbook-su-kien.md và lib/supabase/database.types.ts — cả hai đều do phase-01 tạo, và database.types.ts sẽ bị phase-02 ghi đè sau mỗi migration. ĐÃ SỬA bởi project-manager.",
+      "disposition": "Accept"
+    },
+    {
+      "severity": "Warning",
+      "category": "toolchain",
+      "location": "package.json:9",
+      "summary": "npm run lint đỏ toàn repo (866 error) vì eslint quét cả .claude/hooks/*.cjs. Lỗi có từ trước phase-01 (xác minh trên HEAD 2a1edf1) và eslint.config.mjs không thuộc ownership phase nào. Chưa sửa — sẽ chặn cổng npm run validate của phase-17.",
+      "disposition": "Defer"
+    },
+    {
+      "severity": "Suggestion",
+      "category": "robustness",
+      "location": "proxy.ts:54",
+      "summary": "Regex matcher không case-insensitive nên đuôi ảnh viết hoa (.PNG) sẽ lọt qua proxy thay vì bị loại. Ảnh hưởng nhỏ, chỉ tốn một lượt chạy proxy thừa.",
+      "disposition": "Defer"
+    }
+  ]
+}

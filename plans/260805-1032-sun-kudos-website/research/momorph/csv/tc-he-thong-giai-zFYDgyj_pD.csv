@@ -1,0 +1,60 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,ID-0,Hệ thống giải - DONE,Check access permission,Direct URL access,Authenticated user,,Người dùng đã đăng nhập vào hệ thống SAA 2025,URL: /he-thong-giai,"1. Đăng nhập vào hệ thống
+2. Navigate đến URL /he-thong-giai
+3. Xác nhận trang hiển thị",Trang Hệ thống giải hiển thị thành công,,High,Access control and security,,,,
+ACCESSING,ID-1,Hệ thống giải - DONE,,,Unauthenticated user,,Người dùng chưa đăng nhập,URL: /he-thong-giai,"1. Đảm bảo chưa đăng nhập
+2. Navigate đến URL /he-thong-giai
+3. Kiểm tra chuyển hướng",Người dùng được chuyển đến trang đăng nhập,,High,Access control and security,,,,
+ACCESSING,ID-2,Hệ thống giải - DONE,Check navigation path,From main menu,Via navigation item,,Người dùng đã đăng nhập và đang ở trang chủ hoặc trang khác,Menu chính có mục Hệ thống giải,"1. Đăng nhập vào hệ thống
+2. Mở menu chính
+3. Click vào mục ""Hệ thống giải""
+4. Xác nhận trang hiển thị",Trang Hệ thống giải hiển thị thành công,,Medium,Access control and security,,,,
+GUI,ID-3,Hệ thống giải - DONE,Check layout,Screen-wide layout,Overall structure,,Người dùng đã truy cập trang Hệ thống giải,,"1. Mở trang Hệ thống giải
+2. Quan sát cấu trúc tổng thể
+3. Xác minh vị trí các thành phần chính","Tiêu đề hiển thị ở trên cùng
+Menu điều hướng ở bên trái
+Nội dung giải thưởng ở trung tâm
+Banner Sun* Kudos ở phía dưới",,High,Normal_Others,,,,
+GUI,ID-4,Hệ thống giải - DONE,Initialize,Title hệ thống giải thưởng,Default display,,Người dùng đã truy cập trang,,"1. Mở trang Hệ thống giải
+2. Quan sát tiêu đề
+3. Xác minh nội dung và format","Text phụ ""Sun* annual awards 2025"" hiển thị nhỏ và nhạt
+Tiêu đề chính ""Hệ thống giải thưởng SAA 2025"" hiển thị lớn màu vàng",,Medium,Normal_Others,,,,
+GUI,ID-5,Hệ thống giải - DONE,,Menu list,Default display,,Người dùng đã truy cập trang,,"1. Mở trang Hệ thống giải
+2. Quan sát menu bên trái
+3. Đếm số lượng mục menu","Menu hiển thị 6 mục theo thứ tự: Top Talent, Top Project, Top Project Leader, Best Manager, Signature 2025 - Creator, MVP",,High,Normal_Others,,,,
+GUI,ID-6,Hệ thống giải - DONE,,Award info blocks,Default display,,Người dùng đã truy cập trang,,"1. Mở trang Hệ thống giải
+2. Cuộn qua từng phần giải thưởng
+3. Xác minh nội dung của 6 giải","Tất cả 6 giải hiển thị đầy đủ: Top Talent (10 Đơn vị, 7tr VNĐ), Top Project (02 Tập thể, 15tr VNĐ), Top Project Leader (03 Cá nhân, 7tr VNĐ), Best Manager (01 Cá nhân, 10tr VNĐ), Signature 2025 (01, 5tr/8tr VNĐ), MVP (01, 15tr VNĐ)",,High,Normal_Others,,,,
+GUI,ID-7,Hệ thống giải - DONE,,Picture-Award,Default display,,Người dùng đã truy cập trang,,"1. Mở trang Hệ thống giải
+2. Quan sát các thẻ giải thưởng
+3. Xác minh hình ảnh",Mỗi thẻ giải thưởng hiển thị hình ảnh 336x336px,,Medium,Normal_Others,,,,
+GUI,ID-8,Hệ thống giải - DONE,,Sun* Kudos banner,Default display,,Người dùng đã truy cập trang,,"1. Mở trang Hệ thống giải
+2. Cuộn đến cuối trang
+3. Quan sát banner Sun* Kudos","Hiển thị tiêu đề ""Sun* Kudos"", dòng ""Phong trào ghi nhận"", mô tả ngắn, dòng khuyến khích, nút ""Chi tiết""",,Medium,Normal_Others,,,,
+FUNCTION,ID-9,Hệ thống giải - DONE,Check component interaction,Navigation menu,Click menu items,,Người dùng đang ở trang Hệ thống giải,Tất cả 6 menu items,"1. Mở trang Hệ thống giải
+2. Click lần lượt từng mục menu: Top Talent, Top Project, Top Project Leader, Best Manager, Signature 2025, MVP
+3. Kiểm tra mỗi lần click","Mỗi lần click:
+Trang cuộn đến đúng section tương ứng
+Menu item được active với màu vàng và underline
+Mục trước đó mất active",,High,Normal_Others,,,,
+FUNCTION,ID-10,Hệ thống giải - DONE,,,Hover menu item,,Người dùng đang ở trang Hệ thống giải,Các menu items,"1. Mở trang Hệ thống giải
+2. Di chuột qua từng mục menu
+3. Quan sát hiệu ứng",Mục menu được highlight khi hover,,Medium,Normal_Others,,,,
+FUNCTION,ID-11,Hệ thống giải - DONE,,,Active state display,,Người dùng đang ở trang Hệ thống giải,Menu items,"1. Mở trang Hệ thống giải
+2. Click vào ""Top Talent""
+3. Kiểm tra trạng thái active
+4. Click vào ""MVP""
+5. Kiểm tra lại trạng thái","Sau mỗi lần click, chỉ menu item được click mới có trạng thái active
+Menu item trước đó mất trạng thái active",,High,Normal_Others,,,,
+FUNCTION,ID-12,Hệ thống giải - DONE,,Button Chi tiết,Click and navigate,,Người dùng đang ở trang Hệ thống giải,Button: Chi tiết,"1. Mở trang Hệ thống giải
+2. Cuộn đến banner Sun* Kudos
+3. Click nút ""Chi tiết""
+4. Kiểm tra trang được mở",Tab/trang Sun* Kudos được mở với thông tin chi tiết,,High,Normal_Others,,,,
+FUNCTION,ID-13,Hệ thống giải - DONE,Check error handling,Navigation,Invalid section,,Người dùng thử click menu với section ID không hợp lệ,Section ID không tồn tại,"1. Mở trang Hệ thống giải
+2. Thử truy cập section không tồn tại (qua developer console)
+3. Kiểm tra hành vi","Không có lỗi JavaScript
+Trang giữ nguyên vị trí hoặc hiển thị thông báo thân thiện",,Medium,Abnormal_Others,,,,
+FUNCTION,ID-14,Hệ thống giải - DONE,,Button click,Failed navigation,,Link Sun* Kudos không khả dụng hoặc lỗi,"Button: Chi tiết, URL lỗi","1. Mở trang Hệ thống giải
+2. Mô phỏng lỗi network hoặc URL không hợp lệ
+3. Click nút ""Chi tiết""
+4. Kiểm tra xử lý lỗi",Hiển thị thông báo lỗi hoặc trang lỗi 404 thân thiện,,Medium,Abnormal_Others,,,,

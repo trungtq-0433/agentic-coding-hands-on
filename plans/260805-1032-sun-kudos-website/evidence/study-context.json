@@ -1,0 +1,43 @@
+{
+  "task": "Phase-01 Sun* Kudos — dựng nền tảng Supabase local + Next.js 16 App Router: client @supabase/ssr, proxy.ts refresh session + launch gate, i18n VN/EN qua cookie NEXT_LOCALE, typegen Supabase. Kết thúc phase repo chưa có bảng nào (schema là phase-02).",
+  "mode": "code",
+  "acceptanceCriteria": [
+    "npx supabase status liệt kê đủ API/DB/Studio; Studio mở được ở localhost:54323",
+    "Ở root repo có proxy.ts, KHÔNG có middleware.ts",
+    "grep -rn cookies() lib app | grep -v await trả rỗng",
+    "Đặt NEXT_PUBLIC_LAUNCH_GATE_AT ở tương lai thì mọi URL đáp về /prelaunch; đặt ở quá khứ thì truy cập bình thường và /prelaunch đá về /",
+    "Đổi cookie NEXT_LOCALE từ vi sang en thì chuỗi trong common.json đổi theo và html lang đổi theo",
+    "Kiểm chứng hành vi inline: sửa env rồi chỉ restart thì countdown KHÔNG đổi; build lại thì countdown đổi",
+    "next.config.ts có images.remotePatterns",
+    "npm run build exit 0"
+  ],
+  "touchpoints": [
+    "proxy.ts",
+    "lib/launch-gate.ts",
+    "lib/supabase/client.ts",
+    "lib/supabase/server.ts",
+    "lib/supabase/proxy-session.ts",
+    "lib/supabase/database.types.ts",
+    "lib/i18n/config.ts",
+    "lib/i18n/get-dictionary.ts",
+    "lib/i18n/locale-provider.tsx",
+    "lib/actions/set-locale.ts",
+    "locales/vi/common.json",
+    "locales/en/common.json",
+    "app/layout.tsx",
+    "next.config.ts",
+    "package.json",
+    ".gitignore",
+    ".env.local.example",
+    "docs/runbook-su-kien.md",
+    "supabase/config.toml"
+  ],
+  "blastRadius": "Toàn bộ request đi qua proxy.ts nên lỗi ở đó ảnh hưởng mọi route. app/layout.tsx là root layout — mọi trang render qua nó. package.json thêm script mà phase-04 và phase-17 sẽ nối tiếp. Chưa có bảng DB nên không có blast radius phía dữ liệu.",
+  "contracts": [
+    "proxy.ts export tên `proxy` + config.matcher — phase-03 sẽ chèn route-guard vào đây",
+    "lib/supabase/server.ts createClient() async — mọi Server Component/Action phase sau dùng",
+    "Biến env NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (KHÁC tên trong plan gốc là ANON_KEY)",
+    "lib/i18n: mỗi phase Track A sở hữu namespace JSON riêng, phase-01 chỉ giữ common.json",
+    "npm run supabase:types sinh lib/supabase/database.types.ts — phase-02 chạy lại sau mỗi migration"
+  ]
+}

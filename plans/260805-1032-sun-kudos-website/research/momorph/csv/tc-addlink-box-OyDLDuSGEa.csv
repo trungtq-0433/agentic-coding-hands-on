@@ -1,0 +1,80 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,70006b13-96c9-4b73-9a4b-969aee7c5e00,Add Link Modal,Check access condition,Authorized user access,,,"User is in the designated auth state (authorized, unauthorized, or lacking modal permission)",Authorized user; Unauthorized user; User without modal permission,"1. Attempt to open Add Link modal as an authorized user.
+2. Attempt to open Add Link modal as an unauthorized user.
+3. Attempt to open Add Link modal as a user without modal permission.","1. The Add Link modal displays normally.
+2. Access is denied, trigger is hidden, or user is redirected to login.
+3. Modal trigger is hidden or access is denied.",,,Access control and security,,,,
+ACCESSING,1a55a427-be47-4dd0-97f9-4b4f09cc18a6,Add Link Modal,Check access condition,Authorized user access,,,Add Link modal is already open,Authorized user,"1. Open Add Link modal.
+2. Attempt to open Add Link modal trigger again while it is already open.","1. ---
+2. Only one modal instance remains open; no duplicate modals appear.",,,Access control and security,,,,
+GUI,2efb76ce-b0ea-4f34-a7f5-8ac8b4d35336,Add Link Modal,Check layout,Modal dialog,Visibility and position,,The authorized user triggers the Add Link modal.,"Screen sizes: small, medium, large; Browsers: Chrome, Firefox, Edge","1. Open the Add Link modal.
+2. Resize the browser window to different screen sizes.
+3. Switch between browsers (Chrome, Firefox, Edge).","1. The modal dialog displays, centered with overlay; the underlying page is not interactable.
+2. Modal maintains a centered position regardless of window size; no layout distortion.
+3. Modal maintains consistent layout and position across all supported browsers.",,,User interface,,,,
+GUI,e669b7ef-9a3c-4bff-bcf8-f425fea64bda,Add Link Modal,Check layout,Title label 'Add link',Visibility and position,,Add Link modal is open.,,"1. Observe the modal header area.
+2. Locate the title label.","1. ---
+2. Title ""Add link"" appears at the top center of the modal.",,,User interface,,,,
+GUI,24d2a229-725c-43f2-ac61-33dfc46fd9e2,Add Link Modal,Check layout,Input field 'Text',Visibility and position,,Add Link modal is open.,,"1. Observe the area for the 'Text' input field.
+2. Verify the input field size and position.","1. ---
+2. 'Text' input field is visible, single-line, sized 672x56px, located below the ""Text"" label, and uses a white background with thin borders and rounded corners.",,,User interface,,,,
+GUI,a98b51d4-4fd9-4288-9a28-ac670c83e5ab,Add Link Modal,Check layout,Label 'Text',Position left of input,,Add Link modal is open.,,"1. Locate the 'Text' label.
+2. Check its relative position to its input field.","1. 'Text' label is present.
+2. 'Text' label is displayed to the left of the 'Text' input field.",,,User interface,,,,
+GUI,28793eb6-454a-4c08-a0c1-508c4a80944c,Add Link Modal,Check layout,Input field 'Link',Visibility and position,,Add Link modal is open.,,"1. Observe the area for the 'Link' input field.
+2. Verify the input field size and position.","1. ---
+2. 'Link' input field is visible, single-line, sized 672x56px, located below the ""Link"" label, with a subtle border.",,,User interface,,,,
+GUI,96b032e1-0192-489e-91a3-7daa5756c47b,Add Link Modal,Check layout,Label 'Link',Position left of input,,Add Link modal is open.,,"1. Locate the 'Link' label.
+2. Examine its position relative to its input field.","1. 'Link' label is present.
+2. 'Link' label is positioned to the left of the 'Link' input field and is non-interactive.",,,User interface,,,,
+GUI,abddef4b-90c7-4e76-b280-74bbb24c4885,Add Link Modal,Check layout,Button group,Position at bottom,,Add Link modal is open.,,"1. Observe the button group (Cancel/Hủy and Save/Lưu) in the modal.
+2. Add content to the modal to cause vertical scrolling.
+3. Scroll the modal page.","1. ---
+2. ---
+3. Button group remains anchored at the bottom of the modal throughout scrolling.",,,User interface,,,,
+GUI,b13a3dcc-c3c8-4864-a8bd-6647c3cc9cec,Add Link Modal,Check layout,Button 'Hủy',Bordered with 'X' icon,,Add Link modal is open.,,"1. Locate the 'Hủy' button in the modal.
+2. Observe styling and icon.","1. The 'Hủy' button displays a border and appears smaller than the 'Lưu' button.
+2. The 'Hủy' button displays an 'X' icon.",,,User interface,,,,
+GUI,096b9346-3a8a-4eef-82c9-565811a69d83,Add Link Modal,Check layout,Button 'Lưu',Large yellow with icon,,Add Link modal is open.,,"1. Locate the 'Lưu' button in the modal.
+2. Examine button styling and icon.","1. The 'Lưu' button is large and uses a yellow background color.
+2. The 'Lưu' button displays a link icon and is visually prominent.",,,User interface,,,,
+GUI,7d5ff602-daf2-46bf-a771-95df55b1962e,Add Link Modal,Initialize,Input field 'Text',Empty by default,,Add Link modal is opened.,,"1. Open the Add Link modal.
+2. Examine the 'Text' input field.","1. ---
+2. 'Text' input field is empty by default.",,,User interface,,,,
+GUI,57a9b74f-fcb1-4ac6-b403-6d33c7d23bc9,Add Link Modal,Initialize,Input field 'Link',Empty by default,,Add Link modal is opened.,,"1. Open the Add Link modal.
+2. Examine the 'Link' input field.","1. ---
+2. 'Link' input field is empty by default.",,,User interface,,,,
+FUNCTION,f0c0e8f1-cfe5-44b6-8016-192e5e2a4103,Add Link Modal,Check component interaction,Input field 'Text',Border highlight on focus,,Add Link modal is open.,,"1. Click into No.B.2 'Trường nhập ""Text""/Text input field'.",1. Border of 'Text' input field highlights to indicate focus.,,,Normal_Others,,,,
+FUNCTION,8100906c-5090-4e1c-9706-4b5f5e0a7fc8,Add Link Modal,Check component interaction,Label 'Text',Focus input field on click,,Add Link modal is open.,,"1. Click the No.B.1 'Nhãn ""Text""/Label ""Text""' in the modal.","1. Cursor focuses in No.B.2 'Trường nhập ""Text""/Text input field'.",,,Normal_Others,,,,
+FUNCTION,48467d34-5f81-40d9-9670-a32764306819,Add Link Modal,Check component interaction,Button 'Hủy',Close modal and discard changes,,Add Link modal is open.,,"1. Click the No.D.1 'Nút ""Hủy""/Button ""Hủy""'.
+2. Double-click the No.D.1 'Nút ""Hủy""/Button ""Hủy""'.
+3. Press 'ESC' on keyboard.","1. Modal closes without saving changes.
+2. Modal closes without saving changes (no adverse effect from double click).
+3. Modal closes without saving changes.",,,Normal_Others,,,,
+FUNCTION,13c491cb-9add-42b1-a109-1525f7209eb0,Add Link Modal,Check component interaction,Button 'Lưu',"Validate fields, save link, and close",,Valid data entered in both fields.,"{Text: ""Sample Link"", Link: ""https://www.example.com""}","1. Enter valid 'Text' and 'Link' values in No.B.2 and No.C fields.
+2. Click the No.D.2 'Nút ""Lưu""/Button ""Lưu""'.","1. ---
+2. Data is validated and saved, then the modal closes.",,,Normal_Others,,,,
+FUNCTION,3912184e-15e1-4e7a-857c-fbfbf06a9f5b,Add Link Modal,Check data validation,Input field 'Text',Required field check,,Add Link modal is open.,"{Text: """"}, {Text: ""Valid Text""}","1. Leave No.B.2 'Trường nhập ""Text""/Text input field' blank and attempt to save.
+2. Enter any value into the No.B.2 'Trường nhập ""Text""/Text input field' and attempt to save.","1. Error displays for the required field and saving is blocked.
+2. No error shown (if other validations passed); save proceeds.",,,Normal_Others,,,,
+FUNCTION,adb699ca-0d96-4040-b10c-1c85d8eab0c2,Add Link Modal,Check data validation,Input field 'Text',No whitespace only value,,Add Link modal is open.,"{Text: ""   ""}","1. Enter only spaces into No.B.2 'Trường nhập ""Text""/Text input field'.
+2. Click save.","1. ---
+2. Error displays: whitespace-only value is not allowed; saving is blocked.",,,Normal_Others,,,,
+FUNCTION,7d85997d-8b07-4859-9b8e-ef370aa31bc9,Add Link Modal,Check data validation,Input field 'Text',Length 1–100 characters,,Add Link modal is open.,"{Text: ""a""}, {Text: ""a""*101}","1. Enter a one-character text (""a"") into No.B.2 'Trường nhập ""Text""/Text input field'.
+2. Attempt to save with a 101-character text in No.B.2.","1. Accepted, no error shown.
+2. Error displays: value must be no more than 100 characters; saving is blocked.",,,Normal_Others,,,,
+FUNCTION,97dc4028-a7d5-43a4-832c-0956bcabdcd2,Add Link Modal,Check data validation,Input field 'Link',Required field check,,Add Link modal is open.,"{Link: """"}, {Link: ""https://valid.com""}","1. Leave No.C 'Trường nhập ""Link""/Link input field' blank and attempt to save.
+2. Enter a valid URL into the No.C input field and attempt to save.","1. Error displays for the required 'Link' field and saving is blocked.
+2. No error shown for this field (if other validations passed); save proceeds.",,,Normal_Others,,,,
+FUNCTION,db2ca333-9e06-4ae6-b85b-71025774431d,Add Link Modal,Check data validation,Input field 'Link',Valid URL format,,Add Link modal is open.,"{Link: ""invalid-url""}, {Link: ""https://validurl.com""}","1. Enter ""invalid-url"" into No.C 'Trường nhập ""Link""/Link input field'.
+2. Blur the field or click save.
+3. Enter ""https://validurl.com"" and save.","1. ---
+2. Error displays: URL is an invalid format; saving is blocked.
+3. Accepted, modal closes.",,,Normal_Others,,,,
+FUNCTION,aad5791a-606a-4476-9b89-6fd66a4a1218,Add Link Modal,Check data validation,Input field 'Link',Length 5–2048 characters,,Add Link modal is open.,"{Link: ""www""}, {Link: <valid URL of 2048 characters>}","1. Enter ""www"" (4 chars) into No.C 'Trường nhập ""Link""/Link input field' and attempt to save.
+2. Enter a valid URL with 2048 characters into No.C input field and attempt to save.","1. Error displays: value must be at least 5 characters; saving is blocked.
+2. Accepted, modal closes.",,,Normal_Others,,,,
+FUNCTION,e5632ac7-bf73-4776-9c0f-6e6d9bc0ce6d,Add Link Modal,Check error handling mentioned,Validation error,"Prevent save, show message",,Add Link modal is open.,"{Text: """", Link: """"}; {Text: ""Valid Text"", Link: """"}; {Text: """", Link: ""https://valid.com""}; {Text: ""Valid Text"", Link: ""invalidURL""}","1. Enter invalid data (empty or invalid) for 'Text' and/or 'Link'.
+2. Click No.D.2 'Nút ""Lưu""/Button ""Lưu""'.","1. Error is displayed for each invalid or empty field.
+2. Cannot save; modal remains open and does not close.",,,Abnormal_Others,,,,
+FUNCTION,ef4d0413-6cfc-44a9-a3e7-020330c17a75,Add Link Modal,Check business logic,Form submission,Close modal on successful save,,"Add Link modal is open, valid data entered.","{Text: ""Valid Link Text"", Link: ""https://validurl.com""}","1. Click No.D.2 'Nút ""Lưu""/Button ""Lưu""' with valid 'Text' and 'Link' fields.",1. Data is saved and modal closes.,,,Normal_Others,,,,

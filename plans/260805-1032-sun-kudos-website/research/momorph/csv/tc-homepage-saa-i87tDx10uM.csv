@@ -1,0 +1,218 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,ID-0,Homepage SAA - DONE,Check access permission,Direct URL access,Unauthenticated user,,User is not logged in browser is open,URL: / (homepage),"1. Open browser
+2. Navigate to homepage URL
+3. Verify page loads",Homepage displayed successfully with all public content,,High,Access control and security,,,,
+ACCESSING,ID-1,Homepage SAA - DONE,,,Authenticated user,,User is logged in,URL: / (homepage),"1. User logs in
+2. Navigate to homepage URL
+3. Verify page loads with user-specific features",Homepage displayed with notification bell account menu and personalized options,,High,Access control and security,,,,
+ACCESSING,ID-2,Homepage SAA - DONE,Check navigation path,From any page,Via logo click,,User is on any page of the application,,"1. Navigate to any page
+2. Click logo in header
+3. Verify navigation",Homepage displayed and scrolled to top,,High,Access control and security,,,,
+ACCESSING,ID-3,Homepage SAA - DONE,,From header,Via navigation links,,User is on any page,,"1. Navigate to any page
+2. Click About SAA 2025 in header
+3. Verify navigation",Homepage displayed with About SAA 2025 section visible,,High,Access control and security,,,,
+ACCESSING,ID-4,Homepage SAA - DONE,,From footer,Via navigation links,,User is on any page scrolled to footer,,"1. Navigate to any page
+2. Scroll to footer
+3. Click About SAA 2025 link
+4. Verify navigation",Homepage displayed and scrolled to top,,Medium,Access control and security,,,,
+ACCESSING,ID-5,Homepage SAA - DONE,Check authentication,Admin menu option,Admin role only,,Admin user is logged in,User with admin role,"1. Login as admin user
+2. Navigate to homepage
+3. Click account button
+4. Verify menu options",Account menu displays with Admin Dashboard option,,High,Access control and security,,,,
+ACCESSING,ID-6,Homepage SAA - DONE,,,,,Regular user is logged in,User with regular role,"1. Login as regular user
+2. Navigate to homepage
+3. Click account button
+4. Verify menu options",Account menu displays without Admin Dashboard option,,High,Access control and security,,,,
+GUI,ID-7,Homepage SAA - DONE,Check layout,Screen-wide layout,Overall structure,,User navigated to homepage,,"1. Open homepage
+2. Observe overall page structure
+3. Verify positions of main sections","Header at top with logo left nav center controls right
+Hero section with ROOT FURTHER title centered
+Countdown below hero
+Awards grid (3 columns desktop 2 columns tablet/mobile)
+Sun* Kudos section
+Widget button fixed bottom right
+Footer at bottom",,High,Normal_Others,,,,
+GUI,ID-8,Homepage SAA - DONE,Initialize,Header logo,Default visibility,,User navigated to homepage,,"1. Open homepage
+2. Observe header logo
+3. Check size and alt text",Logo 64x60px visible at header left with alt text,,Medium,Normal_Others,,,,
+GUI,ID-9,Homepage SAA - DONE,,Navigation links,Active state,,User navigated to homepage,,"1. Open homepage
+2. Observe navigation links in header
+3. Check active link styling",About SAA 2025 link highlighted with yellow color/underline,,Medium,Normal_Others,,,,
+GUI,ID-10,Homepage SAA - DONE,,Language button,Default value,,User navigated to homepage,,"1. Open homepage
+2. Observe language button in header
+3. Check displayed value",Language button displays VN,,Medium,Normal_Others,,,,
+GUI,ID-11,Homepage SAA - DONE,,Notification button,Default state,,User navigated to homepage (authenticated),Authenticated user,"1. Login and navigate to homepage
+2. Observe notification button
+3. Check icon and badge","Notification icon 40x40px visible
+Badge visible if unread notifications exist",,Medium,Normal_Others,,,,
+GUI,ID-12,Homepage SAA - DONE,,Countdown timer,Initial values,,User navigated to homepage,Event datetime configured in environment,"1. Open homepage
+2. Observe countdown section
+3. Check DAYS HOURS MINUTES display",Three countdown units display 2-digit values with labels DAYS HOURS MINUTES,,High,Normal_Others,,,,
+GUI,ID-13,Homepage SAA - DONE,,Coming soon label,Initial visibility,,User navigated to homepage before event start time,Event not started,"1. Open homepage
+2. Observe hero section
+3. Check Coming soon label",Coming soon label visible below ROOT FURTHER title,,Medium,Normal_Others,,,,
+GUI,ID-14,Homepage SAA - DONE,,Event information,Default content,,User navigated to homepage,,"1. Open homepage
+2. Observe event information section
+3. Check content","Thời gian: 18h30
+Địa điểm: Nhà hát nghệ thuật quân đội
+Tường thuật trực tiếp tại Group Facebook Sun* Family displayed",,Medium,Normal_Others,,,,
+GUI,ID-15,Homepage SAA - DONE,,Award cards,Grid layout,,User navigated to homepage,,"1. Open homepage on desktop
+2. Observe award cards section
+3. Check grid columns","Award cards display in 3-column grid (desktop)
+Each card shows thumbnail title description (1-2 lines) and Chi tiết link",,High,Normal_Others,,,,
+GUI,ID-16,Homepage SAA - DONE,,,,,User navigated to homepage on tablet or mobile,Tablet/mobile viewport,"1. Open homepage on tablet/mobile
+2. Observe award cards section
+3. Check grid columns",Award cards display in 2-column grid (tablet/mobile),,High,Normal_Others,,,,
+GUI,ID-17,Homepage SAA - DONE,,Footer,Default content,,User navigated to homepage scrolled to bottom,,"1. Open homepage
+2. Scroll to footer
+3. Observe footer content",Footer displays with logo (left) navigation links (center) copyright text Bản quyền thuộc vè Sun* © 2025 (right),,Medium,Normal_Others,,,,
+FUNCTION,ID-18,Homepage SAA - DONE,Check component interaction,Logo,Click navigation,,User on any page,,"1. Navigate to any page
+2. Click header logo
+3. Verify result",Page navigates to homepage and scrolls to top,,High,Normal_Others,,,,
+FUNCTION,ID-19,Homepage SAA - DONE,,,,,User on any page scrolled to footer,,"1. Navigate to any page
+2. Scroll to footer
+3. Click footer logo
+4. Verify result",Page navigates to homepage and scrolls to top,,High,Normal_Others,,,,
+FUNCTION,ID-20,Homepage SAA - DONE,,Navigation links,Click behavior,,User on homepage,,"1. Open homepage
+2. Click About SAA 2025 in header
+3. Verify result",Page scrolls to About SAA 2025 section or reloads homepage,,High,Normal_Others,,,,
+FUNCTION,ID-21,Homepage SAA - DONE,,,,,User on homepage,,"1. Open homepage
+2. Click Awards Information in header
+3. Verify result",Page navigates to Awards Information page,,High,Normal_Others,,,,
+FUNCTION,ID-22,Homepage SAA - DONE,,,,,User on homepage,,"1. Open homepage
+2. Click Sun* Kudos in header
+3. Verify result",Page navigates to Sun* Kudos page,,High,Normal_Others,,,,
+FUNCTION,ID-23,Homepage SAA - DONE,,,Hover state,,User on homepage,,"1. Open homepage
+2. Hover mouse over Awards Information link
+3. Observe visual change",Link displays bright background highlight,,Medium,Normal_Others,,,,
+FUNCTION,ID-24,Homepage SAA - DONE,,Language button,Menu toggle,,User on homepage,,"1. Open homepage
+2. Click language button VN
+3. Verify result",Language selection menu opens with VN/EN options,,High,Normal_Others,,,,
+FUNCTION,ID-25,Homepage SAA - DONE,,,Language switch,,User on homepage language menu open,Select EN,"1. Open homepage
+2. Click language button
+3. Select EN
+4. Verify result",Interface switches to English language,,High,Normal_Others,,,,
+FUNCTION,ID-26,Homepage SAA - DONE,,,,,User on homepage with EN language menu open,Select VN,"1. Homepage in English
+2. Click language button
+3. Select VN
+4. Verify result",Interface switches to Vietnamese language,,High,Normal_Others,,,,
+FUNCTION,ID-27,Homepage SAA - DONE,,Notification button,Panel open,,User logged in on homepage,Authenticated user,"1. Login
+2. Open homepage
+3. Click notification button
+4. Verify result",Notification panel opens,,High,Normal_Others,,,,
+FUNCTION,ID-28,Homepage SAA - DONE,,,Badge display,,User logged in with unread notifications,User with unread notifications,"1. Login with unread notifications
+2. Open homepage
+3. Observe notification button",Red badge visible on notification icon,,Medium,Normal_Others,,,,
+FUNCTION,ID-29,Homepage SAA - DONE,,,,,User logged in with all notifications read,User with no unread notifications,"1. Login with no unread notifications
+2. Open homepage
+3. Observe notification button",No badge visible on notification icon,,Medium,Normal_Others,,,,
+FUNCTION,ID-30,Homepage SAA - DONE,,Dropdown menu,Toggle behavior,,User on homepage,,"1. Open homepage
+2. Click dropdown menu button
+3. Verify result",Dropdown menu opens,,Medium,Normal_Others,,,,
+FUNCTION,ID-31,Homepage SAA - DONE,,,,,User on homepage menu open,,"1. Open homepage
+2. Click dropdown menu button (opens)
+3. Click again
+4. Verify result",Dropdown menu closes,,Medium,Normal_Others,,,,
+FUNCTION,ID-32,Homepage SAA - DONE,,,,,User on homepage menu open,,"1. Open homepage
+2. Click dropdown menu button
+3. Click outside menu area
+4. Verify result",Dropdown menu closes,,Medium,Normal_Others,,,,
+FUNCTION,ID-33,Homepage SAA - DONE,,,Keyboard navigation,,User on homepage menu focused,Keyboard,"1. Open homepage
+2. Tab to dropdown menu button
+3. Press Enter
+4. Verify result",Dropdown menu opens,,Medium,Normal_Others,,,,
+FUNCTION,ID-34,Homepage SAA - DONE,,,,,User on homepage menu focused,Keyboard,"1. Open homepage
+2. Tab to dropdown menu button
+3. Press Space
+4. Verify result",Dropdown menu opens,,Medium,Normal_Others,,,,
+FUNCTION,ID-35,Homepage SAA - DONE,,,,,User on homepage menu open,Keyboard,"1. Open homepage
+2. Open dropdown menu
+3. Press Esc
+4. Verify result",Dropdown menu closes,,Medium,Normal_Others,,,,
+FUNCTION,ID-36,Homepage SAA - DONE,,User account button,Menu display,,User logged in on homepage,Authenticated user,"1. Login
+2. Open homepage
+3. Click account button
+4. Verify result",Account menu opens with Profile and Sign out options,,High,Normal_Others,,,,
+FUNCTION,ID-37,Homepage SAA - DONE,,,Role-based options,,Admin user logged in,Admin user,"1. Login as admin
+2. Open homepage
+3. Click account button
+4. Check menu options",Menu displays Profile Sign out and Admin Dashboard,,High,Normal_Others,,,,
+FUNCTION,ID-38,Homepage SAA - DONE,,,,,Regular user logged in,Regular user,"1. Login as regular user
+2. Open homepage
+3. Click account button
+4. Check menu options",Menu displays Profile and Sign out only,,High,Normal_Others,,,,
+FUNCTION,ID-39,Homepage SAA - DONE,,Countdown timer,Auto update,,User on homepage wait 1 minute,,"1. Open homepage
+2. Note current countdown values
+3. Wait 1 minute
+4. Observe countdown",Minutes value decreases by 1 (or hours/days adjust accordingly),,High,Normal_Others,,,,
+FUNCTION,ID-40,Homepage SAA - DONE,,,,,User on homepage before event,Countdown with single-digit values,"1. Open homepage when countdown has single digits
+2. Observe display format",Values display with leading zero (e.g. 05 09),,Medium,Normal_Others,,,,
+FUNCTION,ID-41,Homepage SAA - DONE,,,Zero state,,User on homepage at event start time,Event start time reached,"1. Open homepage at event start time
+2. Observe countdown
+3. Check display","Countdown shows 00 00 00
+Coming soon label hidden",,High,Normal_Others,,,,
+FUNCTION,ID-42,Homepage SAA - DONE,,Coming soon label,Visibility toggle,,User on homepage after event start,Event already started,"1. Open homepage after event start time
+2. Observe hero section
+3. Check label visibility",Coming soon label not displayed,,High,Normal_Others,,,,
+FUNCTION,ID-43,Homepage SAA - DONE,,,,,User on homepage before event start,Event not started,"1. Open homepage before event start time
+2. Observe hero section
+3. Check label visibility",Coming soon label displayed,,High,Normal_Others,,,,
+FUNCTION,ID-44,Homepage SAA - DONE,,CTA buttons,Navigation,,User on homepage,,"1. Open homepage
+2. Click ABOUT AWARDS button
+3. Verify result",Page navigates to Awards Information page,,High,Normal_Others,,,,
+FUNCTION,ID-45,Homepage SAA - DONE,,,,,User on homepage,,"1. Open homepage
+2. Click ABOUT KUDOS button
+3. Verify result",Page navigates to Sun* Kudos page,,High,Normal_Others,,,,
+FUNCTION,ID-46,Homepage SAA - DONE,,,Hover state,,User on homepage,,"1. Open homepage
+2. Hover over ABOUT AWARDS button
+3. Observe visual change",Button displays hover styling,,Medium,Normal_Others,,,,
+FUNCTION,ID-47,Homepage SAA - DONE,,Award cards,Click navigation,,User on homepage,Award: Top Talent,"1. Open homepage
+2. Click Top Talent card image
+3. Verify result",Page navigates to Awards Information with hashtag scrolls to Top Talent section,,High,Normal_Others,,,,
+FUNCTION,ID-48,Homepage SAA - DONE,,,,,User on homepage,Award: Top Talent,"1. Open homepage
+2. Click Top Talent card title
+3. Verify result",Page navigates to Awards Information with hashtag scrolls to Top Talent section,,High,Normal_Others,,,,
+FUNCTION,ID-49,Homepage SAA - DONE,,,,,User on homepage,Award: Top Talent,"1. Open homepage
+2. Click Chi tiết link on Top Talent card
+3. Verify result",Page navigates to Awards Information with hashtag scrolls to Top Talent section,,High,Normal_Others,,,,
+FUNCTION,ID-50,Homepage SAA - DONE,,,,,User on homepage,All award cards,"1. Open homepage
+2. Click each award card
+3. Verify each navigation",Each card navigates to Awards Information with appropriate hashtag and scrolls to correct section,,High,Normal_Others,,,,
+FUNCTION,ID-51,Homepage SAA - DONE,,,Hover effect,,User on homepage,,"1. Open homepage
+2. Hover over any award card
+3. Observe visual change",Card elevates slightly with enhanced border/lighting effect,,Medium,Normal_Others,,,,
+FUNCTION,ID-52,Homepage SAA - DONE,,,Hashtag navigation,,User on homepage,Award card with hashtag,"1. Open homepage
+2. Click award card
+3. Verify Awards Information page loads
+4. Check scroll position",Page scrolls to section matching the hashtag slug,,High,Normal_Others,,,,
+FUNCTION,ID-53,Homepage SAA - DONE,,Sun* Kudos section,Detail button,,User on homepage,,"1. Open homepage
+2. Scroll to Sun* Kudos section
+3. Click Chi tiết button
+4. Verify result",Page navigates to Sun* Kudos detail page,,High,Normal_Others,,,,
+FUNCTION,ID-54,Homepage SAA - DONE,,Widget button,Quick action menu,,User on homepage,,"1. Open homepage
+2. Click widget button (bottom right)
+3. Verify result",Quick action menu opens with available options,,Medium,Normal_Others,,,,
+FUNCTION,ID-55,Homepage SAA - DONE,,Footer links,Navigation,,User on homepage scrolled to footer,,"1. Open homepage
+2. Scroll to footer
+3. Click each navigation link
+4. Verify results",Each link navigates to corresponding page correctly,,High,Normal_Others,,,,
+FUNCTION,ID-56,Homepage SAA - DONE,Check data validation,Countdown timer,Environment variable format,,Homepage loaded env var set,Event datetime in ISO-8601 format,"1. Set event datetime in environment
+2. Open homepage
+3. Verify countdown calculation",Countdown displays correct remaining time based on env variable,,High,Data and Database Integrity Testing,,,,
+FUNCTION,ID-57,Homepage SAA - DONE,,,ISO-8601 datetime,,Environment configuration,datetime=2025-12-31T18:30:00+07:00,"1. Configure valid ISO-8601 datetime
+2. Restart application
+3. Open homepage
+4. Verify countdown",Countdown calculates and displays correctly,,High,Data and Database Integrity Testing,,,,
+FUNCTION,ID-58,Homepage SAA - DONE,,Language selection,Valid options,,User on homepage language menu open,,"1. Open homepage
+2. Click language button
+3. Check available options",Only VN and EN options displayed,,Medium,Normal_Others,,,,
+FUNCTION,ID-59,Homepage SAA - DONE,Check error handling,Navigation,Broken links,,User on homepage,Chrome extension Check My Links,"1. Open homepage
+2. Run Check My Links extension
+3. Review results",No broken links detected,,High,Normal_Others,,,,
+FUNCTION,ID-60,Homepage SAA - DONE,,Countdown timer,Invalid datetime,,Environment with invalid datetime,datetime=invalid-format,"1. Set invalid datetime in environment
+2. Restart application
+3. Open homepage
+4. Observe countdown",System displays fallback or error message without crashing,,Medium,Abnormal_Others,,,,
+FUNCTION,ID-62,Homepage SAA - DONE,,Award card navigation,Missing hashtag,,User on homepage,Award card without hashtag,"1. Open homepage
+2. Click award card with missing hashtag
+3. Verify result",Page navigates to Awards Information page (without auto-scroll),,Medium,Abnormal_Others,,,,

@@ -1,0 +1,124 @@
+Section,TC_ID,Page_Name,Category,Sub_Category,Sub_Sub_Category,Test_Objective,Precondition,Test_Data,Steps,Expected_Result,Specs,Priority,Testcase_Type,Test_Result,Executed_Date,Tester,Note
+ACCESSING,0952e2f0-41f3-471b-9ba4-37c216063a7f,Sun* Annual Awards 2025 Kudos,Check navigation path,Open profile navigation,Click avatar or name,,"User is authenticated, 'Kudos' cards and sidebar are visible",Kudos card showing sender avatar/receiver name; Sidebar displaying Sunner avatar/name,"1. Locate the avatar or name (No.B.3.2/Thông tin người gửi-Name, No.B.3.5/Ảnh đại diện người nhận-Avatar, No.D.3.2/Thông tin Sunner nhận quà) in the Kudos card or sidebar.
+2. Click the selected avatar or name.","1. ---
+2. The profile page opens for the selected person.",,,Access control and security,,,,
+ACCESSING,31693bb7-b22e-4874-9dae-378b2dcd1f9b,Sun* Annual Awards 2025 Kudos,Check navigation path,Kudos detail navigation,Click 'View Details' or content,,"User is authenticated, Highlight/All Kudos/Spotlight section is visible",Kudos card in Highlight section with 'View Details' button; Kudos content in All Kudos; Recipient node in Spotlight board,"1. Locate a Kudos card or node in the Highlight, All Kudos, or Spotlight section.
+2. Click the 'View Details' button, Kudos content, or recipient node.","1. ---
+2. The Kudos detail page opens for the selected Kudos.",,,Access control and security,,,,
+ACCESSING,71b3ef43-7247-48c7-9dde-8d9d4fd1e369,Sun* Annual Awards 2025 Kudos,Check access condition,Authentication required,,,User is unauthenticated but can view Kudos UI,Attempt to click sender/receiver avatar or name on any Kudos post/leaderboard; Attempt to click 'View Details' or content,"1. While signed out, attempt to open any profile or details from the Kudos UI.",1. The system redirects to the login page or displays an authentication prompt.,,,Access control and security,,,,
+GUI,40d4ba26-ddc0-4905-981b-fd5705745e6c,Banner KV Kudos,Check layout,Banner section,Visibility and position,,Main event screen loaded,,"1. Observe the banner at the top of the page.
+2. Check logo and title display.
+3. Attempt to click or hover on the banner area.","1. Banner KV Kudos is visible and positioned at the top.
+2. Logo 'SAA 2025 KUDOS' and the title 'Hệ thống ghi nhận lời cảm ơn' are displayed correctly.
+3. Banner is not interactive (readonly).",,,User interface,,,,
+GUI,0578e8ef-aec5-4772-94ac-154f0009c18c,Ô nhập/Ghi nhận,Check layout,Input field [Ô nhập/Ghi nhận],Visibility and position,,Main screen loaded,,"1. Locate the No.A.1/Ô nhập/Ghi nhận form below the banner.
+2. Observe its shape.
+3. Verify if the left pencil icon is present.
+4. Check that nothing overlaps or obscures the input field.","1. Input field is visible and has a pill shape.
+2. The left pencil icon is shown.
+3. The field is neither overlapped nor obscured.",,,User interface,,,,
+GUI,06b76e80-427c-4876-a676-b43f4e5b7d79,Mục HIGHLIGHT KUDOS,Check layout,Highlight section,"Header, filter, carousel position",,Highlight section displayed,,"1. Locate the header, filters, and carousel in the Highlight section.
+2. Check alignment and spacing of the header, subtitle, filters, and carousel.","1. The Highlight header ('Sun* Annual Awards 2025') and subtitle ('HIGHLIGHT KUDOS') are shown.
+2. Filter dropdowns for Hashtag (No.B.1.1) and Phòng ban (No.B.1.2) are visible, properly aligned.
+3. Carousel is visible, spaced properly, and items do not overlap.",,,User interface,,,,
+GUI,b03a3b4e-cbe1-4a70-841c-3752fc05b8b8,Tiêu đề phần 'HIGHLIGHT KUDOS' với bộ lọc,Check layout,Highlight title and filters,Visibility and arrangement,,"Highlight section displayed, filters present",Hashtag (No.B.1.1) and Phòng ban (No.B.1.2) filter buttons,"1. Confirm visibility, position, and alignment of Hashtag and Phòng ban filter buttons.
+2. Check active/inactive visual state switches on select and unselect.","1. Hashtag and Phòng ban buttons are visible and aligned.
+2. Visual states switch correctly between active and inactive upon selection or deselection.",,,User interface,,,,
+GUI,0929bc39-c6eb-4401-a873-544bead3d4f2,Nút lọc 'Hastag',Check layout,Button [Hashtag],Visibility and position,,"Highlight section displayed, hashtags available",,"1. Locate the No.B.1.1/Nút lọc 'Hashtag' button.
+2. Verify its visibility and position.
+3. Confirm that the button is not overlapped or obscured.","1. 'Hashtag' filter button is displayed and correctly positioned.
+2. The button is neither overlapped nor obscured.",,,User interface,,,,
+GUI,7b029a3b-0065-42e5-af90-2973ea5e6d9a,Nút 'Phòng ban',Check layout,Button [Phòng ban],Visibility and position,,"Highlight section displayed, departments available",,"1. Locate the No.B.1.2/Nút 'Phòng ban' button.
+2. Verify its visibility and position.
+3. Confirm that the button is not overlapped or obscured.","1. 'Phòng ban' filter button is displayed and correctly positioned.
+2. The button is neither overlapped nor obscured.",,,User interface,,,,
+GUI,86092c3a-e230-4741-bcb3-48346c8ac132,Kudos Nổi Bật,Check layout,Highlight carousel,Slide arrows and cards,,Carousel loaded with slides,,"1. Check the total number of slides in the carousel (should be 5).
+2. Observe visibility of Prev/Next arrows.
+3. Check enabled/disabled states for arrows at start and end.
+4. Check visual prominence of the active card and inactivity/fadedness of other cards.","1. Top 5 Kudos cards are displayed in the carousel.
+2. Prev/Next arrows are visible: disabled on the 1st and last slide respectively.
+3. The active card is visually prominent in the center; inactive cards are faded and non-interactive.",,,User interface,,,,
+GUI,67c21a05-036b-4041-9eb2-478a4413e692,Thẻ KUDO nổi bật,Check layout,Kudos card,"Sender, receiver, time, hashtags",,Highlighted Kudos available,,"1. Examine card fields: sender avatar and info (No.B.3.2/Thông tin người gửi), receiver avatar and info (No.B.3.6/Thông tin người nhận), time label (No.B.4.1/Thời gian đăng), hashtags (No.B.4.3/Hashtag), action buttons.
+2. Verify presence of sender/receiver info, time, message, hashtags, like and copy link buttons.","1. Sender and receiver info is displayed.
+2. Time, message, and hashtags are visible.
+3. Like (heart) and copy link buttons are present.",,,User interface,,,,
+GUI,1ce82447-f8ce-48cf-bc63-afb08c276a20,Thanh tìm kiếm Sunner,Check layout,Search bar,Visibility and placeholder,,Spotlight or Sidebar is visible,,"1. Locate the No.B.7.3/Thanh tìm kiếm Sunner search bar.
+2. Verify that the search bar is present.
+3. Check for the presence of the search icon.
+4. Check if the placeholder text is displayed.","1. The search bar is visible.
+2. The search icon is shown.
+3. The search bar displays the correct placeholder: 'Tìm kiếm' (Tìm kiếm).",,,User interface,,,,
+GUI,ddf67e52-ad09-458e-a9e0-2e0ce086aee3,Bảng Spotlight,Check layout,Spotlight word cloud,"Pan/zoom, search, count",,Spotlight section opened,,"1. Check presence of word cloud showing recipient names.
+2. Look for total count label (No.B.7.1/388 KUDOS).
+3. Check for pan/zoom controls and search bar.
+4. Observe loading and empty state behaviors.","1. A word cloud containing recipient names is displayed.
+2. Total count label ('388 KUDOS') is visible.
+3. Pan/zoom and search controls are present.
+4. The system shows proper loading and empty states if no data is available.",,,User interface,,,,
+GUI,9dfda316-d4e0-4e30-a453-9733c8d22849,Danh sách 'Kudos',Check layout,Kudos feed,"Card list, sidebar",,Main page loaded with Kudos feed,,"1. Locate the Kudos list and sidebar.
+2. Inspect card alignment and sidebar visibility.
+3. Check pagination/infinite scroll functionality.
+4. Observe empty feed state handling.","1. Kudos cards are aligned and sidebar is visible.
+2. Pagination or infinite scroll functions are working.
+3. If the list is empty, the system displays the message: 'Hiện tại chưa có Kudos nào.' (Hiện tại chưa có Kudos nào.).",,,User interface,,,,
+GUI,f92dc686-c530-4fe5-afab-0f089447ee23,Thẻ KUDO hiển thị bài cảm ơn,Check layout,Kudos post card,"Sender, receiver, gallery, buttons",,Kudos feed displays cards,,"1. Check sender and receiver info, gallery, hashtags, like/copy link buttons.
+2. Attempt clicking or hovering on icons and labels.","1. All info fields, gallery, hashtags, and action buttons are visible and placed correctly.
+2. Non-interactive icons and labels are unresponsive.",,,User interface,,,,
+GUI,99ade8e6-516e-479f-b092-5a09d75a4e66,Thanh menu bên phải - Thống kê & Danh sách Kudos,Check layout,Sidebar,Statistics and leaderboards,,Sidebar present,,"1. Check sidebar visibility and alignment.
+2. Verify that section headers, data labels, separators, and leaderboard arrangement are correct.","1. Sidebar is visible and separated from the Kudos feed.
+2. Section headers, data labels, separators are shown, and leaderboard is properly arranged.",,,User interface,,,,
+GUI,b35d40c1-84c2-48e2-99d7-188c2b6e4261,Ô nhập/Ghi nhận,Initialize,Input field [Ô nhập/Ghi nhận],Placeholder text,,Page loaded,,1. Observe the No.A.1/Ô nhập/Ghi nhận input field on page load.,"1. The input field displays the correct placeholder in Vietnamese: 'Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?' (Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?).",,,User interface,,,,
+GUI,d3877e54-f919-4af8-9b05-d9920fd04b32,Thanh tìm kiếm Sunner,Initialize,Search bar,Placeholder text,,Page loaded,,1. Inspect the No.B.7.3/Thanh tìm kiếm Sunner search bar on page load.,1. The search bar displays the correct placeholder in Vietnamese: 'Tìm kiếm' (Tìm kiếm).,,,User interface,,,,
+FUNCTION,f183a3e4-249b-4db2-9380-131408583c10,Ô nhập/Ghi nhận,Check data validation,Input field [Ô nhập/Ghi nhận],Required check,,Kudos dialog open,(empty),"1. Leave the No.A.1/Ô nhập/Ghi nhận input field empty.
+2. Try to submit the form.","1. ---
+2. Submission is blocked; the submit button is disabled.",,,Normal_Others,,,,
+FUNCTION,9e689933-2c0b-4b85-b13e-b3f7832e98ce,Thanh tìm kiếm Sunner,Check data validation,Input field [Thanh tìm kiếm Sunner],Maximum 100 characters,,On search bar,100 characters; 101 characters; (empty),"1. Input a 100-character string and trigger search.
+2. Input a 101-character string and trigger search.
+3. Leave the search bar empty and attempt to search.","1. Input of 100 characters is accepted; search works.
+2. Input of 101 characters is rejected; error is shown.
+3. Search is blocked for empty input; a required message is displayed.",,,Normal_Others,,,,
+FUNCTION,ca8f60b3-3e33-4623-8349-dbb96ebaee82,Ô nhập/Ghi nhận,Check business logic,Form submission,Save Kudos to database,,On Kudos submission dialog,"Valid kudos message, e.g. 'Thank you for your support!'","1. Enter a valid kudos message in the No.A.1/Ô nhập/Ghi nhận input field.
+2. Submit the form.","1. ---
+2. Kudos is saved to the database; a new entry appears in the Kudos feed.",,,Normal_Others,,,,
+FUNCTION,926d92a5-ab21-4027-9177-1d9e087f9c0f,Danh sách 'Kudos',Check business logic,Empty list display,Show 'Hiện tại chưa có Kudos nào.',,No Kudos entries present,,1. Access the Kudos feed or card list when no Kudos exist.,1. The system displays the message: 'Hiện tại chưa có Kudos nào.' (Hiện tại chưa có Kudos nào.).,,,Normal_Others,,,,
+FUNCTION,d662780b-344f-48c2-a621-26384ddf60b1,Sidebar leaderboard,Check business logic,Empty list display,Show 'Chưa có dữ liệu',,Sidebar leaderboard is empty,,1. Open the leaderboard when no data is present.,1. The system displays the message: 'Chưa có dữ liệu' (Chưa có dữ liệu).,,,Normal_Others,,,,
+FUNCTION,63645b03-c4ed-420a-9cf3-549fad9ace84,Kudos card,Check business logic,Like business rule,Sender cannot like own Kudos,,User is viewing Kudos they sent,Sender's own Kudos post,1. Attempt to click the Like (No.C.4.1/Hearts) button on your own sent Kudos.,1. The Like (heart) button is disabled for the sender; cannot like own Kudos.,,,Normal_Others,,,,
+FUNCTION,91e102ba-d28f-46f5-ab90-f0752b173019,Kudos card,Check business logic,Like business rule,One like per user per Kudos,,User has not liked a Kudos yet,,1. Attempt to click the Like button multiple times on a single Kudos card.,1. Each user may like a Kudos only once; multiple likes are blocked.,,,Normal_Others,,,,
+FUNCTION,31936b72-9c0f-4e01-b022-cd8e22a18677,Kudos card,Check business logic,Like on special day,"Admin configuration, 2 hearts",,Kudos post is eligible for special day (admin configured),Special day configuration in system,1. Click the Like (heart) button on a Kudos entry sent during a special day.,"1. When liked, the sender's account receives +2 hearts for each like.",,,Normal_Others,,,,
+FUNCTION,43b54c29-1ff5-4f51-b500-e3d8f42d07b5,Thống kê tổng quát,Check business logic,Open box,Button opens Secret Box dialog,,Sidebar available,,1. Click the No.D.1.8/Nút 'Mở quà' on the sidebar.,1. Secret Box dialog opens.,,,Normal_Others,,,,
+FUNCTION,d035e3b8-5346-41f2-b33d-78d7b09a1f85,Spotlight,Check business logic,Spotlight state,"Loading, empty, interactive",,Access Spotlight board,,"1. Open the Spotlight board while data is still loading.
+2. Open the Spotlight board when there is no data.
+3. Open the Spotlight board when recipient nodes exist.","1. The loading state indicator is shown.
+2. If there are no entries, the Spotlight displays the empty state message.
+3. Recipient nodes are displayed; users may interact as normal.",,,Normal_Others,,,,
+FUNCTION,0e56cacb-fbc4-4b15-9a92-dd865a6d545d,Nút lọc 'Hastag',Check component interaction,Button [Hashtag],Open dropdown and filter,,"Hashtags available, user on Kudos screen","Hashtags sourced live from the database, e.g. ['IDOL GIỚI TRẺ', others]","1. Click the No.B.1.1/Nút lọc 'Hashtag' button to open the dropdown.
+2. Select a hashtag to filter the Kudos list.
+3. Clear the filter to show all Kudos.","1. Dropdown menu for hashtags opens as expected.
+2. Selecting a hashtag filters the Kudos list accordingly.
+3. Clearing the filter displays all Kudos entries; empty state is handled.",,,Normal_Others,,,,
+FUNCTION,159fed13-4827-4496-8d67-b3516d4a6cdc,Nút 'Phòng ban',Check component interaction,Button [Phòng ban],Open dropdown and filter,,"Departments available, user on Kudos screen","Departments sourced live from the database, e.g. ['Marketing', others]","1. Click the No.B.1.2/Nút 'Phòng ban' button to open the dropdown.
+2. Select a department to filter the Kudos list.
+3. Clear the filter to show all Kudos.","1. Dropdown menu for departments opens as expected.
+2. Selecting a department filters the Kudos list accordingly.
+3. Clearing the filter displays all Kudos entries; empty state is handled.",,,Normal_Others,,,,
+FUNCTION,d01729d4-e2cb-426c-9425-31f1db7bc214,Hashtag,Check component interaction,Hashtag tag,Click filters Kudos list,,Kudos cards contain hashtags,"Various hashtag tags displayed in Kudos card, e.g. '#Dedicated', '#Inspiring'",1. Locate and click on a hashtag tag (No.B.4.3/Hashtag-Tag or No.C.3.7/Hashtag-Label) in the Kudos card.,"1. Upon clicking a hashtag, the Kudos list view updates to filter only Kudos containing that tag.",,,Normal_Others,,,,
+FUNCTION,81446f61-8109-4cca-866d-97374d132b0f,Highlight carousel,Check component interaction,Carousel arrows,"Page navigation, disabled at ends",,Highlight section with multiple Kudos,,"1. Click the Next arrow (No.B.2.2/Nút tiến) in the carousel.
+2. Click the Prev arrow (No.B.2.1/Nút lùi).
+3. Observe state when at first and last cards.","1. Clicking Next moves to the next slide; the arrow is disabled on the last slide.
+2. Clicking Prev moves to the previous slide; the arrow is disabled on the first slide.
+3. Pagination and arrow states update correctly.",,,Normal_Others,,,,
+FUNCTION,7a7ec63e-be1a-40eb-b379-f96d77d7780d,Kudos card,Check component interaction,Button [Heart],Like/unlike toggle updates count,,User viewing Kudos post (No.C.4.1/Hearts button displayed),Kudos post card with Like (heart) button,"1. Click the Like (No.C.4.1/Nút thích (tim)) button.
+2. Click again to unlike the Kudos.","1. Clicking Like toggles the heart icon color from gray to red and increments the like count.
+2. Clicking Unlike returns the heart icon to gray and decrements the like count accordingly.",,,Normal_Others,,,,
+FUNCTION,0adfd7ce-be03-4c4a-b8ae-27fde904d17f,Kudos card,Check component interaction,Button [Copy Link],Clipboard copy and toast,,Kudos card displayed with Copy Link button,,1. Click the No.C.4.2/Nút 'Copy Link' button on the Kudos card.,1. The Kudos URL is copied to the clipboard; a toast confirmation 'Link copied — ready to share!' (Link copied — ready to share!) is displayed.,,,Normal_Others,,,,
+FUNCTION,8c0d1781-6605-44e7-97ec-5661c19d7ccc,Kudos card,Check component interaction,Button [View Details],Navigate to Kudos detail,,Kudos card displayed with View Details button,,1. Click the 'View Details' button on the Kudos card.,1. The system navigates to the Kudos detail page.,,,Normal_Others,,,,
+FUNCTION,2cd77a0c-05c5-48fe-a0fe-e5c9d3fc5cec,Thông tin người gửi,Check component interaction,Profile navigation,Click avatar or name,,Kudos card with sender info or sidebar leaderboard visible,Sender avatar and name displayed,1. Click the sender’s avatar or name (No.B.3.2/Thông tin người gửi) on Kudos card/leaderboard.,1. The sender’s profile page opens.,,,Normal_Others,,,,
+FUNCTION,630f42a3-90c8-4d36-a50e-50883369a6c1,Thông tin người nhận,Check component interaction,Profile navigation,Click avatar or name,,Kudos card with receiver info or sidebar leaderboard visible,Receiver avatar and name displayed,1. Click the receiver’s avatar or name (No.B.3.6/Thông tin người nhận) on Kudos card/leaderboard.,1. The receiver’s profile page opens.,,,Normal_Others,,,,
+FUNCTION,cac4b7a3-df74-4f18-a15a-408fc9d7414a,Spotlight,Check component interaction,Pan/zoom button,Toggle pan/zoom mode,,"Spotlight board displayed, pan/zoom icon present",,1. Click the No.B.7.2/Nút 'Pan/Zoom' (icon) on the Spotlight board.,1. Pan/zoom mode toggles between pan and zoom states.,,,Normal_Others,,,,
+FUNCTION,33ca8f8a-4500-434e-bbd1-9ed30ba6f568,Spotlight,Check component interaction,Spotlight node,"Hover shows tooltip, click opens Kudos detail",,"Spotlight board displayed, nodes interactive",,"1. Hover over a node in the Spotlight word cloud.
+2. Click the node.","1. Tooltip displays name and time received Kudos.
+2. Clicking opens the corresponding Kudos detail page.",,,Normal_Others,,,,
+FUNCTION,f9b68ffa-2c91-4dbc-9b89-12e3c398025c,Kudos card,Check component interaction,Image gallery,Click opens full-size image,,Kudos card contains an image gallery,Kudos post with thumbnail images (max 5 images),1. Click any image thumbnail in the Kudos card gallery.,1. Full-size image opens for the selected thumbnail.,,,Normal_Others,,,,
+FUNCTION,6b1e2359-9ff1-46c7-8d27-e827a3cdb7f6,Sidebar leaderboard,Check component interaction,Profile card,"Click avatar/name to profile, hover preview",,Sidebar leaderboard visible,Leaderboard member card displaying avatar/name,"1. Click on the avatar or name of a member in the sidebar leaderboard.
+2. Hover over the avatar or name.","1. Clicking opens the user's profile page.
+2. Hovering displays a preview of the profile.",,,Normal_Others,,,,
