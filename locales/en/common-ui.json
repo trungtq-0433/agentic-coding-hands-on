@@ -1,0 +1,22 @@
+{
+  "dropdown.chevronAria": "Open list",
+  "multiHashtagPicker.triggerLabel": "Hashtag",
+  "multiHashtagPicker.triggerHint": "Max {max}",
+  "multiHashtagPicker.selectedAria": "Selected",
+  "languageSwitcher.ariaLabel": "Choose language",
+  "accountMenu.profile": "Profile",
+  "accountMenu.dashboard": "Dashboard",
+  "accountMenu.logout": "Log out",
+  "accountMenu.triggerAria": "Account menu",
+  "addLinkDialog.title": "Add link",
+  "addLinkDialog.contentLabel": "Content",
+  "addLinkDialog.urlLabel": "URL",
+  "addLinkDialog.cancel": "Cancel",
+  "addLinkDialog.save": "Save",
+  "kudosFab.toggleAria": "Open Kudos menu",
+  "kudosFab.rules": "Rules",
+  "kudosFab.compose": "Write KUDOS",
+  "kudosFab.closeAria": "Close",
+  "siteHeader.navAria": "Main navigation",
+  "siteFooter.navAria": "Footer navigation"
+}

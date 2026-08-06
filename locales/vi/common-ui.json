@@ -1,0 +1,22 @@
+{
+  "dropdown.chevronAria": "Mở danh sách",
+  "multiHashtagPicker.triggerLabel": "Hashtag",
+  "multiHashtagPicker.triggerHint": "Tối đa {max}",
+  "multiHashtagPicker.selectedAria": "Đã chọn",
+  "languageSwitcher.ariaLabel": "Chọn ngôn ngữ",
+  "accountMenu.profile": "Profile",
+  "accountMenu.dashboard": "Dashboard",
+  "accountMenu.logout": "Logout",
+  "accountMenu.triggerAria": "Menu tài khoản",
+  "addLinkDialog.title": "Thêm đường dẫn",
+  "addLinkDialog.contentLabel": "Nội dung",
+  "addLinkDialog.urlLabel": "URL",
+  "addLinkDialog.cancel": "Hủy",
+  "addLinkDialog.save": "Lưu",
+  "kudosFab.toggleAria": "Mở menu Kudos",
+  "kudosFab.rules": "Thể lệ",
+  "kudosFab.compose": "Viết KUDOS",
+  "kudosFab.closeAria": "Đóng",
+  "siteHeader.navAria": "Điều hướng chính",
+  "siteFooter.navAria": "Điều hướng chân trang"
+}
