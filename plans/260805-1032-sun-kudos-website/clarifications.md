@@ -279,6 +279,82 @@ hoãn — `/kudos`, `/awards`, `/profile` sẽ dính đúng cái bẫy này.
   KHÔNG dùng `background-image` CSS (CSS tải nguyên bản, không qua tối ưu định dạng).
 - Khác phase-07: màn này **cả 35 node media đều có URL**, kể cả keyvisual — không phải dùng ảnh tạm.
 
+## Session 2026-08-06 (Sau phase-09 UI Live board)
+
+### Acceptance của phase-09 SAI so với bản vẽ — cần người soạn spec chốt
+
+Phase file ghi "sidebar 5 chỉ số + nút Mở quà + **2 leaderboard**". Query `2940:13488` cho thấy sidebar
+chỉ có **2 con**: khối thống kê `D.1_` và **MỘT** leaderboard `D.3_`. Đánh số nhảy `D.1 → D.3` cho thấy
+`D.2_` từng tồn tại rồi bị xoá khỏi thiết kế. → Bỏ prop `topReceivers` thay vì để nó vĩnh viễn rỗng.
+
+Hai chỗ khác lệch giữa mô tả và bản vẽ:
+- Nhãn nút thật là **"Mở Secret Box"**, không phải "Mở quà".
+- Dòng phụ mỗi hàng leaderboard là **chuỗi mô tả quà** (`"Nhận được 1 áo phông SAA"`), không phải con
+  số — không dựng lại được từ `number` + mẫu câu. Track B phải trả câu đã dựng sẵn.
+
+### Hero tier: đã có TÊN, vẫn thiếu NGƯỠNG
+
+Gap #7 chốt bỏ Hero tier vì "thiếu tên tier + ngưỡng". Màn Live board cho biết **4 tên**: `New Hero`,
+`Rising Hero`, `Super Hero`, `Legend Hero` — và huy hiệu xuất hiện trên MỌI thẻ kudo. Nhưng **ngưỡng
+vẫn không có ở đâu**. → `KudoCard` nhận `heroTier` như prop tuỳ chọn: UI dựng đủ chỗ khớp bản vẽ, luật
+suy ra hạng để trống cho phase-16/PO. Không bịa ngưỡng.
+
+**Ảnh badge `New Hero` không lấy được** — node `MM_MEDIA_New Hero` không có URL trong `get_media_files`
+và `get_figma_image` trả 500. Gặp `new` thì không render huy hiệu. 3 hạng còn lại có đủ ảnh.
+
+### Node không mang tiền tố `MM_MEDIA_` thì nằm NGOÀI pipeline asset
+
+Ba lớp nền hoạ tiết của panel Spotlight (`image 24`, `image 25`, `Root further mo rong 1`) không lấy
+được vì tên không có tiền tố — **đúng cái bẫy đã gặp với ảnh hero ở phase-07**. Panel hiện dùng nền đặc
+cùng tông + đúng viền/bo góc thật (`1px #998C5F`, `radius 47.14px`, tỉ lệ 1157×548). Muốn đủ hoạ tiết
+thì đổi tên 3 node đó trong Figma rồi sync lại — không phải sửa code.
+
+### Bài học quy trình: agent không có MCP thì SUY ĐOÁN, và nó không tự biết
+
+Giữa phiên tôi làm hỏng MCP momorph bằng một lần `claude mcp add` sai endpoint (`momorph.ai/api/mcp` ở
+scope user, trong khi bản đúng là `mcp.momorph.ai/mcp` ở scope local). Hai agent chạy sau đó **không có
+công cụ tra thiết kế** và dựng bằng cách suy từ tên node. Cả hai đều khai báo thẳng, nhưng kết quả lệch
+thật và chỉ lộ ra khi đối chiếu ảnh:
+
+| Chỗ | Agent đoán | Figma thật |
+|---|---|---|
+| Banner | 2 nút "Viết Kudo" / "Tìm kiếm sunner" | 2 ô bo tròn `radius 68px`, chữ "Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?" / "Tìm kiếm profile Sunner" |
+| Headline | không có | "Hệ thống ghi nhận và cảm ơn" 36px/44px `#FFEA9E` |
+| Carousel | thẻ rút gọn avatar + tên | **thẻ kudo đầy đủ** 528px, viền 4px `#FFEA9E`, radius 16 |
+| Header section | chỉ mỗi chữ tiêu đề | eyebrow + kẻ `#2E3940` + tiêu đề 57px, lặp 3 lần |
+
+→ **Kiểm công cụ của agent TRƯỚC khi giao việc phụ thuộc công cụ đó.** Và sửa cấu hình MCP giữa phiên
+thì không có tác dụng: client nạp cấu hình lúc khởi động, phải restart mới ăn.
+
+### Bốn lỗi im lặng tìm được bằng cách CHẠY, không phải đọc code
+
+1. **Chốt chặn double-click không hoạt động.** `useHeartToggle` kiểm `pending` từ state — 5 cú bấm cùng
+   một tick đều đọc closure cũ với set rỗng, cả 5 đều lọt. Con số hiển thị vẫn ĐÚNG (cả 5 tính ra cùng
+   giá trị) nên nhìn qua tưởng đạt; đo bằng cách đếm lời gọi mới lộ ra. → chuyển sang `useRef` cập nhật
+   đồng bộ. Sau khi sửa: 5 cú bấm → đúng **1** lời gọi.
+2. **Huy hiệu Hero render 20×4px** thay vì 109×19 — carousel khai nhầm `width=20 height=20` cho ảnh chữ
+   nhật, cộng flex bóp. Tỉ lệ vẫn đúng nên không "méo", chỉ là bé đến mức không đọc được.
+3. **React key trùng** — thẻ dùng `key={image.url}` mà một kudo hoàn toàn có thể đính cùng một ảnh 2 lần.
+4. **`##Dedicated`** — mock lưu hashtag kèm `#` trong khi thẻ tự thêm dấu. Tầng dữ liệu thật lưu tên trần.
+
+### Trùng lặp phát sinh khi 4 agent dựng song song — đã gộp
+
+- Bảng huy hiệu Hero chép ở 2 file → `hero-badge.tsx`
+- Icon SVG nội tuyến rải 5 file, kính lúp trùng 2 nơi, `kudo-card` còn dùng path bút chì **tự đơn giản
+  hoá** thay vì asset thật → `board-icons.tsx`
+- Mảng nav 3 mục chép ở 3 nơi, bản trong `board-page.tsx` dùng sai key và hardcode tiếng Anh (không dịch
+  được) → `components/layout/site-nav.ts`
+- Mẫu header section lặp 3 lần trong màn (và cũng là mẫu ở trang chủ) → `section-header.tsx`
+
+### Điểm nối dây phase-16 của màn này (grep `phase-16` trong `board-page-client.tsx`)
+
+`onLoadMore` cắt trang từ mảng mock thay vì keyset cursor thật · `onToggleHeart` giả lập độ trễ rồi lật
+trạng thái (tồn tại để kiểm được luật chống double-click; chữ ký `Promise<ToggleHeartResult>` giữ nguyên
+cho RPC thật) · `newKudosQueue` luôn 0 vì chưa nối Broadcast — **không giả lập số đếm nhảy loạn cho có
+vẻ sống động** · `onCompose`/`onRules`/`onOpenBox` mở modal phase-10/13/15 chưa tồn tại.
+
+`app/kudos/page.tsx` **đã nối phiên đăng nhập thật ngay từ đầu** (không lặp lại sai lầm phase-08).
+
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")
 - URL pattern: `https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/{screenId}`

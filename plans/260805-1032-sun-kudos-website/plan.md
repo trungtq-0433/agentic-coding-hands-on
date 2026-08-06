@@ -39,7 +39,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 | 06 | [UI shared components (9 màn)](./phase-06-ui-shared-components.md) | A | completed | 4h | — |
 | 07 | [UI Login](./phase-07-ui-login.md) | A | completed | 1h | 06 |
 | 08 | [UI Homepage SAA](./phase-08-ui-homepage-saa.md) | A | completed | 3h | 06 |
-| 09 | [UI Live board](./phase-09-ui-live-board.md) | A | pending | 4h | 06 |
+| 09 | [UI Live board](./phase-09-ui-live-board.md) | A | completed | 4h | 06 |
 | 10 | [UI Viết Kudo](./phase-10-ui-viet-kudo.md) | A | pending | 3h | 06 |
 | 11 | [UI Profile bản thân](./phase-11-ui-profile-ban-than.md) | A | pending | 3h | 06, 09 |
 | 12 | [UI Hệ thống giải](./phase-12-ui-he-thong-giai.md) | A | pending | 2h | 06 |
@@ -51,7 +51,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 8/17 phase hoàn thành · 29h/63h effort done.
+**Tiến độ:** 9/17 phase hoàn thành · 33h/63h effort done.
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
