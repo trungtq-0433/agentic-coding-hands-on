@@ -1,43 +1,32 @@
 {
-  "task": "Phase-04/05/06 Sun* Kudos chạy hai track song song. Track B: 3 RPC nghiệp vụ + Storage + tầng lib/data|actions|validations (04), rồi hook realtime Broadcast (05). Track A: 13 component dùng chung dựng từ 9 màn MoMorph + ModalShell (06). Nguyên tắc chi phối: mọi bất biến nghiệp vụ ép ở server; client chỉ validate cho trải nghiệm.",
+  "task": "Phase-07 Sun* Kudos — màn /login từ MoMorph (một nút Google duy nhất), kèm tổng quát hoá cơ chế i18n namespace: phase-06 đã phải lách bằng import tĩnh riêng, để nguyên thì phase-08→15 sẽ copy thành 9 bản gần giống nhau.",
   "mode": "code",
   "acceptanceCriteria": [
-    "Ba RPC create_kudos/toggle_heart/open_secret_box đều security definer, set search_path, revoke execute from anon",
-    "toggle_heart không có tham số cờ bonus — hàm tự tra special_days",
-    "Phân phối 6 badge qua 10.000 lần mở lệch dưới 2% so với 30/25/10/5/20/10",
-    "Đường đọc feed không bao giờ chạm thẳng bảng kudos — chỉ qua public_kudos_feed và my_sent_kudos",
-    "Bucket kudos-images tồn tại với policy chặn ghi vào thư mục người khác",
-    "Realtime dùng Broadcast, không Postgres Changes — grep postgres_changes toàn repo rỗng",
-    "Guest chưa đăng nhập vẫn nghe được topic kudos-board",
-    "Payload broadcast chỉ mang id và loại event, không sender_id, không body",
-    "components/ không import lib/supabase, lib/data, lib/actions — grep rỗng",
-    "ModalShell scroll-lock đếm tham chiếu: mở A, mở B, đóng B thì nền vẫn khoá; đóng A thì mở lại",
-    "locales/vi và locales/en của common-ui.json cùng tập key",
-    "Cursor keyset từ URL không phá được ranh giới filter PostgREST"
+    "/login render đủ header, hero, nút LOGIN With Google, footer",
+    "Đổi cookie NEXT_LOCALE giữa vi và en thì mọi chuỗi đổi theo, kể cả chuỗi của component phase-06",
+    "?error=oauth hiện thông báo lỗi ở cả hai ngôn ngữ; không có error thì không có role=alert",
+    "components/ không import lib/supabase, lib/data, lib/actions",
+    "locales/vi/login.json và locales/en/login.json cùng tập key",
+    "Migrate use-common-ui-text.ts sang cơ chế chung không làm hồi quy 8 component phase-06",
+    "Dictionary được bundler gói sẵn, không phụ thuộc process.cwd() lúc chạy"
   ],
   "touchpoints": [
-    "supabase/migrations/0008_business_rpc.sql",
-    "supabase/migrations/0009_storage_kudos_images.sql",
-    "lib/data/**",
-    "lib/actions/**",
-    "lib/validations/**",
-    "lib/kudos/**",
-    "lib/realtime/**",
-    "components/ui/**",
-    "components/layout/**",
-    "locales/vi/common-ui.json",
-    "locales/en/common-ui.json",
-    "package.json",
-    "lib/supabase/database.types.ts"
+    "app/login/page.tsx",
+    "components/login/login-screen.tsx",
+    "components/login/login-page-client.tsx",
+    "components/login/use-login-text.ts",
+    "locales/vi/login.json",
+    "locales/en/login.json",
+    "public/login/Root_Further_Logo.png",
+    "lib/i18n/get-dictionary.ts",
+    "lib/i18n/use-namespace-translation.ts",
+    "components/ui/use-common-ui-text.ts"
   ],
-  "blastRadius": "Ba RPC là nơi DUY NHẤT luật nghiệp vụ sống (phase-02 đã revoke ghi trực tiếp) — sai ở đây là sai toàn hệ thống, không phải sai một màn. lib/kudos/cursor.ts dùng chung bởi cả 3 hàm đọc feed nên một lỗi ở đó nhân ba. ModalShell là chrome dùng chung của phase-10/13/15 chạy song song sau này.",
+  "blastRadius": "lib/i18n/get-dictionary.ts được app/layout.tsx gọi trên MỌI trang — sửa sai là hỏng toàn site. use-common-ui-text.ts được 8 component phase-06 dùng. Đây là hai file thuộc ownership phase-01 và phase-06, sửa qua bàn giao có kiểm soát.",
   "contracts": [
-    "Ghi kudos/hearts/secret-box chỉ qua RPC; đọc feed chỉ qua view",
-    "Ba action cùng hình dạng {ok:true,...} / {ok:false, code, fieldErrors?} — không throw",
-    "fetchKudoCardById nằm ở lib/realtime/fetch-kudo-card.ts (client-side), KHÔNG ở lib/data/kudos-queries.ts",
-    "Bộ lọc phòng ban lọc theo phòng ban NGƯỜI NHẬN, nhóm NULL thành 'Chưa phân loại'",
-    "ModalShell là chrome dùng chung — phase-10/13/15 chỉ compose nội dung",
-    "Component nhận dữ liệu qua prop, phát hành động qua callback; phase-16 nối dây",
-    "Cursor keyset phải validate ISO-8601 trước khi ghép vào filter PostgREST"
+    "Thêm namespace i18n: tạo locales/{vi,en}/<ns>.json + hook 5 dòng gọi useNamespaceTranslation. KHÔNG sửa get-dictionary.ts nữa",
+    "Server Component cần dictionary tĩnh: getDictionary(locale, '<ns>')",
+    "<LoginScreen onGoogleLogin errorCode? /> — phase-16 truyền signInWithGoogle từ lib/auth",
+    "app/login/page.tsx đọc errorCode từ await searchParams (Next 16 là Promise)"
   ]
 }

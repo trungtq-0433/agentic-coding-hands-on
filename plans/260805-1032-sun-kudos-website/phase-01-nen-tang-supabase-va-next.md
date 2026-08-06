@@ -98,6 +98,15 @@ Mỗi phase Track A về sau sở hữu namespace JSON riêng của mình (`logi
 
 **File ownership (glob):** `supabase/config.toml`, `lib/supabase/{client,server,proxy-session,database.types}.ts`, `lib/launch-gate.ts`, `lib/i18n/**`, `lib/actions/set-locale.ts`, `locales/*/common.json`, `proxy.ts`, `app/layout.tsx`, `next.config.ts`, `package.json`, `.env.local.example`, `.gitignore`, `docs/runbook-su-kien.md`
 
+## Bàn giao kiểm soát sau thực thi
+
+Phase-07 (UI Login) sửa file của phase-01 theo khuôn bàn giao có kiểm soát, **cùng mô hình 01→03, 01→04, 01→17** (hai phase cùng chạm một file thì sớm → muộn bàn giao tuần tự nên không giẫm chân):
+
+- **`lib/i18n/get-dictionary.ts`:** thêm tham số `namespace` tùy chọn, dùng `import()` template literal thay `fs.readFile` để bundler gói JSON sẵn. (Phase-06 dùng `getDictionary` qua `lib/i18n/get-dictionary.ts`; phase-07 tổng quát hoá thành hook `useNamespaceTranslation` dùng cơ chế chung.)
+- **`components/ui/use-common-ui-text.ts`** (phase-06, không phase-01 sở hữu) → migrate từ `getDictionary` sang `useNamespaceTranslation`, nằm ở track A chứ không track B, nhưng là bàn giao cưỡng chế qua hook phase-07 phát hành.
+
+**Quy ước:** Từ phase-08+ nếu muốn sửa `lib/i18n/**` hoặc bất kỳ file "phase-01 sở hữu" nào phải làm theo cùng khuôn này (thông qua 1-2 dòng import/interface mới, không phình file hơn 5 dòng), hoặc mở task riêng bàn giao tuần tự với phase-01 chủ file.
+
 ## Implementation Steps
 
 1. `npm i @supabase/supabase-js @supabase/ssr` — **không** cài `@supabase/auth-helpers-nextjs` (đã deprecated, cấm trộn hai package).

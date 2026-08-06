@@ -1,116 +1,109 @@
 {
   "commands": [
     {
-      "command": "npx supabase db reset",
-      "exitCode": 0,
-      "status": "pass",
-      "summary": "Áp đủ 10 migration + seed. Idempotent: chạy 2 lần liên tiếp cho cùng kết quả.",
-      "ts": "2026-08-06T08:04:44+07:00"
-    },
-    {
       "command": "npx tsc --noEmit",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Typecheck sạch sau cả ba phase và sau khi vá cursor + ModalShell.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "Sạch sau cả 3 lần sửa loader (fs → import() → gỡ cache).",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
       "command": "npm run lint",
       "exitCode": 0,
       "status": "pass",
-      "summary": "ESLint sạch (1 warning tiền hữu ở .sunlint-eslint.config.js, ngoài phạm vi).",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "ESLint sạch.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
       "command": "npm run build",
       "exitCode": 0,
       "status": "pass",
-      "summary": "next build compile thành công.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "Turbopack compile thành công; route /login lên dynamic.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "psql: search_path mọi hàm security definer",
+      "command": "curl http://127.0.0.1:3161/login",
       "exitCode": 0,
       "status": "pass",
-      "summary": "12/12 hàm có search_path=public, pg_temp. Không sót hàm nào sau khi thêm 3 RPC mới.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "HTTP 200. VI có đủ ROOT FURTHER / LOGIN With Google / Bản quyền thuộc về Sun* © 2025.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "psql: has_function_privilege cho 3 RPC nghiệp vụ",
+      "command": "curl -H \"Cookie: NEXT_LOCALE=en\" /login",
       "exitCode": 0,
       "status": "pass",
-      "summary": "create_kudos/toggle_heart/open_secret_box: anon=false, authenticated=true. Guest không ghi được gì.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "Toàn bộ chuỗi đổi sang EN.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "psql: pg_get_function_arguments(toggle_heart)",
+      "command": "curl /login?error=oauth (cả hai locale)",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Chỉ (p_kudos_id bigint). Không có tham số cờ bonus — client không thể tự cộng +2 mọi ngày.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "VI: \"Đăng nhập không thành công. Vui lòng thử lại.\" EN: \"Sign-in failed. Please try again.\" Không có error → role=\"alert\" đếm được 0.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "psql: đo phân phối badge 10.000 lần (orchestrator tự đo, không tin báo cáo)",
+      "command": "curl /login?error=<script> (thử XSS phản chiếu)",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Lệch tối đa 0,74% (stay_gold 29,26/30). TRƯỚC khi implementer vá: revival 0,43% so với kỳ vọng 10% — random() bị gọi per-row trong WHERE. Chỉ lộ ra vì Success Criteria bắt chạy 10.000 lần.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "Không render, không phản chiếu. Allow-list params.error === \"oauth\" chặn đúng.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "grep -rn \"from('kudos')\" lib/data lib/realtime",
+      "command": "curl: hồi quy phase-06 sau khi migrate i18n",
       "exitCode": 0,
       "status": "pass",
-      "summary": "0 lời gọi thật ở đường đọc (1 khớp duy nhất là comment nhắc nhở). 7 public_kudos_feed + 2 my_sent_kudos.",
-      "ts": "2026-08-06T08:04:44+07:00"
-    },
-    {
-      "command": "psql: storage.buckets + pg_policies",
-      "exitCode": 0,
-      "status": "pass",
-      "summary": "Bucket kudos-images tồn tại, 2 policy (insert own folder, select all). Implementer đã kiểm ghi vào thư mục người khác bị RLS chặn thật.",
-      "ts": "2026-08-06T08:04:44+07:00"
-    },
-    {
-      "command": "grep -rn postgres_changes lib/ app/ components/",
-      "exitCode": 0,
-      "status": "pass",
-      "summary": "Rỗng. Realtime dùng Broadcast đúng quyết định kiến trúc — không ai lùi về Postgres Changes (thứ sẽ mở lại lỗ rò ẩn danh).",
-      "ts": "2026-08-06T08:04:44+07:00"
-    },
-    {
-      "command": "node script + psql: guest anon subscribe kudos-board",
-      "exitCode": 0,
-      "status": "pass",
-      "summary": "Client hoàn toàn ẩn danh nhận được {event:insert, kudos_id} trong <1s sau khi INSERT qua psql. Payload không có sender_id/body.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "aria-label của LanguageSwitcher đổi VI \"Chọn ngôn ngữ\" → EN \"Choose language\". 8 component dùng useCommonUiT không đổi hành vi.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
       "command": "grep -rn \"lib/supabase|lib/data|lib/actions\" components/",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Rỗng — ranh giới Track A/Track B giữ đúng, component chỉ nhận prop.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "Rỗng — ranh giới Track A giữ nguyên.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "curl PostgREST: tái hiện cursor injection",
+      "command": "node: so Object.keys hai file login.json",
       "exitCode": 0,
       "status": "pass",
-      "summary": "TRƯỚC vá: cursor hợp lệ trả 0 hàng, cursor mang createdAt=\"2000-01-01T00:00:00Z,id.gt.0\" trả 5 hàng — ranh giới keyset bị phá thật. SAU vá regex ISO-8601: 2 payload độc + 3 dạng rác đều bị từ chối, cursor hợp lệ (Z và +00:00) vẫn qua.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "vi=5, en=5, lệch=không.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "node: kiểm biên decodeCursor sau khi vá",
+      "command": "soi .next/server/chunks sau khi đổi sang import() template literal",
       "exitCode": 0,
       "status": "pass",
-      "summary": "6 case: hợp lệ Z / hợp lệ +00:00 chấp nhận; chèn dấu phẩy / chèn or() / rác / id không phải số / base64 hỏng đều trả null, không throw.",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "Reviewer verify thực nghiệm: Turbopack chỉ nhúng bảng tra cứu 876 byte, JSON nạp lười theo chunk riêng, login.json KHÔNG rò vào bundle route /. Xác nhận quyết định bundled import đúng, thay cho fs.readFile(process.cwd()) mà implementer nộp ban đầu.",
+      "ts": "2026-08-06T09:10:39+07:00"
     },
     {
-      "command": "Đăng nhập Google thật + StrictMode double-mount + enabled=false",
+      "command": "build với probe path traversal qua tham số namespace",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "Context module chỉ khớp locales/*/*.json; đường dẫn lạ thất bại lúc chạy và bị try/catch bắt thành lỗi rõ ràng. Không đọc được file tuỳ ý.",
+      "ts": "2026-08-06T09:10:39+07:00"
+    },
+    {
+      "command": "curl sau khi gỡ cache Map thừa",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "/login 200, VI/EN đúng, layout (getDictionary mặc định) 200. Gỡ 15 dòng mà không mất gì — import() vốn đã được module system cache.",
+      "ts": "2026-08-06T09:10:39+07:00"
+    },
+    {
+      "command": "Kiểm role=\"alert\" bằng screen reader thật (NVDA/VoiceOver)",
       "exitCode": 0,
       "status": "skipped",
-      "summary": "CHƯA KIỂM — cần React runtime và trang thật. Trang /kudos, /profile thuộc Track A phase 07-15 chưa dựng; hook realtime chưa cắm vào component nào (đúng phạm vi, việc cắm là phase-16).",
-      "ts": "2026-08-06T08:04:44+07:00"
+      "summary": "CHƯA KIỂM — không có screen reader trong môi trường này. Reviewer nêu rủi ro live region có nội dung sẵn từ SSR có thể không được công bố. Ghi vào Còn treo, cần kiểm trước khi nối OAuth ở phase-16.",
+      "ts": "2026-08-06T09:10:39+07:00"
+    },
+    {
+      "command": "Đăng nhập Google thật qua trình duyệt",
+      "exitCode": 0,
+      "status": "skipped",
+      "summary": "CHƯA KIỂM — onGoogleLogin còn là placeholder đúng phạm vi phase (nối ở phase-16).",
+      "ts": "2026-08-06T09:10:39+07:00"
     }
   ]
 }

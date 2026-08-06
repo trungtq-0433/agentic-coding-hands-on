@@ -4,8 +4,8 @@
 - Login: https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/GzbNeVGJHz
 - Clarifications: plans/260805-1032-sun-kudos-website/clarifications.md
 
-**Track:** A · **P2** · pending · **1h** · phụ thuộc: phase-06 (nội bộ Track A). Không phụ thuộc Track B.
-**File ownership:** `app/login/page.tsx`, `components/login/**`, `locales/*/login.json`
+**Track:** A · **P2** · completed · **1h** · phụ thuộc: phase-06 (nội bộ Track A). Không phụ thuộc Track B.
+**File ownership:** `app/login/page.tsx`, `components/login/**`, `locales/*/login.json` (bàn giao: 01→07 `lib/i18n/get-dictionary.ts`, `components/ui/use-common-ui-text.ts`)
 
 ## Mục tiêu
 Dựng UI trang `/login` qua skill `momorph-implement-design`; mock data lấy từ chính Figma.
@@ -25,3 +25,11 @@ Dựng UI trang `/login` qua skill `momorph-implement-design`; mock data lấy t
 - `/login` render đủ header, hero, nút "LOGIN With Google", footer; đổi VN/EN chuyển hết chuỗi.
 - Bấm nút gọi đúng `onGoogleLogin`; không import gì từ `lib/`.
 - `?error=oauth` hiện thông báo lỗi ở cả hai ngôn ngữ.
+
+## Kết quả thực thi
+
+**Tạo:** `app/login/page.tsx`, `components/login/*`, `locales/{vi,en}/login.json` (5 key), `public/login/Root_Further_Logo.png`
+
+**Sửa (bàn giao 01→07):** `lib/i18n/get-dictionary.ts` (import() template literal), `components/ui/use-common-ui-text.ts` (hook mới)
+
+**Verify:** tsc 0, build OK, `/login` HTTP 200 VI/EN, cookie locale switch OK, error state OK. Live region `role="alert"` chưa NVDA—kiểm phase-16.

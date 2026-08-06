@@ -143,6 +143,17 @@ template tương ứng là `.env.example` và `.env.local.example`.
 - **`public_kudos_feed` KHÔNG có cột `recipient_department_id`** → lọc phòng ban: lấy `recipient_id` → join `profiles` để lấy `department_id` → filter. Không sửa view phase-02.
 - **`SiteHeader`/`SiteFooter`/`CountdownTimer` không có Figma screenId** — style suy từ token 9 màn khác, cần designer duyệt. Chấp nhận là component chung.
 
+## Session 2026-08-06 (Sau phase-07 UI Login)
+
+### i18n Namespace — Ràng buộc mới
+
+- **Thêm namespace locale mới:** tạo file `locales/{vi,en}/<namespace>.json` với 5+ key. Không sửa `lib/i18n/get-dictionary.ts` lần nữa — loader đã tổng quát.
+- **Client component dùng hook:** `const t = useNamespaceTranslation('<namespace>')` → `t('key')`. Hook nằm ở `lib/i18n/use-namespace-translation.ts` (phase-07 phát hành).
+- **Server Component dùng dictionary:** `const dict = await getDictionary(locale, '<namespace>')` → `dict.key`. Hàm ở `lib/i18n/get-dictionary.ts` tham số `namespace` tùy chọn, fallback `'common'`.
+- **Generality forward-looking:** tham số `namespace` ở `getDictionary` chưa có caller nào dùng (chỉ phase-07 nên nó được sinh). Giữ lại vì phase-14/15 (trang tĩnh) nhiều khả năng cần server-side dictionary, nhưng ghi rõ: chưa dùng, không phải nợ.
+- **Path bundler bảo vệ:** `import.meta.resolve` / `@bundler:locales` template literal chỉ gói `locales/*/*.json`, đường dẫn lạ thất bại lúc chạy. Không khai thác được (kiểm qua curl `../../` + `<script>`).
+- **Phase-01 sở hữu nhưng chỉnh sửa tuần tự:** nếu phase sau muốn sửa `lib/i18n/**` phải qua cùng khuôn "bàn giao kiểm soát" (1-2 dòng import/interface mới, không phình file hơn 5 dòng), ghi vào phase file và cập nhật ghi chú amendment này.
+
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")
 - URL pattern: `https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/{screenId}`

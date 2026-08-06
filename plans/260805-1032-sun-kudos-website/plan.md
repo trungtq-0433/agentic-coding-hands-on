@@ -37,7 +37,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 | 04 | [Data access + business logic](./phase-04-data-access-va-business-logic.md) | B | completed | 6h | 03 |
 | 05 | [Realtime — Broadcast](./phase-05-realtime.md) | B | completed | 3h | 04 |
 | 06 | [UI shared components (9 màn)](./phase-06-ui-shared-components.md) | A | completed | 4h | — |
-| 07 | [UI Login](./phase-07-ui-login.md) | A | pending | 1h | 06 |
+| 07 | [UI Login](./phase-07-ui-login.md) | A | completed | 1h | 06 |
 | 08 | [UI Homepage SAA](./phase-08-ui-homepage-saa.md) | A | pending | 3h | 06 |
 | 09 | [UI Live board](./phase-09-ui-live-board.md) | A | pending | 4h | 06 |
 | 10 | [UI Viết Kudo](./phase-10-ui-viet-kudo.md) | A | pending | 3h | 06 |
@@ -51,7 +51,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 6/17 phase hoàn thành · 25h/63h effort done.
+**Tiến độ:** 7/17 phase hoàn thành · 26h/63h effort done.
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
@@ -163,6 +163,21 @@ Chạy sau khi áp xong 16 thay đổi, quét cả những phase reviewer không
 - **Feed read:** 0 `.from('kudos')`, 7 `public_kudos_feed` + 2 `my_sent_kudos` ✓
 - **Guest realtime:** ✓ · **Payload:** `{kudos_id, event}` only ✓
 - **Lint/compile:** 0 errors ✓
+
+### Session — 2026-08-06 (Phase-07 UI Login)
+**Findings:** 2 Warning (minor) + 1 follow-up architectural (không sửa file)
+
+| # | Finding | Severity | Disposition | Notes |
+|---|---|---|---|---|
+| RR-5 | **`role="alert"` render từ SSR** khi `?error=oauth` → live region có nội dung lúc mount, có thể screen reader không công bố. NVDA/VoiceOver thật chưa verify. | Warning | Accept (deferred) | Kiểm lúc phase-16 tích hợp OAuth hay manual browser test. Ghi "Còn treo". |
+| RR-6 | **`namespace: string` không ràng buộc union.** Orchestrator REJECT: union type ép sửa file mỗi lần thêm namespace — chính cái vừa gỡ. Đã kiểm path traversal qua bundler module context: `.replace(NAMESPACE_PATH_PATTERN)` + try/catch gặp `*.json` lạ. Không khai thác được. | Suggestion | Reject (by design) | Generality forward-looking; chưa ai dùng param namespace, không nợ. Ghi vào clarifications. |
+
+**Kiểm độc lập (orchestrator):**
+- **5 file locale:** `locales/{vi,en}/{common,login}.json` + key bảng `5 vi = 5 en` ✓
+- **Mỗi component < 200 dòng**, tổng phase < 30 dòng ✓
+- **Bàn giao kiểm soát:** `lib/i18n/get-dictionary.ts` sửa từ `fs.readFile` sang `import()` template literal, `use-common-ui-text.ts` (phase-06) migrate sang hook mới; cùng khuôn 01→03, 01→04, 01→17 ✓
+- **Lint/compile:** tsc 0 · next build success · curl /login → 200 VI+EN ✓
+- **Live region:** chưa NVDA/VoiceOver, kiểm phase-16
 
 **Unresolved (không che):**
 1. **`useKudosStream` cho guest phụ thuộc cấu hình Realtime Authorization của Supabase local** — plan ghi bước kiểm và policy dự phòng (phase-05 bước 6), nhưng **chưa verify được ở giai đoạn lập kế hoạch** vì `supabase start` chưa từng chạy trên máy này. Nếu bản CLI bật Authorization mặc định cho Broadcast, phase-05 phải thêm policy trên `realtime.messages`; nếu không thì bỏ qua. Xác nhận ở bước đầu phase-05.

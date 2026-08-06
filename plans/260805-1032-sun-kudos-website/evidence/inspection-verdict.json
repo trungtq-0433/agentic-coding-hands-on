@@ -1,29 +1,22 @@
 {
-  "score": 9.2,
+  "score": 9.1,
   "criticalCount": 0,
   "decision": "SEALED",
   "acceptanceCovered": [
-    "Ba RPC create_kudos/toggle_heart/open_secret_box đều security definer, set search_path, revoke execute from anon — verify: 12/12 hàm definer có search_path; has_function_privilege cho anon = false trên cả ba",
-    "toggle_heart không có tham số cờ bonus — hàm tự tra special_days — verify: pg_get_function_arguments trả đúng (p_kudos_id bigint), một tham số duy nhất",
-    "Phân phối 6 badge qua 10.000 lần mở lệch dưới 2% so với 30/25/10/5/20/10 — verify: orchestrator tự đo 10.000 lần, lệch tối đa 0,74%. Trước khi vá bug random()-per-row: revival 0,43% so với 10%",
-    "Đường đọc feed không bao giờ chạm thẳng bảng kudos — chỉ qua public_kudos_feed và my_sent_kudos — verify: grep ra 0 lời gọi thật, 7 public_kudos_feed + 2 my_sent_kudos",
-    "Bucket kudos-images tồn tại với policy chặn ghi vào thư mục người khác — verify: bucket tồn tại + 2 policy; ghi vào thư mục người khác bị RLS chặn",
-    "Realtime dùng Broadcast, không Postgres Changes — grep postgres_changes toàn repo rỗng — verify: grep postgres_changes toàn lib/ app/ components/ trả rỗng",
-    "Guest chưa đăng nhập vẫn nghe được topic kudos-board — verify: script Node với client anon thật nhận tín hiệu <1s sau INSERT qua psql",
-    "Payload broadcast chỉ mang id và loại event, không sender_id, không body — verify: payload đọc từ realtime.messages chỉ có kudos_id + event (cộng field id do realtime.send tự chèn, không phải dữ liệu nghiệp vụ)",
-    "components/ không import lib/supabase, lib/data, lib/actions — grep rỗng — verify: grep trả rỗng",
-    "ModalShell scroll-lock đếm tham chiếu: mở A, mở B, đóng B thì nền vẫn khoá; đóng A thì mở lại — verify: đọc code bộ đếm scrollLockCount cấp module + stack; CHƯA kiểm được bằng trình duyệt thật vì chưa có trang nào dùng ModalShell",
-    "locales/vi và locales/en của common-ui.json cùng tập key — verify: script so Object.keys hai file, 20 key khớp 100%",
-    "Cursor keyset từ URL không phá được ranh giới filter PostgREST — verify: tái hiện injection thật bằng curl (cursor độc trả 5 hàng), vá bằng regex ISO-8601 tại gốc lib/kudos/cursor.ts, kiểm lại 6 case biên đều đúng"
+    "/login render đủ header, hero, nút LOGIN With Google, footer — verify: curl server thật HTTP 200, có đủ ROOT FURTHER / LOGIN With Google / footer copyright",
+    "Đổi cookie NEXT_LOCALE giữa vi và en thì mọi chuỗi đổi theo, kể cả chuỗi của component phase-06 — verify: curl với cookie NEXT_LOCALE=en đổi hết chuỗi, kể cả aria-label LanguageSwitcher của phase-06",
+    "?error=oauth hiện thông báo lỗi ở cả hai ngôn ngữ; không có error thì không có role=alert — verify: curl cả hai locale ra đúng thông báo; không có error thì grep role=alert đếm 0",
+    "components/ không import lib/supabase, lib/data, lib/actions — verify: grep trả rỗng",
+    "locales/vi/login.json và locales/en/login.json cùng tập key — verify: script so Object.keys, vi=en=5, không lệch",
+    "Migrate use-common-ui-text.ts sang cơ chế chung không làm hồi quy 8 component phase-06 — verify: aria-label phase-06 vẫn đổi đúng VI/EN sau migrate; 8 component dùng useCommonUiT không phải sửa dòng nào",
+    "Dictionary được bundler gói sẵn, không phụ thuộc process.cwd() lúc chạy — verify: reviewer soi .next/server/chunks — bảng tra cứu 876 byte, JSON lazy theo chunk, không rò namespace chéo route"
   ],
   "regressionChecked": [
-    "Thêm 3 RPC mới — kiểm chuỗi search_path không bị phá: 12/12 hàm definer vẫn tuân thủ",
-    "package.json thêm zod (bàn giao 01→04→17) — build và tsc vẫn xanh, không đụng khối scripts",
-    "database.types.ts regen sau migration 0008/0009 — tsc 0",
-    "Track A ghi components/ song song Track B ghi lib/ — kiểm không file nào bị chạm chéo, boundary grep rỗng",
-    "Vá cursor tại lib/kudos/cursor.ts ảnh hưởng cả 3 hàm đọc feed — kiểm cursor hợp lệ vẫn qua, không chặn nhầm",
-    "Vá onCloseRef trong ModalShell — lint rule react-hooks vẫn xanh, build compiled",
-    "db reset chạy 2 lần liên tiếp cho cùng kết quả — seed phase-02/03 không bị migration mới phá"
+    "Migrate use-common-ui-text.ts sang hook chung — 8 component phase-06 kiểm bằng curl VI/EN, chuỗi đổi đúng",
+    "app/layout.tsx gọi getDictionary(locale) mặc định — kiểm route / trả 200 sau cả 3 lần sửa loader",
+    "Đổi loader từ fs.readFile sang import() — kiểm lại toàn bộ acceptance, không mục nào hồi quy",
+    "Gỡ cache Map — kiểm /login và / vẫn 200, chuỗi đúng cả hai locale",
+    "Track B (lib/data, lib/actions, lib/realtime, supabase/) không bị chạm — git status xác nhận"
   ],
   "contractStatus": "STABLE",
   "refuted": [],
@@ -31,52 +24,38 @@
   "reachableRegressions": [],
   "findings": [
     {
-      "severity": "Critical",
-      "category": "correctness",
-      "location": "supabase/migrations/0008_business_rpc.sql:224",
-      "summary": "open_secret_box đặt random()*total thẳng trong WHERE → Postgres gọi random() một lần MỖI HÀNG của subquery 6 badge, không phải một lần chung. Đo được revival 0,43% so với kỳ vọng 10%, touch_of_light 2,96% so với 20%. Implementer tự tìm khi chạy đúng test 10.000 lần mà Success Criteria yêu cầu. ĐÃ VÁ bằng rút v_pick ra biến trước; orchestrator đo lại độc lập, lệch tối đa 0,74%.",
-      "disposition": "Accept"
-    },
-    {
-      "severity": "Critical",
-      "category": "correctness",
-      "location": "supabase/migrations/0008_business_rpc.sql:1",
-      "summary": "Chữ ký create_kudos trong phase file ghi p_hashtag_ids uuid[], nhưng hashtags.id và kudos.id thực tế là bigint identity (schema phase-02). Gọi thử bằng psql lộ ngay 'invalid input syntax for type uuid'. ĐÃ VÁ thành bigint[] / returns bigint.",
-      "disposition": "Accept"
-    },
-    {
-      "severity": "Critical",
-      "category": "security",
-      "location": "lib/kudos/cursor.ts:21",
-      "summary": "decodeCursor chỉ kiểm typeof createdAt === 'string' rồi ghép thẳng vào chuỗi filter PostgREST .or('created_at.lt.<X>,…'). Dấu phẩy là ký tự ngăn mệnh đề của PostgREST nên cursor mang createdAt='2000-01-01T00:00:00Z,id.gt.0' phá sạch ranh giới keyset. Tái hiện thật bằng curl: cursor hợp lệ trả 0 hàng, cursor độc trả 5. Lỗi nhân ba vì cùng gốc dùng bởi board/đã-nhận/đã-gửi. Reviewer tìm ra; tester chấm SHIP READY và bỏ sót. ĐÃ VÁ bằng regex ISO-8601 strict tại gốc.",
+      "severity": "Warning",
+      "category": "architecture",
+      "location": "lib/i18n/get-dictionary.ts:34",
+      "summary": "Implementer nộp bản dùng fs.readFile(process.cwd() + …) — dictionary nằm ngoài bundle và phụ thuộc cwd, chạy được với next start tại chỗ nhưng gãy với output:'standalone'/serverless. ĐÃ ĐỔI sang import() template literal: bundler gói sẵn mọi locales/*/*.json mà vẫn giữ tính tổng quát. Reviewer verify bằng cách soi .next/server/chunks.",
       "disposition": "Accept"
     },
     {
       "severity": "Warning",
-      "category": "correctness",
-      "location": "components/ui/modal-shell.tsx:76",
-      "summary": "Effect focus-trap phụ thuộc onClose chưa bọc ref. Caller truyền arrow inline (bình thường) → mỗi lần cha re-render là effect chạy lại, focus nhảy về phần tử đầu và cướp con trỏ khỏi ô input đang gõ. ĐÃ VÁ bằng onCloseRef, đúng khuôn lib/realtime/use-kudos-stream.ts đã dùng.",
+      "category": "simplification",
+      "location": "lib/i18n/get-dictionary.ts:1",
+      "summary": "Orchestrator tự nhận: getDictionary(locale, namespace) hiện KHÔNG có caller nào dùng tham số namespace — app/layout.tsx gọi mặc định, màn login dùng hook client. Chỗ trùng lặp thật nằm ở tầng client và useNamespaceTranslation mới là thứ giải đúng. ĐÃ gỡ cache Map thừa (import() vốn đã module-cached), 92 → 77 dòng. Giữ tham số namespace vì màn tĩnh phase sau (vd /awards) nhiều khả năng cần, nhưng đây là generality chưa dùng.",
       "disposition": "Accept"
     },
     {
       "severity": "Warning",
-      "category": "maintainability",
-      "location": "lib/kudos/star-count.ts:1",
-      "summary": "computeStarCount trùng với bản private trong lib/auth/dto.ts (phase-03). Cố ý không gộp vì lib/auth/** ngoài ownership phase-04. Nợ cần dọn ở phase sau.",
+      "category": "accessibility",
+      "location": "components/login/login-screen.tsx:74",
+      "summary": "role=alert render ngay từ SSR khi ?error=oauth. Live region có nội dung sẵn từ lần render đầu có thể không được screen reader công bố (nó công bố THAY ĐỔI, không phải nội dung ban đầu). CHƯA VÁ — cần kiểm bằng NVDA/VoiceOver thật, không có trong môi trường này.",
       "disposition": "Defer"
     },
     {
       "severity": "Warning",
-      "category": "coverage",
-      "location": "components/ui/modal-shell.tsx:16",
-      "summary": "Hành vi scroll-lock đếm tham chiếu và focus trap mới chỉ kiểm bằng đọc code, chưa chạy trên trình duyệt thật vì chưa trang nào dùng ModalShell. Đây là phần rủi ro cao nhất của phase-06 và là thứ phase-10/13/15 sẽ phụ thuộc. Cần test thật ở phase-16/17.",
-      "disposition": "Defer"
+      "category": "api-design",
+      "location": "lib/i18n/get-dictionary.ts:34",
+      "summary": "Reviewer đề nghị ràng buộc namespace bằng union type. REJECT có lý do: union type sẽ bắt sửa file mỗi lần thêm namespace — đúng cái vừa bỏ công gỡ, và làm hỏng mục đích của cả thay đổi. Đã kiểm path traversal: context module bundler chỉ khớp locales/*/*.json, đường dẫn lạ thất bại lúc chạy và bị try/catch bắt. Không khai thác được.",
+      "disposition": "Reject"
     },
     {
       "severity": "Suggestion",
-      "category": "data-quality",
-      "location": "lib/data/secret-box-queries.ts:1",
-      "summary": "listRecentRankUps() là xấp xỉ — schema không có bảng lịch sử thời điểm vượt ngưỡng hoa-thị, dùng proxy received_kudos_count >= 10 sắp giảm dần. Có thể hiển thị thứ tự không đúng nghĩa 'mới thăng hạng'.",
+      "category": "design-fidelity",
+      "location": "components/login/login-screen.tsx:1",
+      "summary": "Ảnh nền sóng hero không lấy được từ Figma (export API trả 500 hai lần) — thay bằng nền đặc cùng tông + 2 lớp gradient thật. Không lệch bố cục, thiếu hoạ tiết. Cần Figma export lại.",
       "disposition": "Defer"
     }
   ]
