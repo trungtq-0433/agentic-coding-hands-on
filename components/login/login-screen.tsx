@@ -41,13 +41,51 @@ export function LoginScreen({ onGoogleLogin, errorCode }: LoginScreenProps) {
 
   return (
     // mm:662:14387
-    <div className="flex min-h-full flex-1 flex-col">
-      {/* mm:662:14391 */}
-      <SiteHeader appName={commonT("app.name")} nav={[]} slot={<LanguageSwitcher locale={locale} onChange={handleLocaleChange} />} />
+    <div className="relative flex min-h-full flex-1 flex-col">
+      {/* mm:662:14391 — header PHỦ LÊN hero (Figma: position absolute, nền
+          rgba(11,15,18,.8)), không xếp chồng phía trên. Logo là asset thật
+          MM_MEDIA_Logo 52x48, không phải chữ. */}
+      <div className="absolute inset-x-0 top-0 z-20">
+        <SiteHeader
+          appName={commonT("app.name")}
+          nav={[]}
+          logo={
+            /* mm:I662:14391;178:1033;178:1030 */
+            <Image
+              src="/brand/saa-logo.png"
+              alt={commonT("app.name")}
+              width={52}
+              height={48}
+              priority
+            />
+          }
+          slot={<LanguageSwitcher locale={locale} onChange={handleLocaleChange} />}
+        />
+      </div>
 
-      <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-[#00101A]">
-        {/* mm:662:14388 — nền hero (asset không lấy được, xem docblock trên) */}
+      <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-[#00101A] pt-20">
+        {/* mm:662:14388 — nền hero.
+            TẠM THỜI: node ảnh gốc `662:14389` tên "image 1" — KHÔNG có tiền tố
+            `MM_MEDIA_` nên nằm ngoài pipeline asset của MoMorph, và đường thoát
+            `get_figma_image` trả 500 ở mọi biến thể (kể cả trên node đã có URL
+            S3, nên là lỗi endpoint chứ không phải lỗi node). Ảnh dưới đây là
+            vùng hoạ tiết cắt từ `get_frame_image` — pixel THẬT của thiết kế,
+            nhưng nguồn là ảnh render 1440px nên màn rộng hơn sẽ mềm nét, và
+            thiếu phần hoạ tiết bên trái nơi chữ đè lên.
+            ĐỂ ĐẠT 100%: đổi tên node `662:14389` thành `MM_MEDIA_Hero` trong
+            Figma → `get_media_files` sẽ trả URL S3 → thay đúng file này. */}
         <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[#00101A]" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 -z-20 w-[62%] bg-[url('/login/hero-waves-interim.jpg')] bg-cover bg-right bg-no-repeat"
+          /* Mép trái của crop là chỗ cắt, không phải chỗ hoạ tiết kết thúc thật —
+             để trần sẽ thấy một đường nối dọc. Mask cho nó tan dần vào nền như
+             thiết kế gốc (hoạ tiết chìm dưới lớp gradient chứ không bị cắt). */
+          style={{
+            maskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+          }}
+        />
         {/* mm:662:14392 — gradient trái sang phải */}
         <div
           aria-hidden="true"

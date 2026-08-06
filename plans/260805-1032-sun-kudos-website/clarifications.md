@@ -59,7 +59,23 @@ Nguồn: 15 finding từ 4 reviewer thù địch, user duyệt từng cái. Bả
 - **`app/prelaunch/` 404**: Đúng design, thuộc phase-14. Kiểm tra route khác phải ở gate ở quá khứ.
 
 ## Còn treo (không chặn MVP)
-- **Đăng nhập Google end-to-end chưa verify trên browser** — mọi kiểm soát quanh OAuth (provider bật, redirect_uri khớp, trigger bootstrap, callback error-handling) đều test qua API + psql + curl được. Nhưng luồng thật qua Google consent ở trình duyệt chưa chạy lần nào. Tiếp theo phase-16 khi UI hoàn hoặc manual browser test. **Avatar Google** cũng chưa verify hiển thị — phụ thuộc điều kiện đó.
+- **✅ Đăng nhập Google end-to-end ĐÃ VERIFY THẬT** (2026-08-06, trình duyệt thật, tài khoản thật).
+  Hai tài khoản đăng nhập thành công: `tran.quang.trung@sun-asterisk.com` và **`tqtrung09@gmail.com`
+  — Gmail NGOÀI domain**, chứng minh spec "mọi tài khoản Google đều được phép" chạy đúng ngoài đời,
+  không chỉ với user giả tạo qua admin API. Trigger `handle_new_user` tạo đúng 1 hàng `profiles` +
+  1 hàng `user_roles` (role `user`) cho mỗi người, chép được `full_name` + `avatar_url` từ metadata
+  Google. `/profile` trả 404 sau khi login (route guard cho qua) và 307 khi chưa login — session thật.
+  `avatar_url` về từ `lh3.googleusercontent.com`, khớp đúng `images.remotePatterns` mà phase-01 khai.
+  **Còn lại chưa kiểm:** avatar chưa được RENDER ở đâu (chưa màn nào hiển thị), nên `next/image` chưa
+  thực sự chạy với host đó — chỉ mới chứng minh cấu hình khớp dữ liệu thật.
+- **Lỗi đã sửa khi demo (2026-08-06):** `supabase/config.toml` mặc định của CLI có
+  `site_url = "http://127.0.0.1:3000"` và `additional_redirect_urls = ["https://127.0.0.1:3000"]`
+  (https, không chứa app). GoTrue thấy `redirect_to` ngoài allow-list thì **rơi về `site_url` và vứt
+  luôn path** → sau khi login về `http://127.0.0.1:3000/?code=...` thay vì `/auth/callback?code=...`,
+  nên `exchangeCodeForSession` không bao giờ chạy và không có session nào được tạo. Đã đổi thành
+  `site_url = "http://localhost:3000"` + allow-list `http://localhost:3000/**` và
+  `http://127.0.0.1:3000/**`. **Lưu ý:** GoTrue KHÔNG coi `localhost` và `127.0.0.1` là một, và `/**`
+  là bắt buộc vì app redirect về `/auth/callback` chứ không về gốc. Dev phải chạy ở **cổng 3000**.
 - **StrictMode double-mount + `enabled=false` của hook realtime**: thật chưa kiểm (cần React runtime + component thật, phase-16).
 - **5 chỗ UI phải suy đoán** vì Figma không có frame: trigger đóng FilterDropdown, hover/disabled mọi dropdown, trạng thái lỗi AddLinkDialog, icon cờ VN/EN, 3 component không screenId.
 - Hero tier: cần designer cấp tên tier + ngưỡng + icon.

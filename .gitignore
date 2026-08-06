@@ -54,3 +54,6 @@ next-env.d.ts
 
 # File credential tải từ Google Cloud Console — không bao giờ vào git
 client_secret*.json
+
+# playwright MCP scratch output
+/.playwright-mcp
