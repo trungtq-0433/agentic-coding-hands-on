@@ -1,69 +1,44 @@
-import Image from "next/image";
+import { signOutAction } from "@/lib/actions/auth-actions";
+import { getCurrentProfile, isCurrentUserAdmin } from "@/lib/auth/dal";
+import { HomePageClient } from "@/components/home/home-page-client";
 
-export default function Home() {
+/**
+ * Trang chủ `/` — thay hoàn toàn trang mặc định của create-next-app.
+ *
+ * `NEXT_PUBLIC_EVENT_START_AT` bị **inline vào bundle lúc build**, không đọc lúc
+ * chạy — đổi ngày thì BẮT BUỘC chạy lại `next build`, restart process là không
+ * đủ (`node_modules/next/dist/docs/01-app/02-guides/environment-variables.md`).
+ * Vì vậy phải viết `process.env.NEXT_PUBLIC_EVENT_START_AT` nguyên dạng, không
+ * gán qua biến trung gian — bundler chỉ thay thế được khi thấy đúng mẫu đó.
+ * Thiếu biến → chuỗi rỗng; `CountdownDigits` coi giá trị không parse được là
+ * "đã qua mốc" và hiện `00 00 00` thay vì làm vỡ trang.
+ *
+ * **Nối phiên đăng nhập (2026-08-06, kéo sớm một phần phase-16).**
+ * Trước đó file này truyền cứng `profile={null}` theo đúng ranh giới Track A/B
+ * của plan. Nhưng `proxy.ts` lại đọc cookie THẬT để quyết định điều hướng, nên
+ * trang có HAI nguồn sự thật khác nhau về "đã đăng nhập chưa": người đã đăng
+ * nhập bị `/login` đá về `/`, mà `/` vẫn vẽ nút "Đăng nhập" — bấm vào thì quay
+ * lại đúng chỗ cũ, không có đường nào thoát. Xem báo cáo debug cùng ngày.
+ *
+ * `verifySession()` bọc `cache()` nên hai lệnh gọi dưới đây chỉ hỏi Supabase
+ * Auth MỘT lần cho cả request, dù chạy song song.
+ *
+ * `signOutAction` là Server Action — đây là lý do nó truyền được xuống Client
+ * Component qua props, trong khi function thường thì không.
+ */
+export default async function HomePageRoute() {
+  const targetIso = process.env.NEXT_PUBLIC_EVENT_START_AT ?? "";
+  const [profile, isAdmin] = await Promise.all([getCurrentProfile(), isCurrentUserAdmin()]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <HomePageClient
+      targetIso={targetIso}
+      // Thu hẹp `PublicProfile` xuống đúng 2 trường `AccountMenu` cần. Không
+      // đẩy nguyên DTO xuống client: các trường đếm (received_kudos_count...)
+      // không liên quan gì tới header.
+      profile={profile ? { name: profile.fullName, avatarUrl: profile.avatarUrl } : null}
+      isAdmin={isAdmin}
+      signOut={signOutAction}
+    />
   );
 }
