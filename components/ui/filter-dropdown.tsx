@@ -13,7 +13,16 @@ export interface FilterDropdownItem {
 export interface FilterDropdownProps {
   items: FilterDropdownItem[];
   value: string | null;
-  onChange: (value: string) => void;
+  /**
+   * `null` = bỏ lọc, quay về `placeholder`.
+   *
+   * Bàn giao kiểm soát phase-06 → phase-09: chữ ký cũ là `(value: string)`,
+   * tức **không có cách nào biểu đạt "bỏ chọn"**. Người dùng chọn một giá trị
+   * rồi thì kẹt luôn ở đó — bộ lọc không xoá được là một cái bẫy, không phải
+   * một lựa chọn thiết kế. Trang cha vốn đã nhận `string | null`, chỉ có
+   * dropdown là không bao giờ phát `null`.
+   */
+  onChange: (value: string | null) => void;
   placeholder: string;
 }
 
@@ -58,8 +67,13 @@ export function FilterDropdown({ items, value, onChange, placeholder }: FilterDr
                   type="button"
                   role="option"
                   aria-selected={isActive}
+                  /* Bấm lại đúng mục đang chọn → BỎ chọn. Bản vẽ dropdown
+                     (`721:5580` Hashtag, `WXK5AYB_rG` Phòng ban) chỉ liệt kê
+                     các mục giá trị, KHÔNG có mục "Tất cả" — nên thêm một mục
+                     như vậy là tự bịa thêm UI. Toggle giữ đúng danh sách mục
+                     của thiết kế mà vẫn cho đường thoát. */
                   onClick={() => {
-                    onChange(item.value);
+                    onChange(isActive ? null : item.value);
                     setOpen(false);
                   }}
                   style={
