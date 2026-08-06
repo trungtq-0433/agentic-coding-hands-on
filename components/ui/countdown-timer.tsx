@@ -20,7 +20,7 @@ export interface CountdownTimerProps {
   labels: CountdownTimerLabels;
 }
 
-interface RemainingParts {
+export interface RemainingParts {
   days: number;
   hours: number;
   minutes: number;
@@ -49,7 +49,14 @@ function pad(value: number): string {
   return String(value).padStart(2, "0");
 }
 
-export function CountdownTimer({ targetIso, tickMs, labels }: CountdownTimerProps) {
+/**
+ * Hook tính + tự cập nhật phần thời gian còn lại tới `targetIso`. Tách ra
+ * khỏi `CountdownTimer` để dùng lại được cho biến thể giao diện khác của
+ * phase-08 (`components/home/countdown-digits.tsx` — 3 ô số kính trên
+ * Homepage thay vì text inline như Prelaunch gate). Logic tính + interval
+ * giữ nguyên 100%, chỉ đổi nơi gọi setState.
+ */
+export function useCountdownRemaining(targetIso: string, tickMs: number): RemainingParts {
   const [remaining, setRemaining] = useState<RemainingParts>(() => computeRemaining(targetIso));
   // Theo dõi `targetIso` của lần render trước để phát hiện khi prop đổi và
   // tính lại NGAY TRONG RENDER (không phải setState đồng bộ trong effect —
@@ -69,6 +76,12 @@ export function CountdownTimer({ targetIso, tickMs, labels }: CountdownTimerProp
     }, tickMs);
     return () => clearInterval(timer);
   }, [targetIso, tickMs]);
+
+  return remaining;
+}
+
+export function CountdownTimer({ targetIso, tickMs, labels }: CountdownTimerProps) {
+  const remaining = useCountdownRemaining(targetIso, tickMs);
 
   if (remaining.finished) {
     return (
