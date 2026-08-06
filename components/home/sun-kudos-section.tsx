@@ -99,7 +99,7 @@ export function SunKudosSection({ onDetail }: SunKudosSectionProps) {
           src="/home/kudos-logo.svg"
           alt={t("kudos.logoAlt")}
           width={364}
-          height={72}
+          height={74}
           className="hidden h-auto lg:mr-[84px] lg:block lg:w-[364px]"
         />
       </div>
