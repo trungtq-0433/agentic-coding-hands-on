@@ -98,7 +98,12 @@ export function LoginScreen({ onGoogleLogin, errorCode }: LoginScreenProps) {
             <div className="flex flex-col items-start gap-6">
               {/* mm:2939:9548 */}
               <Image
-                src="/login/Root_Further_Logo.png"
+                /* Chuyển từ `/login/Root_Further_Logo.png` sang `public/brand/`
+                   (2026-08-06, phase-08): Homepage dùng đúng file này, và bản
+                   tải về từ Figma trùng md5 với bản của phase-07. Hai bản sao
+                   của cùng một asset thương hiệu nghĩa là lần đổi logo sau sẽ
+                   sót một chỗ — gộp về `brand/` cạnh `saa-logo.png`. */
+                src="/brand/root-further-logo.png"
                 alt={t("hero.title")}
                 width={451}
                 height={200}
