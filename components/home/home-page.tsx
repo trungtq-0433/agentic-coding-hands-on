@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import type { NavItem } from "@/components/layout/site-header";
+import { buildSiteNav, SITE_NAV_HREFS } from "@/components/layout/site-nav";
 import type { AccountMenuProfile } from "@/components/ui/account-menu";
 import { KudosFab } from "@/components/ui/kudos-fab";
 import { LOCALE_COOKIE, type Locale } from "@/lib/i18n/config";
@@ -65,15 +65,6 @@ export function HomePage({
     router.refresh();
   }
 
-  // Điều hướng thuần route (không chạm backend) nên xử lý tại chỗ thay vì bơm
-  // thêm callback vào contract — contract chỉ mang những hành vi mà Track B
-  // phải nối dây ở phase-16.
-  const nav: NavItem[] = [
-    { label: t("nav.aboutSaa"), href: "/", active: true },
-    { label: t("nav.awardInfo"), href: "/awards" },
-    { label: t("nav.sunKudos"), href: "/kudos" },
-  ];
-
   return (
     // mm:2167:9026 — nền `#00101A`. `isolate` để hai lớp nền z âm bên dưới
     // nằm gọn trong stacking context của trang.
@@ -116,7 +107,7 @@ export function HomePage({
       <div className="relative z-20 lg:absolute lg:inset-x-0 lg:top-0">
         <HomeHeader
           locale={locale}
-          nav={nav}
+          nav={buildSiteNav(t, SITE_NAV_HREFS.home)}
           profile={profile}
           isAdmin={isAdmin}
           onLocaleChange={handleLocaleChange}

@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { SiteFooter } from "@/components/layout/site-footer";
+import { buildSiteNav } from "@/components/layout/site-nav";
 import { montserrat } from "@/components/ui/fonts";
 import { useT } from "@/lib/i18n/locale-provider";
 
@@ -40,11 +41,7 @@ export function HomeFooter({ onRules }: HomeFooterProps) {
         /* mm:I5001:14800;342:1408;178:1030 — 69×64, to hơn logo header (52×48). */
         <Image src="/brand/saa-logo.png" alt={commonT("app.name")} width={69} height={64} />
       }
-      nav={[
-        { label: t("nav.aboutSaa"), href: "/" },
-        { label: t("nav.awardInfo"), href: "/awards" },
-        { label: t("nav.sunKudos"), href: "/kudos" },
-      ]}
+      nav={buildSiteNav(t)}
       slot={
         <button
           type="button"
