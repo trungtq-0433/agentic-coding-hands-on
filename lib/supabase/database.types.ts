@@ -516,10 +516,35 @@ export type Database = {
         Args: { p_count: number; p_profile_ids: string[] }
         Returns: undefined
       }
+      create_kudos: {
+        Args: {
+          p_body: string
+          p_hashtag_ids: number[]
+          p_image_urls: string[]
+          p_is_anonymous: boolean
+          p_recipient: string
+        }
+        Returns: number
+      }
       is_admin: { Args: never; Returns: boolean }
+      open_secret_box: {
+        Args: never
+        Returns: {
+          badge_code: string
+          badge_id: number
+          remaining: number
+        }[]
+      }
       sync_profile_from_google: {
         Args: { p_avatar_url: string; p_full_name: string }
         Returns: undefined
+      }
+      toggle_heart: {
+        Args: { p_kudos_id: number }
+        Returns: {
+          heart_count: number
+          hearted: boolean
+        }[]
       }
     }
     Enums: {
