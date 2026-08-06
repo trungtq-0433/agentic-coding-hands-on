@@ -41,7 +41,13 @@ export function SiteHeader({ appName, nav, logo, slot }: SiteHeaderProps) {
   const t = useCommonUiT();
   return (
     <header
-      className={`${montserrat.className} flex h-20 flex-wrap items-center justify-between gap-4 bg-[rgba(11,15,18,0.8)] px-6 py-3 md:px-16 lg:px-36`}
+      /* `min-h-20` chứ không `h-20`: Figma đo 80px trên khung 1512px, nơi logo +
+         nav + slot vừa đúng một hàng. Ở màn hẹp chúng buộc phải xuống dòng
+         (`flex-wrap`), mà chiều cao CỐ ĐỊNH thì phần xuống dòng tràn ra ngoài
+         hộp và đè lên nội dung bên dưới — đã thấy ở 375px: nav phủ lên chữ
+         "ROOT FURTHER". `min-h-20` giữ nguyên 80px ở desktop, cho phép cao lên
+         ở mobile. (Bàn giao kiểm soát phase-06 → phase-08.) */
+      className={`${montserrat.className} flex min-h-20 flex-wrap items-center justify-between gap-4 bg-[rgba(11,15,18,0.8)] px-6 py-3 md:px-16 lg:px-36`}
     >
       {logo ?? <span className="text-lg font-bold text-[#FFEA9E]">{appName}</span>}
       <nav aria-label={t("siteHeader.navAria")} className="flex flex-wrap items-center gap-6">
