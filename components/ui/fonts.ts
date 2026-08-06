@@ -1,4 +1,4 @@
-import { Montserrat } from "next/font/google";
+import { Montserrat, Montserrat_Alternates } from "next/font/google";
 
 /**
  * Font Montserrat (weight 700 — trọng số DUY NHẤT xuất hiện trong 9 màn Figma
@@ -8,6 +8,18 @@ import { Montserrat } from "next/font/google";
  * đúng font thiết kế thay vì font mặc định Geist của root layout.
  */
 export const montserrat = Montserrat({
+  subsets: ["latin", "vietnamese"],
+  weight: ["700"],
+  display: "swap",
+});
+
+/**
+ * Montserrat **Alternates** — chỉ dòng bản quyền ở footer dùng font này
+ * (`mms_D_Footer` → node `I662:14447;342:1413`, đo trên màn Login). Phần còn lại
+ * của thiết kế dùng Montserrat thường, nên hai font cùng tồn tại là đúng bản vẽ,
+ * không phải nhầm lẫn.
+ */
+export const montserratAlternates = Montserrat_Alternates({
   subsets: ["latin", "vietnamese"],
   weight: ["700"],
   display: "swap",
