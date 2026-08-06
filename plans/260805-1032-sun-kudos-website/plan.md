@@ -38,7 +38,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 | 05 | [Realtime — Broadcast](./phase-05-realtime.md) | B | completed | 3h | 04 |
 | 06 | [UI shared components (9 màn)](./phase-06-ui-shared-components.md) | A | completed | 4h | — |
 | 07 | [UI Login](./phase-07-ui-login.md) | A | completed | 1h | 06 |
-| 08 | [UI Homepage SAA](./phase-08-ui-homepage-saa.md) | A | pending | 3h | 06 |
+| 08 | [UI Homepage SAA](./phase-08-ui-homepage-saa.md) | A | completed | 3h | 06 |
 | 09 | [UI Live board](./phase-09-ui-live-board.md) | A | pending | 4h | 06 |
 | 10 | [UI Viết Kudo](./phase-10-ui-viet-kudo.md) | A | pending | 3h | 06 |
 | 11 | [UI Profile bản thân](./phase-11-ui-profile-ban-than.md) | A | pending | 3h | 06, 09 |
@@ -51,7 +51,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 7/17 phase hoàn thành · 26h/63h effort done.
+**Tiến độ:** 8/17 phase hoàn thành · 29h/63h effort done.
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
@@ -163,6 +163,33 @@ Chạy sau khi áp xong 16 thay đổi, quét cả những phase reviewer không
 - **Feed read:** 0 `.from('kudos')`, 7 `public_kudos_feed` + 2 `my_sent_kudos` ✓
 - **Guest realtime:** ✓ · **Payload:** `{kudos_id, event}` only ✓
 - **Lint/compile:** 0 errors ✓
+
+### Session — 2026-08-06 (Phase-08 UI Homepage SAA)
+**Findings:** 3 Warning từ reviewer (0 Critical) + **8 sai sót orchestrator tự bắt bằng visual diff**
+
+| # | Finding | Severity | Nguồn | Xử lý |
+|---|---|---|---|---|
+| RR-7 | **Nền keyvisual biến mất hoàn toàn.** `overflow-x-hidden` khiến trình duyệt tính lại `overflow-y` thành `auto` → thẻ gốc thành vùng cuộn, Chromium sơn nền vùng cuộn ĐÈ lên con `z` âm. Ảnh vẫn load, `opacity:1`, đúng kích thước, không lỗi nào báo ra. | Critical | Visual diff | Bỏ `overflow-x-hidden`; kiểm bằng pixel: `(209,129,57)` vs thiết kế `(204,131,65)` ✓ |
+| RR-8 | **`box-shadow` thẻ giải tính ra TRONG SUỐT.** `shadow-[0_4px_4px_0_rgba(0,0,0,.25),0_0_6px_0_#FAE287]` — Tailwind v4 bỏ qua giá trị nhiều lớp có dấu phẩy trong `rgba()`; `getComputedStyle` trả `rgba(0,0,0,0) 0px 0px 0px 0px`, không lỗi build | Critical | `getComputedStyle` | Chuyển sang `style={{ boxShadow }}` inline |
+| RR-9 | **`fonts.ts` chỉ nạp Montserrat weight 700** nhưng Homepage cần 400 + 500. `next/font/google` chỉ sinh `@font-face` cho weight khai báo → chữ dày sai mà không báo lỗi | Critical | implementer (từ chối tự sửa vì ngoài ownership — đúng) | Thêm `["400","500","700"]` |
+| RR-10 | **Header đè chữ hero ở 375px.** `h-20` cố định + `flex-wrap` → nav xuống dòng tràn ra ngoài hộp | High | Responsive check | `h-20`→`min-h-20`; header chỉ PHỦ từ `lg`, dưới `lg` nằm trong luồng |
+| RR-11 | **Footer thiếu logo + 4 mục nav** (chỉ có dòng bản quyền) | High | Visual diff | Thêm prop `logo` cho `SiteFooter`, đảo thứ tự nhóm trái/phải |
+| RR-12 | **Khoảng cách cột lưới giải sai**: dùng `gap:80px` Figma khai, nhưng `space-between` làm khoảng cách thật là **108px** | Warning | Đối chiếu toạ độ | `lg:gap-x-[108px] lg:gap-y-20`; 3×336+2×108 = 1224 ✓ |
+| RR-13 | **Khối Root Further cao dư 467px**: áp `padding 120px 104px` mà Figma khai, trong khi con của frame đặt tuyệt đối và phớt lờ padding đó (frame còn khai height 1219 < nội dung 1256) | Warning | Đo `getBoundingClientRect` | Bỏ cả padding ngang lẫn dọc → tổng trang **4479 vs 4480** |
+| RR-14 | **Khối Sun\* Kudos rộng dư 104px**: dùng 1224 (khung canh giữa) thay vì 1120 (tấm thẻ thật) | Warning | Đối chiếu toạ độ | `max-w-[1120px]` |
+| RR-15 | **Rác lọt vào `public/`** — `kv-preview.png` (236KB, do chính orchestrator tạo lúc xem ảnh) + `.claude/agent-memory/` rỗng. `public/` được Next phục vụ TĨNH → mọi file trong đó truy cập công khai được (đã curl xác nhận 200) | Warning | reviewer | Xoá; dọn thêm `next.svg`/`vercel.svg` mồ côi sau khi thay trang mặc định |
+| RR-16 | `home-page.tsx` 213 dòng, vượt ngưỡng 200 | Warning | reviewer + tester (cùng bắt) | Tách `home-header.tsx` + `home-footer.tsx` → còn 153 |
+| RR-17 | `useMemo` với dep `[t]` không bao giờ trúng (`t` là closure mới mỗi render) — chú thích còn giải thích SAI lý do | Suggestion | orchestrator tự bắt, reviewer xác nhận | Gỡ `useMemo` |
+
+**Kiểm độc lập (orchestrator):**
+- **Toạ độ 4 khối khớp Figma**: x/w đúng tuyệt đối; tổng trang **4479 vs 4480 (lệch 1px)**, footer lệch 1px
+- **Nền keyvisual khớp pixel** với ảnh thiết kế tại 9 điểm mẫu
+- **Responsive 375/768/1280**: 0 tràn ngang, header không đè hero ở cả 3 khổ
+- **Countdown chạy thật** (`20/05/54` với mốc tương lai) và về `00 00 00` với mốc quá khứ, không âm, không `NaN`
+- **12/12 đường dẫn asset** trong code trỏ tới file có thật · **0 import** `lib/data|actions|supabase|realtime`
+- **i18n 45 = 45 key**, VI/EN không lệch tên · tsc 0 · lint 0 error · build thành công
+
+**Hồi quy phát hiện thêm:** `site-footer.tsx` trước đây dùng `justify-between` với đúng MỘT con nên dòng bản quyền dạt trái — bản sửa của phase-08 **vá luôn** lỗi đó cho `/login`, không phải gây hồi quy.
 
 ### Session — 2026-08-06 (Phase-07 UI Login)
 **Findings:** 2 Warning (minor) + 1 follow-up architectural (không sửa file)

@@ -170,6 +170,115 @@ template tương ứng là `.env.example` và `.env.local.example`.
 - **Path bundler bảo vệ:** `import.meta.resolve` / `@bundler:locales` template literal chỉ gói `locales/*/*.json`, đường dẫn lạ thất bại lúc chạy. Không khai thác được (kiểm qua curl `../../` + `<script>`).
 - **Phase-01 sở hữu nhưng chỉnh sửa tuần tự:** nếu phase sau muốn sửa `lib/i18n/**` phải qua cùng khuôn "bàn giao kiểm soát" (1-2 dòng import/interface mới, không phình file hơn 5 dòng), ghi vào phase file và cập nhật ghi chú amendment này.
 
+## Session 2026-08-06 (Sau phase-08 UI Homepage)
+
+### Bản thiết kế Homepage tự mâu thuẫn — 4 chỗ, đã chốt cách xử lý
+
+Màn `i87tDx10uM` còn `in_progress`, quyết định cũ là "code theo bản hiện tại". Bốn chỗ dưới đây
+**không thể chép nguyên văn** vì chép là tạo lỗi, nên đã lệch có chủ đích và cần người soạn thiết kế xác nhận:
+
+- **3/6 mô tả thẻ giải TRÙNG NHAU.** Best Manager, Signature 2025 - Creator và MVP dùng chung câu
+  "Vinh danh người quản lý có năng lực quản lý tốt, dẫn dắt đội nhóm". Mô tả của Top Project Leader
+  thì kết thúc bằng dấu phẩy cụt. → **Chép nguyên văn** (đúng "code theo bản hiện tại") kèm `FIXME`
+  trong `components/home/figma-award-mock.ts`. Cần 3 mô tả thật.
+- **Chữ "Comming soon" sai chính tả** trong Figma (node `2167:9036`). → Viết đúng thành
+  "Coming soon". Lệch 1 ký tự so với bản vẽ, nhưng đưa lỗi chính tả lên production tệ hơn.
+- **Footer đánh dấu "Award Information" là mục ĐANG CHỌN** trong khi header đánh dấu "About SAA 2025"
+  — hai chỗ mâu thuẫn trên CÙNG một trang. → Không chép trạng thái chọn ở footer;
+  `aria-current="page"` đặt lên link trỏ đi trang khác là sai ngữ nghĩa.
+- **Ngày sự kiện hiển thị `26/12/2025`** (chuỗi tĩnh trong Figma) trong khi
+  `NEXT_PUBLIC_EVENT_START_AT` = `2025-12-20T18:00:00+07:00`. **Lệch 6 ngày, hai nguồn độc lập.**
+  Countdown đếm theo env, chữ hiển thị theo Figma → có thể về `00` trong khi vẫn ghi "26/12". Cần
+  chốt một nguồn duy nhất trước khi chạy thật.
+
+### Font chữ số countdown — chưa có, đang dùng bản thay thế
+
+Figma khai font `"Digital Numbers"` (LCD 7 đoạn) cho ô số. Font này **không có trên Google Fonts và
+không có trong hệ thống** (đã `fc-list`: chỉ có `KacstDigital`, font Ả Rập, không dùng được).
+→ Tạm dùng `Share_Tech_Mono`, chọn vì monospace nên chữ số không nhảy ngang khi đếm — tiêu chí quan
+trọng hơn hình dáng glyph. Khai cục bộ trong `components/home/countdown-digits.tsx`, đổi font chỉ
+cần sửa đúng chỗ đó. **Cần designer cấp file font + license.**
+
+### Ba cái bẫy kỹ thuật đã trả giá để tìm ra (đừng lặp lại)
+
+- **`overflow-x-hidden` + con `z` âm = nền biến mất.** CSS quy định khi một trục `overflow` là
+  `hidden` còn trục kia `visible` thì trục `visible` bị tính lại thành `auto` — phần tử thành vùng
+  cuộn, và Chromium sơn nền vùng cuộn ĐÈ LÊN các con z âm. Ảnh vẫn load, `opacity:1`, đúng kích
+  thước, chỉ là không bao giờ thấy. Mất khá lâu vì mọi thuộc tính đọc ra đều đúng. `/login` dùng
+  cùng khuôn z âm mà không dính vì nó `overflow-hidden` CẢ HAI trục. → Đừng đặt `overflow-x-hidden`
+  lên thẻ vừa có nền vừa chứa con z âm.
+- **`shadow-[0_4px_4px_0_rgba(0,0,0,0.25),0_0_6px_0_#FAE287]` của Tailwind v4 không dựng ra gì.**
+  Giá trị nhiều lớp có dấu phẩy bên trong `rgba()` bị lớp arbitrary bỏ qua; `getComputedStyle` trả
+  `rgba(0,0,0,0) 0px 0px 0px 0px`, tức bóng mất sạch mà **không có lỗi build nào**. → Bóng nhiều lớp
+  viết `style={{ boxShadow: ... }}` inline.
+- **`useMemo` với dep là hàm từ hook i18n luôn trượt.** `useNamespaceTranslation` trả arrow function
+  mới mỗi render → `[t]` luôn khác → memo không bao giờ trúng. Đã gỡ.
+
+### Đọc số đo Figma: hai chỗ thuộc tính khai KHÁC bố cục thật
+
+- **`gap` + `justify-content: space-between` → khoảng cách thật KHÔNG phải `gap`.** Lưới thẻ giải
+  khai `gap: 80px` nhưng toạ độ cho thấy 108px (thẻ 1 đóng x=480, thẻ 2 mở x=588); và
+  3×336 + 2×108 = 1224 khớp đúng bề ngang khối. `gap` chỉ là mức tối thiểu. **Luôn kiểm bằng toạ độ.**
+- **`padding` khai nhưng không bó nội dung.** `Frame 486` (Root Further) khai `padding: 120px 104px`,
+  nhưng con của nó đặt TUYỆT ĐỐI và phớt lờ: node chữ trải đủ 1152px (không thụt 104px), `Group 434`
+  nằm ở y=881 — CAO HƠN mép trên frame (899). Frame khai height 1219 trong khi nội dung cao 1256,
+  tức nội dung tràn khỏi khung. Áp padding ngang → khối cao dư ~470px; áp thêm padding dọc → dư ~280px.
+  Bỏ cả hai → tổng trang **4479px so với bản vẽ 4480px**.
+
+### Bàn giao kiểm soát sang file của phase khác (4 file)
+
+- `components/ui/fonts.ts` (phase-06): Montserrat `["700"]` → `["400","500","700"]`. Homepage dùng 400
+  (tiêu đề + mô tả thẻ giải) và 500 (nút "Chi tiết"). `next/font/google` CHỈ sinh `@font-face` cho
+  weight được liệt kê — thiếu thì CSS vẫn đúng nhưng trình duyệt phải suy ra từ 700, chữ dày sai mà
+  không báo lỗi.
+- `components/ui/countdown-timer.tsx` (phase-06): tách `useCountdownRemaining(targetIso, tickMs)` +
+  export `RemainingParts`. `CountdownTimer` giữ nguyên props/markup. Homepage dùng lại logic đếm với
+  giao diện ô số hoàn toàn khác — chia hook thay vì nhồi variant vào component cũ.
+- `components/layout/site-footer.tsx` (phase-06): thêm prop `logo`, nhóm trái (logo → nav → slot)
+  đứng trước dòng bản quyền. Footer Homepage có logo 69×64 + 4 mục nav; footer Login chỉ có bản quyền
+  căn giữa — cùng component Figma, hai cách dùng. `hasSides` sai → giữ nguyên hành vi màn Login.
+- `components/layout/site-header.tsx` (phase-06): `h-20` → `min-h-20`. Chiều cao cố định làm nav xuống
+  dòng ở 375px tràn ra ngoài hộp và **đè lên chữ hero**.
+
+### Quyết định không có trong Figma (màn này không có khung mobile)
+
+- **Header chỉ PHỦ từ `lg` trở lên**, dưới `lg` nằm trong luồng và đẩy nội dung xuống. Bản vẽ chỉ tồn
+  tại ở khung 1512px nơi header vừa đúng một hàng 80px.
+- **Trạng thái khách**: Figma chỉ vẽ trạng thái đã đăng nhập (avatar + menu). Acceptance phase-08 yêu
+  cầu guest xem được toàn bộ nội dung → chỗ `AccountMenu` đổi thành lối vào `/login`.
+- **"Tiêu chuẩn chung"** (mục nav thứ 4 ở footer) không có route trên bản vẽ → nối vào `onRules`
+  (modal Thể lệ, phase-13), cùng đích với nút "Thể lệ" trên FAB. Render thành `<a href>` là link chết.
+
+### Điểm nối dây của phase-16 (grep `phase-16` trong `components/home/home-page-client.tsx`)
+
+Còn lại: `onCompose` / `onRules` — modal Viết Kudo (phase-10) và Thể lệ (phase-13) chưa tồn tại,
+nút bấm được, FAB thu gọn lại, chưa có gì mở ra. **Không dựng modal giả**: phase-06 đã chốt
+`ModalShell` là chrome dùng chung.
+
+**Phần auth đã KÉO SỚM, không còn chờ phase-16 nữa (2026-08-06).** Ban đầu `profile = null` /
+`isAdmin = false` được truyền cứng đúng theo ranh giới Track A/B. Nhưng `proxy.ts` của Track B đã
+chạy từ phase-03 và nó đọc **cookie thật** — nên trang có HAI nguồn sự thật ngược nhau về "đã đăng
+nhập chưa": người đã đăng nhập bị `/login` đá về `/`, mà `/` vẫn vẽ nút "Đăng nhập", bấm vào thì
+quay lại chỗ cũ — kẹt vòng, và không có đường đăng xuất vì menu tài khoản không bao giờ render.
+
+→ `app/page.tsx` giờ đọc phiên thật qua `getCurrentProfile()` + `isCurrentUserAdmin()` và truyền
+`signOutAction` (Server Action — đây là lý do nó xuống được Client Component, function thường thì
+Next chặn). **Hệ quả về plan:** `app/page.tsx` đã chạm cả hai track, sớm hơn quy tắc "phase-16 là
+phase duy nhất được sửa file của cả hai track". Cố ý, xem
+`../reports/debugger-260806-1347-header-mau-thuan-trang-thai-dang-nhap.md`.
+
+**Bài học cho phase-09..12:** nối phiên NGAY khi dựng màn, đừng truyền cứng `profile={null}` rồi
+hoãn — `/kudos`, `/awards`, `/profile` sẽ dính đúng cái bẫy này.
+
+### Asset
+
+- Logo Root Further gộp về `public/brand/root-further-logo.png`. Bản tải cho Homepage trùng **md5**
+  với bản `public/login/Root_Further_Logo.png` của phase-07 — hai bản sao của cùng một asset thương
+  hiệu nghĩa là lần đổi logo sau sẽ sót một chỗ. `login-screen.tsx` đã trỏ lại.
+- `public/home/keyvisual-bg.png` nặng **4,3MB** → bắt buộc qua `next/image` (`fill` + `priority`),
+  KHÔNG dùng `background-image` CSS (CSS tải nguyên bản, không qua tối ưu định dạng).
+- Khác phase-07: màn này **cả 35 node media đều có URL**, kể cả keyvisual — không phải dùng ảnh tạm.
+
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")
 - URL pattern: `https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/{screenId}`
