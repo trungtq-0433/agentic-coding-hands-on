@@ -34,9 +34,9 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 | 01 | [Nền tảng Supabase + Next](./phase-01-nen-tang-supabase-va-next.md) | B | completed | 3h | — |
 | 02 | [Schema, migrations, RLS](./phase-02-schema-migrations-rls.md) | B | completed | 6h | 01 |
 | 03 | [Auth Google OAuth](./phase-03-auth-google-oauth.md) | B | completed | 3h | 02 + **PRE-REQ-01** |
-| 04 | [Data access + business logic](./phase-04-data-access-va-business-logic.md) | B | pending | 6h | 03 |
-| 05 | [Realtime — Broadcast](./phase-05-realtime.md) | B | pending | 3h | 04 |
-| 06 | [UI shared components (9 màn)](./phase-06-ui-shared-components.md) | A | pending | 4h | — |
+| 04 | [Data access + business logic](./phase-04-data-access-va-business-logic.md) | B | completed | 6h | 03 |
+| 05 | [Realtime — Broadcast](./phase-05-realtime.md) | B | completed | 3h | 04 |
+| 06 | [UI shared components (9 màn)](./phase-06-ui-shared-components.md) | A | completed | 4h | — |
 | 07 | [UI Login](./phase-07-ui-login.md) | A | pending | 1h | 06 |
 | 08 | [UI Homepage SAA](./phase-08-ui-homepage-saa.md) | A | pending | 3h | 06 |
 | 09 | [UI Live board](./phase-09-ui-live-board.md) | A | pending | 4h | 06 |
@@ -51,7 +51,7 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 3/17 phase hoàn thành · 12h/63h effort done.
+**Tiến độ:** 6/17 phase hoàn thành · 25h/63h effort done.
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 
@@ -144,6 +144,25 @@ Chạy sau khi áp xong 16 thay đổi, quét cả những phase reviewer không
 | Số RPC | phase-02/04 vs phase-17 | 4 (3 nghiệp vụ + `admin_grant_secret_box`); phase-17 đã ghi 4. ✅ |
 | Cross-track dependency | đọc header 10 phase Track A | Không phase Track A nào phụ thuộc phase-01…05. ✅ |
 | Track A ≤ 30 dòng | `wc -l` | 10/10 đạt. ✅ |
+
+### Session — 2026-08-05 (Phase-04/05/06 Execution Review)
+**Findings:** 4 Critical + actions remediation path
+
+| # | Finding | Severity | Phase | Action |
+|---|---|---|---|---|
+| **RR-1** | **Random weight phân phối lệch 10% → 0.43%, 20% → 2.96%** — `open_secret_box` đặt `random() * total` trong mệnh đề WHERE, Postgres gọi hàm ngẫu nhiên một lần cho **mỗi hàng** subquery 6 badge, không phải chung. 10.000 lần test: `revival` 10% kỳ vọng nhưng chỉ 0,43% thực tế. | Critical | 04 (Success Criteria) | Rút `v_pick := random() * total_weight` thành biến trước WHERE; sau vá lệch tối đa 0,74% ✓ |
+| **RR-2** | **Kiểu dữ liệu RPC sai** — `create_kudos(p_hashtag_ids uuid[])` nhưng `hashtags.id` / `kudos.id` thực tế `bigint identity` (schema phase-02) → psql reject `invalid input syntax for type uuid` | Critical | 04 (RPC chữ ký) | Sửa `p_hashtag_ids bigint[]` · `p_kudos_id bigint` · returns `bigint` ✓ |
+| **RR-3** | **Cursor keyset injection PostgREST** — `decodeCursor` chỉ kiểm `typeof createdAt === "string"` rồi ghép thẳng vào `.or("created_at.lt.<X>,…")`. Dấu phẩy là ký tự ngăn mệnh đề → cursor `createdAt="2000-01-01T00:00:00Z,id.gt.0"` phá ranh keyset. Tái hiện thật bằng curl: cursor hợp lệ trả 0, cursor độc trả 5. Lỗi ở 3 hàm đọc feed (board/received/sent) cùng gốc. | Critical | 04 (lib/kudos/cursor.ts) | Regex ISO-8601 strict tại `decodeCursor`, kiểm: 2 payload độc + 3 dạng rác từ chối, hợp lệ qua ✓ |
+| **RR-4** | **`ModalShell` cướp focus** — effect focus-trap phụ thuộc `onClose` chưa bọc ref; caller truyền arrow inline → effect chạy lại mỗi cha re-render → focus nhảy về phần tử đầu, cướp con trỏ khỏi input đang gõ | Warning | 06 (ModalShell) | Dùng `onCloseRef` giống `lib/realtime/use-kudos-stream.ts` ✓ |
+
+**Kiểm độc lập (orchestrator):**
+- **12/12** security definer có `search_path=public, pg_temp` ✓
+- **3 RPC:** anon reject, authenticated accept ✓; `toggle_heart` chỉ 1 param (no bonus flag) ✓
+- **Race `toggle_heart`:** `for update skip locked` + `on conflict do nothing` ✓
+- **Phân phối 10.000:** max deviation 0,74% ✓
+- **Feed read:** 0 `.from('kudos')`, 7 `public_kudos_feed` + 2 `my_sent_kudos` ✓
+- **Guest realtime:** ✓ · **Payload:** `{kudos_id, event}` only ✓
+- **Lint/compile:** 0 errors ✓
 
 **Unresolved (không che):**
 1. **`useKudosStream` cho guest phụ thuộc cấu hình Realtime Authorization của Supabase local** — plan ghi bước kiểm và policy dự phòng (phase-05 bước 6), nhưng **chưa verify được ở giai đoạn lập kế hoạch** vì `supabase start` chưa từng chạy trên máy này. Nếu bản CLI bật Authorization mặc định cho Broadcast, phase-05 phải thêm policy trên `realtime.messages`; nếu không thì bỏ qua. Xác nhận ở bước đầu phase-05.

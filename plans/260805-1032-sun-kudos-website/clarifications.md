@@ -60,11 +60,12 @@ Nguồn: 15 finding từ 4 reviewer thù địch, user duyệt từng cái. Bả
 
 ## Còn treo (không chặn MVP)
 - **Đăng nhập Google end-to-end chưa verify trên browser** — mọi kiểm soát quanh OAuth (provider bật, redirect_uri khớp, trigger bootstrap, callback error-handling) đều test qua API + psql + curl được. Nhưng luồng thật qua Google consent ở trình duyệt chưa chạy lần nào. Tiếp theo phase-16 khi UI hoàn hoặc manual browser test. **Avatar Google** cũng chưa verify hiển thị — phụ thuộc điều kiện đó.
+- **StrictMode double-mount + `enabled=false` của hook realtime**: thật chưa kiểm (cần React runtime + component thật, phase-16).
+- **5 chỗ UI phải suy đoán** vì Figma không có frame: trigger đóng FilterDropdown, hover/disabled mọi dropdown, trạng thái lỗi AddLinkDialog, icon cờ VN/EN, 3 component không screenId.
 - Hero tier: cần designer cấp tên tier + ngưỡng + icon.
 - Rule cấp phát Secret Box: cần PO chốt. **Đường tạm:** RPC `admin_grant_secret_box()` + runbook cấp tay (phase-02) — đủ để sự kiện không chết giữa chừng khi hết hộp. (#7)
 - Nội dung/trigger cụ thể của notification bell (gap #14) — định nghĩa lúc implement, ưu tiên "nhận kudos mới".
 - Màn Admin Dashboard thật: cần batch spec riêng.
-- **`department_id` của mọi user đăng nhập thật sẽ là NULL.** Google không trả phòng ban, trigger chỉ chép name/avatar, và **không có màn sửa profile trong 18 màn**. Đường tạm: filter gom NULL vào nhóm hiển thị **"Chưa phân loại"** thay vì trả rỗng im lặng. Cần PO chốt cách gán phòng ban thật (import HR? màn chọn lúc đăng nhập lần đầu? — cả hai đều cần design mới). (#6)
 - **`PAO - PAO` trong danh sách phòng ban nguồn** — mục thứ 50, một phòng ban con trùng tên cha (`PAO` là mục 33). Gần như chắc chắn lỗi nhập liệu bên soạn spec. Vẫn seed đủ 50 kèm `FIXME`, chờ người soạn spec xác nhận gộp hay sửa tên. (capped finding)
 - **8/18 file test case rỗng hoàn toàn 0 byte** (mọi dropdown + cả 2 FAB) — nhóm component dùng chung của phase-06 không có TC gốc để bám, test phải suy từ spec. Nếu QA bổ sung TC sau, rà lại phase-17. (capped finding)
 
@@ -123,6 +124,24 @@ template tương ứng là `.env.example` và `.env.local.example`.
 đã dùng cho các provider khác. **Tuyệt đối không ghi giá trị literal vào config.toml**, file đó
 được commit. Redirect URI đã đăng ký sẵn trên Cloud Console:
 `http://localhost:54321/auth/v1/callback` (cổng **Supabase**, không phải cổng Next).
+
+## Session 2026-08-05 (Sau phase-04/05/06 thực thi)
+
+### Ràng buộc bảo mật từ phase-04/05/06
+
+- **Cursor keyset PHẢI validate định dạng ISO-8601** trước khi ghép vào filter PostgREST. Input từ URL là thù địch. Regex strict: `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$`.
+- **`fetchKudoCardById` ở `lib/realtime/`**, KHÔNG `lib/data/`** — vì nó cần chạy ở client (hook), `kudos-queries.ts` dùng server client (`next/headers`). Phase-16 import từ `lib/realtime/fetch-kudo-card.ts`.
+- **Bộ lọc phòng ban lọc theo phòng ban NGƯỜI NHẬN**, không người gửi. Phải xử lý `department_id IS NULL` thành nhóm "Chưa phân loại" (mọi user đăng nhập thật đều NULL). Không sửa view phase-02, xử lý ở `listDepartments()` + `listKudos(departmentId='unassigned')`.
+- **Đọc feed CHỈ qua `public_kudos_feed` + `my_sent_kudos`**; ghi CHỈ qua 3 RPC. Đọc thẳng `kudos` = lỗi bảo mật (revoke ở phase-02).
+- **`ModalShell` là chrome dùng chung** — `components/layout/modal-shell.tsx` chỉ backdrop/Esc/focus trap/scroll-lock. Phase-10/13/15 song song compose nội dung, KHÔNG tự dựng chrome (3 phase tự dựng = 3 Esc-listener đá nhau).
+
+### Deviations (cấu trúc, không phải lỗi)
+
+- **`computeStarCount` trùng ở 2 chỗ**: `lib/kudos/star-count.ts` (phase-04) và bản private `lib/auth/dto.ts` (phase-03). Cố ý không gộp vì ownership khác. Nợ phase-18+.
+- **`listRecentRankUps()` là xấp xỉ** — no history table, proxy `received_kudos_count >= 10` sort desc. Toàn là demo.
+- **`ModalShell` bỏ `createPortal`** — `fixed inset-0` đủ, nhưng sẽ hỏng nếu parent có `transform`/`filter` CSS. Chấp nhận giới hạn đó.
+- **`public_kudos_feed` KHÔNG có cột `recipient_department_id`** → lọc phòng ban: lấy `recipient_id` → join `profiles` để lấy `department_id` → filter. Không sửa view phase-02.
+- **`SiteHeader`/`SiteFooter`/`CountdownTimer` không có Figma screenId** — style suy từ token 9 màn khác, cần designer duyệt. Chấp nhận là component chung.
 
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")

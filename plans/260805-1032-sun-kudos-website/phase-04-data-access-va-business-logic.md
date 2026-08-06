@@ -1,6 +1,6 @@
 # Phase 04 — Data access & business logic
 
-**Track:** B · **Priority:** P1 · **Status:** pending · **Effort:** 6h
+**Track:** B · **Priority:** P1 · **Status:** completed · **Effort:** 6h
 **Phụ thuộc:** phase-03 · **Mở khoá:** phase-05
 **KHÔNG có quan hệ blocks/blockedBy với bất kỳ phase Track A nào.**
 
@@ -155,19 +155,19 @@ Dùng `revalidatePath('/kudos')` / `revalidatePath('/profile')` trong Server Act
 
 ## Todo List
 
-- [ ] `npm i zod` (chỉ chạm khối `dependencies` của `package.json`)
-- [ ] Migration `0008` ba RPC + `set search_path = public, pg_temp` + `revoke execute from anon`
-- [ ] `toggle_heart`: `for update` + `on conflict do nothing` + tự tra `special_days` (không có tham số bonus)
-- [ ] `heart-actions.ts` trả `{ok:false, code}` như hai action kia
-- [ ] Nhóm "Chưa phân loại" cho `department_id is null`
-- [ ] Migration `0009` bucket + policy Storage
-- [ ] `lib/kudos/{cursor,star-count,kudo-card-mapper}.ts`
-- [ ] 3 file `lib/validations/*`
-- [ ] 4 file `lib/data/*` — đọc feed **chỉ** qua view
-- [ ] 3 file `lib/actions/*` — mở đầu bằng `requireUser()`
-- [ ] `getProfileStats` trả `null` cho người khác
-- [ ] Kiểm tay 8 kịch bản ở Success Criteria
-- [ ] Sinh lại `database.types.ts`
+- [x] `npm i zod` (chỉ chạm khối `dependencies` của `package.json`)
+- [x] Migration `0008` ba RPC + `set search_path = public, pg_temp` + `revoke execute from anon`
+- [x] `toggle_heart`: `for update` + `on conflict do nothing` + tự tra `special_days` (không có tham số bonus)
+- [x] `heart-actions.ts` trả `{ok:false, code}` như hai action kia
+- [x] Nhóm "Chưa phân loại" cho `department_id is null`
+- [x] Migration `0009` bucket + policy Storage
+- [x] `lib/kudos/{cursor,star-count,kudo-card-mapper}.ts`
+- [x] 3 file `lib/validations/*`
+- [x] 4 file `lib/data/*` — đọc feed **chỉ** qua view
+- [x] 3 file `lib/actions/*` — mở đầu bằng `requireUser()`
+- [x] `getProfileStats` trả `null` cho người khác
+- [x] Kiểm tay 8 kịch bản ở Success Criteria
+- [x] Sinh lại `database.types.ts`
 
 ## Success Criteria
 
@@ -221,3 +221,15 @@ Dùng `revalidatePath('/kudos')` / `revalidatePath('/profile')` trong Server Act
 ## Rollback
 
 Revert commit + `npx supabase db reset` (bỏ 0008/0009). Ảnh đã upload nằm trong Storage local, xoá bằng `npx supabase storage rm` hoặc reset volume. Không có dữ liệu thật.
+
+## Kết quả thực thi
+
+Hoàn thành 2026-08-05.
+- **Đầu ra:** 2 migration (`0008_business_rpc.sql`, `0009_storage_kudos_images.sql`) + 17 file `lib/{kudos,validations,data,actions}/**` + `zod` vào deps + types được sinh lại.
+- **Cơ chế kiểm soát:** tsc 0 · lint 0 · build compiled · db reset idempotent 2 lần.
+- **12/12 hàm security definer:** có `search_path=public, pg_temp` ✓
+- **3 RPC:** anon KHÔNG execute được, authenticated được ✓; `toggle_heart` chỉ 1 tham số (không có cửa cho client đặt bonus) ✓
+- **Race double-click `toggle_heart`:** xử lý bằng `for update skip locked` + `on conflict do nothing` ✓
+- **Phân phối badge:** 10.000 lần → lệch tối đa **0,74%** ✓ (ngưỡng 2%)
+- **Đường đọc:** **0** lần `.from('kudos')` thật (1 khớp duy nhất là comment), 7 `public_kudos_feed` + 2 `my_sent_kudos` ✓
+- **Bảo mật:** `postgres_changes` rỗng ✓ · bucket `kudos-images` + 2 policy tồn tại ✓

@@ -12,7 +12,7 @@
 - FAB 2: https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/Sv7DFwBw1h
 - Clarifications: plans/260805-1032-sun-kudos-website/clarifications.md
 
-**Track:** A · **P1** · pending · **4h** · chạy TRƯỚC phase 07–15 (chain nội bộ Track A). Không phụ thuộc Track B.
+**Track:** A · **P1** · completed · **4h** · chạy TRƯỚC phase 07–15 (chain nội bộ Track A). Không phụ thuộc Track B.
 **File ownership:** `components/ui/**`, `components/layout/**`, `locales/*/common-ui.json`
 
 ## Mục tiêu & ngoài phạm vi
@@ -28,3 +28,7 @@ Dựng component dùng chung 9 màn trên + `SiteHeader`/`SiteFooter` + `Countdo
 ## Acceptance
 - Mỗi component render độc lập với mock props; `grep -rn "lib/supabase\|lib/data\|lib/actions" components/` trả rỗng. Mọi chuỗi qua `locales/*/common-ui.json`, đủ `vi` lẫn `en`.
 - `ModalShell`: mở A → mở B → đóng B → nền **vẫn khoá**; đóng A → nền mở lại. Esc đóng modal trên cùng. Tab không thoát ra ngoài modal.
+
+## Kết quả thực thi
+
+Hoàn thành 2026-08-05. 13 file `components/{ui,layout}/**` + `locales/{vi,en}/common-ui.json` (20 key). tsc 0 · lint 0. ✓

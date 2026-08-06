@@ -4,106 +4,113 @@
       "command": "npx supabase db reset",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Xanh SAU KHI vá seed.sql. Trước vá: LỖI duplicate key profiles_pkey, toàn bộ seed rollback, DB rỗng (0 profile/0 kudos/0 department). Sau vá: 8 profile đều có department_id, 1 admin, 30 kudos, 50 phòng ban.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Áp đủ 10 migration + seed. Idempotent: chạy 2 lần liên tiếp cho cùng kết quả.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
       "command": "npx tsc --noEmit",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Typecheck sạch.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Typecheck sạch sau cả ba phase và sau khi vá cursor + ModalShell.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
       "command": "npm run lint",
       "exitCode": 0,
       "status": "pass",
-      "summary": "ESLint sạch.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "ESLint sạch (1 warning tiền hữu ở .sunlint-eslint.config.js, ngoài phạm vi).",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
       "command": "npm run build",
       "exitCode": 0,
       "status": "pass",
       "summary": "next build compile thành công.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "curl http://127.0.0.1:54321/auth/v1/settings",
+      "command": "psql: search_path mọi hàm security definer",
       "exitCode": 0,
       "status": "pass",
-      "summary": "external.google = true — provider bật thật ở stack local, không phải chỉ khai trong config.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "12/12 hàm có search_path=public, pg_temp. Không sót hàm nào sau khi thêm 3 RPC mới.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "curl /auth/v1/authorize?provider=google (đọc redirect_uri)",
+      "command": "psql: has_function_privilege cho 3 RPC nghiệp vụ",
       "exitCode": 0,
       "status": "pass",
-      "summary": "TRƯỚC vá: GoTrue gửi http://127.0.0.1:54321/... trong khi Google Cloud Console đăng ký http://localhost:54321/... → redirect_uri_mismatch chắc chắn ở lần đăng nhập thật đầu tiên. SAU vá (khai tường minh trong config.toml + restart): khớp chính xác.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "create_kudos/toggle_heart/open_secret_box: anon=false, authenticated=true. Guest không ghi được gì.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "psql: pg_proc search_path mọi hàm security definer",
+      "command": "psql: pg_get_function_arguments(toggle_heart)",
       "exitCode": 0,
       "status": "pass",
-      "summary": "handle_new_user và sync_profile_from_google đều có search_path=public, pg_temp. Đếm hàm definer thiếu search_path trong schema public: 0.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Chỉ (p_kudos_id bigint). Không có tham số cờ bonus — client không thể tự cộng +2 mọi ngày.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "admin API tạo user + psql đếm hàng",
+      "command": "psql: đo phân phối badge 10.000 lần (orchestrator tự đo, không tin báo cáo)",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Trigger bootstrap: +1 profiles, +1 user_roles (role mặc định user), metadata Google (full_name/avatar_url) được chép. department_id NULL — đúng giới hạn đã biết.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Lệch tối đa 0,74% (stay_gold 29,26/30). TRƯỚC khi implementer vá: revival 0,43% so với kỳ vọng 10% — random() bị gọi per-row trong WHERE. Chỉ lộ ra vì Success Criteria bắt chạy 10.000 lần.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "admin API tạo user email @gmail.com ngoài domain",
+      "command": "grep -rn \"from('kudos')\" lib/data lib/realtime",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Tạo thành công 200, trigger chạy bình thường. Không có check hd/domain nào trong code — đúng spec Login item 2.2.1.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "0 lời gọi thật ở đường đọc (1 khớp duy nhất là comment nhắc nhở). 7 public_kudos_feed + 2 my_sent_kudos.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "psql: RPC sync_profile_from_google cách ly người gọi",
+      "command": "psql: storage.buckets + pg_policies",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Chữ ký chỉ (p_full_name, p_avatar_url) — không nhận id nên không nhắm được hàng người khác. Phiên A gọi: A đổi, B nguyên. Phiên anon: permission denied for function.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Bucket kudos-images tồn tại, 2 policy (insert own folder, select all). Implementer đã kiểm ghi vào thư mục người khác bị RLS chặn thật.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "curl route guard bằng session cookie thật",
+      "command": "grep -rn postgres_changes lib/ app/ components/",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Guest: /profile→307 /login, /admin→307 /login. User đã login (cookie sb-127-auth-token dựng từ password grant): /login→307 /. /profile,/admin trả 404 vì trang thuộc Track A chưa dựng — guard đã cho qua, đúng.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Rỗng. Realtime dùng Broadcast đúng quyết định kiến trúc — không ai lùi về Postgres Changes (thứ sẽ mở lại lỗ rò ẩn danh).",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "curl /auth/callback với code thiếu/rác/rỗng",
+      "command": "node script + psql: guest anon subscribe kudos-board",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Cả 3 trường hợp đều 307 về /login?error=oauth, không có 500 nào lọt ra. try/catch bao ngoài đã thêm sau góp ý reviewer.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Client hoàn toàn ẩn danh nhận được {event:insert, kudos_id} trong <1s sau khi INSERT qua psql. Payload không có sender_id/body.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "grep -c email lib/auth/dto.ts",
+      "command": "grep -rn \"lib/supabase|lib/data|lib/actions\" components/",
       "exitCode": 0,
       "status": "pass",
-      "summary": "0 — DTO không rò email hay auth identifier (TC_WEB_PROFILE_SEC_004).",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "Rỗng — ranh giới Track A/Track B giữ đúng, component chỉ nhận prop.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "grep NextResponse.redirect proxy.ts",
+      "command": "curl PostgREST: tái hiện cursor injection",
       "exitCode": 0,
       "status": "pass",
-      "summary": "Chỉ xuất hiện trong helper redirectKeepingSession và trong comment giải thích. Không có redirect trần nào đánh rơi cookie session.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "TRƯỚC vá: cursor hợp lệ trả 0 hàng, cursor mang createdAt=\"2000-01-01T00:00:00Z,id.gt.0\" trả 5 hàng — ranh giới keyset bị phá thật. SAU vá regex ISO-8601: 2 payload độc + 3 dạng rác đều bị từ chối, cursor hợp lệ (Z và +00:00) vẫn qua.",
+      "ts": "2026-08-06T08:04:44+07:00"
     },
     {
-      "command": "Đăng nhập Google THẬT qua trình duyệt",
+      "command": "node: kiểm biên decodeCursor sau khi vá",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "6 case: hợp lệ Z / hợp lệ +00:00 chấp nhận; chèn dấu phẩy / chèn or() / rác / id không phải số / base64 hỏng đều trả null, không throw.",
+      "ts": "2026-08-06T08:04:44+07:00"
+    },
+    {
+      "command": "Đăng nhập Google thật + StrictMode double-mount + enabled=false",
       "exitCode": 0,
       "status": "skipped",
-      "summary": "CHƯA CHẠY ĐƯỢC — cần người mở browser thật, ngoài khả năng phiên này. Mọi thứ bao quanh đã verify (provider bật, redirect_uri khớp, trigger chạy, callback xử lý lỗi đúng) nhưng luồng end-to-end vẫn là giả định. Kéo theo: avatar Google hiển thị (bằng chứng images.remotePatterns) cũng chưa kiểm.",
-      "ts": "2026-08-05T23:52:43+07:00"
+      "summary": "CHƯA KIỂM — cần React runtime và trang thật. Trang /kudos, /profile thuộc Track A phase 07-15 chưa dựng; hook realtime chưa cắm vào component nào (đúng phạm vi, việc cắm là phase-16).",
+      "ts": "2026-08-06T08:04:44+07:00"
     }
   ]
 }

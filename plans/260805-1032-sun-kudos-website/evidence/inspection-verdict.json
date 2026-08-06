@@ -1,25 +1,29 @@
 {
-  "score": 9.3,
+  "score": 9.2,
   "criticalCount": 0,
   "decision": "SEALED",
   "acceptanceCovered": [
-    "Bấm nút Google → về / với session, không phải /todo — verify một phần: redirect đích trong callback là new URL('/', request.url); callback với code hỏng đi về /login?error=oauth. Luồng consent thật CHƯA chạy được (cần browser)",
-    "Đăng nhập lần đầu: profiles và user_roles mỗi bảng thêm đúng MỘT hàng; lần hai không thêm — verify: tạo user qua admin API → +1 profiles, +1 user_roles. Lần hai không thêm vì trigger là AFTER INSERT trên auth.users, đăng nhập lại không tạo hàng auth.users mới",
-    "Guest mở /profile → 302 /login; sau khi login mở lại → thấy trang — verify: HTTP thật trả 307 (Next dùng 307 chứ không 302) về /login. Phần 'sau khi login mở lại → thấy trang' chưa kiểm được vì trang /profile thuộc Track A chưa dựng (404), nhưng guard đã cho qua",
-    "User đã login mở /login → 302 / — verify: dựng cookie sb-127-auth-token từ session thật rồi curl → 307 về /",
-    "User role user mở /admin → 302 /; đổi role thành admin rồi F5 → vào được ngay không cần đăng xuất — verify một phần: proxy chặn guest; chặn theo role nằm ở requireAdmin() trong DAL, query user_roles tươi mỗi lần nên đổi role có hiệu lực ngay (không dựa JWT claim). Trang /admin thật chưa tồn tại (Track A) nên chưa chạy qua đường thật",
-    "Đăng nhập bằng Gmail ngoài @sun-asterisk.com → thành công (đúng spec, không chặn domain) — verify: tạo user email @gmail.com qua admin API thành công, trigger chạy bình thường, không có check hd/domain nào trong code",
-    "grep -rn email lib/auth/dto.ts không khớp — verify: 0 lần xuất hiện",
-    "select proconfig from pg_proc where proname = handle_new_user chứa search_path=public, pg_temp — verify: search_path=public, pg_temp; và 0 hàm definer nào trong schema thiếu",
-    "Đăng nhập thật xong, avatar Google hiển thị được — CHƯA VERIFY: cần browser thật"
+    "Ba RPC create_kudos/toggle_heart/open_secret_box đều security definer, set search_path, revoke execute from anon — verify: 12/12 hàm definer có search_path; has_function_privilege cho anon = false trên cả ba",
+    "toggle_heart không có tham số cờ bonus — hàm tự tra special_days — verify: pg_get_function_arguments trả đúng (p_kudos_id bigint), một tham số duy nhất",
+    "Phân phối 6 badge qua 10.000 lần mở lệch dưới 2% so với 30/25/10/5/20/10 — verify: orchestrator tự đo 10.000 lần, lệch tối đa 0,74%. Trước khi vá bug random()-per-row: revival 0,43% so với 10%",
+    "Đường đọc feed không bao giờ chạm thẳng bảng kudos — chỉ qua public_kudos_feed và my_sent_kudos — verify: grep ra 0 lời gọi thật, 7 public_kudos_feed + 2 my_sent_kudos",
+    "Bucket kudos-images tồn tại với policy chặn ghi vào thư mục người khác — verify: bucket tồn tại + 2 policy; ghi vào thư mục người khác bị RLS chặn",
+    "Realtime dùng Broadcast, không Postgres Changes — grep postgres_changes toàn repo rỗng — verify: grep postgres_changes toàn lib/ app/ components/ trả rỗng",
+    "Guest chưa đăng nhập vẫn nghe được topic kudos-board — verify: script Node với client anon thật nhận tín hiệu <1s sau INSERT qua psql",
+    "Payload broadcast chỉ mang id và loại event, không sender_id, không body — verify: payload đọc từ realtime.messages chỉ có kudos_id + event (cộng field id do realtime.send tự chèn, không phải dữ liệu nghiệp vụ)",
+    "components/ không import lib/supabase, lib/data, lib/actions — grep rỗng — verify: grep trả rỗng",
+    "ModalShell scroll-lock đếm tham chiếu: mở A, mở B, đóng B thì nền vẫn khoá; đóng A thì mở lại — verify: đọc code bộ đếm scrollLockCount cấp module + stack; CHƯA kiểm được bằng trình duyệt thật vì chưa có trang nào dùng ModalShell",
+    "locales/vi và locales/en của common-ui.json cùng tập key — verify: script so Object.keys hai file, 20 key khớp 100%",
+    "Cursor keyset từ URL không phá được ranh giới filter PostgREST — verify: tái hiện injection thật bằng curl (cursor độc trả 5 hàng), vá bằng regex ISO-8601 tại gốc lib/kudos/cursor.ts, kiểm lại 6 case biên đều đúng"
   ],
   "regressionChecked": [
-    "Trigger 0007 trên auth.users va chạm seed.sql — PHÁT HIỆN HỒI QUY: db reset gãy hoàn toàn, DB rỗng. Đã vá bằng ON CONFLICT DO UPDATE; kiểm lại db reset exit 0 và 8 profile đều có department_id (chứng tỏ seed vẫn thắng trigger đúng ý đồ)",
-    "proxy.ts nhận thêm nhánh redirect từ route-guard — kiểm mọi redirect đều qua redirectKeepingSession, không đánh rơi cookie session vừa refresh (lỗi Critical đã xảy ra ở phase-01)",
-    "database.types.ts regen sau migration 0007 — tsc --noEmit exit 0",
-    "config.toml đổi + restart Supabase — kiểm provider google vẫn true và redirect_uri khớp Google Cloud Console sau restart",
-    "Gỡ biến env GOOGLE_CLIENT_ID/GOOGLE_SECRET khỏi .env.local — kiểm không code nào đọc chúng trước khi gỡ; build vẫn xanh sau khi gỡ",
-    "Phase-01/02 không hồi quy: launch gate, i18n, RLS, view ẩn danh không bị đụng (ownership tách bạch); build + lint + tsc đều xanh"
+    "Thêm 3 RPC mới — kiểm chuỗi search_path không bị phá: 12/12 hàm definer vẫn tuân thủ",
+    "package.json thêm zod (bàn giao 01→04→17) — build và tsc vẫn xanh, không đụng khối scripts",
+    "database.types.ts regen sau migration 0008/0009 — tsc 0",
+    "Track A ghi components/ song song Track B ghi lib/ — kiểm không file nào bị chạm chéo, boundary grep rỗng",
+    "Vá cursor tại lib/kudos/cursor.ts ảnh hưởng cả 3 hàm đọc feed — kiểm cursor hợp lệ vẫn qua, không chặn nhầm",
+    "Vá onCloseRef trong ModalShell — lint rule react-hooks vẫn xanh, build compiled",
+    "db reset chạy 2 lần liên tiếp cho cùng kết quả — seed phase-02/03 không bị migration mới phá"
   ],
   "contractStatus": "STABLE",
   "refuted": [],
@@ -28,37 +32,51 @@
   "findings": [
     {
       "severity": "Critical",
-      "category": "regression",
-      "location": "supabase/seed.sql:140",
-      "summary": "Trigger handle_new_user() của migration 0007 tạo profiles/user_roles ngay khi seed insert auth.users, sau đó seed tự insert lại 2 bảng đó không có ON CONFLICT → đụng khoá chính, toàn bộ seed rollback, db reset để lại DB RỖNG (0 profile/0 kudos/0 department). Comment trong seed ghi rõ giả định cũ 'không có trigger handle_new_user() ở phase này'. ĐÃ VÁ bằng on conflict do update, giữ được việc seed bồi department_id và nâng An lên admin.",
+      "category": "correctness",
+      "location": "supabase/migrations/0008_business_rpc.sql:224",
+      "summary": "open_secret_box đặt random()*total thẳng trong WHERE → Postgres gọi random() một lần MỖI HÀNG của subquery 6 badge, không phải một lần chung. Đo được revival 0,43% so với kỳ vọng 10%, touch_of_light 2,96% so với 20%. Implementer tự tìm khi chạy đúng test 10.000 lần mà Success Criteria yêu cầu. ĐÃ VÁ bằng rút v_pick ra biến trước; orchestrator đo lại độc lập, lệch tối đa 0,74%.",
+      "disposition": "Accept"
+    },
+    {
+      "severity": "Critical",
+      "category": "correctness",
+      "location": "supabase/migrations/0008_business_rpc.sql:1",
+      "summary": "Chữ ký create_kudos trong phase file ghi p_hashtag_ids uuid[], nhưng hashtags.id và kudos.id thực tế là bigint identity (schema phase-02). Gọi thử bằng psql lộ ngay 'invalid input syntax for type uuid'. ĐÃ VÁ thành bigint[] / returns bigint.",
+      "disposition": "Accept"
+    },
+    {
+      "severity": "Critical",
+      "category": "security",
+      "location": "lib/kudos/cursor.ts:21",
+      "summary": "decodeCursor chỉ kiểm typeof createdAt === 'string' rồi ghép thẳng vào chuỗi filter PostgREST .or('created_at.lt.<X>,…'). Dấu phẩy là ký tự ngăn mệnh đề của PostgREST nên cursor mang createdAt='2000-01-01T00:00:00Z,id.gt.0' phá sạch ranh giới keyset. Tái hiện thật bằng curl: cursor hợp lệ trả 0 hàng, cursor độc trả 5. Lỗi nhân ba vì cùng gốc dùng bởi board/đã-nhận/đã-gửi. Reviewer tìm ra; tester chấm SHIP READY và bỏ sót. ĐÃ VÁ bằng regex ISO-8601 strict tại gốc.",
       "disposition": "Accept"
     },
     {
       "severity": "Warning",
-      "category": "integration",
-      "location": "supabase/config.toml:346",
-      "summary": "redirect_uri để trống → GoTrue tự suy ra http://127.0.0.1:54321/auth/v1/callback, nhưng Google Cloud Console đăng ký http://localhost:54321/auth/v1/callback. Google so khớp redirect_uri theo chuỗi tuyệt đối nên lần đăng nhập thật đầu tiên sẽ gãy redirect_uri_mismatch. Kiểm chứng bằng curl /auth/v1/authorize?provider=google. ĐÃ VÁ bằng khai tường minh + restart + verify lại.",
+      "category": "correctness",
+      "location": "components/ui/modal-shell.tsx:76",
+      "summary": "Effect focus-trap phụ thuộc onClose chưa bọc ref. Caller truyền arrow inline (bình thường) → mỗi lần cha re-render là effect chạy lại, focus nhảy về phần tử đầu và cướp con trỏ khỏi ô input đang gõ. ĐÃ VÁ bằng onCloseRef, đúng khuôn lib/realtime/use-kudos-stream.ts đã dùng.",
       "disposition": "Accept"
     },
     {
-      "severity": "Suggestion",
+      "severity": "Warning",
       "category": "maintainability",
-      "location": ".env.local.example:1",
-      "summary": "GOOGLE_CLIENT_ID/GOOGLE_SECRET nằm trong .env.local và .env.local.example nhưng KHÔNG code nào đọc — CLI Supabase đọc .env với tên SUPABASE_AUTH_EXTERNAL_GOOGLE_*. Biến chết trông có thẩm quyền khiến người sửa auth sẽ sửa nhầm file. ĐÃ VÁ: gỡ khỏi cả hai, thay bằng dòng trỏ sang .env.example.",
-      "disposition": "Accept"
-    },
-    {
-      "severity": "Suggestion",
-      "category": "robustness",
-      "location": "app/auth/callback/route.ts:21",
-      "summary": "Thiếu try/catch bao ngoài — exception không lường trước (Supabase sập, metadata dị dạng) sẽ thành trang 500 trần ở đúng điểm cuối luồng đăng nhập, user không có đường đi tiếp. ĐÃ VÁ: bọc try/catch, mọi hỏng hóc quy về /login?error=oauth. Kiểm 3 trường hợp code thiếu/rác/rỗng đều 307 đúng chỗ.",
-      "disposition": "Accept"
+      "location": "lib/kudos/star-count.ts:1",
+      "summary": "computeStarCount trùng với bản private trong lib/auth/dto.ts (phase-03). Cố ý không gộp vì lib/auth/** ngoài ownership phase-04. Nợ cần dọn ở phase sau.",
+      "disposition": "Defer"
     },
     {
       "severity": "Warning",
       "category": "coverage",
-      "location": "plans/260805-1032-sun-kudos-website/phase-03-auth-google-oauth.md:129",
-      "summary": "Luồng đăng nhập Google end-to-end thật chưa chạy được lần nào (cần browser). Mọi thứ bao quanh đã verify nhưng bản thân consent flow + avatar hiển thị vẫn là giả định. Ghi vào Còn treo, cần người mở browser xác nhận trước khi coi phase-03 là đã chứng minh đầy đủ.",
+      "location": "components/ui/modal-shell.tsx:16",
+      "summary": "Hành vi scroll-lock đếm tham chiếu và focus trap mới chỉ kiểm bằng đọc code, chưa chạy trên trình duyệt thật vì chưa trang nào dùng ModalShell. Đây là phần rủi ro cao nhất của phase-06 và là thứ phase-10/13/15 sẽ phụ thuộc. Cần test thật ở phase-16/17.",
+      "disposition": "Defer"
+    },
+    {
+      "severity": "Suggestion",
+      "category": "data-quality",
+      "location": "lib/data/secret-box-queries.ts:1",
+      "summary": "listRecentRankUps() là xấp xỉ — schema không có bảng lịch sử thời điểm vượt ngưỡng hoa-thị, dùng proxy received_kudos_count >= 10 sắp giảm dần. Có thể hiển thị thứ tự không đúng nghĩa 'mới thăng hạng'.",
       "disposition": "Defer"
     }
   ]

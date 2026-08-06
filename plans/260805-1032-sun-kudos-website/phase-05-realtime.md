@@ -1,6 +1,6 @@
 # Phase 05 — Realtime (Broadcast)
 
-**Track:** B · **Priority:** P2 · **Status:** pending · **Effort:** 3h
+**Track:** B · **Priority:** P2 · **Status:** completed · **Effort:** 3h
 **Phụ thuộc:** phase-04 · **Mở khoá:** phase-16
 **KHÔNG có quan hệ blocks/blockedBy với bất kỳ phase Track A nào.**
 
@@ -114,14 +114,14 @@ Không chèn thẳng vào giữa danh sách keyset. Đẩy vào hàng đợi, hi
 
 ## Todo List
 
-- [ ] Xác nhận trigger `0006b` phát tín hiệu (Realtime Inspector)
-- [ ] `kudos-channel.ts` không state module-level
-- [ ] `use-kudos-stream.ts` + cleanup `removeChannel`
-- [ ] `use-my-hearts-stream.ts`, bỏ qua khi guest
-- [ ] `fetchKudoCardById` trong `kudos-queries.ts`
-- [ ] Policy cho `anon` nghe `kudos-board` (nếu Realtime Authorization bật)
-- [ ] Kiểm **guest chưa login** nhận được kudo mới
-- [ ] Kiểm StrictMode không rò kênh
+- [x] Xác nhận trigger `0006b` phát tín hiệu (Realtime Inspector)
+- [x] `kudos-channel.ts` không state module-level
+- [x] `use-kudos-stream.ts` + cleanup `removeChannel`
+- [x] `use-my-hearts-stream.ts`, bỏ qua khi guest
+- [x] `fetchKudoCardById` trong `kudos-queries.ts`
+- [x] Policy cho `anon` nghe `kudos-board` (nếu Realtime Authorization bật)
+- [x] Kiểm **guest chưa login** nhận được kudo mới
+- [x] Kiểm StrictMode không rò kênh
 
 ## Success Criteria
 
@@ -164,3 +164,11 @@ Không chèn thẳng vào giữa danh sách keyset. Đẩy vào hàng đợi, hi
 ## Rollback
 
 Revert commit. Gỡ realtime không ảnh hưởng luồng đọc/ghi — feed vẫn chạy bằng query thường, chỉ mất cập nhật tức thời. Trigger `0006b` để lại cũng vô hại (phát tín hiệu mà không ai nghe).
+
+## Kết quả thực thi
+
+Hoàn thành 2026-08-05.
+- **Đầu ra:** 5 file `lib/realtime/**` (283 dòng) + 1 hàm mới `fetchKudoCardById` ở `lib/data/kudos-queries.ts`.
+- **Cơ chế kiểm soát:** tsc 0 · lint 0 · db reset idempotent.
+- **Guest (anon) nhận realtime board:** ✓ · StrictMode cleanup không rò kênh ✓
+- **Payload Broadcast:** chỉ `{kudos_id, event}` ✓ · Topic `kudos-board` + `user-hearts:<id>` ✓
