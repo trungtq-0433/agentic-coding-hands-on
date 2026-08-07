@@ -89,7 +89,13 @@ export function AwardsPage({
         <AwardsKeyvisual />
 
         {/* mm:A_Title hệ thống giải thưởng — CSV item A */}
-        <div className={`${montserrat.className} flex flex-col gap-4`}>
+        {/* CẢ HAI dòng đều CANH GIỮA. Đo bản vẽ: eyebrow `313:8454` là khối
+            rộng đúng 1152 (= bề ngang khung nội dung) với `textAlign: center`;
+            tiêu đề `313:8457` rộng 931 nhưng nằm trong `Frame 488` rộng 1152
+            `justify-content: center`, nên mép trái rơi vào x=254 —
+            (1152−931)/2 = 110.5, cộng 144 ra đúng 254. Bản trước để cả hai canh
+            trái ở x=144, lệch 110px. */}
+        <div className={`${montserrat.className} flex flex-col gap-4 text-center`}>
           <p className="text-2xl leading-8 font-bold text-white">{t("section.eyebrow")}</p>
           <div className="h-px w-full bg-[#2E3940]" aria-hidden="true" />
           <h2 className="text-[clamp(2rem,1rem+4vw,3.5625rem)] leading-[1.12] font-bold tracking-[-0.25px] text-[#FFEA9E]">
@@ -101,7 +107,12 @@ export function AwardsPage({
             Grid 2 cột cố định `240px` + phần còn lại — khuôn "sticky sidebar
             cạnh nội dung dài" chắc chắn hơn flex (xem comment ở `awards-nav.tsx`
             Lỗi 3). Cả 2 cột cùng bắt đầu ở đây → menu ngang hàng thẻ đầu tiên. */}
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_1fr] lg:items-start lg:gap-16">
+        {/* `lg:pl-11` = 44px: bản vẽ thụt cả khối menu+thẻ vào so với khung nội
+            dung — menu bắt đầu ở x=188 chứ không phải x=144 (mép khung), và thẻ
+            ở x=443. Bản trước bỏ qua khoảng thụt này nên cả hai cột dạt trái.
+            `lg:gap-4` (15px) là khoảng thật giữa mép phải menu (428) và mép trái
+            thẻ (443) — trước để `gap-16` (64px) nên thẻ bị bóp còn 833 thay vì 856. */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_1fr] lg:items-start lg:gap-4 lg:pl-11">
           <AwardsNav awards={awards} activeSlug={currentSlug} onSelect={scrollToSlug} />
           <div className="flex min-w-0 flex-col gap-12 lg:gap-16">
             {awards.map((award, index) => (
