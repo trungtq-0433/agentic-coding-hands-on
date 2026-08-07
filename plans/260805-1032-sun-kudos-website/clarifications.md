@@ -292,12 +292,27 @@ Hai chỗ khác lệch giữa mô tả và bản vẽ:
 - Dòng phụ mỗi hàng leaderboard là **chuỗi mô tả quà** (`"Nhận được 1 áo phông SAA"`), không phải con
   số — không dựng lại được từ `number` + mẫu câu. Track B phải trả câu đã dựng sẵn.
 
-### Hero tier: đã có TÊN, vẫn thiếu NGƯỠNG
+### Hero tier: ĐÃ ĐỦ cả TÊN lẫn NGƯỠNG (cập nhật 2026-08-07)
 
-Gap #7 chốt bỏ Hero tier vì "thiếu tên tier + ngưỡng". Màn Live board cho biết **4 tên**: `New Hero`,
-`Rising Hero`, `Super Hero`, `Legend Hero` — và huy hiệu xuất hiện trên MỌI thẻ kudo. Nhưng **ngưỡng
-vẫn không có ở đâu**. → `KudoCard` nhận `heroTier` như prop tuỳ chọn: UI dựng đủ chỗ khớp bản vẽ, luật
-suy ra hạng để trống cho phase-16/PO. Không bịa ngưỡng.
+Gap #7 từng chốt bỏ Hero tier vì "thiếu tên tier + ngưỡng". Màn Live board cho **4 tên** (`New Hero`,
+`Rising Hero`, `Super Hero`, `Legend Hero`) nhưng không có ngưỡng, nên bản ghi cũ kết luận là vẫn thiếu.
+
+**Ngưỡng có thật, và nằm ở màn Thể lệ (`b1Filzi9i6`) — không phải Live board.** Phát hiện khi dựng
+phase-13. Đây là chỗ DUY NHẤT trong 18 màn chứa con số này, nên ai tìm ở màn Live board sẽ không thấy:
+
+| Hạng | Ngưỡng |
+|---|---|
+| New Hero | 1–4 người gửi Kudos cho bạn |
+| Rising Hero | 5–9 |
+| Super Hero | 10–20 |
+| Legend Hero | hơn 20 |
+
+⚠ **Đơn vị đếm là SỐ NGƯỜI GỬI KHÁC NHAU, không phải tổng kudos.** Đừng lẫn với ngưỡng hoa-thị
+10/20/50 — cái đó đếm tổng kudos. Hai thang khác nhau, đọc lướt là trộn.
+
+Hợp đồng `KudoCard` **không đổi**: `heroTier` vẫn là prop, Track B tính rồi truyền xuống. Có ngưỡng
+không biến việc "component tự đếm" thành đúng. Việc còn lại của phase-16: hiện thực luật này ở tầng dữ
+liệu (đếm distinct sender trong `public_kudos_feed`), rồi cấp `heroTier` đã tính sẵn cho UI.
 
 **Ảnh badge `New Hero` không lấy được** — node `MM_MEDIA_New Hero` không có URL trong `get_media_files`
 và `get_figma_image` trả 500. Gặp `new` thì không render huy hiệu. 3 hạng còn lại có đủ ảnh.
@@ -354,6 +369,63 @@ cho RPC thật) · `newKudosQueue` luôn 0 vì chưa nối Broadcast — **khôn
 vẻ sống động** · `onCompose`/`onRules`/`onOpenBox` mở modal phase-10/13/15 chưa tồn tại.
 
 `app/kudos/page.tsx` **đã nối phiên đăng nhập thật ngay từ đầu** (không lặp lại sai lầm phase-08).
+
+## Session 2026-08-07 (Sau phase-10→15, 6 màn dựng song song)
+
+### Spec Secret Box mâu thuẫn với chính node nó trỏ tới — CẦN NGƯỜI SOẠN SPEC CHỐT
+
+Dòng A của `spec-open-secret-box-J3-4YFIpMM.csv` trỏ node `1466:7678` và mô tả *"Tiêu đề modal 'MỞ
+SECRET BOX THÀNH CÔNG'"*. Query thẳng node đó: `character` thật là **"KHÁM PHÁ SECRET BOX CỦA BẠN"**.
+Không phải gắn nhầm frame — **đúng frame, đúng node, sai văn bản mô tả**.
+
+Cả frame là trạng thái CHƯA MỞ: tên frame `Open secret box- chưa mở`, node ảnh `MM_MEDIA_box quà chưa
+mở`, không có node huy hiệu nào. Nhưng spec + 19 test case đều mô tả trạng thái ĐÃ MỞ THÀNH CÔNG.
+
+Figma còn **8 frame `Open secret box- trạng thái Standby sau khi đã bấm`** (bản web, chưa kể 8 bản iOS)
+— nhiều khả năng đó mới là trạng thái kết quả. Nhưng chúng **không nằm trong 18 màn đã sync**: query
+`AzMhNg8aqW` trả *"Frame metadata does not contain node style information"*. Không có toạ độ, không có
+màu, không có asset → **không dựng theo chúng được**, dựng là bịa.
+
+**Bản đã dựng là con lai:** chữ theo spec/TC (vì `TC a0cd2f27` ép cứng chuỗi tiêu đề), hình học + 2
+asset theo Figma. Dù chốt hướng nào thì một nửa cũng phải làm lại:
+
+| Nếu chốt | Việc phải làm |
+|---|---|
+| Spec đúng → sửa Figma | Cần hình hộp ĐÃ MỞ + huy hiệu; chưa có trong màn nào đã sync → chờ designer |
+| Figma đúng → sửa spec | Đổi 2 chuỗi i18n + **sửa 19 test case**, và dựng thêm modal kết quả (chưa tồn tại) |
+
+**Không chặn phase-16** — nối RPC `open_secret_box()` vào modal chạy được ngay. Nhưng ra sự kiện thật mà
+chưa chốt thì người dùng bấm mở xong sẽ thấy chữ "thành công" kèm hình hộp còn nguyên. Phạm vi sửa gọn:
+7 key i18n + 2 asset; hợp đồng `<SecretBoxModal remaining lastBadge onOpenBox />` chịu được cả hai hướng.
+
+### 4/6 thẻ ở màn Hệ thống giải là instance CHƯA AI SỬA NỘI DUNG
+
+Quét cả 72 node TEXT của `zFYDgyj_pD`: chỉ **2/6 thẻ có nội dung riêng** — `D.1 Top Talent` và
+`D.5 Signature 2025 - Creator`. Bốn thẻ còn lại (`D.2`, `D.3`, `D.4`, `D.6`) đều mang tiêu đề
+**"Top Talent"**, lặp y nguyên đoạn mô tả Top Talent, số lượng đều "10", giá trị đều "7.000.000 VNĐ".
+
+→ **Ở màn này CSV spec là nguồn đúng, không phải Figma.** Số lượng/giá trị lấy từ CSV (Top Project 02
+tập thể 15tr · Top Project Leader 03 cá nhân 7tr · Best Manager 01 cá nhân 10tr · MVP 01 15tr). Mô tả
+của 4 thẻ đó giữ bản tóm tắt ngắn + `FIXME` trong `lib/content/awards.ts`, **không chép đoạn Top Talent
+sang** — chép là bịa nội dung dưới danh nghĩa "lấy từ thiết kế". Chờ PO cấp mô tả riêng.
+
+Hệ quả đo lường: `/awards` cao 4606px vs bản vẽ 6410px. **Khoảng hụt này KHÔNG phải lỗi** — bản vẽ cao
+hơn vì 4 thẻ placeholder lặp đoạn văn 392 ký tự. Đuổi theo 6410 nghĩa là sao chép lỗi của bản vẽ.
+
+### Bài học quy trình: `implementer` KHÔNG có MCP momorph
+
+Frontmatter `.claude/agents/implementer.md` khai 13 tool, không có `mcp__momorph__*` lẫn `ToolSearch`.
+Giao 6 màn UI cho nó là giao việc phụ thuộc tool cho agent không có tool đó — **lặp lại đúng bài học đã
+ghi ở session 2026-08-06** ("agent không có MCP thì SUY ĐOÁN, và nó không tự biết").
+
+Thực tế cứu vãn được một phần vì `implementer` có tool `Agent`: phase-13 và phase-15 tự bung agent phụ
+`general-purpose` (có MCP) để đi lấy dữ liệu. Nhưng **không đồng đều** — phase-12 không làm vậy, nên
+`/awards` dựng chay từ CSV + asset tái dùng của phase-08, và sau đó lòi ra 3 lỗi bố cục (thẻ không so
+le, menu trái neo sau thẻ thứ 5, mô tả một dòng thay vì đoạn 480×192). Orchestrator phải đo bằng
+Playwright + MCP rồi gửi số đo về cho agent sửa.
+
+→ **Kiểm tool của agent TRƯỚC khi giao việc phụ thuộc tool.** Nếu buộc phải dùng `implementer` cho việc
+cần MCP, nói thẳng trong prompt: "mày không có MCP, hãy bung agent phụ `general-purpose` để lấy dữ liệu".
 
 ## MoMorph refs
 - fileKey: `9ypp4enmFmdK3YAFJLIu6C` (file "SAA 2025 - Internal Live Coding")

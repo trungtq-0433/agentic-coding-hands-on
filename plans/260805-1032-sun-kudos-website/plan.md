@@ -40,18 +40,18 @@ Track A không import file nào của Track B trước phase-16; mọi hành vi 
 | 07 | [UI Login](./phase-07-ui-login.md) | A | completed | 1h | 06 |
 | 08 | [UI Homepage SAA](./phase-08-ui-homepage-saa.md) | A | completed | 3h | 06 |
 | 09 | [UI Live board](./phase-09-ui-live-board.md) | A | completed | 4h | 06 |
-| 10 | [UI Viết Kudo](./phase-10-ui-viet-kudo.md) | A | pending | 3h | 06 |
-| 11 | [UI Profile bản thân](./phase-11-ui-profile-ban-than.md) | A | pending | 3h | 06, 09 |
-| 12 | [UI Hệ thống giải](./phase-12-ui-he-thong-giai.md) | A | pending | 2h | 06 |
-| 13 | [UI Thể lệ](./phase-13-ui-the-le.md) | A | pending | 1h | 06 |
-| 14 | [UI Countdown Prelaunch](./phase-14-ui-countdown-prelaunch.md) | A | pending | 1h | 06 |
-| 15 | [UI Open Secret Box](./phase-15-ui-open-secret-box.md) | A | pending | 1h | 06 |
+| 10 | [UI Viết Kudo](./phase-10-ui-viet-kudo.md) | A | completed | 3h | 06 |
+| 11 | [UI Profile bản thân](./phase-11-ui-profile-ban-than.md) | A | completed | 3h | 06, 09 |
+| 12 | [UI Hệ thống giải](./phase-12-ui-he-thong-giai.md) | A | completed | 2h | 06 |
+| 13 | [UI Thể lệ](./phase-13-ui-the-le.md) | A | completed | 1h | 06 |
+| 14 | [UI Countdown Prelaunch](./phase-14-ui-countdown-prelaunch.md) | A | completed | 1h | 06 |
+| 15 | [UI Open Secret Box](./phase-15-ui-open-secret-box.md) | A | completed | 1h | 06 |
 | 16 | [Integration](./phase-16-integration.md) | — | pending | 5h | 05 + 07..15 |
 | 17 | [Tests](./phase-17-tests.md) | — | pending | 14h | 16 |
 
 **Tổng 63h** = Track B 21h (3+6+3+6+3) · Track A 23h (4+1+3+4+3+3+2+1+1+1) · phase-16 5h · phase-17 14h.
 
-**Tiến độ:** 9/17 phase hoàn thành · 33h/63h effort done.
+**Tiến độ:** 15/17 phase hoàn thành · 44h/63h effort done. Còn phase-16 (integration, 5h) + phase-17 (tests, 14h).
 
 ## Pre-requisites (ngoài phase, làm song song từ ngày 0)
 

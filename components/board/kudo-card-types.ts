@@ -10,12 +10,18 @@
 /**
  * Hạng Hero hiển thị cạnh tên người dùng.
  *
- * **Vì sao là prop chứ không tự tính:** `clarifications.md` gap #7 chốt bỏ Hero
- * tier khỏi MVP vì "thiếu tên tier + ngưỡng". Màn Live board cho biết 4 TÊN
- * (`New Hero` / `Rising Hero` / `Super Hero` / `Legend Hero`) nhưng **vẫn không
- * cho biết NGƯỠNG**. Nên UI dựng đủ chỗ để hiển thị huy hiệu (khớp bản vẽ),
- * còn luật suy ra hạng thì để nguyên chỗ trống — phase-16/PO chốt sau. Không
- * bịa ngưỡng.
+ * **Vì sao là prop chứ không tự tính:** UI dựng chỗ hiển thị huy hiệu cho khớp
+ * bản vẽ, còn luật suy ra hạng thuộc tầng dữ liệu (Track B, nối ở phase-16).
+ * Lý do này KHÔNG đổi kể cả khi đã biết ngưỡng — component không nên tự đếm.
+ *
+ * **Ngưỡng đã tìm được (2026-08-07, phase-13).** Màn Thể lệ (`b1Filzi9i6`) ghi
+ * rõ, và đây là chỗ DUY NHẤT trong toàn bộ 18 màn có con số này — không phải
+ * màn Live board, nơi ai cũng tìm:
+ *   New 1–4 · Rising 5–9 · Super 10–20 · Legend >20
+ * Đơn vị đếm là **SỐ NGƯỜI GỬI KHÁC NHAU**, không phải tổng kudos. Đừng lẫn với
+ * ngưỡng hoa-thị 10/20/50 — cái đó đếm tổng kudos, hai thang hoàn toàn khác.
+ * `clarifications.md` gap #7 trước đây chốt bỏ Hero tier vì "thiếu tên + ngưỡng";
+ * giờ đủ cả hai, việc còn lại là Track B cấp `heroTier` đã tính sẵn.
  *
  * `new` chưa có ảnh: node `MM_MEDIA_New Hero` không có URL trong
  * `get_media_files` và `get_figma_image` trả 500 (cùng lỗi endpoint đã gặp ở
