@@ -310,6 +310,9 @@ phase-13. Đây là chỗ DUY NHẤT trong 18 màn chứa con số này, nên ai
 ⚠ **Đơn vị đếm là SỐ NGƯỜI GỬI KHÁC NHAU, không phải tổng kudos.** Đừng lẫn với ngưỡng hoa-thị
 10/20/50 — cái đó đếm tổng kudos. Hai thang khác nhau, đọc lướt là trộn.
 
+**Đã xác nhận (2026-08-07): đơn vị đếm là SỐ NGƯỜI GỬI KHÁC NHAU (distinct sender).** Phase-16 hiện
+thực bằng cách đếm distinct sender trên `public_kudos_feed` rồi cấp `heroTier` đã tính sẵn cho UI.
+
 Hợp đồng `KudoCard` **không đổi**: `heroTier` vẫn là prop, Track B tính rồi truyền xuống. Có ngưỡng
 không biến việc "component tự đếm" thành đúng. Việc còn lại của phase-16: hiện thực luật này ở tầng dữ
 liệu (đếm distinct sender trong `public_kudos_feed`), rồi cấp `heroTier` đã tính sẵn cho UI.
@@ -372,45 +375,53 @@ vẻ sống động** · `onCompose`/`onRules`/`onOpenBox` mở modal phase-10/1
 
 ## Session 2026-08-07 (Sau phase-10→15, 6 màn dựng song song)
 
-### Spec Secret Box mâu thuẫn với chính node nó trỏ tới — CẦN NGƯỜI SOẠN SPEC CHỐT
+### Spec Secret Box mâu thuẫn với node nó trỏ tới — ĐÃ CHỐT: lấy Figma
 
 Dòng A của `spec-open-secret-box-J3-4YFIpMM.csv` trỏ node `1466:7678` và mô tả *"Tiêu đề modal 'MỞ
-SECRET BOX THÀNH CÔNG'"*. Query thẳng node đó: `character` thật là **"KHÁM PHÁ SECRET BOX CỦA BẠN"**.
-Không phải gắn nhầm frame — **đúng frame, đúng node, sai văn bản mô tả**.
+SECRET BOX THÀNH CÔNG'"*. Nội dung thật của node đó là **"KHÁM PHÁ SECRET BOX CỦA BẠN"**; node
+`1466:7683` là **"Click vào box để mở"** (spec ghi "…để tiếp tục mở"); node ảnh tên `MM_MEDIA_box quà
+chưa mở`. Đúng frame, đúng node, **sai văn bản mô tả** — cả khung là trạng thái TRƯỚC khi mở.
 
-Cả frame là trạng thái CHƯA MỞ: tên frame `Open secret box- chưa mở`, node ảnh `MM_MEDIA_box quà chưa
-mở`, không có node huy hiệu nào. Nhưng spec + 19 test case đều mô tả trạng thái ĐÃ MỞ THÀNH CÔNG.
+**Quyết định (2026-08-07): Figma đúng, spec phải sửa theo.** Đã đổi `locales/{vi,en}/secret-box.json`:
+- `modal.title` → "KHÁM PHÁ SECRET BOX CỦA BẠN" / "DISCOVER YOUR SECRET BOX"
+- `modal.instruction` → "Click vào box để mở" / "Click the box to open it"
 
-Figma còn **8 frame `Open secret box- trạng thái Standby sau khi đã bấm`** (bản web, chưa kể 8 bản iOS)
-— nhiều khả năng đó mới là trạng thái kết quả. Nhưng chúng **không nằm trong 18 màn đã sync**: query
-`AzMhNg8aqW` trả *"Frame metadata does not contain node style information"*. Không có toạ độ, không có
-màu, không có asset → **không dựng theo chúng được**, dựng là bịa.
+**Việc còn lại KHÔNG ở code, giao lại người soạn spec:**
+1. Sửa spec CSV + **19 test case** cho khớp trạng thái chưa mở. `TC a0cd2f27` ép cứng chuỗi tiêu đề cũ
+   nên sẽ FAIL cho tới khi cập nhật.
+2. Figma còn **8 khung `Open secret box- trạng thái Standby sau khi đã bấm`** (bản web) chưa sync/spec —
+   nhiều khả năng đó mới là modal KẾT QUẢ, và sẽ là một màn riêng cần dựng sau.
 
-**Bản đã dựng là con lai:** chữ theo spec/TC (vì `TC a0cd2f27` ép cứng chuỗi tiêu đề), hình học + 2
-asset theo Figma. Dù chốt hướng nào thì một nửa cũng phải làm lại:
+### ĐÍNH CHÍNH — bản vẽ Hệ thống giải ĐÃ điền đủ 6 thẻ (khẳng định trước đó SAI)
 
-| Nếu chốt | Việc phải làm |
-|---|---|
-| Spec đúng → sửa Figma | Cần hình hộp ĐÃ MỞ + huy hiệu; chưa có trong màn nào đã sync → chờ designer |
-| Figma đúng → sửa spec | Đổi 2 chuỗi i18n + **sửa 19 test case**, và dựng thêm modal kết quả (chưa tồn tại) |
+Bản ghi trước ở mục này khẳng định D.2/D.3/D.4/D.6 là instance chưa ai sửa nội dung, dựa trên việc cả
+bốn đều hiện ra "Top Talent". **Khẳng định đó SAI, do đọc nhầm trường dữ liệu.**
 
-**Không chặn phase-16** — nối RPC `open_secret_box()` vào modal chạy được ngay. Nhưng ra sự kiện thật mà
-chưa chốt thì người dùng bấm mở xong sẽ thấy chữ "thành công" kèm hình hộp còn nguyên. Phạm vi sửa gọn:
-7 key i18n + 2 asset; hợp đồng `<SecretBoxModal remaining lastBadge onOpenBox />` chịu được cả hai hướng.
+`query_by_type` chỉ trả `itemName` — là **TÊN node** Figma, đặt theo nội dung LÚC TẠO và **không đổi
+khi người ta sửa chữ**. Nội dung thật nằm ở `character`, mà lệnh đó không trả về. Ví dụ:
 
-### 4/6 thẻ ở màn Hệ thống giải là instance CHƯA AI SỬA NỘI DUNG
+| node | `itemName` (tên node, cũ) | `character` (nội dung thật) |
+|---|---|---|
+| `I313:8468;214:2622` | Top Talent | **Top Project** |
+| `I313:8469;214:2530` | Top Talent | **Top Project Leader** |
 
-Quét cả 72 node TEXT của `zFYDgyj_pD`: chỉ **2/6 thẻ có nội dung riêng** — `D.1 Top Talent` và
-`D.5 Signature 2025 - Creator`. Bốn thẻ còn lại (`D.2`, `D.3`, `D.4`, `D.6`) đều mang tiêu đề
-**"Top Talent"**, lặp y nguyên đoạn mô tả Top Talent, số lượng đều "10", giá trị đều "7.000.000 VNĐ".
+Kiểm lại bằng `get_node` / `query_section` (hai lệnh CÓ trả `character`): **cả 6 thẻ đều có tiêu đề,
+mô tả, số lượng, giá trị riêng.** Đã chép nguyên văn vào `lib/content/awards.ts`, gỡ hết `FIXME`.
 
-→ **Ở màn này CSV spec là nguồn đúng, không phải Figma.** Số lượng/giá trị lấy từ CSV (Top Project 02
-tập thể 15tr · Top Project Leader 03 cá nhân 7tr · Best Manager 01 cá nhân 10tr · MVP 01 15tr). Mô tả
-của 4 thẻ đó giữ bản tóm tắt ngắn + `FIXME` trong `lib/content/awards.ts`, **không chép đoạn Top Talent
-sang** — chép là bịa nội dung dưới danh nghĩa "lấy từ thiết kế". Chờ PO cấp mô tả riêng.
+Số lượng/giá trị đối chiếu thêm bằng ảnh thiết kế — và lộ ra một chỗ `plan.md` + phase-12 ghi sai:
+**Top Talent là "10 Cá nhân", không phải "10 đơn vị".**
 
-Hệ quả đo lường: `/awards` cao 4606px vs bản vẽ 6410px. **Khoảng hụt này KHÔNG phải lỗi** — bản vẽ cao
-hơn vì 4 thẻ placeholder lặp đoạn văn 392 ký tự. Đuổi theo 6410 nghĩa là sao chép lỗi của bản vẽ.
+| Thẻ | Số lượng | Giá trị |
+|---|---|---|
+| Top Talent | 10 Cá nhân | 7.000.000 VNĐ / mỗi giải |
+| Top Project | 02 Tập thể | 15.000.000 VNĐ / mỗi giải |
+| Top Project Leader | 03 Cá nhân | 7.000.000 VNĐ / mỗi giải |
+| Best Manager | 01 Cá nhân | 10.000.000 VNĐ |
+| Signature 2025 - Creator | 01 Cá nhân hoặc tập thể | 5.000.000 (cá nhân) / 8.000.000 (tập thể) |
+| MVP | 01 Cá nhân | 15.000.000 VNĐ |
+
+**Bài học: `itemName` KHÔNG phải nội dung.** Muốn đọc chữ trong Figma qua MoMorph thì phải dùng lệnh
+trả `character`; `query_by_type` chỉ dùng để LIỆT KÊ node, không dùng để đọc nội dung.
 
 ### Bài học quy trình: `implementer` KHÔNG có MCP momorph
 
