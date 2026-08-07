@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 
+import { AppModalHost, type AppModal } from "@/components/modals/app-modal-host";
 import type { AccountMenuProfile } from "@/components/ui/account-menu";
 import type { AwardContent } from "@/lib/content/awards";
 
@@ -44,9 +47,7 @@ export function AwardsPageClient({ awards, profile, isAdmin, signOut }: AwardsPa
     router.push(path);
   }
 
-  function handleRules() {
-    // phase-16: mở modal Thể lệ (phase-13).
-  }
+  const [modal, setModal] = useState<AppModal>(null);
 
   function handleSignOut() {
     void signOut().catch((error: unknown) => {
@@ -55,13 +56,16 @@ export function AwardsPageClient({ awards, profile, isAdmin, signOut }: AwardsPa
   }
 
   return (
+    <>
     <AwardsPage
       awards={awards}
       onNavigate={handleNavigate}
       profile={profile}
       isAdmin={isAdmin}
       onSignOut={handleSignOut}
-      onRules={handleRules}
+      onRules={() => setModal("rules")}
     />
+    <AppModalHost active={modal} onChange={setModal} />
+    </>
   );
 }

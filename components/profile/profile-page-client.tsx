@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 
+import { AppModalHost, type AppModal } from "@/components/modals/app-modal-host";
 import type { AccountMenuProfile } from "@/components/ui/account-menu";
 import type { ToggleHeartResult } from "@/components/board/kudo-card-types";
 
@@ -53,6 +54,7 @@ export function ProfilePageClient({
   const [direction, setDirection] = useState<ProfileDirection>("received");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState<AppModal>(null);
 
   const receivedPool = useMemo(
     () => buildMockReceivedFeed(profile, poolTotal(profile.receivedKudosCount)),
@@ -114,14 +116,6 @@ export function ProfilePageClient({
   // tại) nhưng vẫn phải khai trong chữ ký để khớp `ProfilePageProps.onCompose`
   // — bỏ tên tham số thay vì đặt `_recipientId` để không vướng
   // `@typescript-eslint/no-unused-vars` (repo này không bật `argsIgnorePattern`).
-  function handleCompose() {
-    // phase-16: mở modal Viết Kudo (phase-10), prefill người nhận theo recipientId truyền vào.
-  }
-
-  function handleRules() {
-    // phase-16: mở modal Thể lệ (phase-13).
-  }
-
   function handleSignOut() {
     void signOut().catch((error: unknown) => {
       console.error("[profile] đăng xuất thất bại:", error);
@@ -129,6 +123,7 @@ export function ProfilePageClient({
   }
 
   return (
+    <>
     <ProfilePage
       headerProfile={headerProfile}
       isAdmin={isAdmin}
@@ -142,8 +137,10 @@ export function ProfilePageClient({
       onDirectionChange={handleDirectionChange}
       onLoadMore={handleLoadMore}
       onToggleHeart={handleToggleHeart}
-      onCompose={handleCompose}
-      onRules={handleRules}
+      onCompose={() => setModal("compose")}
+      onRules={() => setModal("rules")}
     />
+    <AppModalHost active={modal} onChange={setModal} />
+    </>
   );
 }

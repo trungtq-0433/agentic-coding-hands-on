@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 
+import { AppModalHost, type AppModal } from "@/components/modals/app-modal-host";
 import type { AccountMenuProfile } from "@/components/ui/account-menu";
 
 import { BoardPage } from "./board-page";
@@ -47,6 +48,7 @@ export function BoardPageClient({ profile, isAdmin, signOut }: BoardPageClientPr
   const [loading, setLoading] = useState(false);
   const [selectedHashtag, setSelectedHashtag] = useState<string | null>(null);
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+  const [modal, setModal] = useState<AppModal>(null);
 
   const hasMore = items.length < MOCK_TOTAL;
 
@@ -86,18 +88,6 @@ export function BoardPageClient({ profile, isAdmin, signOut }: BoardPageClientPr
     // phase-16: lọc thật chạy ở server (`listKudos` của phase-04), không lọc ở client.
   }, []);
 
-  function handleCompose() {
-    // phase-16: mở modal Viết Kudo (phase-10).
-  }
-
-  function handleRules() {
-    // phase-16: mở modal Thể lệ (phase-13).
-  }
-
-  function handleOpenBox() {
-    // phase-16: mở modal Open Secret Box (phase-15).
-  }
-
   function handleSignOut() {
     void signOut().catch((error: unknown) => {
       console.error("[board] đăng xuất thất bại:", error);
@@ -105,6 +95,7 @@ export function BoardPageClient({ profile, isAdmin, signOut }: BoardPageClientPr
   }
 
   return (
+    <>
     <BoardPage
       profile={profile}
       isAdmin={isAdmin}
@@ -134,10 +125,12 @@ export function BoardPageClient({ profile, isAdmin, signOut }: BoardPageClientPr
       onLoadMore={handleLoadMore}
       onFlushQueue={() => undefined}
       onToggleHeart={handleToggleHeart}
-      onCompose={handleCompose}
-      onRules={handleRules}
-      onOpenBox={handleOpenBox}
+      onCompose={() => setModal("compose")}
+      onRules={() => setModal("rules")}
+      onOpenBox={() => setModal("secretBox")}
       onSignOut={handleSignOut}
     />
+    <AppModalHost active={modal} onChange={setModal} unopenedBoxes={25} />
+    </>
   );
 }

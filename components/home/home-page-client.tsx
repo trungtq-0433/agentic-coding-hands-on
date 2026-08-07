@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+
+import { AppModalHost, type AppModal } from "@/components/modals/app-modal-host";
 import type { AccountMenuProfile } from "@/components/ui/account-menu";
 
 import { buildFigmaAwardMock } from "./figma-award-mock";
@@ -37,14 +40,7 @@ export function HomePageClient({ targetIso, profile, isAdmin, signOut }: HomePag
   // thêm một tầng gọi hàm mà không tiết kiệm gì. Bản thân việc dựng là map qua
   // 6 phần tử, rẻ hơn cả chi phí so sánh dependency.
   const awards = buildFigmaAwardMock(t);
-
-  function handleCompose() {
-    // phase-16: mở modal Viết Kudo (phase-10).
-  }
-
-  function handleRules() {
-    // phase-16: mở modal Thể lệ (phase-13).
-  }
+  const [modal, setModal] = useState<AppModal>(null);
 
   function handleSignOut() {
     // `onSignOut` trong contract là đồng bộ (`() => void`), còn Server Action
@@ -57,14 +53,17 @@ export function HomePageClient({ targetIso, profile, isAdmin, signOut }: HomePag
   }
 
   return (
+    <>
     <HomePage
       targetIso={targetIso}
       awards={awards}
       profile={profile}
       isAdmin={isAdmin}
-      onCompose={handleCompose}
-      onRules={handleRules}
+      onCompose={() => setModal("compose")}
+      onRules={() => setModal("rules")}
       onSignOut={handleSignOut}
     />
+    <AppModalHost active={modal} onChange={setModal} />
+    </>
   );
 }
