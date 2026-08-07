@@ -14,22 +14,22 @@ import { useSecretBoxT } from "./use-secret-box-text";
  * `9ypp4enmFmdK3YAFJLIu6C`, screenId `J3-4YFIpMM`). Bọc trong `ModalShell`
  * dùng chung của phase-06 — không tự dựng backdrop/Esc/scroll-lock (đã có ở đó).
  *
- * **Lệch giữa nội dung Figma sống và spec/test case/tiêu đề nhiệm vụ — đã chốt
- * dùng nguồn nào:** truy vấn MCP trực tiếp cho thấy node `1466:7678` hiện chữ
- * "KHÁM PHÁ SECRET BOX CỦA BẠN" (không phải "MỞ SECRET BOX THÀNH CÔNG"), node
- * `1466:7683` hiện "Click vào box để mở" (không phải "...để tiếp tục mở"), và
- * hộp minh họa tên `MM_MEDIA_box quà chưa mở` (= hộp CHƯA mở) — tức khung Figma
- * này thực chất là trạng thái TRƯỚC khi mở, không phải modal thành công. Ba
- * nguồn độc lập khác đều đồng nhất với trạng thái THÀNH CÔNG: spec CSV
- * (`spec-open-secret-box-J3-4YFIpMM`, mô tả rõ "'MỞ SECRET BOX THÀNH CÔNG'"),
- * 19 test case (`tc-open-secret-box-J3-4YFIpMM`, TC `a0cd2f27-…` khẳng định
- * "exact static text: 'MỞ SECRET BOX THÀNH CÔNG'"), và chính tiêu đề nhiệm vụ
- * được giao. Vì TC là hợp đồng hành vi bắt buộc (sai chữ tĩnh này = fail TC
- * `a0cd2f27`), đã chọn dùng CHỮ theo spec+TC+nhiệm vụ, còn HÌNH HỌC/MÀU/PHÔNG
- * (kích thước modal, bo góc, khoảng cách, font-size, màu vàng/trắng) lấy
- * nguyên từ node Figma sống — hai phần này không mâu thuẫn nhau. Cần người
- * soạn thiết kế xác nhận lại nội dung khung `J3-4YFIpMM` (đổi tên/nội dung để
- * khớp trạng thái "đã mở", hoặc bổ sung khung riêng cho trạng thái này).
+ * **Đã chốt (2026-08-07): FIGMA là nguồn đúng, spec phải sửa theo.**
+ *
+ * Spec CSV và 19 test case mô tả trạng thái "MỞ SECRET BOX THÀNH CÔNG", nhưng
+ * chính node mà spec trỏ tới lại mang nội dung khác. Truy vấn thẳng:
+ *   `1466:7678` → character "KHÁM PHÁ SECRET BOX CỦA BẠN"
+ *   `1466:7683` → character "Click vào box để mở"
+ * và node ảnh tên `MM_MEDIA_box quà chưa mở`. Cả khung là trạng thái TRƯỚC khi
+ * mở. Người chủ sản phẩm đã chốt lấy Figma; chữ trong `locales/{vi,en}/secret-box.json`
+ * đã đổi theo đúng hai chuỗi trên.
+ *
+ * **Việc còn lại KHÔNG nằm ở code:** spec CSV và 19 test case vẫn đang mô tả
+ * trạng thái thành công, nên chúng SAI so với quyết định này và cần người soạn
+ * spec sửa — đáng chú ý là TC `a0cd2f27-…` ép cứng chuỗi tiêu đề cũ, nên nó sẽ
+ * fail cho tới khi được cập nhật. Ngoài ra Figma còn 8 khung
+ * `Open secret box- trạng thái Standby sau khi đã bấm` chưa được sync/spec —
+ * nhiều khả năng đó mới là modal kết quả, và sẽ là một màn riêng.
  *
  * Không có node huy hiệu nào trong Figma của màn này (xem
  * `secret-box-illustration.tsx`) — huy hiệu nhận được hoàn toàn đến từ prop
