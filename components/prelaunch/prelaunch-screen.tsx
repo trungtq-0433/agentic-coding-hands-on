@@ -86,35 +86,68 @@ export function PrelaunchScreen({ targetIso, onReachZero }: PrelaunchScreenProps
   const displayed = mounted ? remaining : { ...STATIC_ZERO, finished: false, seconds: 0 };
 
   return (
-    <main className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#00101A] px-6 py-16">
-      {/*
-        Nền hoạ tiết hữu cơ (spec: "Nền tối với họa tiết hữu cơ nhiều màu sắc").
-        Node Figma "Background Image" (2268:35129) KHÔNG mang tiền tố
-        `MM_MEDIA_` nên không có URL tải qua pipeline asset (đúng bẫy đã gặp ở
-        phase-07/09 — chỉ node `MM_MEDIA_*` mới tải được). Dùng gradient mã hoá
-        thay thế bằng đúng bảng màu thương hiệu đã dùng ở các màn khác
-        (`#00101A` nền, `#FFEA9E`/`#998C5F` điểm nhấn), KHÔNG bịa ảnh thay thế.
-        Cần designer đổi tên node đúng tiền lệ để lấy ảnh thật.
-      */}
+    // Khối đếm ngược KHÔNG căn giữa dọc — bản vẽ đặt nó CAO HƠN tâm khung.
+    // Đo `2268:35137`→`2268:35143`: khối chiếm y 314→577 trong khung cao 1077,
+    // tâm khối 445 so với tâm khung 538 → lệch lên 93px. Căn giữa dọc (bản
+    // trước) đẩy tiêu đề xuống y=407 thay vì 314. `pt-[29.16vh]` = 314/1077 nên
+    // tỉ lệ giữ nguyên ở mọi chiều cao màn hình.
+    <main className="relative flex min-h-screen w-full items-start justify-center overflow-hidden bg-[#00101A] px-6 pt-[29.16vh] pb-16">
+      {/* Nền hoạ tiết hữu cơ — ẢNH THẬT từ node `MM_MEDIA_BG Image`
+          (`2268:35129`, 1512×1077, đúng bằng khung thiết kế).
+
+          Ghi lại vì đây là một chẩn đoán SAI kéo dài ba lượt: bản trước ghi node
+          này "không mang tiền tố MM_MEDIA_ nên không tải được" và thay bằng
+          gradient tự chế. Chạy `list_media_nodes(8PJQswPZmU)` thì màn này có
+          đúng MỘT media node, tên `MM_MEDIA_BG Image` — CÓ tiền tố, CÓ URL, tải
+          bình thường. Bài học: kiểm `list_media_nodes` của CHÍNH màn đang dựng,
+          đừng suy từ màn khác.
+
+          Dùng ảnh **1:1**, KHÔNG áp `background-size` mà node khai. Node ghi
+          `url(...) -142px -789.753px / 109.392% 216.017%` — đó là phép biến hình
+          của ảnh NGUỒN bên trong ô fill của Figma, không phải cách hiển thị ảnh
+          mà MoMorph xuất ra. Ảnh MoMorph trả về đã đúng 1512×1077 = bằng khung
+          thiết kế, tức đã cắt/scale sẵn. Áp thêm 109%/216% nữa là phóng chồng
+          lên một lần nữa, ra hoạ tiết to gấp đôi.
+
+          Kiểm bằng số, không phải bằng mắt: dựng lại ảnh (asset 1:1 + lớp Cover)
+          rồi so 8 điểm mẫu với ảnh render của bản vẽ — lệch trung bình 24.6/255,
+          so với 67.8 khi dùng asset trần và lệch còn tệ hơn khi áp 109%/216%.
+
+          KHÔNG dùng `-z-10`: `<main>` có `overflow-hidden` + `bg-[#00101A]`, mà
+          `position: relative` với `z-index: auto` KHÔNG tạo stacking context —
+          nền của `main` sẽ sơn ĐÈ lên con z âm và ảnh biến mất không báo lỗi.
+          Đúng lỗi RR-7 đã ghi ở phase-08 (nền keyvisual trang chủ). Cách đúng:
+          lớp nền `absolute` không z, nội dung nhận `relative z-10`. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url(/prelaunch/prelaunch-bg.webp)" }}
+      />
+      {/* Lớp phủ `Cover` (`2268:35130`) — gradient CHÉO 18°, không phải một lớp
+          đen phẳng. Bản trước đoán `bg-black/40`; đây là giá trị thật của node. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 18% 22%, rgba(255,234,158,0.16) 0%, rgba(255,234,158,0) 45%), " +
-            "radial-gradient(circle at 82% 78%, rgba(153,140,95,0.22) 0%, rgba(153,140,95,0) 50%), " +
-            "linear-gradient(160deg, #10222E 0%, #00101A 60%, #00070C 100%)",
+            "linear-gradient(18deg, #00101A 15.48%, rgba(0, 18, 29, 0.46) 52.13%, rgba(0, 19, 32, 0.00) 63.41%)",
         }}
       />
-      {/* Lớp phủ bán trong suốt màu tối tăng độ tương phản cho văn bản (spec). */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/40" />
 
-      <div className="flex flex-col items-center gap-10 text-center">
-        <p className={`${montserrat.className} text-[clamp(18px,3vw,28px)] font-medium text-white`}>
+      {/* `gap-6` (24px) giữa tiêu đề và hàng số: bản vẽ để tiêu đề kết thúc ở
+          y=362 và ô số bắt đầu ở y=386. Bản trước dùng `gap-10` (40px). */}
+      <div className="relative z-10 flex flex-col items-center gap-6 text-center">
+        {/* Tiêu đề `2268:35137`: 36px/48px Montserrat **700** canh giữa — bản
+            trước để 28px `font-medium`, sai cả cỡ lẫn độ đậm. */}
+        <p
+          className={`${montserrat.className} text-[clamp(18px,2.38vw,36px)] leading-[1.333] font-bold text-white`}
+        >
           {t("title")}
         </p>
+        {/* Khoảng cách giữa ba nhóm là 60px: nhóm Days kết thúc x=608, nhóm
+            Hours bắt đầu x=668. Bản trước 24/40/56px. */}
         <div
-          className="flex gap-6 sm:gap-10 md:gap-14"
+          className="flex gap-[clamp(16px,3.97vw,60px)]"
           role="timer"
           aria-live="polite"
           aria-label={t("countdownAria")}
