@@ -1,11 +1,29 @@
 import { notFound } from "next/navigation";
 
+import type { DepartmentOption } from "@/lib/data/master-queries";
+
 import { signOutAction } from "@/lib/actions/auth-actions";
 import { getCurrentProfile, isCurrentUserAdmin, requireUser } from "@/lib/auth/dal";
+import { listDepartments } from "@/lib/data/master-queries";
 import { findMockOtherProfile } from "@/components/profile/figma-profile-mock";
 import { ProfilePageClient } from "@/components/profile/profile-page-client";
 import { resolveProfileIdParam } from "@/components/profile/validate-profile-id";
 import type { ProfileStats, ProfileSummary } from "@/components/profile/profile-types";
+
+/**
+ * `department_id` → tên hiển thị. Trả `null` khi chưa gán phòng ban, để
+ * `ProfileHero` ẩn hẳn dòng đó (TC_WEB_PROFILE_GUI_009) thay vì hiện chuỗi rỗng.
+ * KHÔNG rơi về mục ảo "Chưa phân loại": mục đó dành cho bộ lọc ở Live board,
+ * dùng làm nhãn profile sẽ thành khẳng định sai rằng người này thuộc một phòng
+ * ban tên như vậy.
+ */
+function resolveDepartmentName(
+  departments: DepartmentOption[],
+  departmentId: number | null,
+): string | null {
+  if (departmentId === null) return null;
+  return departments.find((d) => d.id === departmentId)?.name ?? null;
+}
 
 /**
  * Màn `/profile` — Server Component mỏng, đúng khuôn `app/kudos/page.tsx`
@@ -47,7 +65,11 @@ export default async function ProfileRoute({
     notFound();
   }
 
-  const [selfProfile, isAdmin] = await Promise.all([getCurrentProfile(), isCurrentUserAdmin()]);
+  const [selfProfile, isAdmin, departments] = await Promise.all([
+    getCurrentProfile(),
+    isCurrentUserAdmin(),
+    listDepartments(),
+  ]);
   if (!selfProfile) {
     // Phòng hờ: `requireUser()` xác nhận có session thật, nhưng nếu vì lý do gì
     // đó bảng `profiles` chưa có hàng tương ứng (trigger `handle_new_user` lẽ ra
@@ -62,11 +84,17 @@ export default async function ProfileRoute({
       id: selfProfile.id,
       fullName: selfProfile.fullName,
       avatarUrl: selfProfile.avatarUrl,
-      // `departmentId` (số) không có tên tương ứng ở tầng Track A — resolve tên
-      // thật là việc của `listDepartments()` (phase-04, Track B), nối ở phase-16.
-      // Không hiện dòng phòng ban là hành vi ĐÚNG khi chưa có tên, không phải lỗi
-      // (khớp TC_WEB_PROFILE_GUI_009: departmentId NULL → không có dòng phòng ban).
-      departmentName: null,
+      /* Tên phòng ban resolve từ `listDepartments()` (Track B). Server Component
+         gọi được vì đây là file của `app/`, cùng khuôn `app/kudos/page.tsx` đã
+         ship — `components/profile/**` vẫn tuyệt đối không chạm Track B.
+
+         ⚠ Vẫn `null` với tài khoản đăng nhập Google THẬT, và đó không phải lỗi ở
+         đây: `handle_new_user()` tạo profile không kèm phòng ban nên
+         `department_id` là NULL (Red Team #6 — "không có đường gán"). Kiểm bằng
+         DB: 8/9 profile seed có phòng ban, đúng 1 profile NULL là tài khoản
+         Google thật. Muốn thấy dòng này thì phải gán `department_id` cho tài
+         khoản đó; TC_WEB_PROFILE_GUI_009 xác nhận NULL → ẩn dòng là đúng. */
+      departmentName: resolveDepartmentName(departments, selfProfile.departmentId),
       starCount: selfProfile.starCount,
       receivedKudosCount: selfProfile.receivedKudosCount,
     };
